@@ -17,7 +17,7 @@ public class ShootAction : BaseAction
         Cooloff,
 
     }
-    private ProbabilitySystem ps;                                // Funci�n probabilidad @EMF
+    public ProbabilitySystem ps;                                // Funci�n probabilidad @EMF
 
     public event EventHandler<Unit> OnShoot;                    // Evento cuando la unidad dispara
     public static event EventHandler<Unit> OnAnyShoot;          // Evento cuando cualquier unidad dispara
@@ -36,9 +36,10 @@ public class ShootAction : BaseAction
     private float stateTimer;                                   // Timer de la maquina de estados
 
 
-    private void Start()
-    {
-        ps = ProbabilitySystem.Instance;
+    private void private void Start() {
+        {
+            
+        }
     }
     // @IGM ------------------------
     // Update is called every frame.

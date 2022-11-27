@@ -16,7 +16,7 @@ public class SwordAction : BaseAction
         SwingingSwordAfterHit
 
     }
-    private ProbabilitySystem ps;                        // Funci�n probabilidad @EMF
+    public ProbabilitySystem ps;                        // Funci�n probabilidad @EMF
 
     public event EventHandler OnSwordActionStarted;     // Evento cuando la accion de espadazo empieza
     public event EventHandler OnSwordActionCompleted;   // Evento cuando la accion de espadazo termina

@@ -5,20 +5,11 @@ using UnityEngine;
 public class ProbabilitySystem : MonoBehaviour
 {
 
-    public static ProbabilitySystem Instance {get; private set;}
-
-    private void Awake()
-    {
-        if(Instance != null)
-        {
-            Destroy(this);
-            return;
-        }
-        
-        Instance = this;
-    }
+    public static ProbabilitySystem Instance;
 
 
+
+    
     // @EMF -----------------------------------------------------------
     // M�todo, con probabilidad de fallo, que calcula el da�o realizado
     // ----------------------------------------------------------------

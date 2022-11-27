@@ -4,23 +4,8 @@ using UnityEngine;
 
 public class ProbabilitySystem : MonoBehaviour
 {
-
-    public static ProbabilitySystem Instance {get; private set;}
-
-    private void Awake()
-    {
-        if(Instance != null)
-        {
-            Destroy(this);
-            return;
-        }
-        
-        Instance = this;
-    }
-
-
     // @EMF -----------------------------------------------------------
-    // Mï¿½todo, con probabilidad de fallo, que calcula el daï¿½o realizado
+    // Método, con probabilidad de fallo, que calcula el daño realizado
     // ----------------------------------------------------------------
     public int CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage, int hitProbability)
     {
@@ -28,14 +13,14 @@ public class ProbabilitySystem : MonoBehaviour
         {
             float rnd = Random.Range(0, 101);
 
-            if (rnd <= criticalProbability){ return damage + (int)((float)damage * criticalPercentage); } // Acierto con crï¿½tico.
-            else{ return damage; } // Acierto. Daï¿½o base.
+            if (rnd <= criticalProbability){ return damage + (int)((float)damage * criticalPercentage); } // Acierto con crítico.
+            else{ return damage; } // Acierto. Daño base.
         }
-        else{ return 0; } // Fallo. Daï¿½o 0.
+        else{ return 0; } // Fallo. Daño 0.
     }
 
     // @EMF -------------------------
-    // Mï¿½todo para comprobar acierto
+    // Método para comprobar acierto
     // ------------------------------
     public bool CheckHit(int hitProbability)
     {
@@ -46,7 +31,7 @@ public class ProbabilitySystem : MonoBehaviour
     }
 
     // @EMF -------------------------------------
-    // Mï¿½todo override sin probabilidad de fallo
+    // Método override sin probabilidad de fallo
     // ------------------------------------------
     public int CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage)
     {

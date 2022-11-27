@@ -5,17 +5,14 @@ using UnityEngine;
 public class ProbabilitySystem : MonoBehaviour
 {
 
-    public static ProbabilitySystem Instance {get; private set;}
+    public static ProbabilitySystem Instance;
 
     private void Awake()
     {
         if(Instance != null)
         {
-            Destroy(this);
-            return;
+            Destroy()
         }
-        
-        Instance = this;
     }
 
 

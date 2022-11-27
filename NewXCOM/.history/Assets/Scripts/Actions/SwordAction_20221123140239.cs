@@ -16,27 +16,22 @@ public class SwordAction : BaseAction
         SwingingSwordAfterHit
 
     }
-    private ProbabilitySystem ps;                        // Funciï¿½n probabilidad @EMF
+    public ProbabilitySystem ps;                        // Función probabilidad @EMF
 
     public event EventHandler OnSwordActionStarted;     // Evento cuando la accion de espadazo empieza
     public event EventHandler OnSwordActionCompleted;   // Evento cuando la accion de espadazo termina
     public static event EventHandler OnAnySwordHit;     // Evento cuando cualquier espadazo golpea
 
     [SerializeField] private int maxSwordDistance;      // Distancia maxima de dar un espadazo
-    [SerializeField] private int swordDamage;           // Daï¿½o del espadazo
+    [SerializeField] private int swordDamage;           // Daño del espadazo
 
-    [SerializeField] private int criticalProbability = 15;      // Probabilidad de crï¿½tico @EMF
-    [SerializeField] private float criticalPercentage = 0.2f;   // Porcentaje crï¿½tico @EMF
+    [SerializeField] private int criticalProbability = 15;      // Probabilidad de crítico @EMF
+    [SerializeField] private float criticalPercentage = 0.2f;   // Porcentaje crítico @EMF
 
     private State state;                                // Estado actual de la accion
     private float stateTimer;                           // Timer de la maquina de estados
     private Unit targetUnit;                            // Unidad a la que vamos a disparar
 
-
-    private void Start()
-    {
-        ps = ProbabilitySystem.Instance;
-    }
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------
@@ -102,7 +97,7 @@ public class SwordAction : BaseAction
                 float afterHitStateTime = 0.5f;
                 stateTimer = afterHitStateTime;
 
-                // Daï¿½amos a la unidad objetivo
+                // Dañamos a la unidad objetivo
                 targetUnit.Damage(ps.CheckDamageProbability(swordDamage, criticalProbability, criticalPercentage));
 
                 // Comprobamos si hay alguna clase escuchando el evento
@@ -216,7 +211,7 @@ public class SwordAction : BaseAction
 
                 }
 
-                // Lo aï¿½adimos a la lista
+                // Lo añadimos a la lista
                 validGridPositionList.Add(testGridPosition);
 
             }

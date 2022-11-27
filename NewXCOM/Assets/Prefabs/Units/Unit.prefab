@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxBuildDistance: 1
-  structure: {fileID: 424301498099959746, guid: a9d5afa09bc89524ea21816e781df61c,
+  structure: {fileID: 3266928928870785723, guid: c0ba9eaf1ef70594292206293c2d21df,
     type: 3}
 --- !u!114 &2024494511
 MonoBehaviour:
