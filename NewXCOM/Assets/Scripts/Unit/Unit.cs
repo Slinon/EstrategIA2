@@ -249,7 +249,7 @@ public class Unit : MonoBehaviour
     // @IGM ------------------------------
     // Metodo para hacer daño a la unidad.
     // -----------------------------------
-    public void Damage(int damageAmount)
+    public void Damage(Vector2 damageAmount)
     {
 
         healthSystem.Damage(damageAmount);

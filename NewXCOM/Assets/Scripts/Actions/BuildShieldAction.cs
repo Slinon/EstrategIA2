@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildShieldAction : BaseAction
+public class BuildStructureAction : BaseAction
 {
     [SerializeField] private int maxBuildDistance;      // Distancia maxima de construcción
-    [SerializeField] private GameObject shield;         // shield
+    [SerializeField] private GameObject structure;      // Torreta
 
     public event EventHandler OnStartBuilding;
     public event EventHandler OnStopBuilding;
@@ -34,7 +34,7 @@ public class BuildShieldAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        Instantiate(shield, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity);
+        Instantiate(structure, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity);
 
         if (OnStartBuilding != null)
         {
@@ -119,7 +119,7 @@ public class BuildShieldAction : BaseAction
     public override string GetActionName()
     {
 
-        return "Shield";
+        return "Build turret";
 
     }
 }

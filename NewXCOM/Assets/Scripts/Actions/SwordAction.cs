@@ -102,7 +102,7 @@ public class SwordAction : BaseAction
                 float afterHitStateTime = 0.5f;
                 stateTimer = afterHitStateTime;
 
-                // Da�amos a la unidad objetivo
+                // Da�amos a la unidad objetivo    
                 targetUnit.Damage(ps.CheckDamageProbability(swordDamage, criticalProbability, criticalPercentage));
 
                 // Comprobamos si hay alguna clase escuchando el evento

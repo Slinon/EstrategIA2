@@ -160,9 +160,7 @@ public class ShootAction : BaseAction
         }
 
         // Hacemos da�o a la unidad
-        int damage = ps.CheckDamageProbability(shootDamage, criticalProbability, criticalPercentage, hitProbability);
-        targetUnit.Damage(damage);
-        Debug.Log("Shoot damage: " + damage);
+        targetUnit.Damage(ps.CheckDamageProbability(shootDamage, criticalProbability, criticalPercentage, hitProbability));
     }
 
     // @IGM -------------------------------------
