@@ -13,7 +13,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private Transform gridDebugObjectPrefab;   // Prefab del nodo que se genera en la malla
     [SerializeField] private int width;                         // Alto de la malla
     [SerializeField] private int height;                        // Ancho de la malla
-    [SerializeField] private float cellSize;                    // Tamaño de la celda
+    [SerializeField] private float cellSize;                    // Tamaï¿½o de la celda
 
     private GridSystem<GridObject> gridSystem;                  // Malla que utilizamos
 
@@ -56,12 +56,12 @@ public class LevelGrid : MonoBehaviour
     }
 
     // @IGM ---------------------------------
-    // Metodo para añadir una unidad al nodo.
+    // Metodo para aï¿½adir una unidad al nodo.
     // --------------------------------------
     public void AddUnitAtGridPosition(GridPosition gridPosition, Unit unit)
     {
 
-        // Añadimos la unidad
+        // Aï¿½adimos la unidad
         GridObject gridObject = gridSystem.GetGridObject(gridPosition);
         gridObject.AddUnit(unit);
 
@@ -100,7 +100,7 @@ public class LevelGrid : MonoBehaviour
         // Eliminamos la unidad del nodo de donde viene
         RemoveUnitAtGridPosition(fromGridPosition, unit);
 
-        // Añadimos la unidad al nodo al que va
+        // Aï¿½adimos la unidad al nodo al que va
         AddUnitAtGridPosition(toGridPosition, unit);
 
         // Comprobamos si hay alguna clase escuchando el evento
@@ -170,7 +170,7 @@ public class LevelGrid : MonoBehaviour
     }
 
     // @IGM ----------------------
-    // Getter del tamaño de celda.
+    // Getter del tamaï¿½o de celda.
     // ---------------------------
     public float GetCellSize()
     {
@@ -225,5 +225,8 @@ public class LevelGrid : MonoBehaviour
         gridObject.SetInteractable(interactable);
 
     }
+
+
+
 
 }
