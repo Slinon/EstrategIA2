@@ -90,6 +90,7 @@ public class UnitAnimator : MonoBehaviour
 
         // Activamos la animacion
         unitAnimator.SetBool("IsWalking", true);
+        unitAnimator.SetBool("Crouch", false);
 
     }
 
