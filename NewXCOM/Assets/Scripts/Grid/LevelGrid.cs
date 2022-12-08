@@ -227,6 +227,39 @@ public class LevelGrid : MonoBehaviour
     }
 
 
+    public GridPosition GetCoverTypeAtPosition(Vector3 worldPosition) 
+    {
+        return gridSystem.GetGridPosition(worldPosition);
+    }
 
+    public CoverType GetUnitCoverType(Vector3 worldPosition) 
+    {
+
+        gridSystem.GetGridPosition(worldPosition);
+
+        bool hasLeft = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) - 2, Mathf.RoundToInt(worldPosition.y) + 0));
+        bool hasRight = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 2, Mathf.RoundToInt(worldPosition.y) + 0));
+        bool hasFront = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) + 2));
+        bool hasBack = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) - 2));
+
+        CoverType leftCover, rightCover, frontCover, backCover;
+        leftCover = rightCover = frontCover = backCover = CoverType.None;
+
+        if(hasLeft) leftCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) - 2 , Mathf.RoundToInt(worldPosition.y) + 0)).GetCoverType();
+        if(hasRight) rightCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 2, Mathf.RoundToInt(worldPosition.y) + 0)).GetCoverType();
+        if(hasFront) frontCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) + 2)).GetCoverType();
+        if(hasBack) backCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) - 2)).GetCoverType();
+
+
+        if (leftCover == CoverType.Covered ||
+            rightCover == CoverType.Covered ||
+            frontCover == CoverType.Covered ||
+            backCover == CoverType.Covered) 
+        {
+            return CoverType.Covered;
+        }
+
+        return CoverType.None;
+    }
 
 }

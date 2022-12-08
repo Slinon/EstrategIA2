@@ -7,14 +7,17 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyActionPointsChanged;      // Evento cuando cambia el numero de acciones disponibles
     public static event EventHandler OnAnyUnitDied;                 // Evento cuando una unidad muere
     public static event EventHandler OnAnyUnitSpawned;              // Evento cuando aparece una tropa nueva
+    public event EventHandler OnCoverTypeChanged;
 
     [SerializeField] private int maxActionPoints;                   // Puntos de accion maximos de la unidad
     [SerializeField] private bool isEnemy;
+    [SerializeField] private CoverType coverType;
 
     private GridPosition gridPosition;                              // Posicion de la malla donde esta la unidad
     private HealthSystem healthSystem;                              // Sistema de salud de la unidad
     private BaseAction[] baseActionArray;                           // Array de acciones de la unidad
     private int actionPoints;                                       // Puntos de accion de la unidad
+
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -76,7 +79,11 @@ public class Unit : MonoBehaviour
 
         }
 
+        UpdateCoverType();
+
     } 
+
+
 
     // @IGM ------------------------------------------
     // Getter de la posicion en la malla de la unidad.
@@ -247,7 +254,7 @@ public class Unit : MonoBehaviour
     }
 
     // @IGM ------------------------------
-    // Metodo para hacer daño a la unidad.
+    // Metodo para hacer daï¿½o a la unidad.
     // -----------------------------------
     public void Damage(int damageAmount)
     {
@@ -286,5 +293,24 @@ public class Unit : MonoBehaviour
         return healthSystem.GetHealthNormalized();
 
     }
+
+
+
+
+
+
+
+    
+    private void UpdateCoverType()
+    {
+        coverType = LevelGrid.Instance.GetUnitCoverType(GetWorldPosition());
+        OnCoverTypeChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public CoverType GetCoverType()
+    {
+        return coverType;
+    }
+
 
 }
