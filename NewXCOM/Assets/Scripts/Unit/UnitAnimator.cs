@@ -67,6 +67,7 @@ public class UnitAnimator : MonoBehaviour
 
         // Activamos la animacion
         EquipeSword();
+        unitAnimator.SetBool("Covered", false);
         unitAnimator.SetTrigger("SwordSlash");
 
     }
@@ -89,8 +90,10 @@ public class UnitAnimator : MonoBehaviour
     {
 
         // Activamos la animacion
+        
         unitAnimator.SetBool("IsWalking", true);
-        unitAnimator.SetBool("Crouch", false);
+        unitAnimator.SetBool("Covered", false);
+
 
     }
 
@@ -102,6 +105,7 @@ public class UnitAnimator : MonoBehaviour
 
         // Activamos la animacion
         unitAnimator.SetBool("IsWalking", false);
+        
 
     }
 
@@ -112,6 +116,7 @@ public class UnitAnimator : MonoBehaviour
     {
 
         // Activamos la animacion
+        
         unitAnimator.SetTrigger("Shoot");
 
         // Instanciamos la bala

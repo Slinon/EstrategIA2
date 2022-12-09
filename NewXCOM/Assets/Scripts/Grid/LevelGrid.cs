@@ -14,6 +14,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private int width;                         // Alto de la malla
     [SerializeField] private int height;                        // Ancho de la malla
     [SerializeField] private float cellSize;                    // Tama�o de la celda
+    [SerializeField] private LayerMask pathfindingObstaclesLayerMask;
 
     private GridSystem<GridObject> gridSystem;                  // Malla que utilizamos
 
@@ -42,6 +43,7 @@ public class LevelGrid : MonoBehaviour
             (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
         //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
 
+        
     }
 
     // @IGM -----------------------------------------
@@ -237,18 +239,18 @@ public class LevelGrid : MonoBehaviour
 
         gridSystem.GetGridPosition(worldPosition);
 
-        bool hasLeft = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) - 2, Mathf.RoundToInt(worldPosition.y) + 0));
-        bool hasRight = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 2, Mathf.RoundToInt(worldPosition.y) + 0));
-        bool hasFront = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) + 2));
-        bool hasBack = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) - 2));
+        bool hasLeft = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) - 1, Mathf.RoundToInt(worldPosition.z) + 0));
+        bool hasRight = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 1, Mathf.RoundToInt(worldPosition.z) + 0));
+        bool hasFront = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.z) + 1));
+        bool hasBack = gridSystem.IsValidGridPosition(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.z) - 1));
 
         CoverType leftCover, rightCover, frontCover, backCover;
-        leftCover = rightCover = frontCover = backCover = CoverType.None;
+        leftCover = rightCover = frontCover = backCover = CoverType.Covered;
 
-        if(hasLeft) leftCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) - 2 , Mathf.RoundToInt(worldPosition.y) + 0)).GetCoverType();
-        if(hasRight) rightCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 2, Mathf.RoundToInt(worldPosition.y) + 0)).GetCoverType();
-        if(hasFront) frontCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) + 2)).GetCoverType();
-        if(hasBack) backCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.y) - 2)).GetCoverType();
+        if(hasLeft) leftCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) - 1 , Mathf.RoundToInt(worldPosition.z) + 0)).GetCoverType();
+        if(hasRight) rightCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 1, Mathf.RoundToInt(worldPosition.z) + 0)).GetCoverType();
+        if(hasFront) frontCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.z) + 1)).GetCoverType();
+        if(hasBack) backCover = gridSystem.GetGridObject(new GridPosition(Mathf.RoundToInt(worldPosition.x) + 0, Mathf.RoundToInt(worldPosition.z) - 1)).GetCoverType();
 
 
         if (leftCover == CoverType.Covered ||
@@ -261,5 +263,7 @@ public class LevelGrid : MonoBehaviour
 
         return CoverType.None;
     }
+
+
 
 }

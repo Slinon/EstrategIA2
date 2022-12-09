@@ -333,6 +333,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Wall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 835754882302905463, guid: 84a5120fc59eb6b418ac87c191986bb9,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84a5120fc59eb6b418ac87c191986bb9, type: 3}
 --- !u!1 &35322130
@@ -1187,6 +1192,9 @@ MonoBehaviour:
   width: 14
   height: 21
   cellSize: 2
+  pathfindingObstaclesLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &326168625
 Transform:
   m_ObjectHideFlags: 0
@@ -4033,7 +4041,7 @@ PrefabInstance:
     - target: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 4
+      value: 14.19
       objectReference: {fileID: 0}
     - target: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
         type: 3}
@@ -7021,7 +7029,7 @@ PrefabInstance:
     - target: {fileID: 2340227495752026277, guid: c9cdf2952cd873f4c8d50bec81344437,
         type: 3}
       propertyPath: coverType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2340227495752026278, guid: c9cdf2952cd873f4c8d50bec81344437,
         type: 3}
