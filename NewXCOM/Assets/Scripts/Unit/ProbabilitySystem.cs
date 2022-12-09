@@ -20,29 +20,30 @@ public class ProbabilitySystem : MonoBehaviour
     // @EMF -----------------------------------------------------------
     // Metodo, con probabilidad de fallo, que calcula el daño realizado
     // ----------------------------------------------------------------
-    public Vector2 CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage, int hitProbability)
+    public Vector2 CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage, int hitProbability, int distance)
     {
         Vector2 info = new Vector2(0, 0); // int damage + int info (-1 fallo, 0 normal, 1 critico)
+        int probabilty = Mathf.RoundToInt(hitProbability - GetDistancePercentage(distance) * 100);
 
-        if (CheckHit(hitProbability))
+        if (CheckHit(probabilty)) // si no falla
         {
-            float rnd = Random.Range(0, 101);
+            float rnd = Random.Range(0, 101); // 0 - 101
 
             if (rnd <= criticalProbability)
             {
                 info.x = damage + (int)((float)damage * criticalPercentage);
-                info.y = 1;
+                info.y = 1; // acierto critico
             }
             else
             {
                 info.x = damage;
-                info.y = 0;
+                info.y = 0; // acierto normal
             }
         }
         else
         {
             info.x = 0;
-            info.y = -1;
+            info.y = -1; // fallo
         }
         return info;
     }
@@ -56,6 +57,22 @@ public class ProbabilitySystem : MonoBehaviour
 
         if (rnd <= hitProbability){ return true; } // Acierto
         else{ return false; } // Fallo
+    }
+
+    public float GetDistancePercentage(int distance)
+    {
+        float percentage = 0f;
+
+        if (distance >= 2 && distance < 4)
+        {
+            percentage = 0.4f;
+        }
+        else if (distance > 4)
+        {
+            percentage = 0.7f;
+        }
+
+        return percentage;
     }
 
     // @EMF -------------------------------------
@@ -80,4 +97,11 @@ public class ProbabilitySystem : MonoBehaviour
 
         return info;
     }
+
+    public int CalculateDistanceUnit(Unit itself, Unit target)
+    {
+        return Mathf.RoundToInt(Vector3.Distance(itself.gameObject.transform.position, target.gameObject.transform.position) / 2);  
+    }
+
+
 }

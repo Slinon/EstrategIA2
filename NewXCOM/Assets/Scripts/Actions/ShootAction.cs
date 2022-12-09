@@ -160,7 +160,15 @@ public class ShootAction : BaseAction
         }
 
         // Hacemos da�o a la unidad
-        targetUnit.Damage(ps.CheckDamageProbability(shootDamage, criticalProbability, criticalPercentage, hitProbability));
+
+        Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
+            criticalPercentage, hitProbability, ps.CalculateDistanceUnit(this.unit, targetUnit)));
+
+        float porcentaje_acierto = hitProbability - ps.GetDistancePercentage(ps.CalculateDistanceUnit(this.unit, targetUnit)) * 100;
+
+        targetUnit.Damage(damagetmp);
+
+        Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + ps.CalculateDistanceUnit(this.unit, targetUnit) + " %: " + porcentaje_acierto);
     }
 
     // @IGM -------------------------------------
