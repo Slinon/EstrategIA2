@@ -14,7 +14,6 @@ public class HealthSystem : MonoBehaviour
     private int health;                                 // Salud de la unidad
 
     private Unit unit;                                  //Referencia al component Unit asociado a este GameObject
-    private MoneySystem moneySystem;                    //Referencia al Manager que controla el dinero
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -35,7 +34,6 @@ public class HealthSystem : MonoBehaviour
     {
 
         unit = GetComponent<Unit>();
-        moneySystem = FindObjectOfType<MoneySystem>();
 
     }
 
@@ -96,14 +94,14 @@ public class HealthSystem : MonoBehaviour
         if (unit.IsEnemy())
         {
             //El jugador recibe dinero por el takedown
-            moneySystem.GiveTakeMoney(100, moneySystem.player);
+            MoneySystem.Instance.GiveTakeMoney(200, MoneySystem.Instance.player);
 
         }
 
         else
         {
             //La AI recibe dinero por el takedown
-            moneySystem.GiveTakeMoney(100, moneySystem.enemyAI);
+            MoneySystem.Instance.GiveTakeMoney(200, MoneySystem.Instance.enemyAI);
 
         }
         

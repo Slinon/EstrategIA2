@@ -25,8 +25,21 @@ public class MoneySystem : MonoBehaviour
 
     public Target player, enemyAI;
 
+    public static MoneySystem Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
 
         //Create two instances of Tagret class
         player = new Target();

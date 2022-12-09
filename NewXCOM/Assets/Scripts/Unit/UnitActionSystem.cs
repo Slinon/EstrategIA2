@@ -131,9 +131,50 @@ public class UnitActionSystem : MonoBehaviour
 
             }
 
-            // Lanzamos la accion
-            SetBusy();
-            selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+
+            ///He creado dos nuevos metodos virtuales en la clase BaseAction: un booleano "ThisActionCostsMoney" y un int "MoneyCost"
+            ///en base.BaseAction están puestos a false y 0 respectivamente. Spawn Unit Action hace override a esos valores.
+            ///pero me surgen varias dudas/problemas: como puedo hacer esto genérico para que afecta a la IA también?
+            ///ahora mismo (check linea 150) estoy comprobando exclusivamente el dinero del jugador (player.money).
+            ///además, me consume un punto de acción y no sé como evitarlo.
+
+            if (selectedAction.ThisActionCostsMoney() && MoneySystem.Instance.player.money < selectedAction.MoneyCost())
+            {
+
+                Debug.Log("No tienes dinero!");
+                return;
+
+            }
+
+            else
+            {
+                // Lanzamos la accion
+                SetBusy();
+                selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+
+                if (selectedAction.ThisActionCostsMoney()) //restamos el dinero, si es que era una acción con coste de dinero.
+                {
+                    MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.player);
+                }
+                
+            }
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+
 
             // Comprobamos si hay alguna clase escuchando el evento
             if (OnActionStarted != null)

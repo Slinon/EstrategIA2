@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class SpawnUnitAction : BaseAction
 {
+    [SerializeField] private string unitName;
+    [SerializeField] private int unitCost;
+    [SerializeField] private Transform unitSpawned;                 // Unidad que queremos spawnear
 
     // @IGM -----------------------------------------------------
     // Maquina de estados de de la accion de spawnear una unidad.
@@ -21,19 +24,28 @@ public class SpawnUnitAction : BaseAction
     public event EventHandler OnSpawnActionCompleted;               // Evento cuando la accion de spawnear se completa
     public static event EventHandler<Vector3> OnAnyUnitSpawned;     // Evento cuando cualquier unidad dispara
 
-    [SerializeField] private Transform unitSpawned;                 // Unidad que queremos spawnear
     [SerializeField] private int maxSpawnDistance;                  // Distancia maxima de spawn
 
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
     private float stateTimer;                                       // Timer de la maquina de estados
 
+    public override int MoneyCost()
+    {
+        return unitCost;
+    }
+
+    public override bool ThisActionCostsMoney()
+    {
+        return true;
+    }
+
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------
     private void Update()
     {
-
+       
         // Comprobamos si la accion se ha activado
         if (!isActive)
         {
@@ -136,7 +148,7 @@ public class SpawnUnitAction : BaseAction
     public override string GetActionName()
     {
 
-        return "Spawn Unit";
+        return "Spawn " + unitName.ToString();
 
     }
 
@@ -219,8 +231,9 @@ public class SpawnUnitAction : BaseAction
         stateTimer = beforeSpawnStateTime;
 
         // Empezamos la accion
+        
         ActionStart(onActionComplete);
-
+        
     }
 
 }

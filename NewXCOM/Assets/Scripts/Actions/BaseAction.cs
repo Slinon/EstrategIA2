@@ -165,4 +165,17 @@ public abstract class BaseAction : MonoBehaviour
     // -----------------------------------------------------------------------------------
     public abstract EnemyAIAction GetEnemyAIAction(GridPosition gridPosition);
 
+    // @GRG ------------------------------------------------------------------------------
+    // Funcion para saber si esta acción está ligada a un coste monetario del moneySystem
+    // -----------------------------------------------------------------------------------
+    public virtual bool ThisActionCostsMoney()
+    {
+        return false;
+    }
+
+    public virtual int MoneyCost()
+    {
+        return 0;
+    }
+    
 }
