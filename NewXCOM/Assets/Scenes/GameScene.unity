@@ -382,7 +382,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -0.053931713, y: 12, z: -9.946069}
+  m_FollowOffset: {x: -0.053931713, y: 11, z: -9.946069}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -1298,8 +1298,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.393417, y: -0.34407046, z: 0.16171046, w: 0.8370713}
-  m_LocalPosition: {x: 10.000002, y: 12, z: -4.0658646}
+  m_LocalRotation: {x: 0.37531176, y: -0.3474708, z: 0.1542684, w: 0.845344}
+  m_LocalPosition: {x: 10.000002, y: 11, z: -4.0658646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3273,6 +3273,16 @@ PrefabInstance:
       propertyPath: area
       value: 
       objectReference: {fileID: 1421444729}
+    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
+      propertyPath: state
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
+      propertyPath: maxCaptureDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
       propertyPath: m_Name
@@ -3892,6 +3902,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actionCameraGameObject: {fileID: 1192711861}
+--- !u!1 &1019673552 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1232262549}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1037569147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4228,8 +4244,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103454021}
-  m_LocalRotation: {x: 0.393417, y: -0.34407046, z: 0.16171046, w: 0.8370713}
-  m_LocalPosition: {x: 10.000002, y: 12, z: -4.0658646}
+  m_LocalRotation: {x: 0.37531176, y: -0.3474708, z: 0.1542684, w: 0.845344}
+  m_LocalPosition: {x: 10.000002, y: 11, z: -4.0658646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4388,6 +4404,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1223159476}
     m_Modifications:
+    - target: {fileID: -1803460875891568307, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: interactionSpheres.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1803460875891568307, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: interactionSpheres.Array.data[0]
+      value: 
+      objectReference: {fileID: 2075484301}
+    - target: {fileID: -1803460875891568307, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: interactionSpheres.Array.data[1]
+      value: 
+      objectReference: {fileID: 1019673552}
     - target: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
         type: 3}
       propertyPath: m_Name
@@ -4876,6 +4907,16 @@ PrefabInstance:
       propertyPath: area
       value: 
       objectReference: {fileID: 1287569033}
+    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
+      propertyPath: state
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
+      propertyPath: maxCaptureDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
       propertyPath: m_Name
@@ -7338,6 +7379,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2340227495752026276, guid: c9cdf2952cd873f4c8d50bec81344437,
     type: 3}
   m_PrefabInstance: {fileID: 2069250223}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2075484301 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 784597064}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2076620600
 GameObject:

@@ -28,6 +28,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
     [SerializeField] private Material neutralMaterialArea;      // Material neutral
 
     [SerializeField] private MeshRenderer area;
+    [SerializeField] private int maxCaptureDistance;
 
     private GridPosition gridPosition;                      // Posicion en la malla de la puerta
     private InControlState state;                           // Estado para saber de quien es el control 
@@ -48,7 +49,18 @@ public class InteractSphere : MonoBehaviour, IInteractable
         // Establecemos el color neutral
         SetColorNeutral();
     }
+    public GridPosition GetGridPosition()
+    {
 
+        return gridPosition;
+
+    }
+    public int GetMaxCaptureDistance()
+    {
+
+        return maxCaptureDistance;
+
+    }
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------

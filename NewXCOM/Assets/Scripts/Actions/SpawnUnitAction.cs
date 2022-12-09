@@ -23,6 +23,7 @@ public class SpawnUnitAction : BaseAction
 
     [SerializeField] private Transform unitSpawned;                 // Unidad que queremos spawnear
     [SerializeField] private int maxSpawnDistance;                  // Distancia maxima de spawn
+    [SerializeField] GameObject[] interactionSpheres;
 
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
@@ -166,43 +167,87 @@ public class SpawnUnitAction : BaseAction
         // Creamos la lista
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
+        // Creamos la lista posiciones
+        List<GridPosition> allPositionsList = new List<GridPosition>(); // Posicion unidad y puntos capturados
+
+        // Creamos la lista spawns distances
+        List<int> maxSpawnDistanceList = new List<int>(); // Spawn Distance unidad y puntos capturados
+
         // Recuperamos la posicion de la unidad
-        GridPosition unitGridPosition = unit.GetGridPosition();
+        // GridPosition unitGridPosition = unit.GetGridPosition();
+        allPositionsList.Add(unit.GetGridPosition());
 
-        // Recorremos todas las posiciones validas alrededor de la malla
-        for (int x = -maxSpawnDistance; x <= maxSpawnDistance; x++)
+        maxSpawnDistanceList.Add(maxSpawnDistance);
+
+        // Comprobar puntos capturados y su distancia maxima alrededor
+
+        foreach (GameObject child in interactionSpheres)
         {
+            InteractSphere sphere = child.GetComponent<InteractSphere>();
 
-            for (int z = -maxSpawnDistance; z <= maxSpawnDistance; z++)
+            if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
             {
-
-                // Creamos la posicion alrededor de la posicion del jugador
-                GridPosition offsetGridPosition = new GridPosition(x, z);
-                GridPosition testGridPosition = unitGridPosition + offsetGridPosition;
-
-                // Comprobamos si la posicion esta fuera de la malla
-                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
-                {
-
-                    // La saltamos
-                    continue;
-
-                }
-
-                // Comprobamos si la posicion tiene unidades dentro
-                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
-                {
-
-                    // La saltamos
-                    continue;
-
-                }
-
-                // Lo añadimos a la lista
-                validGridPositionList.Add(testGridPosition);
-
+                allPositionsList.Add(sphere.GetGridPosition());
+                maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
             }
+        }
 
+        for (int i = 0; i < allPositionsList.Count; i++)
+        {
+            // Recorremos todas las posiciones validas alrededor de la malla
+            for (int x = -maxSpawnDistanceList[i]; x <= maxSpawnDistanceList[i]; x++)
+            {
+                for (int z = -maxSpawnDistanceList[i]; z <= maxSpawnDistanceList[i]; z++)
+                {
+
+                    // Creamos la posicion alrededor de la posicion del jugador
+                    GridPosition offsetGridPosition = new GridPosition(x, z);
+                    GridPosition testGridPosition = allPositionsList[i] + offsetGridPosition;
+
+                    // Comprobamos si la posicion esta fuera de la malla
+                    if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Comprobamos si la posicion es en la que esta la unidad
+                    if (allPositionsList[i] == testGridPosition)
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Comprobamos si la posicion tiene unidades dentro
+                    if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Comprobamos si la posicion es un obstaculo
+                    if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Comprobamos que la posicion no esta ya en la lista
+                    if (!validGridPositionList.Contains(allPositionsList[i]))
+                    {
+                        // Lo añadimos a la lista
+                        validGridPositionList.Add(testGridPosition);
+                    }  
+                }
+            }
         }
 
         return validGridPositionList;
