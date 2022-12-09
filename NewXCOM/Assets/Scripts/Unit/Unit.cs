@@ -287,4 +287,12 @@ public class Unit : MonoBehaviour
 
     }
 
+
+    //@GRG le devolvemos el puntito si el pobre no ha podido hacer la acción por estar pobre :(
+    public void GiveActionPointBack()
+    {
+        actionPoints += 1;
+        OnAnyActionPointsChanged(this, EventArgs.Empty);
+    }
+
 }

@@ -35,10 +35,6 @@ public class SpawnUnitAction : BaseAction
         return unitCost;
     }
 
-    public override bool ThisActionCostsMoney()
-    {
-        return true;
-    }
 
     // @IGM ------------------------
     // Update is called every frame.

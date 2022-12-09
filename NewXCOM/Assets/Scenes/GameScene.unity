@@ -4122,16 +4122,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1223159476}
     m_Modifications:
-    - target: {fileID: -1803460875891568307, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: unitCost
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: -1803460875891568307, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: unitName
-      value: Soldier
-      objectReference: {fileID: 0}
     - target: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
         type: 3}
       propertyPath: m_Name
@@ -4191,11 +4181,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6315176357458564335, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: maxActionPoints
-      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7c2f787643e4e2449140e58fb1f2218, type: 3}

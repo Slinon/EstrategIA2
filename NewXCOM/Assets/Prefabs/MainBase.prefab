@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd271029597fea147acbfd625861eb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActionPoints: 1
+  maxActionPoints: 2
   isEnemy: 0
 --- !u!114 &6830159223452896923
 MonoBehaviour:
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitName: Solider
+  unitName: Soldier
   unitCost: 300
   unitSpawned: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
     type: 3}

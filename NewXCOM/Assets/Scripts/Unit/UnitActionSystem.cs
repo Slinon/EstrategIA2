@@ -131,49 +131,63 @@ public class UnitActionSystem : MonoBehaviour
 
             }
 
-
-
-
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
 
-            ///He creado dos nuevos metodos virtuales en la clase BaseAction: un booleano "ThisActionCostsMoney" y un int "MoneyCost"
-            ///en base.BaseAction están puestos a false y 0 respectivamente. Spawn Unit Action hace override a esos valores.
-            ///pero me surgen varias dudas/problemas: como puedo hacer esto genérico para que afecta a la IA también?
-            ///ahora mismo (check linea 150) estoy comprobando exclusivamente el dinero del jugador (player.money).
-            ///además, me consume un punto de acción y no sé como evitarlo.
-
-            if (selectedAction.ThisActionCostsMoney() && MoneySystem.Instance.player.money < selectedAction.MoneyCost())
+            if (!selectedUnit.IsEnemy()) //Si se trata del jugador
             {
 
-                Debug.Log("No tienes dinero!");
-                return;
-
-            }
-
-            else
-            {
-                // Lanzamos la accion
-                SetBusy();
-                selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-
-                if (selectedAction.ThisActionCostsMoney()) //restamos el dinero, si es que era una acción con coste de dinero.
+                if (selectedAction.MoneyCost() < MoneySystem.Instance.player.money)
                 {
+
+                    Debug.Log("Esta acción se puede realizar");
+
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
                     MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.player);
+
                 }
-                
+
+                else
+                {
+
+                    Debug.Log("Esta acción NO se puede realizar, devolviendo el punto de acción");
+
+                    selectedUnit.GiveActionPointBack();
+                    //Actualizar visual!!!
+
+                }
+
             }
+
+            else //Si se trata de la IA
+            {
+
+                if (selectedAction.MoneyCost() < MoneySystem.Instance.enemyAI.money)
+                {
+
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+                    MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.enemyAI);
+
+                }
+
+                else
+                {
+
+                    selectedUnit.GiveActionPointBack();
+                    //Actualizar visual!!!
+
+                }
+
+            }
+
+
+
+
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            
 
 
             // Comprobamos si hay alguna clase escuchando el evento

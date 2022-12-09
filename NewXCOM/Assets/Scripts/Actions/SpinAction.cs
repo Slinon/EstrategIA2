@@ -84,7 +84,7 @@ public class SpinAction : BaseAction
     // ----------------------------------------
     public override int GetActionPointsCost()
     {
-        return 4;
+        return 1;
     }
 
     // @IGM ------------------------------------------------------------------------------
