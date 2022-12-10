@@ -126,14 +126,6 @@ public class GridObject
     }
 
 
-
-
-
-
-
-
-
-
     public void SetCoverType(CoverType coverType)
     {
         this.coverType = coverType;

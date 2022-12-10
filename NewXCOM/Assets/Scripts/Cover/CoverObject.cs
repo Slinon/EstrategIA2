@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class CoverObject : MonoBehaviour
 {
-    
+     
     [SerializeField] private CoverType coverType;
 
 
+    
 
     public CoverType GetCoverType()
     {

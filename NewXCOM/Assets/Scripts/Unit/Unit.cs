@@ -85,7 +85,7 @@ public class Unit : MonoBehaviour
 
     } 
 
-
+    
 
     // @IGM ------------------------------------------
     // Getter de la posicion en la malla de la unidad.
@@ -301,7 +301,11 @@ public class Unit : MonoBehaviour
     private void UpdateCoverType()
     {
         coverType = LevelGrid.Instance.GetUnitCoverType(GetWorldPosition());
-        OnCoverChanged?.Invoke(this, EventArgs.Empty);
+        if(coverType == CoverType.Covered)
+        {
+            OnCoverChanged?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 
     public CoverType GetCoverType()

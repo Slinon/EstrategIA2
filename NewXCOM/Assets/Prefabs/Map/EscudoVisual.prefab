@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 624530010720538556}
   - component: {fileID: 4430597064014462418}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Escudo (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1603605271383072597}
-  m_Layer: 0
+  - component: {fileID: 4703303264335941269}
+  m_Layer: 8
   m_Name: EscudoVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -119,6 +120,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4703303264335941269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5041720490820942010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1728eb54b6a2e0748b9735831b207cc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CoverSprite:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &5472093368335508627
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7885836695950408398}
   - component: {fileID: 4740304934429679962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Escudo (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7484914235850779228}
   - component: {fileID: 1552661901222568362}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Escudo (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +315,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2158695033820437115}
   - component: {fileID: 3508918073168590507}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Escudo (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
