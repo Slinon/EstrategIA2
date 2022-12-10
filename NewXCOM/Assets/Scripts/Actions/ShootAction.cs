@@ -17,7 +17,7 @@ public class ShootAction : BaseAction
         Cooloff,
 
     }
-    private ProbabilitySystem ps;                                // Funci�n probabilidad @EMF
+    private ProbabilitySystem ps;                               // Funci�n probabilidad @EMF
 
     public event EventHandler<Unit> OnShoot;                    // Evento cuando la unidad dispara
     public static event EventHandler<Unit> OnAnyShoot;          // Evento cuando cualquier unidad dispara
@@ -35,17 +35,23 @@ public class ShootAction : BaseAction
     private bool canShootBullet;                                // Booleano para indicar que la unidad puede disparar
     private float stateTimer;                                   // Timer de la maquina de estados
 
+    private UnitManager unitManager;
+    private List<Unit> enemiesList;
+
 
     private void Start()
     {
         ps = ProbabilitySystem.Instance;
+        unitManager = UnitManager.Instance;
+
+        enemiesList = unitManager.GetEnemyUnitList();
+
     }
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------
     private void Update()
     {
-
         // Comprobamos si la accion se ha activado
         if (!isActive)
         {
@@ -159,16 +165,22 @@ public class ShootAction : BaseAction
 
         }
 
-        // Hacemos da�o a la unidad
+        //  Hacemos daño a la unidad
+
+        // Debug ------------------------------------------------------------------
+
+        ShowEnemiesPercentage();
 
         Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, ps.CalculateDistanceUnit(this.unit, targetUnit)));
+            criticalPercentage, hitProbability, ps.CalculateDistanceUnit(this.unit, targetUnit), maxShootDistance));
 
-        float porcentaje_acierto = hitProbability - ps.GetDistancePercentage(ps.CalculateDistanceUnit(this.unit, targetUnit)) * 100;
+        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, ps.CalculateDistanceUnit(this.unit, targetUnit), maxShootDistance);
 
         targetUnit.Damage(damagetmp);
 
         Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + ps.CalculateDistanceUnit(this.unit, targetUnit) + " %: " + porcentaje_acierto);
+
+        // Debug -------------------------------------------------------------------
     }
 
     // @IGM -------------------------------------
@@ -355,4 +367,20 @@ public class ShootAction : BaseAction
 
     }
 
+    public void ShowEnemiesPercentage()
+    {
+        // Mostrar % enemigos
+        foreach (Unit enemy in enemiesList)
+        {
+            if (this.unit.name == "Unit (1)")
+            {
+                Debug.Log(this.unit + " --- " + (hitProbability - ps.GetDistancePercentage(ps.CalculateDistanceUnit(this.unit, enemy))) + " --- " + enemy.name);
+            }
+        }
+    }
+
+    public int GetShootHitProbability()
+    {
+        return hitProbability;
+    }
 }

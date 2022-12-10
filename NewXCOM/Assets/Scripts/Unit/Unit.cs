@@ -16,12 +16,13 @@ public class Unit : MonoBehaviour
     private BaseAction[] baseActionArray;                           // Array de acciones de la unidad
     private int actionPoints;                                       // Puntos de accion de la unidad
 
+
+
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
     private void Awake()
     {
-
         // Asignamos las acciones al array
         baseActionArray = GetComponents<BaseAction>();
 
