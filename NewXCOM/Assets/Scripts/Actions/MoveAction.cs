@@ -239,4 +239,6 @@ public class MoveAction : BaseAction
 
     }
 
+    public int MaxMoveDistance() { return maxMoveDistance; }
+
 }

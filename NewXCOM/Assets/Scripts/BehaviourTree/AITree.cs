@@ -14,6 +14,17 @@ public class AITree : BTree
                 //new Task
             //)
 
+            //new NodeSequence(new List<BTNode>
+            //(
+                //new Check
+            //new Task
+            //)
+
+            //new NodeSequence(new List<BTNode>
+            //(
+                //new Check
+                //new Task
+            //)
 
             ));
 

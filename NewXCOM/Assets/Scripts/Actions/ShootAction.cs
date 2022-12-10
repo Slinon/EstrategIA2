@@ -35,6 +35,7 @@ public class ShootAction : BaseAction
     private bool canShootBullet;                                // Booleano para indicar que la unidad puede disparar
     private float stateTimer;                                   // Timer de la maquina de estados
 
+
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------
@@ -343,5 +344,12 @@ public class ShootAction : BaseAction
         return GetValidActionGridPositionList(gridPosition).Count;
 
     }
+
+    //Getter daño :C
+    public int GetShootDamage()
+    {
+        return shootDamage;
+    }
+
 
 }
