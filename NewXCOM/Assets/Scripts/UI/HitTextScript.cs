@@ -58,13 +58,7 @@ public class HitTextScript : MonoBehaviour
             default:
                 ShowAllProbabiltyTexts(allTexts, false);
                 break;
-        }
-
-        if (unit.name == "UnitScoutEnemy")
-        {
-            Debug.Log("Enemy  " + unit.name + " at distance: " + pathFinding.CalculateDistance(unitSelected.GetGridPosition(), unit.GetGridPosition()) / 10 );
-        }
-        
+        }    
     }
 
     private void UpdateHitProbabilityText()
