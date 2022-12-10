@@ -142,10 +142,14 @@ GameObject:
   m_Component:
   - component: {fileID: 5525236020020757583}
   - component: {fileID: 4982671606360440177}
+  - component: {fileID: -3147024549923208559}
   - component: {fileID: 6315176357458564335}
   - component: {fileID: 6830159223452896923}
   - component: {fileID: -1803460875891568307}
-  - component: {fileID: -3147024549923208559}
+  - component: {fileID: 1870813685670864508}
+  - component: {fileID: 489632006182357166}
+  - component: {fileID: 2229958808863480921}
+  - component: {fileID: 5812569492142175501}
   - component: {fileID: 2538739146799923764}
   m_Layer: 7
   m_Name: MainBase
@@ -185,6 +189,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.3962746, y: 3.117995, z: 6.099913}
   m_Center: {x: -0.14200783, y: 1.5158912, z: -0.018522501}
+--- !u!114 &-3147024549923208559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5017dac62bb2744408dd3102ccbf8cf0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  factory: {fileID: 7648293086318671254}
+  darkMaterial: {fileID: 2100000, guid: 953b9105585ade743a5c4a274068d431, type: 2}
+  lightMaterial: {fileID: 2100000, guid: 07b3b5d544c10d84b8beff8b746dce39, type: 2}
+  spawnVfx: {fileID: 112855271554573800, guid: 7c2bdcba6e171df4ba7778c39cf3535c, type: 3}
 --- !u!114 &6315176357458564335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -197,8 +217,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd271029597fea147acbfd625861eb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActionPoints: 1
-  isEnemy: 0
+  maxActionPoints: 2
+  isEnemy: 1
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,10 +243,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitSpawned: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
+  unitName: Soldier
+  unitCost: 300
+  unitSpawned: {fileID: 1672859388607310, guid: 96b113a755cdb824ba5b09a4f7b08ad6,
     type: 3}
   maxSpawnDistance: 2
---- !u!114 &-3147024549923208559
+--- !u!114 &1870813685670864508
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,13 +257,65 @@ MonoBehaviour:
   m_GameObject: {fileID: 5525236020020757582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5017dac62bb2744408dd3102ccbf8cf0, type: 3}
+  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  factory: {fileID: 7648293086318671254}
-  darkMaterial: {fileID: 2100000, guid: 953b9105585ade743a5c4a274068d431, type: 2}
-  lightMaterial: {fileID: 2100000, guid: 07b3b5d544c10d84b8beff8b746dce39, type: 2}
-  spawnVfx: {fileID: 112855271554573800, guid: 7c2bdcba6e171df4ba7778c39cf3535c, type: 3}
+  unitName: Granadier
+  unitCost: 700
+  unitSpawned: {fileID: 7078400495500296147, guid: baded0d98baa166469d568497c2b4484,
+    type: 3}
+  maxSpawnDistance: 2
+--- !u!114 &489632006182357166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Scout
+  unitCost: 700
+  unitSpawned: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
+    type: 3}
+  maxSpawnDistance: 2
+--- !u!114 &2229958808863480921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Berserk
+  unitCost: 1200
+  unitSpawned: {fileID: 6920828138287288616, guid: 46096d14cf2cafc449ed1e995f4ba17a,
+    type: 3}
+  maxSpawnDistance: 2
+--- !u!114 &5812569492142175501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitName: Juggernaut
+  unitCost: 2000
+  unitSpawned: {fileID: 38327701121909258, guid: ba986151f45cc3c4faf1830cba95f74f,
+    type: 3}
+  maxSpawnDistance: 2
 --- !u!114 &2538739146799923764
 MonoBehaviour:
   m_ObjectHideFlags: 0

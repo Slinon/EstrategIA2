@@ -13,6 +13,15 @@ public class ActionButtonUI : MonoBehaviour
 
     private BaseAction baseAction;                              // Accion que contiene el boton
 
+    private void Update()
+    {
+        if (baseAction.MoneyCost() > MoneySystem.Instance.player.money)
+        {
+            button.interactable = false;
+        }
+    }
+
+
     // @IGM --------------------------------------
     // Metodo para establecer la accion del boton.
     // -------------------------------------------
@@ -44,7 +53,6 @@ public class ActionButtonUI : MonoBehaviour
         // Activamos el objeto si la accion del boton es la seleccionada
         BaseAction selectedBaseAction = UnitActionSystem.Instance.GetSelectedAction();
         selectedGameObject.SetActive(selectedBaseAction == baseAction);
-
     }
 
 }
