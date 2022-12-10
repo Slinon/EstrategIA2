@@ -115,11 +115,4 @@ public class ProbabilitySystem : MonoBehaviour
 
         return info;
     }
-
-    public int CalculateDistanceUnit(Unit itself, Unit target)
-    {
-        return Mathf.RoundToInt(Vector3.Distance(itself.gameObject.transform.position, target.gameObject.transform.position) / 2);  
-    }
-
-
 }

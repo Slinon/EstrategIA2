@@ -37,12 +37,15 @@ public class ShootAction : BaseAction
 
     private UnitManager unitManager;
     private List<Unit> enemiesList;
+    private Pathfinding pathFinding;
+
 
 
     private void Start()
     {
         ps = ProbabilitySystem.Instance;
         unitManager = UnitManager.Instance;
+        pathFinding = Pathfinding.Instance;
 
         enemiesList = unitManager.GetEnemyUnitList();
 
@@ -169,16 +172,16 @@ public class ShootAction : BaseAction
 
         // Debug ------------------------------------------------------------------
 
-        ShowEnemiesPercentage();
+        
 
         Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, ps.CalculateDistanceUnit(this.unit, targetUnit), maxShootDistance));
+            criticalPercentage, hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance));
 
-        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, ps.CalculateDistanceUnit(this.unit, targetUnit), maxShootDistance);
+        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance);
 
         targetUnit.Damage(damagetmp);
 
-        Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + ps.CalculateDistanceUnit(this.unit, targetUnit) + " %: " + porcentaje_acierto);
+        Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
 
         // Debug -------------------------------------------------------------------
     }
@@ -365,18 +368,6 @@ public class ShootAction : BaseAction
 
         return GetValidActionGridPositionList(gridPosition).Count;
 
-    }
-
-    public void ShowEnemiesPercentage()
-    {
-        // Mostrar % enemigos
-        foreach (Unit enemy in enemiesList)
-        {
-            if (this.unit.name == "Unit (1)")
-            {
-                Debug.Log(this.unit + " --- " + (hitProbability - ps.GetDistancePercentage(ps.CalculateDistanceUnit(this.unit, enemy))) + " --- " + enemy.name);
-            }
-        }
     }
 
     public int GetShootHitProbability()

@@ -12,6 +12,7 @@ public class HitTextScript : MonoBehaviour
 
     private UnitActionSystem unitActionSystem;
     private ProbabilitySystem ps;
+    private Pathfinding pathFinding;
 
     private Unit unitSelected;
     private ShootAction unitSelectedShootAction;
@@ -24,19 +25,15 @@ public class HitTextScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        if (unit.IsEnemy())
-        {
-            //UnitActionSystem.Instance.OnSelectedActionChanged += HitTextScript_OnSelectedActionChanged;
-        }
         
         unitActionSystem = UnitActionSystem.Instance;
         ps = ProbabilitySystem.Instance;
+        pathFinding = Pathfinding.Instance;
 
         unitSelected = unitActionSystem.GetSelectedUnit();
         unitSelectedShootAction = unitSelected.GetComponent<ShootAction>();
-
-       allTexts = GetAllProbabilityTexts();
+        
+        allTexts = GetAllProbabilityTexts();
     }
 
     // Update is called once per frame
@@ -44,14 +41,15 @@ public class HitTextScript : MonoBehaviour
     {
         selectedAction = UnitActionSystem.Instance.GetSelectedAction();
 
+        unitSelected = unitActionSystem.GetSelectedUnit();
+        unitSelectedShootAction = unitSelected.GetComponent<ShootAction>();
+
+
         switch (selectedAction)
         {
             // Accion de disparo
             case ShootAction shootAction:
                 ShowAllProbabiltyTexts(allTexts, true);
-
-                unitSelected = unitActionSystem.GetSelectedUnit();
-                unitSelectedShootAction = unitSelected.GetComponent<ShootAction>();
 
                 //Debug.Log(ps.CalculateDistanceUnit(unitSelected, unit));
                 UpdateHitProbabilityText();
@@ -60,7 +58,13 @@ public class HitTextScript : MonoBehaviour
             default:
                 ShowAllProbabiltyTexts(allTexts, false);
                 break;
-        } 
+        }
+
+        if (unit.name == "UnitScoutEnemy")
+        {
+            Debug.Log("Enemy  " + unit.name + " at distance: " + pathFinding.CalculateDistance(unitSelected.GetGridPosition(), unit.GetGridPosition()) / 10 );
+        }
+        
     }
 
     private void UpdateHitProbabilityText()
@@ -73,15 +77,7 @@ public class HitTextScript : MonoBehaviour
 
     public int GetProbabilityHit()
     {
-        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), ps.CalculateDistanceUnit(unitSelected, unit), unitSelectedShootAction.GetMaxShootDistance());
-    }
-
-    private void HitTextScript_OnSelectedActionChanged(object sender, EventArgs empty)
-    {
-
-        // Actualizamos la vista de la malla
-        UpdateHitProbabilityText();
-
+        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), pathFinding.CalculateDistance(unitSelected.GetGridPosition(), unit.GetGridPosition()) / 10, unitSelectedShootAction.GetMaxShootDistance());
     }
 
     private void ShowAllProbabiltyTexts(GameObject[] allTexts, bool show)
