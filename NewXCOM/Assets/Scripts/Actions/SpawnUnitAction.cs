@@ -25,7 +25,7 @@ public class SpawnUnitAction : BaseAction
     public static event EventHandler<Vector3> OnAnyUnitSpawned;     // Evento cuando cualquier unidad dispara
 
     [SerializeField] private int maxSpawnDistance;                  // Distancia maxima de spawn
-    [SerializeField] GameObject[] interactionSpheres;
+    private GameObject[] interactionSpheres;
 
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
@@ -38,7 +38,7 @@ public class SpawnUnitAction : BaseAction
 
     private void Start()
     {
-        
+        interactionSpheres = GameObject.FindGameObjectsWithTag("Sphere");
     }
 
     // @IGM ------------------------
