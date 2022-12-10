@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxActionPoints: 2
-  isEnemy: 1
+  isEnemy: 0
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,6 +248,9 @@ MonoBehaviour:
   unitSpawned: {fileID: 1672859388607310, guid: 96b113a755cdb824ba5b09a4f7b08ad6,
     type: 3}
   maxSpawnDistance: 2
+  interactionSpheres:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &1870813685670864508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +268,7 @@ MonoBehaviour:
   unitSpawned: {fileID: 7078400495500296147, guid: baded0d98baa166469d568497c2b4484,
     type: 3}
   maxSpawnDistance: 2
+  interactionSpheres: []
 --- !u!114 &489632006182357166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,6 +286,7 @@ MonoBehaviour:
   unitSpawned: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
     type: 3}
   maxSpawnDistance: 2
+  interactionSpheres: []
 --- !u!114 &2229958808863480921
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -299,6 +304,7 @@ MonoBehaviour:
   unitSpawned: {fileID: 6920828138287288616, guid: 46096d14cf2cafc449ed1e995f4ba17a,
     type: 3}
   maxSpawnDistance: 2
+  interactionSpheres: []
 --- !u!114 &5812569492142175501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,6 +322,7 @@ MonoBehaviour:
   unitSpawned: {fileID: 38327701121909258, guid: ba986151f45cc3c4faf1830cba95f74f,
     type: 3}
   maxSpawnDistance: 2
+  interactionSpheres: []
 --- !u!114 &2538739146799923764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be4dd0d838231c4bbd5668e1418f789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrebab: {fileID: 0}
   healthMax: 500
 --- !u!1 &5525236020238794742
 GameObject:

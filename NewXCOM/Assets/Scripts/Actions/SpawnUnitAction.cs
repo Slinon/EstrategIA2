@@ -36,6 +36,10 @@ public class SpawnUnitAction : BaseAction
         return unitCost;
     }
 
+    private void Start()
+    {
+        
+    }
 
     // @IGM ------------------------
     // Update is called every frame.
@@ -189,14 +193,30 @@ public class SpawnUnitAction : BaseAction
 
         // Comprobar puntos capturados y su distancia maxima alrededor
 
-        foreach (GameObject child in interactionSpheres)
+        if (unit.IsEnemy())
         {
-            InteractSphere sphere = child.GetComponent<InteractSphere>();
-
-            if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
+            foreach (GameObject child in interactionSpheres)
             {
-                allPositionsList.Add(sphere.GetGridPosition());
-                maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
+                InteractSphere sphere = child.GetComponent<InteractSphere>();
+
+                if (sphere.GetInControlState() == InteractSphere.InControlState.Enemy)
+                {
+                    allPositionsList.Add(sphere.GetGridPosition());
+                    maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
+                }
+            }
+        }
+        else
+        {
+            foreach (GameObject child in interactionSpheres)
+            {
+                InteractSphere sphere = child.GetComponent<InteractSphere>();
+
+                if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
+                {
+                    allPositionsList.Add(sphere.GetGridPosition());
+                    maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
+                }
             }
         }
 
