@@ -132,11 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1728eb54b6a2e0748b9735831b207cc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoverSprite:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  CoverSprite: {fileID: 21300000, guid: 1696d8b1b0d43114ea6ec4697f3ef022, type: 3}
 --- !u!1 &5472093368335508627
 GameObject:
   m_ObjectHideFlags: 0
