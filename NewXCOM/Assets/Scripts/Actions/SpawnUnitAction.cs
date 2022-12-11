@@ -164,7 +164,7 @@ public class SpawnUnitAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 100
+            actionValue = baseAIValue
 
         };
 

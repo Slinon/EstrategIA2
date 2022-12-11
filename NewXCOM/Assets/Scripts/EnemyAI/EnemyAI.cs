@@ -18,8 +18,10 @@ public class EnemyAI : MonoBehaviour
 
     }
 
+    public static event EventHandler OnAnyAIUnitIsSelected; // Evento cuano una unidad de la IA se ha seleccionado
+
     private State state;                                    // Estado actual de la IA
-    private float timer;
+    private float timer;                                    // Timer de los estados
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -127,6 +129,15 @@ public class EnemyAI : MonoBehaviour
     // --------------------------------------------------
     private bool TryTakeEnemyAIAction(Action onEnemyAIActionComplete)
     {
+
+        // Comprobamos si hay alguna clase escuchando el evento
+        if (OnAnyAIUnitIsSelected != null)
+        {
+
+            // Lanzamos el evento
+            OnAnyAIUnitIsSelected(this, EventArgs.Empty);
+
+        }
 
         // Recorremos la lista de unidades enemigas
         foreach (Unit enemyUnit in UnitManager.Instance.GetEnemyUnitList())

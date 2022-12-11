@@ -6,28 +6,53 @@ using UnityEngine;
 public class Checkers : MonoBehaviour
 {
 
-    public static Checkers Instance { get; private set; }
+    public static Checkers Instance { get; private set; }       // Instancia del singleton
 
+    // @GRG ----------------------------------------------------
+    // Awake is called when the script instance is being loaded.
+    // ---------------------------------------------------------
     private void Awake()
     {
-        if (Instance != null && Instance == this)
+
+        // Comprobamos si hay una instancia del objeto
+        if (Instance != null)
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+
+            // Lo eliminamos
+            Debug.LogError("Mas de un Checkers!" + transform + " - " + Instance);
+            Destroy(gameObject);
+            return;
+
         }
 
-        else
-        {
-            Debug.LogError("Hay más de un checker");
-            Destroy(gameObject);
-        }
+        // Asignamos el objeto a la instancia
+        Instance = this;
+
     }
 
+    // @GRG ------------------------------------------------------------------------
+    // Funcion para comprobar si estamos a un movimiento de un objeto interactuable.
+    // -----------------------------------------------------------------------------
     public bool IsCloseToSphere(Unit unit)
     {
-        int maxMoveDistance = unit.GetComponent<MoveAction>().MaxMoveDistance();
-        // Creamos la lista
-        List<GridPosition> validGridPositionList = new List<GridPosition>();
+
+        int maxMoveDistance;
+
+        // Comprobamos si la unidad tiene la accion de movimiento
+        if (unit.TryGetComponent(out MoveAction moveAction))
+        {
+
+            // Recuperamos la distancia maxima de movimiento
+            maxMoveDistance = moveAction.GetMaxMoveDistance();
+
+        }
+        else
+        {
+
+            // La unidad no se puede mover, por lo que no puede interactuar
+            return false;
+
+        }
 
         // Recuperamos la posicion en la malla de la unidad
         GridPosition unitGridPosition = unit.GetGridPosition();
@@ -46,7 +71,7 @@ public class Checkers : MonoBehaviour
                 // Comprobamos si la posicion esta fuera de la malla
                 if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
                 {
-
+              
                     // La saltamos
                     continue;
 
@@ -55,7 +80,7 @@ public class Checkers : MonoBehaviour
                 // Comprobamos si la posicion es en la que esta la unidad
                 if (unitGridPosition == testGridPosition)
                 {
-
+                    
                     // La saltamos
                     continue;
 
@@ -64,25 +89,7 @@ public class Checkers : MonoBehaviour
                 // Comprobamos si la posicion tiene unidades dentro
                 if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                 {
-
-                    // La saltamos
-                    continue;
-
-                }
-
-                // Comprobamos si la posicion es un obstaculo
-                if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
-                {
-
-                    // La saltamos
-                    continue;
-
-                }
-
-                // Comprobamos si la posicion es alcanzable
-                if (!Pathfinding.Instance.HasPath(unitGridPosition, testGridPosition))
-                {
-
+                   
                     // La saltamos
                     continue;
 
@@ -94,7 +101,7 @@ public class Checkers : MonoBehaviour
                 // Comprobamos si el camino es demasiado largo
                 if (Pathfinding.Instance.GetPathLength(unitGridPosition, testGridPosition) > maxMoveDistance * pathfindingDistanceMultiplier)
                 {
-
+             
                     // La saltamos
                     continue;
 
@@ -104,7 +111,7 @@ public class Checkers : MonoBehaviour
                 IInteractable interactable = LevelGrid.Instance.GetInteractableAtGridPosition(testGridPosition);
                 if (interactable == null)
                 {
-
+                 
                     // La saltamos
                     continue;
 
@@ -115,7 +122,7 @@ public class Checkers : MonoBehaviour
                 if (interactSphere != null &&
                     (int)interactSphere.GetInControlState() == Convert.ToInt32(unit.IsEnemy()))
                 {
-
+      
                     // La saltamos
                     continue;
 
@@ -128,13 +135,35 @@ public class Checkers : MonoBehaviour
 
         }
 
+        // No hemos detectado una esfera
         return false;
 
     }
 
+    // @GRG -------------------------------------------------------------------
+    // Funcion para comprobar que tenemos en rango de interacción a una esfera.
+    // ------------------------------------------------------------------------
     public bool IsSphereNearby(Unit unit)
     {
-        int maxInteractDistance = 1;
+
+        int maxInteractDistance;
+
+        // Comprobamos si la unidad tiene la accion de interactuar
+        if (unit.TryGetComponent(out InteractAction interactAction))
+        {
+
+            // Recuperamos la distancia maxima de movimiento
+            maxInteractDistance = interactAction.GetMaxInteractDistance();
+
+        }
+        else
+        {
+
+            // La unidad no se puede mover, por lo que no puede interactuar
+            return false;
+
+        }
+
         // Creamos la lista
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
@@ -189,25 +218,71 @@ public class Checkers : MonoBehaviour
 
         }
 
+        // No hemos detectado ninguna esfera
         return false;
 
     }
 
-
+    // @GRG --------------------------------------------------
+    // Funcion para saber cuantos puntos de acción nos quedan.
+    // -------------------------------------------------------
     public int GetRemainingActionPoints(Unit unit)
     {
+        
+        // Devolvemos la cantidad de puntos que le quedan ala unidad
         return unit.GetActionPoints();
+
     }
 
+    // @GRG -------------------------------------
+    // Funcion para saber si hay enemigos a tiro.
+    // ------------------------------------------
     public bool AreEnemiesNearby(Unit unit)
     {
-        return unit.GetComponent<ShootAction>().GetTargetCountAtPosition(unit.GetGridPosition()) > 0;
+
+        // Comprobamos si la unidad tiene la accion de disparo
+        if (unit.TryGetComponent(out ShootAction shootAction))
+        {
+
+            // Comprobamos si hay enemigos en el rango de disparo
+            if (shootAction.GetTargetCountAtPosition(unit.GetGridPosition()) > 0)
+            {
+
+                return true;
+
+            }
+
+        }
+
+        // No hay enemigos o la unidad no puede disparar
+        return false;
+
     }
 
-
+    // @GRG -----------------------------------------------
+    // Funcion para comprobar si tenemos un enemigo a mele.
+    // ----------------------------------------------------
     public bool IsEnemyPointBlank(Unit unit)
     {
-        int maxSwordDistance = 1;
+
+        int maxSwordDistance;
+
+        // Comprobamos si la unidad tiene la accion de interactuar
+        if (unit.TryGetComponent(out SwordAction swordAction))
+        {
+
+            // Recuperamos la distancia maxima de movimiento
+            maxSwordDistance = swordAction.GetMaxSwordDistance();
+
+        }
+        else
+        {
+
+            // La unidad no puede pegar espadazo, por lo que no tiene enemigos con los que interactuar
+            return false;
+
+        }
+
         // Creamos la lista
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
@@ -255,29 +330,154 @@ public class Checkers : MonoBehaviour
 
                 }
 
+                // Tenemos un enemigo a mele
                 return true;
 
             }
 
         }
 
+        // No tenemos ningun enemigo a mele
         return false;
+
     }
 
-    public bool CouldBeKiled(Unit unit)
+    // @GRG --------------------------------------------------------------------
+    // Funcion para saber si podemos morir por las unides que nos tienen a tiro.
+    // -------------------------------------------------------------------------
+    public bool CouldBeKilled(Unit unit)
     {
 
+        // Recuperamos la lista de unidades enemigas
         List<Unit> enemies = UnitManager.Instance.GetEnemyUnitList();
 
+        // Recorremos la lista de unidades enemigas
         foreach (Unit enemy in enemies)
         {
-            if ((unit.GetHealthNormalized() * 100f) < enemy.GetComponent<ShootAction>().GetShootDamage())
+
+            // Recuperamos las posiciones de las unidades aliadas que tiene el enemigo a tiro
+            List<GridPosition> allyUnitsGridPosition = enemy.GetAction<ShootAction>().GetValidActionGridPositionList();
+
+            // Recorremos la lista de las posiciones aliadas
+            foreach (GridPosition allyGridPosition in allyUnitsGridPosition)
             {
-                return true;
+
+                // Recuperamos la unidad aliada
+                Unit ally = LevelGrid.Instance.GetUnitListAtGridPosition(allyGridPosition)[0];
+
+                // Comprobamos si la unidad aliada es nuestra unidad
+                if (ally == unit)
+                {
+
+                    // Comrpobamos si el enemigo la puede matar de un tiro
+                    if ((unit.GetHealthNormalized() * 100f) < enemy.GetComponent<ShootAction>().GetShootDamage())
+                    {
+
+                        return true;
+
+                    }
+
+                }
+
             }
+            
+        }
+
+        // Las unidades enemigos no pueden matarnos de un tiro
+        return false;
+
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para saber si es correcto lanzar una granada.
+    // -----------------------------------------------------
+    public bool IsValidGrenade(Unit unit)
+    {
+
+        // Comprobamos si la unidad tiene la accion de interactuar
+        if (!unit.TryGetComponent(out GrenadeAction grenadeAction))
+        {
+
+            // La unidad no puede pegar espadazo, por lo que no tiene enemigos con los que interactuar
+            return false;
+
+        }
+
+        int explosionRadious = grenadeAction.GetGridDamageRadius();
+
+        // Recorremos la lista de 
+        foreach (GridPosition gridPosition in grenadeAction.GetValidActionGridPositionList())
+        {
+            
+            // Creamos la cantidad de enemigos y aliados que estan arango de la explosion
+            int enemiesInRange = 0;
+            int alliesInRange = 0;
+
+            // Recorremos todas las posiciones validas alrededor de la malla
+            for (int x = -explosionRadious; x <= explosionRadious; x++)
+            {
+
+                for (int z = -explosionRadious; z <= explosionRadious; z++)
+                {
+
+                    // Creamos la posicion alrededor de la posicion del jugador
+                    GridPosition offsetGridPosition = new GridPosition(x, z);
+                    GridPosition testGridPosition = gridPosition + offsetGridPosition;
+
+                    // Comprobamos si la posicion esta fuera de la malla
+                    if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Comprobamos si la posicion no tiene unidades dentro
+                    if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Recuperamos el target de la posicion
+                    Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
+
+                    // Comprobamos si el target esta en el mismo equipo que la unidad que va a disparar
+                    if (targetUnit.IsEnemy() == unit.IsEnemy())
+                    {
+
+                        // Añadimos la unidad a los aliados afectados
+                        alliesInRange++;
+
+                    }
+                    else
+                    {
+
+                        // La unidad es enemiga, la añadimos a los enemigos afectados
+                        enemiesInRange++;
+
+                    }
+
+                }
+
+            }
+
+            // Comprobamos si es factible lanzar una granada en esta posicion
+            if (alliesInRange == 0 && enemiesInRange > 1)
+            {
+
+                return true;
+
+            }
+
         }
 
         return false;
+
     }
+
 }
 

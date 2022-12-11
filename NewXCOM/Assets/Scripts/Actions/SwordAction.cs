@@ -152,12 +152,15 @@ public class SwordAction : BaseAction
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
 
+        // Recuperamos la unidad objetivo
+        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
         // Devolvemos la accion de la IA
         return new EnemyAIAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 200,
+            actionValue = baseAIValue + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
 
         };
 

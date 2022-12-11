@@ -46,14 +46,14 @@ public class GrenadeAction : BaseAction
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = 0
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
         };
 
     }
 
-    // @IGM -------------------------------------------------------------
-    // Funcion que devuelve la lista de posiciones validas donde moverse.
-    // ------------------------------------------------------------------
+    // @IGM ------------------------------------------------------------------------
+    // Funcion que devuelve la lista de posiciones validas donde lanzar una granada.
+    // -----------------------------------------------------------------------------
     public override List<GridPosition> GetValidActionGridPositionList()
     {
 
@@ -184,6 +184,84 @@ public class GrenadeAction : BaseAction
 
         // Comprueba si hay un obstaculo en la direccion
         return Physics.Raycast(ray, distanceToTarget, obstacleLayerMask);
+    }
+
+    // @IGM ------------------------------------
+    // Getter de la distancia maxima de lanzado.
+    // -----------------------------------------
+    public int GetMaxThrowDistance()
+    {
+
+        return maxThrowDistance;
+
+    }
+
+    // @IGM ------------------------------------------------------------
+    // Funcion para calcular la mejor posicion donde lanzar una granada.
+    // -----------------------------------------------------------------
+    public int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        // Reseteamos el valor de la posicion en la malla
+        int targetValue = 0;
+
+        // Calculamos el radio de la explosión en casillas
+        int explosionRadious = GetGridDamageRadius();
+
+        // Recorremos todas las posiciones validas alrededor de la malla
+        for (int x = -explosionRadious; x <= explosionRadious; x++)
+        {
+
+            for (int z = -explosionRadious; z <= explosionRadious; z++)
+            {
+
+                // Calculamos la posición alrededor de la zona de impacto de la granada
+                GridPosition offsetGridPosition = new GridPosition(x, z);
+                GridPosition testGridPosition = gridPosition + offsetGridPosition;
+
+                // Comprobamos si la posicion esta fuera de la malla
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion no tiene unidades dentro
+                if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Recuperamos el target de la posicion
+                Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
+
+                // Comprobamos si el target esta en el mismo equipo que la unidad que va a disparar
+                if (targetUnit.IsEnemy() == unit.IsEnemy())
+                {
+
+                    // Le restamos valor a esa posicion
+                    targetValue -= 15;
+
+                }
+                else
+                {
+
+                    // Le sumamos valor a esa posicion
+                    targetValue += 5;
+
+                }
+
+            }
+
+        }
+
+        return targetValue;
+
     }
 
 }

@@ -354,7 +354,7 @@ public class ShootAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
+            actionValue = baseAIValue + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
 
         };
 

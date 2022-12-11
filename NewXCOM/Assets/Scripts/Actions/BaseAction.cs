@@ -13,18 +13,7 @@ public abstract class BaseAction : MonoBehaviour
     protected bool isActive;                                    // Booleano para indicar si la accion se ha activado
     protected Action onActionComplete;                          // Accion para cambiar el esrtado del actionSystem
 
-    protected int baseValue;
-
-    public virtual void SetBaseValue(int baseValue)
-    {
-        this.baseValue = baseValue;
-    }
-
-    //Getter del valor de la acción
-    public virtual int BaseValue()
-    {
-        return baseValue;
-    }
+    protected int baseAIValue;
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -186,5 +175,21 @@ public abstract class BaseAction : MonoBehaviour
     {
         return 0;
     }
-    
+
+    // @GRG ----------------------------------
+    // Setter del valor de la acción de la IA.
+    // ---------------------------------------
+    public virtual void SetBaseAIValue(int baseValue)
+    {
+        this.baseAIValue = baseValue;
+    }
+
+    // @GRG ----------------------------------
+    // Getter del valor de la acción de la IA.
+    // ---------------------------------------
+    public virtual int GetBaseAIValue()
+    {
+        return baseAIValue;
+    }
+
 }

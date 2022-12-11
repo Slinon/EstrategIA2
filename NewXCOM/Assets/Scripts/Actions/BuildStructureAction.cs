@@ -111,7 +111,7 @@ public class BuildShieldAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 200,
+            actionValue = baseAIValue,
 
         };
     }

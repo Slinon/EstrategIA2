@@ -233,12 +233,20 @@ public class MoveAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = targetCountAtGridPosition * 10
+            actionValue = baseAIValue + targetCountAtGridPosition * 10
 
         };
 
     }
 
-    public int MaxMoveDistance() { return maxMoveDistance; }
+    // @GRG ---------------------------------------
+    // Getter de la distancia maxima de movimiento.
+    // --------------------------------------------
+    public int GetMaxMoveDistance() 
+    { 
+    
+        return maxMoveDistance; 
+
+    }
 
 }

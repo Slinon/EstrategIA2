@@ -46,8 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76033c6da76a6334cb198b1171d3a750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageRadius: 4
-  damageAmount: 60
+  damageRadius: 3
+  damageAmount: {x: 40, y: 0}
   maxGrenadeHeight: 4
   grenadeExplodeVfxPrefab: {fileID: 3492407005075749401, guid: 51edd039c637e9240bcd70808cd1b8d7,
     type: 3}

@@ -9,6 +9,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 691790700652449851, guid: 3c8e2994b196057439b8a649fcf9f89f,
         type: 3}
+      propertyPath: ragdollPrefab
+      value: 
+      objectReference: {fileID: 5082672127757808714, guid: 25467315e42e4b248acbad95cbaa5fe6,
+        type: 3}
+    - target: {fileID: 691790700652449851, guid: 3c8e2994b196057439b8a649fcf9f89f,
+        type: 3}
       propertyPath: floatingTextPrebab
       value: 
       objectReference: {fileID: 3181831354123590032, guid: 8628eb414de0834498130c598e600dc7,

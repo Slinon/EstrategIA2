@@ -85,6 +85,12 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 2897903280794393051, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
         type: 3}
+      propertyPath: ragdollPrefab
+      value: 
+      objectReference: {fileID: 5082672127757808714, guid: 25467315e42e4b248acbad95cbaa5fe6,
+        type: 3}
+    - target: {fileID: 2897903280794393051, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
+        type: 3}
       propertyPath: floatingTextPrebab
       value: 
       objectReference: {fileID: 3181831354123590032, guid: 8628eb414de0834498130c598e600dc7,

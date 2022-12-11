@@ -98,7 +98,7 @@ public class SpinAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 0
+            actionValue = baseAIValue
 
         };
 

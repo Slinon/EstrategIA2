@@ -48,7 +48,7 @@ public class InteractAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 400
+            actionValue = baseAIValue
 
         };
 
@@ -141,7 +141,7 @@ public class InteractAction : BaseAction
     public override int GetActionPointsCost()
     {
 
-        return 0;
+        return 1;
 
     }
 
@@ -162,6 +162,16 @@ public class InteractAction : BaseAction
 
         // Terminamos la accion
         ActionComplete();
+
+    }
+
+    // @GRG ----------------------------------------
+    // Getter de la distancia maxima de interaccion.
+    // ---------------------------------------------
+    public int GetMaxInteractDistance()
+    {
+
+        return maxInteractDistance;
 
     }
 

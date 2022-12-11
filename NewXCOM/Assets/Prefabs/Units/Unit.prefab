@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: -4531885919472716451}
   - component: {fileID: 5789377868464818684}
   - component: {fileID: -1514894338747600631}
+  - component: {fileID: -4241342217339519904}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -541,6 +542,20 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 5670714769479422707, guid: 39f714fbe91a7e341ab9b59c77270586,
     type: 3}
   originalRootBone: {fileID: 5666594676002316301}
+--- !u!114 &-4241342217339519904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670714769479422705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86bb985f1816aa94c9af47d9a9c22ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAIValueAction: 200
+  minAIValueAction: 100
 --- !u!1 &6456686226750173416
 GameObject:
   m_ObjectHideFlags: 0
@@ -904,7 +919,6 @@ MonoBehaviour:
   unit: {fileID: 5670714769479422706}
   healthBarImage: {fileID: 5449129393467464558}
   healthSystem: {fileID: 5789377868464818684}
-  probabilityPercentageText: {fileID: 0}
 --- !u!114 &2326158299126407318
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -111,7 +111,7 @@ public class BuildStructureAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 200,
+            actionValue = baseAIValue,
 
         };
     }
