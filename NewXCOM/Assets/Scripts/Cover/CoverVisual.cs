@@ -33,7 +33,7 @@ public class CoverVisual : MonoBehaviour
             Vector3 snappedWorldPosition = LevelGrid.Instance.GetWorldPosition(mousegridPosition);
  
             CoverType coverType = LevelGrid.Instance.GetCoverTypeAtPosition(snappedWorldPosition);
-            Debug.Log("El snappedWorld es " + snappedWorldPosition + " El coverType es " + coverType);
+            //Debug.Log("El snappedWorld es " + snappedWorldPosition + " El coverType es " + coverType);
             switch (coverType) 
             {
                 case CoverType.None:
