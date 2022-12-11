@@ -374,4 +374,11 @@ public class ShootAction : BaseAction
     {
         return hitProbability;
     }
+
+    //Getter daño :C
+    public int GetShootDamage()
+    {
+        return shootDamage;
+    }
+
 }
