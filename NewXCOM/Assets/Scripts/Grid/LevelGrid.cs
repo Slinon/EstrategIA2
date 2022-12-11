@@ -252,6 +252,13 @@ public class LevelGrid : MonoBehaviour
         height = gridSystem.GetHeight();
     }
 
+    public void SetCoverTypeAtGridPosition(CoverType coverType, GridPosition gridPosition)
+    {
+        
+        GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+        gridObject.SetCoverType(coverType);
+    }
+
     public void SetCoverType(CoverType coverType) 
     {
         this.coverType = coverType;
@@ -261,9 +268,6 @@ public class LevelGrid : MonoBehaviour
     {
         return coverType;
     }
-
-
-
 
     public CoverType GetCoverTypeAtPosition(Vector3 worldPosition) 
     {
