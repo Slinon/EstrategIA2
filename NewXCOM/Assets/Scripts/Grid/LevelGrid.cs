@@ -268,6 +268,7 @@ public class LevelGrid : MonoBehaviour
     public CoverType GetCoverTypeAtPosition(Vector3 worldPosition) 
     {
         return gridSystem.GetGridObject(LevelGrid.Instance.GetGridPosition(worldPosition)).GetCoverType();
+        
     }
 
     public CoverType GetUnitCoverType(Vector3 worldPosition) 

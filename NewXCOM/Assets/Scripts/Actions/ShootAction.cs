@@ -17,7 +17,7 @@ public class ShootAction : BaseAction
         Cooloff,
 
     }
-    public ProbabilitySystem ps;                                // Función probabilidad @EMF
+    public ProbabilitySystem ps;                                // Funciï¿½n probabilidad @EMF
 
     public event EventHandler<Unit> OnShoot;                    // Evento cuando la unidad dispara
     public static event EventHandler<Unit> OnAnyShoot;          // Evento cuando cualquier unidad dispara
@@ -25,10 +25,10 @@ public class ShootAction : BaseAction
     [SerializeField] private int maxShootDistance;              // Distancia maxima de disparo
     [SerializeField] LayerMask obstacleLayerMask;               // Capa de los obstaculos
 
-    [SerializeField] private int shootDamage = 40;              // Daño del disparo @EMF
+    [SerializeField] private int shootDamage = 40;              // Daï¿½o del disparo @EMF
     [SerializeField] private int hitProbability = 80;           // Probabilidad de acierto @EMF
-    [SerializeField] private int criticalProbability = 50;      // Probabilidad de crítico @EMF
-    [SerializeField] private float criticalPercentage = 0.2f;   // Porcentaje crítico @EMF
+    [SerializeField] private int criticalProbability = 50;      // Probabilidad de crï¿½tico @EMF
+    [SerializeField] private float criticalPercentage = 0.2f;   // Porcentaje crï¿½tico @EMF
 
     private State state;                                        // Estado actual de la accion
     private Unit targetUnit;                                    // Unidad ala que vamos a disparar
@@ -154,10 +154,10 @@ public class ShootAction : BaseAction
 
         }
 
-        // Hacemos daño a la unidad
+        // Hacemos daï¿½o a la unidad
         int damage = ps.CheckDamageProbability(shootDamage, criticalProbability, criticalPercentage, hitProbability);
         targetUnit.Damage(damage);
-        Debug.Log("Shoot damage: " + damage);
+        //Debug.Log("Shoot damage: " + damage);
     }
 
     // @IGM -------------------------------------
@@ -244,25 +244,41 @@ public class ShootAction : BaseAction
 
                 }
 
-                // Definimos un offset para poder disparar por encima de obstaculos bajos
-                float unitShoulderHeight = 1.7f;
+                
+
 
                 // Calculamos la direccion de disparo
                 Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Unit unitPosition = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                // Definimos un offset para poder disparar por encima de obstaculos bajos
+                float unitShoulderHeight = 1.7f;
+                
+
+
+                if(targetUnit.GetCoverType() == CoverType.Covered)
+                {
+                    if(unitPosition.GetCoverType() == CoverType.Covered)
+                    {
+                        unitShoulderHeight = 0.6f;
+                    }else{unitShoulderHeight = 1.7f;}         
+                }
+
+
 
                 // Comprobamos si la unidad no tiene visual del objetivo
                 if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
                     Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()), obstacleLayerMask))
                 {
-
+                    
                     // La saltamos
                     continue;
 
 
                 }
 
-                // Lo añadimos a la lista
+                // Lo aï¿½adimos a la lista
                 validGridPositionList.Add(testGridPosition);
 
             }
@@ -279,10 +295,9 @@ public class ShootAction : BaseAction
     // ---------------------------------------
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-
-        // Asignamos la unidad a la que vamos a disparar
+        
         targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
-
+        
         // Establecemos los parametros iniciales
         state = State.Aiming;
         canShootBullet = true;

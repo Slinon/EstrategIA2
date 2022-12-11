@@ -29,10 +29,11 @@ public class CoverVisual : MonoBehaviour
         //Debug.Log("La posicion global del raton es " + mouseWorldPosition + " y en el grid es " + mousegridPosition);
         if(LevelGrid.Instance.IsValidGridPosition(mousegridPosition))
         {
+            //Debug.Log("Entrado-------------------------");
             Vector3 snappedWorldPosition = LevelGrid.Instance.GetWorldPosition(mousegridPosition);
-            //Debug.Log("El snappedWorld es " + snappedWorldPosition);
+ 
             CoverType coverType = LevelGrid.Instance.GetCoverTypeAtPosition(snappedWorldPosition);
-            //Debug.Log("El coverType es " + coverType);
+            //Debug.Log("El snappedWorld es " + snappedWorldPosition + " El coverType es " + coverType);
             switch (coverType) 
             {
                 case CoverType.None:

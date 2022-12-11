@@ -13,10 +13,14 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool isEnemy;
     [SerializeField] private CoverType coverType;
 
+
+
+
     private GridPosition gridPosition;                              // Posicion de la malla donde esta la unidad
     private HealthSystem healthSystem;                              // Sistema de salud de la unidad
     private BaseAction[] baseActionArray;                           // Array de acciones de la unidad
     private int actionPoints;                                       // Puntos de accion de la unidad
+
     
 
     // @IGM ----------------------------------------------------
@@ -33,6 +37,9 @@ public class Unit : MonoBehaviour
 
         // Asignamos el numero de acciones disponibles
         actionPoints = maxActionPoints;
+
+
+
 
     }
 
@@ -301,6 +308,7 @@ public class Unit : MonoBehaviour
     private void UpdateCoverType()
     {
         coverType = LevelGrid.Instance.GetUnitCoverType(GetWorldPosition());
+        
         if(coverType == CoverType.Covered)
         {
             OnCoverChanged?.Invoke(this, EventArgs.Empty);
