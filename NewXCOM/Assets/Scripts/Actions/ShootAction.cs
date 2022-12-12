@@ -275,7 +275,21 @@ public class ShootAction : BaseAction
 
                 // Calculamos la direccion de disparo
                 Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Unit unitPosition = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                // Definimos un offset para poder disparar por encima de obstaculos bajos
+
+                
+
+
+                if(targetUnit.GetCoverType() == CoverType.Covered)
+                {
+                    if(unitPosition.GetCoverType() == CoverType.Covered)
+                    {
+                        unitShoulderHeight = 0.6f;
+                    }else{unitShoulderHeight = 1.7f;}         
+                }
 
                 // Comprobamos si la unidad no tiene visual del objetivo
                 if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
