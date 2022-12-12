@@ -12,11 +12,10 @@ public class Target
 
 public class MoneySystem : MonoBehaviour
 {
-    
+
     //-----------------------------------
     //@GRG - Money System
     //-----------------------------------
-
     [SerializeField] private int startingAmount = 500;
     [SerializeField] private int moneyPerTurn = 500;
     [SerializeField] private float timeToFill = 2f;
@@ -25,8 +24,21 @@ public class MoneySystem : MonoBehaviour
 
     public Target player, enemyAI;
 
+    public static MoneySystem Instance { get; private set; }
+
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+        }
+
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
 
         //Create two instances of Tagret class
         player = new Target();
@@ -46,9 +58,10 @@ public class MoneySystem : MonoBehaviour
     {
 
         DisplayPlayerMoney(player.money);
-
+        
     }
 
+    
     void DisplayPlayerMoney(int amount)
     {
 

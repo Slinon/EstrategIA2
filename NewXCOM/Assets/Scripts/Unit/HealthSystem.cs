@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class HealthSystem : MonoBehaviour
 {
+    public GameObject floatingTextPrebab;
 
     public event EventHandler OnDead;                   // Evento cuando la unidad muere
     public event EventHandler OnDamaged;                // Evento cuando se daña a una unidad
@@ -14,7 +15,6 @@ public class HealthSystem : MonoBehaviour
     private int health;                                 // Salud de la unidad
 
     private Unit unit;                                  //Referencia al component Unit asociado a este GameObject
-    private MoneySystem moneySystem;                    //Referencia al Manager que controla el dinero
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -35,19 +35,21 @@ public class HealthSystem : MonoBehaviour
     {
 
         unit = GetComponent<Unit>();
-        moneySystem = FindObjectOfType<MoneySystem>();
 
     }
 
     // @IGM -------------------------
     // Metodo para dañar a la unidad.
     // ------------------------------
-
-    public void Damage(int damageAmount)
+    public void Damage(Vector2 damageInfo) // Valor x "daño", Valor y "info_critico"
     {
+        if (floatingTextPrebab)
+        {
+            ShowFloatingTextDamage(damageInfo);
+        }
 
         // Reducimos la vida
-        health -= damageAmount;
+        health -= (int)damageInfo.x;
 
         // Comprobamos si la vida es menor a 0
         if (health < 0)
@@ -77,13 +79,26 @@ public class HealthSystem : MonoBehaviour
         }
 
     }
+    void ShowFloatingTextDamage(Vector2 damage)
+    {
+        var go = Instantiate(floatingTextPrebab, transform.position, Quaternion.identity, transform);
+        go.GetComponent<TextMesh>().text = damage.x.ToString();
+
+        if (damage.y > 0) // critico
+        {
+            go.GetComponent<TextMesh>().color = Color.red;
+        }
+        else
+        {
+            go.GetComponent<TextMesh>().color = Color.white;
+        }
+    }
 
     // @IGM -------------------------
     // Metodo para matar a la unidad.
     // ------------------------------
     private void Die()
     {
-
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnDead != null)
         {
@@ -96,14 +111,14 @@ public class HealthSystem : MonoBehaviour
         if (unit.IsEnemy())
         {
             //El jugador recibe dinero por el takedown
-            moneySystem.GiveTakeMoney(100, moneySystem.player);
+            MoneySystem.Instance.GiveTakeMoney(200, MoneySystem.Instance.player);
 
         }
 
         else
         {
             //La AI recibe dinero por el takedown
-            moneySystem.GiveTakeMoney(100, moneySystem.enemyAI);
+            MoneySystem.Instance.GiveTakeMoney(200, MoneySystem.Instance.enemyAI);
 
         }
         
