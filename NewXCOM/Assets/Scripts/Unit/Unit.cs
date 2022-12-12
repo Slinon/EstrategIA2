@@ -318,4 +318,8 @@ public class Unit : MonoBehaviour
         return coverType;
     }
 
+    public int GetDistanceBetweenUnits(Unit selected, Unit target)
+    {
+        return (Mathf.Abs(selected.GetGridPosition().x - target.GetGridPosition().x)) + Mathf.Abs(Mathf.Abs(selected.GetGridPosition().z - target.GetGridPosition().z));
+    }
 }

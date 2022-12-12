@@ -171,9 +171,9 @@ public class ShootAction : BaseAction
         
 
         Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance));
+            criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(this.unit, targetUnit), maxShootDistance));
 
-        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance);
+        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, unit.GetDistanceBetweenUnits(this.unit, targetUnit), maxShootDistance);
 
         targetUnit.Damage(damagetmp);
 
@@ -232,6 +232,7 @@ public class ShootAction : BaseAction
                 }
 
                 // Calculamos la distancia de la posicion a probar
+                
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
 
                 // Comprobamos si la distancia es mayor a la de diparo
@@ -242,6 +243,7 @@ public class ShootAction : BaseAction
                     continue;
 
                 }
+                
 
                 // Comprobamos si la posicion no tiene unidades dentro
                 if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
@@ -273,9 +275,6 @@ public class ShootAction : BaseAction
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
 
                 // Definimos un offset para poder disparar por encima de obstaculos bajos
-
-                
-
 
                 if(targetUnit.GetCoverType() == CoverType.Covered)
                 {

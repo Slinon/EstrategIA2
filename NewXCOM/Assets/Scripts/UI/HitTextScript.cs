@@ -59,9 +59,7 @@ public class HitTextScript : MonoBehaviour
                 ShowAllProbabiltyTexts(enemyList, false);
                 break;
         }
-        //Debug.Log(GetDistance((int)(unitSelected.GetWorldPosition().x / levelGrid.GetCellSize()), (int)(unitSelected.GetWorldPosition().z / levelGrid.GetCellSize())));
     }
-
     
     private void UpdateHitProbabilityText()
     {
@@ -73,7 +71,8 @@ public class HitTextScript : MonoBehaviour
 
     public int GetProbabilityHit()
     {
-        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), GetDistance((int)(unitSelected.GetWorldPosition().x / levelGrid.GetCellSize()), (int)(unitSelected.GetWorldPosition().z / levelGrid.GetCellSize())), unitSelectedShootAction.GetMaxShootDistance());
+        // Comprobar si esta cubierto para devolver 0
+        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), unit.GetDistanceBetweenUnits(unitSelected, this.unit), unitSelectedShootAction.GetMaxShootDistance());
     }
 
     private void ShowAllProbabiltyTexts(List<Unit> enemyList, bool show)
@@ -84,9 +83,5 @@ public class HitTextScript : MonoBehaviour
             unit.GetComponentInChildren<HitTextScript>().hitProbabilityText.gameObject.SetActive(show);
         }
     }
- 
-    private int GetDistance(int x, int z)
-    {
-        return Mathf.Abs(x) + Mathf.Abs(z);
-    }
+    
 }

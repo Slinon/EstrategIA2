@@ -280,8 +280,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 832517032484472279, guid: 84a5120fc59eb6b418ac87c191986bb9,
         type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0000217
+      objectReference: {fileID: 0}
+    - target: {fileID: 832517032484472279, guid: 84a5120fc59eb6b418ac87c191986bb9,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.4999993
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 832517032484472279, guid: 84a5120fc59eb6b418ac87c191986bb9,
         type: 3}
@@ -382,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -0.053931713, y: 8.00001, z: -9.946069}
+  m_FollowOffset: {x: -0.053931713, y: 12, z: -9.946069}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -1292,8 +1297,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.3073015, y: -0.35858002, z: 0.12631343, w: 0.872371}
-  m_LocalPosition: {x: 10.000002, y: 8.00001, z: -4.0658646}
+  m_LocalRotation: {x: 0.393417, y: -0.34407046, z: 0.16171046, w: 0.8370713}
+  m_LocalPosition: {x: 10.000002, y: 12, z: -4.0658646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2395,6 +2400,11 @@ PrefabInstance:
       propertyPath: unitManager
       value: 
       objectReference: {fileID: 1389710013}
+    - target: {fileID: 1952096564367789872, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: maxShootDistance
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1952096564367789872, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: criticalPercentage
@@ -4293,8 +4303,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103454021}
-  m_LocalRotation: {x: 0.3073015, y: -0.35858002, z: 0.12631343, w: 0.872371}
-  m_LocalPosition: {x: 10.000002, y: 8.00001, z: -4.0658646}
+  m_LocalRotation: {x: 0.393417, y: -0.34407046, z: 0.16171046, w: 0.8370713}
+  m_LocalPosition: {x: 10.000002, y: 12, z: -4.0658646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7748,6 +7758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: EnemyMainBase
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302299, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 16902b0745a39fb47bd3eeeacdc812a4, type: 3}
