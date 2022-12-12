@@ -22,7 +22,7 @@ public class FogOfWar : MonoBehaviour
     void Start()
     {
         UnitManager.OnAnyUnitMovedGridPosition += UnitManager_OnAnyUnitMovedGridPosition;
-        Unit.OnAnyUnitDied += UnitManager_OnAnyUnitMovedGridPosition;
+        UnitManager.Ondie
         UpdateAllFogOfWar();
     }
 
@@ -53,7 +53,7 @@ public class FogOfWar : MonoBehaviour
             }
             
             Vector3 baseDir = new Vector3(1, 0, 0);
-            float angleIncrease = 10;
+            float angleIncrease = 45;
             for(float angle = 0; angle < 360; angle += angleIncrease)
             {
                 Vector3 dir = ApplyRotationToVectorXZ(baseDir, angle);
@@ -64,7 +64,7 @@ public class FogOfWar : MonoBehaviour
 
                 // Detectamos colisiones con paredes
                 Debug.DrawRay(unitWorldPosition, dir * viewDistanceCollision, Color.green);
-                if(Physics.Raycast(unitWorldPosition, dir, out RaycastHit hit, viewDistanceCollision, layerMask))
+                if(Physics.Raycast(unitWorldPosition, dir, out RaycastHit hit, viewDistanceMax, layerMask))
                 {
                     // Hit object
                     viewDistanceCollision = Vector3.Distance(hit.point, unitWorldPosition);

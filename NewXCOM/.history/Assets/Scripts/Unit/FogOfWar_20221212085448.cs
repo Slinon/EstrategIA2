@@ -22,7 +22,6 @@ public class FogOfWar : MonoBehaviour
     void Start()
     {
         UnitManager.OnAnyUnitMovedGridPosition += UnitManager_OnAnyUnitMovedGridPosition;
-        Unit.OnAnyUnitDied += UnitManager_OnAnyUnitMovedGridPosition;
         UpdateAllFogOfWar();
     }
 
@@ -48,7 +47,7 @@ public class FogOfWar : MonoBehaviour
             float viewDistanceShootingRange = 0;
             if(unit.gameObject.TryGetComponent<ShootAction>(out ShootAction shootAction))
             {
-                viewDistanceShootingRange = shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize();
+                viewDistanceShootingRange = shootAction.GetMaxShootDistance();
                 Debug.Log("shooting range: " + viewDistanceShootingRange);
             }
             
@@ -59,12 +58,10 @@ public class FogOfWar : MonoBehaviour
                 Vector3 dir = ApplyRotationToVectorXZ(baseDir, angle);
                 //Debug.DrawLine(Vector3.zero, dir, Color.green, 100f);
 
-                // Si la unidad tiene rango de disparo, se usa eso como distancia. Si no, se usa la que está por defecto
-                float viewDistanceCollision = viewDistanceShootingRange == 0? viewDistanceMax : viewDistanceShootingRange;
+                float viewDistanceCollision = viewDistanceShootingRange == 0? viewDistanceShootingRange : viewDistanceMax;
 
                 // Detectamos colisiones con paredes
-                Debug.DrawRay(unitWorldPosition, dir * viewDistanceCollision, Color.green);
-                if(Physics.Raycast(unitWorldPosition, dir, out RaycastHit hit, viewDistanceCollision, layerMask))
+                if(Physics.Raycast(unitWorldPosition, dir, out RaycastHit hit, viewDistanceMax, layerMask) /*raycastHit2D.collider != null*/)
                 {
                     // Hit object
                     viewDistanceCollision = Vector3.Distance(hit.point, unitWorldPosition);
