@@ -386,11 +386,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActionPoints: 2
   isEnemy: 0
-  coverType: 0
+<<<<<<< HEAD
   skinnedMeshRenderer: {fileID: 5718205366572282113}
   gunMeshRenderer: {fileID: 5684564054465811295}
   selectedVisualMeshRenderer: {fileID: 3971381634955791457}
   UnitWorldUICanvas: {fileID: 4730256894191432498}
+=======
+  coverType: 0
+>>>>>>> main
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -909,6 +912,7 @@ MonoBehaviour:
   unit: {fileID: 5670714769479422706}
   healthBarImage: {fileID: 5449129393467464558}
   healthSystem: {fileID: 5789377868464818684}
+  probabilityPercentageText: {fileID: 0}
 --- !u!114 &2326158299126407318
 MonoBehaviour:
   m_ObjectHideFlags: 0

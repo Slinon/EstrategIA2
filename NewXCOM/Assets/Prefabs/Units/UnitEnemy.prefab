@@ -23,6 +23,26 @@ PrefabInstance:
       propertyPath: isEnemy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: gunMeshRenderer
+      value: 
+      objectReference: {fileID: 23710549990685410}
+    - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: UnitWorldUICanvas
+      value: 
+      objectReference: {fileID: 1086110679097891471}
+    - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: skinnedMeshRenderer
+      value: 
+      objectReference: {fileID: 138689103154239676}
+    - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: selectedVisualMeshRenderer
+      value: 
+      objectReference: {fileID: 8767016383254947292}
     - target: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: m_RootOrder
@@ -90,3 +110,27 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7d22fc6b9a431b043a917fb89a80bcfc, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}
+--- !u!23 &23710549990685410 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5684564054465811295, guid: 93acb812f8d87a24c94eb922d5515eaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5672174317135997373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &138689103154239676 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5718205366572282113, guid: 93acb812f8d87a24c94eb922d5515eaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5672174317135997373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!223 &1086110679097891471 stripped
+Canvas:
+  m_CorrespondingSourceObject: {fileID: 4730256894191432498, guid: 93acb812f8d87a24c94eb922d5515eaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5672174317135997373}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &8767016383254947292 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 3971381634955791457, guid: 93acb812f8d87a24c94eb922d5515eaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 5672174317135997373}
+  m_PrefabAsset: {fileID: 0}
