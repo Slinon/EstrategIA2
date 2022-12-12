@@ -22,6 +22,8 @@ public class LevelGrid : MonoBehaviour
     private bool hasFront;
     private bool hasBack;
 
+    RandomizeMap randomizer;
+
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
@@ -68,7 +70,10 @@ public class LevelGrid : MonoBehaviour
     // ----------------------------------------------
     private void Start()
     {
-
+        //Fetcheamos el randomizador
+        randomizer = GetComponent<RandomizeMap>();
+        //Instanciamos los obstaculos
+        randomizer.FillWithObstacles();
         // Asignamos el pathfinding
         Pathfinding.Instance.Setup(width, height, cellSize);
 

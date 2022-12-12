@@ -12,7 +12,8 @@ public class RandomizeMap : MonoBehaviour
     [SerializeField] GameObject[] obstacles;
     [SerializeField] GameObject[] interactableSpheres;
 
-    void Start()
+
+    public void FillWithObstacles()
     {
         if (useRandomSeed) seed = Time.deltaTime.ToString();
 
@@ -41,8 +42,7 @@ public class RandomizeMap : MonoBehaviour
                     else
                     {
                         
-                        int rand = Random.Range(0, obstacles.Length);
-                        Instantiate(obstacles[rand], new Vector3(i * cellSize, 0, j * cellSize), Quaternion.identity);
+                        Instantiate(obstacles[pseudoRandom.Next(0, obstacles.Length)], new Vector3(i * cellSize, 0, j * cellSize), Quaternion.identity);
 
                     }
                     
