@@ -145,7 +145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9032900685401006415}
   - component: {fileID: 3692668024331777100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,7 +334,6 @@ GameObject:
   - component: {fileID: -4531885919472716451}
   - component: {fileID: 5789377868464818684}
   - component: {fileID: -1514894338747600631}
-  - component: {fileID: -4241342217339519904}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -388,6 +387,10 @@ MonoBehaviour:
   maxActionPoints: 2
   isEnemy: 0
   coverType: 0
+  skinnedMeshRenderer: {fileID: 5718205366572282113}
+  gunMeshRenderer: {fileID: 5684564054465811295}
+  selectedVisualMeshRenderer: {fileID: 3971381634955791457}
+  UnitWorldUICanvas: {fileID: 4730256894191432498}
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -543,20 +546,6 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 5670714769479422707, guid: 39f714fbe91a7e341ab9b59c77270586,
     type: 3}
   originalRootBone: {fileID: 5666594676002316301}
---- !u!114 &-4241342217339519904
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5670714769479422705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86bb985f1816aa94c9af47d9a9c22ace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxAIValueAction: 10000000
-  minAIValueAction: 0
 --- !u!1 &6456686226750173416
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,7 +801,6 @@ GameObject:
   - component: {fileID: 3762164936287602603}
   - component: {fileID: 5614754062764630398}
   - component: {fileID: 4453314054099463766}
-  - component: {fileID: 1565077096892425093}
   - component: {fileID: 2326158299126407318}
   m_Layer: 7
   m_Name: UnitWorldUI
@@ -921,20 +909,6 @@ MonoBehaviour:
   unit: {fileID: 5670714769479422706}
   healthBarImage: {fileID: 5449129393467464558}
   healthSystem: {fileID: 5789377868464818684}
---- !u!114 &1565077096892425093
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8509874585498721790}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200988b1c7b562e48844e8e966117f59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unit: {fileID: 5670714769479422706}
-  hitProbabilityText: {fileID: 2400888707202066159}
 --- !u!114 &2326158299126407318
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,6 +1123,10 @@ PrefabInstance:
       value: SM_Prop_Sword_01
       objectReference: {fileID: 0}
     - target: {fileID: 1891074724505988, guid: f124a282fc554ba40aabfad1c3f4d7a9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891074724505988, guid: f124a282fc554ba40aabfad1c3f4d7a9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1309,6 +1287,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4d1c11ecf91c18d4e86d3818e8c650cc, type: 2}
@@ -1332,6 +1315,12 @@ PrefabInstance:
 --- !u!4 &5666099855287337497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4620998167008108, guid: c25ac4fdc903e7d49a7520930673ecd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5670714769087910261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5684564054465811295 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
     type: 3}
   m_PrefabInstance: {fileID: 5670714769087910261}
   m_PrefabAsset: {fileID: 0}
@@ -2693,6 +2682,12 @@ Transform:
 --- !u!4 &5673616682826027869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4170833147357194, guid: 2f3e27eecb190e44a9af50723c394274,
+    type: 3}
+  m_PrefabInstance: {fileID: 5670714769988467543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5718205366572282113 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137720934533220950, guid: 2f3e27eecb190e44a9af50723c394274,
     type: 3}
   m_PrefabInstance: {fileID: 5670714769988467543}
   m_PrefabAsset: {fileID: 0}

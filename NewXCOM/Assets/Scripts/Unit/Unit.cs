@@ -7,6 +7,7 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyActionPointsChanged;      // Evento cuando cambia el numero de acciones disponibles
     public static event EventHandler OnAnyUnitDied;                 // Evento cuando una unidad muere
     public static event EventHandler OnAnyUnitSpawned;              // Evento cuando aparece una tropa nueva
+    public static event EventHandler OnAnyUnitMoved;
     public event EventHandler OnCoverChanged;                       //Evento para activar la animacion de Cobertura
 
     [SerializeField] private int maxActionPoints;                   // Puntos de accion maximos de la unidad
@@ -19,6 +20,10 @@ public class Unit : MonoBehaviour
     private int actionPoints;                                       // Puntos de accion de la unidad
 
 
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private MeshRenderer gunMeshRenderer;
+    [SerializeField] private MeshRenderer selectedVisualMeshRenderer;
+    [SerializeField] private Canvas UnitWorldUICanvas;
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -45,6 +50,13 @@ public class Unit : MonoBehaviour
         // Asignamos los eventos
         TurnSystem.Instance.OnTurnChanged += TurnSystem_OnTurnChanged;
         healthSystem.OnDead += HealthSystem_OnDead;
+
+        // @VJT Buscamos la acción de movimiento y asignamos el evento
+        MoveAction moveAction = GetAction<MoveAction>();
+        if(moveAction != null) 
+        {
+            moveAction.OnPositionChanged += MoveAction_OnPositionChanged;
+        }
 
         // Asignamos la posicion de la malla donde esta la unidad
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
@@ -81,6 +93,10 @@ public class Unit : MonoBehaviour
 
         }
         UpdateCoverType();
+
+        // Field of view
+        //fieldOfView.SetOrigin(transform.position);
+        //Debug.Log("setting new origin: " + transform.position);
 
     } 
 
@@ -293,6 +309,35 @@ public class Unit : MonoBehaviour
 
     }
 
+    // @VJT --------------------------------------------------
+    // Handler del evento cuando se mueve la unidad
+    // -------------------------------------------------------
+    private void MoveAction_OnPositionChanged(object sender, EventArgs empty)
+    {
+        // Comprobamos si hay alguna clase escuchando el evento
+        if (OnAnyUnitMoved != null)
+        {
+
+            // Lanzamos el evento
+            OnAnyUnitMoved(this, EventArgs.Empty);
+
+        }
+    }
+
+    public void SetIsVisible(bool isVisible)
+    {
+        skinnedMeshRenderer.enabled = isVisible;
+        gunMeshRenderer.enabled = isVisible;
+        // get shildren of the gun and make them invisile
+        MeshRenderer[] array = gunMeshRenderer.gameObject.GetComponentsInChildren<MeshRenderer>();
+        foreach (MeshRenderer gunPart in array)
+        {
+            gunPart.enabled = isVisible;
+        }
+        selectedVisualMeshRenderer.enabled = isVisible;
+        UnitWorldUICanvas.enabled = isVisible;
+
+    }
 
     //@GRG le devolvemos el puntito si el pobre no ha podido hacer la acci�n por estar pobre :(
     public void GiveActionPointBack()

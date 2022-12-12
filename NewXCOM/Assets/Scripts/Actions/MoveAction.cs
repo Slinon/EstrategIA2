@@ -8,6 +8,7 @@ public class MoveAction : BaseAction
 
     public event EventHandler OnStartMoving;                // Evento cuando la unida se empieza a mover
     public event EventHandler OnStopMoving;                 // Evento cuando la unidad se termina de mover
+    public event EventHandler OnPositionChanged;
 
     [SerializeField] private int maxMoveDistance;           // Distancia maxima del movimiento de la unidad
 
@@ -57,6 +58,9 @@ public class MoveAction : BaseAction
             // Actualizamos el indice
             currentPositionIndex++;
 
+            // @VJT Lanzamos el evento de cambio de posicion
+            OnPositionChanged?.Invoke(this, EventArgs.Empty);
+
             // Comprobamos si es la ultima posicion
             if (currentPositionIndex >= positionList.Count)
             {
@@ -99,7 +103,7 @@ public class MoveAction : BaseAction
         foreach (GridPosition pathGridPosition in pathGridPositionList)
         {
 
-            // Añadimos la posicion en la lista
+            // Aï¿½adimos la posicion en la lista
             positionList.Add(LevelGrid.Instance.GetWorldPosition(pathGridPosition));
 
         }
@@ -198,7 +202,7 @@ public class MoveAction : BaseAction
 
                 }
 
-                // Lo añadimos a la lista
+                // Lo aï¿½adimos a la lista
                 validGridPositionList.Add(testGridPosition);
 
             }

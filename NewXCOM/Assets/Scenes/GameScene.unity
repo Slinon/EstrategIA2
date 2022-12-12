@@ -268,6 +268,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2081410193}
     m_Modifications:
+    - target: {fileID: 828183271349158665, guid: 84a5120fc59eb6b418ac87c191986bb9,
+        type: 3}
+      propertyPath: m_Convex
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 832517032484472279, guid: 84a5120fc59eb6b418ac87c191986bb9,
         type: 3}
       propertyPath: m_RootOrder
@@ -522,7 +527,7 @@ GameObject:
   - component: {fileID: 105237599}
   - component: {fileID: 105237598}
   - component: {fileID: 105237597}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2044,7 +2049,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &488781757
 MonoBehaviour:
@@ -2092,7 +2097,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &491537935
 MonoBehaviour:
@@ -3191,7 +3196,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756445078
 GameObject:
@@ -3376,6 +3381,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InteractSphere_Area1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3433141472039707202, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc9d85b794241ef418d2522dd0219f0a, type: 3}
@@ -3970,7 +3980,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1007480405
 MonoBehaviour:
@@ -4176,6 +4186,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallDoor (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7546596010532706402, guid: 95c3fc4f2d44b514c9f06aa1ae0d1151,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95c3fc4f2d44b514c9f06aa1ae0d1151, type: 3}
 --- !u!1001 &1087740400
@@ -4372,6 +4387,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 853005623}
     m_Modifications:
+    - target: {fileID: 900443981725530656, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
+        type: 3}
+      propertyPath: maxActionPoints
+      value: 1514
+      objectReference: {fileID: 0}
     - target: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
         type: 3}
       propertyPath: m_RootOrder
@@ -4742,7 +4762,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1200627423
 MonoBehaviour:
@@ -5158,7 +5178,7 @@ GameObject:
   - component: {fileID: 1333719215}
   - component: {fileID: 1333719214}
   - component: {fileID: 1333719213}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: Elevation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5279,7 +5299,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1389710013
 MonoBehaviour:
@@ -5397,6 +5417,71 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421444726}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1435897216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1435897218}
+  - component: {fileID: 1435897217}
+  - component: {fileID: 1435897219}
+  m_Layer: 0
+  m_Name: FogOfWar
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1435897217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435897216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b554bf0fb657af4e848e01a07ac4f4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  viewDistanceMax: 3.75
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!4 &1435897218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435897216}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.345721, y: 2.2819538, z: 3.7519536}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1542528361}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1435897219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435897216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c66ac94454a9942812c03592185883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FogOfWarGridSingle: {fileID: 5299408843905618678, guid: 12afe8bf955434c469b38b254a1c4c12,
+    type: 3}
+  exposedMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  hiddenMaterial: {fileID: 2100000, guid: 953b9105585ade743a5c4a274068d431, type: 2}
 --- !u!4 &1451580831 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3188524047625887891, guid: 973183692a0c1714fae22433d6922691,
@@ -5986,6 +6071,7 @@ Transform:
   - {fileID: 326168625}
   - {fileID: 2066800113}
   - {fileID: 1533095003}
+  - {fileID: 1435897218}
   - {fileID: 755460036}
   - {fileID: 1007480404}
   - {fileID: 1389710012}
@@ -6208,7 +6294,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1623336576
 MonoBehaviour:
@@ -7155,6 +7241,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WallDoor (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7546596010532706402, guid: 95c3fc4f2d44b514c9f06aa1ae0d1151,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95c3fc4f2d44b514c9f06aa1ae0d1151, type: 3}
 --- !u!1 &1999938189
@@ -7551,7 +7642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2081410193}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7633,7 +7724,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1542528361}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2088579551
 MonoBehaviour:
@@ -7872,6 +7963,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WallDoor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7546596010532706402, guid: 95c3fc4f2d44b514c9f06aa1ae0d1151,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 95c3fc4f2d44b514c9f06aa1ae0d1151, type: 3}
