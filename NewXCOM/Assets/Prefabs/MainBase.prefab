@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 2538739146799923764}
   m_Layer: 7
   m_Name: MainBase
-  m_TagString: Untagged
+  m_TagString: MainBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,6 +354,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActionPoints: 2
   isEnemy: 0
+  coverType: 0
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -852,7 +853,6 @@ MonoBehaviour:
   unit: {fileID: 6315176357458564335}
   healthBarImage: {fileID: 5415937886379180179}
   healthSystem: {fileID: 2538739146799923764}
-  hitProbabilityText: {fileID: 0}
 --- !u!114 &1452951678084430903
 MonoBehaviour:
   m_ObjectHideFlags: 0

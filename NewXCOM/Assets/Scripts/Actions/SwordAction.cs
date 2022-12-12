@@ -152,15 +152,12 @@ public class SwordAction : BaseAction
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
 
-        // Recuperamos la unidad objetivo
-        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
-
         // Devolvemos la accion de la IA
         return new EnemyAIAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
 
@@ -273,6 +270,20 @@ public class SwordAction : BaseAction
     {
 
         return targetUnit;
+
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        // Recuperamos la unidad objetivo
+        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
+        // Calculamos la vida de cada unidad a la que podemos dar un espadazo
+        return Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f);
 
     }
 

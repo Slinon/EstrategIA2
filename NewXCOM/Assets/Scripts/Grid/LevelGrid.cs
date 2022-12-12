@@ -45,7 +45,7 @@ public class LevelGrid : MonoBehaviour
         // Creamos la malla
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, 
             (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
-        gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
+        //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
 
 
         for (int x = 0; x < width; x++) {
@@ -365,7 +365,7 @@ public class LevelGrid : MonoBehaviour
                     {
                         hasBack=true;
                     }else{
-                        Debug.Log("Llegado");
+                
                         hasBack = false;}
                 }else{hasBack = true;}
         }else{hasBack = false;}

@@ -555,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86bb985f1816aa94c9af47d9a9c22ace, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxAIValueAction: 200
-  minAIValueAction: 100
+  maxAIValueAction: 10000000
+  minAIValueAction: 0
 --- !u!1 &6456686226750173416
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +812,7 @@ GameObject:
   - component: {fileID: 3762164936287602603}
   - component: {fileID: 5614754062764630398}
   - component: {fileID: 4453314054099463766}
+  - component: {fileID: 1565077096892425093}
   - component: {fileID: 2326158299126407318}
   m_Layer: 7
   m_Name: UnitWorldUI
@@ -920,6 +921,20 @@ MonoBehaviour:
   unit: {fileID: 5670714769479422706}
   healthBarImage: {fileID: 5449129393467464558}
   healthSystem: {fileID: 5789377868464818684}
+--- !u!114 &1565077096892425093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8509874585498721790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200988b1c7b562e48844e8e966117f59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unit: {fileID: 5670714769479422706}
+  hitProbabilityText: {fileID: 2400888707202066159}
 --- !u!114 &2326158299126407318
 MonoBehaviour:
   m_ObjectHideFlags: 0

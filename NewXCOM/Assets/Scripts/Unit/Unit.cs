@@ -10,8 +10,8 @@ public class Unit : MonoBehaviour
     public event EventHandler OnCoverChanged;                       //Evento para activar la animacion de Cobertura
 
     [SerializeField] private int maxActionPoints;                   // Puntos de accion maximos de la unidad
-    [SerializeField] private bool isEnemy;
-    [SerializeField] private CoverType coverType;
+    [SerializeField] private bool isEnemy;                          // Booleano para saber si la unidad es enemiga
+    [SerializeField] private CoverType coverType;                   // Tipo de covertura que tiene la unidad
 
     private GridPosition gridPosition;                              // Posicion de la malla donde esta la unidad
     private HealthSystem healthSystem;                              // Sistema de salud de la unidad

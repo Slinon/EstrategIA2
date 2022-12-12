@@ -98,9 +98,19 @@ public class SpinAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
+
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        return 0;
 
     }
 

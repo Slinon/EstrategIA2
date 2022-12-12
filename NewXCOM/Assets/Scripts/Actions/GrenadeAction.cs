@@ -199,14 +199,14 @@ public class GrenadeAction : BaseAction
     // @IGM ------------------------------------------------------------
     // Funcion para calcular la mejor posicion donde lanzar una granada.
     // -----------------------------------------------------------------
-    public int GetTargetValueAtPosition(GridPosition gridPosition)
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
     {
 
         // Reseteamos el valor de la posicion en la malla
         int targetValue = 0;
 
         // Calculamos el radio de la explosión en casillas
-        int explosionRadious = GetGridDamageRadius();
+        int explosionRadious = GetGridDamageRadius() - 1;
 
         // Recorremos todas las posiciones validas alrededor de la malla
         for (int x = -explosionRadious; x <= explosionRadious; x++)

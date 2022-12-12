@@ -8,6 +8,8 @@ public class Checkers : MonoBehaviour
 
     public static Checkers Instance { get; private set; }       // Instancia del singleton
 
+    [SerializeField] LayerMask obstacleLayerMask;               // Capa de los obstaculos
+
     // @GRG ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
@@ -394,22 +396,22 @@ public class Checkers : MonoBehaviour
     public bool IsValidGrenade(Unit unit)
     {
 
-        // Comprobamos si la unidad tiene la accion de interactuar
+        // Comprobamos si la unidad tiene la accion de lanzar granada
         if (!unit.TryGetComponent(out GrenadeAction grenadeAction))
         {
 
-            // La unidad no puede pegar espadazo, por lo que no tiene enemigos con los que interactuar
+            // La unidad no puede lanzar granada
             return false;
 
         }
 
-        int explosionRadious = grenadeAction.GetGridDamageRadius();
-
-        // Recorremos la lista de 
+        int explosionRadious = grenadeAction.GetGridDamageRadius() - 1;
+ 
+        // Recorremos la lista de posiciones en las que se puede lanzar una granada
         foreach (GridPosition gridPosition in grenadeAction.GetValidActionGridPositionList())
         {
             
-            // Creamos la cantidad de enemigos y aliados que estan arango de la explosion
+            // Creamos la cantidad de enemigos y aliados que estan a rango de la explosion
             int enemiesInRange = 0;
             int alliesInRange = 0;
 
@@ -467,6 +469,137 @@ public class Checkers : MonoBehaviour
 
             // Comprobamos si es factible lanzar una granada en esta posicion
             if (alliesInRange == 0 && enemiesInRange > 1)
+            {
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+    public bool IsValidStructure(Unit unit)
+    {
+
+        // Comprobamos si la unidad tiene la accion de construir torre
+        if (!unit.TryGetComponent(out BuildStructureAction buildStructureAction))
+        {
+
+            // La unidad no puede lanzar granada
+            return false;
+
+        }
+
+        // Calculamos la distancia de la torre
+        int maxTurretRange = buildStructureAction.GetStructure()
+            .GetComponentInChildren<ShootAction>().GetMaxShootDistance();
+
+        // Recorremos la lista de posiciones en las que se puede construir una torre
+        foreach (GridPosition gridPosition in buildStructureAction.GetValidActionGridPositionList())
+        {
+
+            int allyTurretsInRange = 0;
+            int enemiesInRange = 0;
+
+            // Recorremos todas las posiciones validas alrededor de la malla
+            for (int x = -maxTurretRange; x <= maxTurretRange; x++)
+            {
+
+                for (int z = -maxTurretRange; z <= maxTurretRange; z++)
+                {
+
+                    // Creamos la posicion alrededor de la posicion del jugador
+                    GridPosition offsetGridPosition = new GridPosition(x, z);
+                    GridPosition testGridPosition = gridPosition + offsetGridPosition;
+
+                    // Comprobamos si la posicion esta fuera de la malla
+                    if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Calculamos la distancia de la posicion a probar
+                    int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+
+                    // Comprobamos si la distancia es mayor a la de diparo
+                    if (testDistance > maxTurretRange)
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Comprobamos si la posicion no tiene unidades dentro
+                    if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Recuperamos el target de la posicion
+                    Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
+
+                    // Comprobamos si el target esta en el mismo equipo que la unidad
+                    if (targetUnit.IsEnemy() == unit.IsEnemy())
+                    {
+
+                        // Comprobamos si la unidad es una torre
+                        if (targetUnit.tag == "Turret")
+                        {
+
+                            allyTurretsInRange++;
+
+                        }
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    // Definimos un offset para poder disparar por encima de obstaculos bajos
+                    float unitShoulderHeight = 1.7f;
+
+                    // Calculamos la direccion de disparo
+                    Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
+                    Unit unitPosition = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
+                    Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                    // Definimos un offset para poder disparar por encima de obstaculos bajos
+                    if (targetUnit.GetCoverType() == CoverType.Covered)
+                    {
+                        if (unitPosition.GetCoverType() == CoverType.Covered)
+                        {
+                            unitShoulderHeight = 0.6f;
+                        }
+                        else { unitShoulderHeight = 1.7f; }
+                    }
+
+                    // Comprobamos si la unidad no tiene visual del objetivo
+                    if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
+                        Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()), obstacleLayerMask))
+                    {
+
+                        // La saltamos
+                        continue;
+
+                    }
+
+                    enemiesInRange++;
+
+                }
+
+            }
+            Debug.Log(unit.name + ": " + allyTurretsInRange);
+            if (allyTurretsInRange == 0 && enemiesInRange > 2)
             {
 
                 return true;

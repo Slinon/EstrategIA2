@@ -279,10 +279,6 @@ public class ShootAction : BaseAction
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
 
                 // Definimos un offset para poder disparar por encima de obstaculos bajos
-
-                
-
-
                 if(targetUnit.GetCoverType() == CoverType.Covered)
                 {
                     if(unitPosition.GetCoverType() == CoverType.Covered)
@@ -368,7 +364,7 @@ public class ShootAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
 
@@ -393,6 +389,20 @@ public class ShootAction : BaseAction
     public int GetShootDamage()
     {
         return shootDamage;
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        // Recuperamos la unidad objetivo
+        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
+        // Calculamos la vida de cada unidad a la que podemos dar un espadazo
+        return Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f);
+
     }
 
 }

@@ -167,6 +167,11 @@ public abstract class BaseAction : MonoBehaviour
     // -----------------------------------------------------------------------------------
     public abstract EnemyAIAction GetEnemyAIAction(GridPosition gridPosition);
 
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public abstract int GetTargetValueAtPosition(GridPosition gridPosition);
+
     // @GRG ------------------------------------------------------------------------------
     // Funcion para saber si esta acción está ligada a un coste monetario del moneySystem
     // -----------------------------------------------------------------------------------

@@ -650,7 +650,7 @@ GameObject:
   - component: {fileID: 465745189711302297}
   m_Layer: 7
   m_Name: EnemyMainBase
-  m_TagString: Untagged
+  m_TagString: EnemyMainBase
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -716,6 +716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActionPoints: 2
   isEnemy: 1
+  coverType: 0
 --- !u!114 &465745189711302274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +724,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 465745189711302299}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8526230dc960dc94793498027384e2f8, type: 3}
   m_Name: 
@@ -1085,7 +1086,6 @@ MonoBehaviour:
   unit: {fileID: 465745189711302296}
   healthBarImage: {fileID: 465745189217013675}
   healthSystem: {fileID: 465745189711302297}
-  hitProbabilityText: {fileID: 3923621785619980744}
 --- !u!114 &465745190550361579
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ public class InteractAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
 
@@ -172,6 +172,16 @@ public class InteractAction : BaseAction
     {
 
         return maxInteractDistance;
+
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        return 0;
 
     }
 
