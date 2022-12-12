@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProbabilitySystem : MonoBehaviour
 {
-
     public static ProbabilitySystem Instance {get; private set;}
 
     private void Awake()
@@ -18,24 +17,41 @@ public class ProbabilitySystem : MonoBehaviour
         Instance = this;
     }
 
-
     // @EMF -----------------------------------------------------------
-    // M�todo, con probabilidad de fallo, que calcula el da�o realizado
+    // Metodo, con probabilidad de fallo, que calcula el daño realizado
     // ----------------------------------------------------------------
-    public int CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage, int hitProbability)
+    public Vector2 CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage, int hitProbability, int distance, int maxShootDistance)
     {
-        if (CheckHit(hitProbability))
-        {
-            float rnd = Random.Range(0, 101);
+        Vector2 info = new Vector2(0, 0); // int damage + int info (-1 fallo, 0 normal, 1 critico)
 
-            if (rnd <= criticalProbability){ return damage + (int)((float)damage * criticalPercentage); } // Acierto con cr�tico.
-            else{ return damage; } // Acierto. Da�o base.
+        int probability = GetProbabiltyByDistance(hitProbability, distance, maxShootDistance);
+
+        if (CheckHit(probability)) // si no falla
+        {
+            float rnd = Random.Range(0, 101); // 0 - 101
+
+            if (rnd <= criticalProbability)
+            {
+                info.x = damage + (int)((float)damage * criticalPercentage);
+                info.y = 1; // acierto critico
+            }
+            else
+            {
+                info.x = damage;
+                info.y = 0; // acierto normal
+            }
         }
-        else{ return 0; } // Fallo. Da�o 0.
+        else
+        {
+            info.x = 0;
+            info.y = -1; // fallo
+        }
+
+        return info;
     }
 
     // @EMF -------------------------
-    // M�todo para comprobar acierto
+    // Metodo para comprobar acierto
     // ------------------------------
     public bool CheckHit(int hitProbability)
     {
@@ -45,14 +61,58 @@ public class ProbabilitySystem : MonoBehaviour
         else{ return false; } // Fallo
     }
 
-    // @EMF -------------------------------------
-    // M�todo override sin probabilidad de fallo
-    // ------------------------------------------
-    public int CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage)
+    public int GetProbabiltyByDistance(int hitProbability, int distance, int maxShootDistance)
     {
+        int probability;
+
+        if (hitProbability - GetDistancePercentage(distance) > 0 &&  distance <= maxShootDistance) // Probabilidad positiva y distancia mejor que rango max
+        {
+            probability = Mathf.RoundToInt(hitProbability - GetDistancePercentage(distance)); 
+        }
+        else
+        {
+            probability = 0;
+        }
+
+        return probability;
+    }
+
+    public int GetDistancePercentage(int distance)
+    {
+        int percentage = 0;
+
+        if (distance >= 2 && distance < 4)
+        {
+            percentage = 40;
+        }
+        else if (distance >= 4)
+        {
+            percentage = 60;
+        }
+
+        return percentage;
+    }
+
+    // @EMF -------------------------------------------------
+    // Metodo override sin probabilidad de fallo ni distancia
+    // ------------------------------------------------------
+    public Vector2 CheckDamageProbability(int damage, int criticalProbability, float criticalPercentage)
+    {
+        Vector2 info = new Vector2(0, 0); // int damage + int info (-1 fallo, 0 normal, 1 critico)
+
         float rnd = Random.Range(0, 101);
 
-        if (rnd <= criticalProbability) { return damage + (int)((float)damage * criticalPercentage); }
-        else { return damage; }
+        if (rnd <= criticalProbability)
+        {
+            info.x = damage + (int)((float)damage * criticalPercentage);
+            info.y = 1;
+        }
+        else
+        {
+            info.x = damage;
+            info.y = 0;
+        }
+
+        return info;
     }
 }

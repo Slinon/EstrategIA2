@@ -131,9 +131,64 @@ public class UnitActionSystem : MonoBehaviour
 
             }
 
-            // Lanzamos la accion
-            SetBusy();
-            selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            if (!selectedUnit.IsEnemy()) //Si se trata del jugador
+            {
+
+                if (selectedAction.MoneyCost() < MoneySystem.Instance.player.money)
+                {
+
+                    Debug.Log("Esta acción se puede realizar");
+
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+                    MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.player);
+
+                }
+
+                else
+                {
+
+                    Debug.Log("Esta acción NO se puede realizar, devolviendo el punto de acción");
+
+                    selectedUnit.GiveActionPointBack();
+                    //Actualizar visual!!!
+
+                }
+
+            }
+
+            else //Si se trata de la IA
+            {
+
+                if (selectedAction.MoneyCost() < MoneySystem.Instance.enemyAI.money)
+                {
+
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+                    MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.enemyAI);
+
+                }
+
+                else
+                {
+
+                    selectedUnit.GiveActionPointBack();
+                    //Actualizar visual!!!
+
+                }
+
+            }
+
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
             // Comprobamos si hay alguna clase escuchando el evento
             if (OnActionStarted != null)

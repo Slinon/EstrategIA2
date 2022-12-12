@@ -17,7 +17,7 @@ public class ShootAction : BaseAction
         Cooloff,
 
     }
-    private ProbabilitySystem ps;                                // Funci�n probabilidad @EMF
+    private ProbabilitySystem ps;                               // Funci�n probabilidad @EMF
 
     public event EventHandler<Unit> OnShoot;                    // Evento cuando la unidad dispara
     public static event EventHandler<Unit> OnAnyShoot;          // Evento cuando cualquier unidad dispara
@@ -35,17 +35,26 @@ public class ShootAction : BaseAction
     private bool canShootBullet;                                // Booleano para indicar que la unidad puede disparar
     private float stateTimer;                                   // Timer de la maquina de estados
 
+    private UnitManager unitManager;
+    private List<Unit> enemiesList;
+    private Pathfinding pathFinding;
+
+
 
     private void Start()
     {
         ps = ProbabilitySystem.Instance;
+        unitManager = UnitManager.Instance;
+        pathFinding = Pathfinding.Instance;
+
+        enemiesList = unitManager.GetEnemyUnitList();
+
     }
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------
     private void Update()
     {
-
         // Comprobamos si la accion se ha activado
         if (!isActive)
         {
@@ -159,10 +168,22 @@ public class ShootAction : BaseAction
 
         }
 
-        // Hacemos da�o a la unidad
-        int damage = ps.CheckDamageProbability(shootDamage, criticalProbability, criticalPercentage, hitProbability);
-        targetUnit.Damage(damage);
-        Debug.Log("Shoot damage: " + damage);
+        //  Hacemos daño a la unidad
+
+        // Debug ------------------------------------------------------------------
+
+        
+
+        Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
+            criticalPercentage, hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance));
+
+        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance);
+
+        targetUnit.Damage(damagetmp);
+
+        Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
+
+        // Debug -------------------------------------------------------------------
     }
 
     // @IGM -------------------------------------
@@ -254,7 +275,21 @@ public class ShootAction : BaseAction
 
                 // Calculamos la direccion de disparo
                 Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Unit unitPosition = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                // Definimos un offset para poder disparar por encima de obstaculos bajos
+
+                
+
+
+                if(targetUnit.GetCoverType() == CoverType.Covered)
+                {
+                    if(unitPosition.GetCoverType() == CoverType.Covered)
+                    {
+                        unitShoulderHeight = 0.6f;
+                    }else{unitShoulderHeight = 1.7f;}         
+                }
 
                 // Comprobamos si la unidad no tiene visual del objetivo
                 if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
@@ -349,4 +384,8 @@ public class ShootAction : BaseAction
 
     }
 
+    public int GetShootHitProbability()
+    {
+        return hitProbability;
+    }
 }

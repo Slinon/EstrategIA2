@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UnitRagdollSpawner : MonoBehaviour
 {
+    public GameObject floatingTextPrebab;
 
     [SerializeField] private Transform ragdollPrefab;           // Prefab del muñeco
     [SerializeField] private Transform originalRootBone;        // Posicion del hueso raiz de la unidad
@@ -30,6 +31,7 @@ public class UnitRagdollSpawner : MonoBehaviour
     // ------------------------------------------
     private void HealthSystem_OnDead(object sender, EventArgs empty)
     {
+        ShowFloatingTextMoney(100);
 
         // Instanciamos el muñeco
         Transform ragdollTransform = Instantiate(ragdollPrefab, transform.position, transform.rotation);
@@ -39,7 +41,13 @@ public class UnitRagdollSpawner : MonoBehaviour
 
         // Establecemos la posicion del hueso raiz
         unitRagdoll.Setup(originalRootBone);
+    }
 
+    void ShowFloatingTextMoney(int money)
+    {
+        var go = Instantiate(floatingTextPrebab, transform.position, Quaternion.identity);
+        go.GetComponent<TextMesh>().text = "+" + money.ToString();
+        go.GetComponent<TextMesh>().color = Color.yellow;
     }
 
 }
