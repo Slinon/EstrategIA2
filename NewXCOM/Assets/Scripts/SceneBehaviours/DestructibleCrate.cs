@@ -47,6 +47,7 @@ public class DestructibleCrate : MonoBehaviour
 
         // Destruimos el objeto
         Destroy(gameObject);
+        LevelGrid.Instance.SetCoverTypeAtGridPosition(CoverType.None, gridPosition);
 
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnAnyDestroyed != null)
@@ -59,7 +60,7 @@ public class DestructibleCrate : MonoBehaviour
 
     }
     // @IGM -------------------------------------------------
-    // Metodo para aplicar una fuerza de explosion al muñeco.
+    // Metodo para aplicar una fuerza de explosion al muï¿½eco.
     // ------------------------------------------------------
     private void ApplyExplosionToChildren(Transform root, float explosionForce, Vector3 explosionPosition, float explosionRange)
     {
@@ -72,7 +73,7 @@ public class DestructibleCrate : MonoBehaviour
             if (child.TryGetComponent<Rigidbody>(out Rigidbody childRigidbody))
             {
 
-                // Añadimos la explosion
+                // Aï¿½adimos la explosion
                 childRigidbody.AddExplosionForce(explosionForce, explosionPosition, explosionRange);
 
             }

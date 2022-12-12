@@ -9,7 +9,7 @@ public class GridObject
     private GridPosition gridPosition;                  // Posicion en la malla
     private List<Unit> unitList;                        // Lista de unidades que contiene
     private IInteractable interactable;                 // Puerta que contiene la posicion
-
+    private CoverType coverType;
     // @IGM -------------------
     // Constructor de la clase.
     // ------------------------
@@ -41,12 +41,12 @@ public class GridObject
     }
 
     // @IGM ------------------------------------
-    // Metodo para añadir una unidad a la celda.
+    // Metodo para aï¿½adir una unidad a la celda.
     // -----------------------------------------
     public void AddUnit(Unit unit)
     {
 
-        // Añadimos la unidad
+        // Aï¿½adimos la unidad
         unitList.Add(unit);
 
     }
@@ -124,5 +124,19 @@ public class GridObject
         this.interactable = interactable;
 
     }
+
+
+    public void SetCoverType(CoverType coverType)
+    {
+        this.coverType = coverType;
+    }
+
+    public CoverType GetCoverType() 
+    {
+        return coverType;
+    }
+
+
+
 
 }
