@@ -1,5 +1,140 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &766995724196062882
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8938905976855174575}
+  - component: {fileID: 778246749972533894}
+  - component: {fileID: 2400888707202066159}
+  m_Layer: 7
+  m_Name: HitProbabilityText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8938905976855174575
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766995724196062882}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2903063238959557236}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -0.5, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &778246749972533894
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766995724196062882}
+  m_CullTransparentMesh: 1
+--- !u!114 &2400888707202066159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 766995724196062882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: X
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 0
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomLeft: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 0.5
+  m_fontSizeBase: 0.5
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 1
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 0
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1594317761151638448
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +306,7 @@ RectTransform:
   - {fileID: 1441388887312615800}
   - {fileID: 3215412083904151653}
   m_Father: {fileID: 2903063238959557236}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -194,11 +329,11 @@ GameObject:
   - component: {fileID: -4097678567261118390}
   - component: {fileID: 2103982402689608955}
   - component: {fileID: 7810047224444809089}
+  - component: {fileID: 6062886979335544872}
   - component: {fileID: 2024494511}
   - component: {fileID: -4531885919472716451}
   - component: {fileID: 5789377868464818684}
   - component: {fileID: -1514894338747600631}
-  - component: {fileID: 2024494522}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -249,8 +384,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd271029597fea147acbfd625861eb16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxActionPoints: 9
+  maxActionPoints: 2
   isEnemy: 0
+  coverType: 0
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +412,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b251252ff934e49a6df057807226ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
   maxShootDistance: 7
   obstacleLayerMask:
     serializedVersion: 2
@@ -315,7 +450,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925e2c4cec1384844991736f0acc3ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
   maxSwordDistance: 1
   swordDamage: 100
   criticalProbability: 15
@@ -333,6 +467,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxInteractDistance: 1
+--- !u!114 &6062886979335544872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670714769479422705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54f8900978513a94ba3182e657922c65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxBuildDistance: 1
+  structure: {fileID: 3266928928870785723, guid: c0ba9eaf1ef70594292206293c2d21df,
+    type: 3}
 --- !u!114 &2024494511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +524,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be4dd0d838231c4bbd5668e1418f789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrebab: {fileID: 0}
   healthMax: 100
 --- !u!114 &-1514894338747600631
 MonoBehaviour:
@@ -388,24 +538,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da231b5c0c7b475438c87c33038e15f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrebab: {fileID: 0}
   ragdollPrefab: {fileID: 5670714769479422707, guid: 39f714fbe91a7e341ab9b59c77270586,
     type: 3}
   originalRootBone: {fileID: 5666594676002316301}
---- !u!114 &2024494522
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5670714769479422705}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54f8900978513a94ba3182e657922c65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxBuildDistance: 1
-  structure: {fileID: 424301498099959746, guid: a9d5afa09bc89524ea21816e781df61c,
-    type: 3}
 --- !u!1 &6456686226750173416
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +573,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2903063238959557236}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -681,6 +817,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 8938905976855174575}
   - {fileID: 6572866306518558320}
   - {fileID: 8033154723261059475}
   m_Father: {fileID: 5670714769479422707}
@@ -768,6 +905,7 @@ MonoBehaviour:
   unit: {fileID: 5670714769479422706}
   healthBarImage: {fileID: 5449129393467464558}
   healthSystem: {fileID: 5789377868464818684}
+  probabilityPercentageText: {fileID: 0}
 --- !u!114 &2326158299126407318
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,21 +7,24 @@ public class Unit : MonoBehaviour
     public static event EventHandler OnAnyActionPointsChanged;      // Evento cuando cambia el numero de acciones disponibles
     public static event EventHandler OnAnyUnitDied;                 // Evento cuando una unidad muere
     public static event EventHandler OnAnyUnitSpawned;              // Evento cuando aparece una tropa nueva
+    public event EventHandler OnCoverChanged;                       //Evento para activar la animacion de Cobertura
 
     [SerializeField] private int maxActionPoints;                   // Puntos de accion maximos de la unidad
     [SerializeField] private bool isEnemy;
+    [SerializeField] private CoverType coverType;
 
     private GridPosition gridPosition;                              // Posicion de la malla donde esta la unidad
     private HealthSystem healthSystem;                              // Sistema de salud de la unidad
     private BaseAction[] baseActionArray;                           // Array de acciones de la unidad
     private int actionPoints;                                       // Puntos de accion de la unidad
 
+
+
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
     private void Awake()
     {
-
         // Asignamos las acciones al array
         baseActionArray = GetComponents<BaseAction>();
 
@@ -46,6 +49,8 @@ public class Unit : MonoBehaviour
         // Asignamos la posicion de la malla donde esta la unidad
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.AddUnitAtGridPosition(gridPosition, this);
+
+        UpdateCoverType();
 
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnAnyUnitSpawned != null)
@@ -75,6 +80,7 @@ public class Unit : MonoBehaviour
             LevelGrid.Instance.UnitMovedGridPosition(this, oldGridPosition, newGridPosition);
 
         }
+        UpdateCoverType();
 
     } 
 
@@ -247,9 +253,9 @@ public class Unit : MonoBehaviour
     }
 
     // @IGM ------------------------------
-    // Metodo para hacer daño a la unidad.
+    // Metodo para hacer daï¿½o a la unidad.
     // -----------------------------------
-    public void Damage(int damageAmount)
+    public void Damage(Vector2 damageAmount)
     {
 
         healthSystem.Damage(damageAmount);
@@ -288,11 +294,28 @@ public class Unit : MonoBehaviour
     }
 
 
-    //@GRG le devolvemos el puntito si el pobre no ha podido hacer la acción por estar pobre :(
+    //@GRG le devolvemos el puntito si el pobre no ha podido hacer la acciï¿½n por estar pobre :(
     public void GiveActionPointBack()
     {
         actionPoints += 1;
         OnAnyActionPointsChanged(this, EventArgs.Empty);
+    }
+
+
+    private void UpdateCoverType()
+    {
+        coverType = LevelGrid.Instance.GetUnitCoverType(GetWorldPosition());
+        
+        if(coverType == CoverType.Covered)
+        {
+            OnCoverChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+    }
+
+    public CoverType GetCoverType()
+    {
+        return coverType;
     }
 
 }

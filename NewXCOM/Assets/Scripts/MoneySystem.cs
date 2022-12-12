@@ -12,11 +12,10 @@ public class Target
 
 public class MoneySystem : MonoBehaviour
 {
-    
+
     //-----------------------------------
     //@GRG - Money System
     //-----------------------------------
-
     [SerializeField] private int startingAmount = 500;
     [SerializeField] private int moneyPerTurn = 500;
     [SerializeField] private float timeToFill = 2f;
@@ -59,9 +58,10 @@ public class MoneySystem : MonoBehaviour
     {
 
         DisplayPlayerMoney(player.money);
-
+        
     }
 
+    
     void DisplayPlayerMoney(int amount)
     {
 

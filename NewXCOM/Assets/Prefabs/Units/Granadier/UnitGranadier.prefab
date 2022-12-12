@@ -12,6 +12,11 @@ PrefabInstance:
       propertyPath: maxThrowDistance
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 1418037165886715287, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: m_Name
+      value: Escudo
+      objectReference: {fileID: 0}
     - target: {fileID: 1952096564367789872, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: maxShootDistance
@@ -85,4 +90,5 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 2103982402689608955, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}
     - {fileID: 2024494511, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}
+    - {fileID: 6062886979335544872, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}

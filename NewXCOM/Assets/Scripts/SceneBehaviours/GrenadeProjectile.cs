@@ -9,7 +9,7 @@ public class GrenadeProjectile : MonoBehaviour
     public static event EventHandler OnAnyGrenadeExploded;      // Evento cuando cualquier granada explota
 
     [SerializeField] private float damageRadius;                // Radio de daño de la granada
-    [SerializeField] private int damageAmount;                  // Daño que hace la granada
+    [SerializeField] private Vector2 damageAmount;                  // Daño que hace la granada
     [SerializeField] private float maxGrenadeHeight;            // Máxima altura que puede alcanzar la granada
     [SerializeField] private Transform grenadeExplodeVfxPrefab; // Prefab del efecto visual de la explosion
     [SerializeField] private TrailRenderer trailRenderer;       // Render de la estela de la granada

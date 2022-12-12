@@ -13,7 +13,6 @@ public class UnitWorldUI : MonoBehaviour
     [SerializeField] private Image healthBarImage;                  // Imagen de la barra de vida
     [SerializeField] private HealthSystem healthSystem;             // Sistema de vida de la unidad
 
-
     // @IGM -----------------------------------------
     // Start is called before the first frame update.
     // ----------------------------------------------
@@ -26,7 +25,6 @@ public class UnitWorldUI : MonoBehaviour
         // Actualizamos las variables
         UpdateActionPointsText();
         UpdateHelthBar();
-
     }
 
     // @IGM -----------------------------------------------------
