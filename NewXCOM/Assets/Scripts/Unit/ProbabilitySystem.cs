@@ -79,15 +79,19 @@ public class ProbabilitySystem : MonoBehaviour
 
     public int GetDistancePercentage(int distance)
     {
-        int percentage = 0;
+        int percentage;
 
         if (distance >= 2 && distance < 4)
         {
-            percentage = 40;
+            percentage = 10;
         }
-        else if (distance >= 4)
+        else if (distance >= 4 && distance <= 5)
         {
-            percentage = 60;
+            percentage = 20;
+        }
+        else
+        {
+            percentage = 30;
         }
 
         return percentage;

@@ -36,7 +36,6 @@ public class ShootAction : BaseAction
     private float stateTimer;                                   // Timer de la maquina de estados
 
     private UnitManager unitManager;
-    private List<Unit> enemiesList;
     private Pathfinding pathFinding;
 
 
@@ -46,9 +45,6 @@ public class ShootAction : BaseAction
         ps = ProbabilitySystem.Instance;
         unitManager = UnitManager.Instance;
         pathFinding = Pathfinding.Instance;
-
-        enemiesList = unitManager.GetEnemyUnitList();
-
     }
     // @IGM ------------------------
     // Update is called every frame.
@@ -213,14 +209,12 @@ public class ShootAction : BaseAction
     // -------------------------------------------------------------------
     private List<GridPosition> GetValidActionGridPositionList(GridPosition unitGridPosition)
     {
-
         // Creamos la lista
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         // Recorremos todas las posiciones validas alrededor de la malla
         for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
-
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
             {
 

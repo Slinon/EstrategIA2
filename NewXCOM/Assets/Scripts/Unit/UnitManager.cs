@@ -152,7 +152,5 @@ public class UnitManager : MonoBehaviour
     {
 
         return enemyUnitList;
-
     }
-
 }
