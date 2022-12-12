@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9032900685401006415}
   - component: {fileID: 3692668024331777100}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -251,6 +251,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActionPoints: 2
   isEnemy: 0
+  skinnedMeshRenderer: {fileID: 5718205366572282113}
+  gunMeshRenderer: {fileID: 5684564054465811295}
+  selectedVisualMeshRenderer: {fileID: 3971381634955791457}
+  UnitWorldUICanvas: {fileID: 4730256894191432498}
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +280,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b251252ff934e49a6df057807226ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
   maxShootDistance: 7
   obstacleLayerMask:
     serializedVersion: 2
@@ -315,7 +318,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 925e2c4cec1384844991736f0acc3ba5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
   maxSwordDistance: 1
   swordDamage: 100
   criticalProbability: 15
@@ -982,6 +984,10 @@ PrefabInstance:
       value: SM_Prop_Sword_01
       objectReference: {fileID: 0}
     - target: {fileID: 1891074724505988, guid: f124a282fc554ba40aabfad1c3f4d7a9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1891074724505988, guid: f124a282fc554ba40aabfad1c3f4d7a9, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1142,6 +1148,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4d1c11ecf91c18d4e86d3818e8c650cc, type: 2}
@@ -1165,6 +1176,12 @@ PrefabInstance:
 --- !u!4 &5666099855287337497 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4620998167008108, guid: c25ac4fdc903e7d49a7520930673ecd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5670714769087910261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5684564054465811295 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
     type: 3}
   m_PrefabInstance: {fileID: 5670714769087910261}
   m_PrefabAsset: {fileID: 0}
@@ -2526,6 +2543,12 @@ Transform:
 --- !u!4 &5673616682826027869 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4170833147357194, guid: 2f3e27eecb190e44a9af50723c394274,
+    type: 3}
+  m_PrefabInstance: {fileID: 5670714769988467543}
+  m_PrefabAsset: {fileID: 0}
+--- !u!137 &5718205366572282113 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 137720934533220950, guid: 2f3e27eecb190e44a9af50723c394274,
     type: 3}
   m_PrefabInstance: {fileID: 5670714769988467543}
   m_PrefabAsset: {fileID: 0}
