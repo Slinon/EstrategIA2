@@ -46,6 +46,11 @@ public class UnitAnimator : MonoBehaviour
 
         }
 
+        if (TryGetComponent<Unit>(out Unit unit))
+        {
+            unit.OnCoverChanged += MoveAction_OnCoverChanged;
+        }
+        
     }
 
     // @IGM -----------------------------------------
@@ -67,8 +72,9 @@ public class UnitAnimator : MonoBehaviour
 
         // Activamos la animacion
         EquipeSword();
+        unitAnimator.SetBool("Covered", false);
         unitAnimator.SetTrigger("SwordSlash");
-
+        
     }
 
     // @IGM ------------------------------------------------------------------
@@ -79,7 +85,8 @@ public class UnitAnimator : MonoBehaviour
 
         // Equipamos el rifle de nuevo
         EquipeRifle();
-
+        
+    
     }
 
     // @IGM ----------------------------------------
@@ -89,7 +96,10 @@ public class UnitAnimator : MonoBehaviour
     {
 
         // Activamos la animacion
+        unitAnimator.SetBool("Covered", false);
         unitAnimator.SetBool("IsWalking", true);
+        
+
 
     }
 
@@ -101,7 +111,8 @@ public class UnitAnimator : MonoBehaviour
 
         // Activamos la animacion
         unitAnimator.SetBool("IsWalking", false);
-
+        unitAnimator.SetBool("Covered", false);
+        
     }
 
     // @IGM ---------------------------------------
@@ -111,6 +122,7 @@ public class UnitAnimator : MonoBehaviour
     {
 
         // Activamos la animacion
+        unitAnimator.SetBool("Covered", false);
         unitAnimator.SetTrigger("Shoot");
 
         // Instanciamos la bala
@@ -127,6 +139,11 @@ public class UnitAnimator : MonoBehaviour
         // Establecemos los parametros de la bala
         bulletProjectile.Setup(targetUnitShootAtPosition);
 
+    }
+
+    private void MoveAction_OnCoverChanged(object sender,EventArgs empty)
+    {
+        unitAnimator.SetBool("Covered", true);
     }
 
     // @IGM -------------------------
@@ -152,5 +169,7 @@ public class UnitAnimator : MonoBehaviour
         swordTransform.gameObject.SetActive(false);
 
     }
+
+
 
 }

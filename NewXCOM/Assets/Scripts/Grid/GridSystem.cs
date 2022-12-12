@@ -8,7 +8,7 @@ public class GridSystem<TGridObject>
 
     private int width;                                      // Ancho de la malla
     private int height;                                     // Alto de la malla
-    private float cellSize;                                 // Tamaño de la celda
+    private float cellSize;                                 // Tamaï¿½o de la celda
     private TGridObject[,] gridObjectArray;                  // Matriz de celdas
 
     // @IGM -------------------
@@ -49,7 +49,7 @@ public class GridSystem<TGridObject>
     public Vector3 GetWorldPosition(GridPosition gridPosition)
     {
 
-        // Multiplicamos la posicion por el tamaño de celda
+        // Multiplicamos la posicion por el tamaï¿½o de celda
         return new Vector3(gridPosition.x, 0, gridPosition.z) * cellSize;
 
     }
@@ -60,7 +60,7 @@ public class GridSystem<TGridObject>
     public GridPosition GetGridPosition(Vector3 worldPosition)
     {
 
-        // Dividimos la posicion por el tamaño de celda
+        // Dividimos la posicion por el tamaï¿½o de celda
         return new GridPosition(Mathf.RoundToInt(worldPosition.x / cellSize),
             Mathf.RoundToInt(worldPosition.z / cellSize));
 
@@ -111,7 +111,7 @@ public class GridSystem<TGridObject>
     public bool IsValidGridPosition(GridPosition gridPosition)
     {
 
-        // Comprobamos que la posicion estña dentro de los limites de la malla
+        // Comprobamos que la posicion estï¿½a dentro de los limites de la malla
         return gridPosition.x >= 0 && gridPosition.z >= 0 && 
             gridPosition.x < width && gridPosition.z < height;
 
@@ -138,7 +138,7 @@ public class GridSystem<TGridObject>
     }
 
     // @IGM ----------------------
-    // Getter del tamaño de celda.
+    // Getter del tamaï¿½o de celda.
     // ---------------------------
     public float GetCellSize()
     {

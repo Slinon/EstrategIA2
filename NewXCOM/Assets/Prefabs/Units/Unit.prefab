@@ -387,6 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActionPoints: 2
   isEnemy: 0
+  coverType: 0
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0
