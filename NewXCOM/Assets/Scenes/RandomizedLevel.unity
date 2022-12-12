@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 326168624}
   - component: {fileID: 326168626}
   m_Layer: 0
-  m_Name: LevelGrid
+  m_Name: LevelGrid MODIFIED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4030,11 +4030,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1223159476}
     m_Modifications:
-    - target: {fileID: 2448187888765117218, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4194109987388807241, guid: c7c2f787643e4e2449140e58fb1f2218,
         type: 3}
       propertyPath: hitProbabilityText
@@ -4445,7 +4440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1223159476}
   m_Layer: 0
-  m_Name: Enviroment
+  m_Name: Enviroment MODIFIED
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
