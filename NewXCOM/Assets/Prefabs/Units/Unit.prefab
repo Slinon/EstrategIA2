@@ -334,6 +334,7 @@ GameObject:
   - component: {fileID: -4531885919472716451}
   - component: {fileID: 5789377868464818684}
   - component: {fileID: -1514894338747600631}
+  - component: {fileID: 95529980993083365}
   m_Layer: 7
   m_Name: Unit
   m_TagString: Untagged
@@ -486,6 +487,9 @@ MonoBehaviour:
   maxBuildDistance: 1
   structure: {fileID: 3266928928870785723, guid: c0ba9eaf1ef70594292206293c2d21df,
     type: 3}
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &2024494511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,6 +550,20 @@ MonoBehaviour:
   ragdollPrefab: {fileID: 5670714769479422707, guid: 39f714fbe91a7e341ab9b59c77270586,
     type: 3}
   originalRootBone: {fileID: 5666594676002316301}
+--- !u!114 &95529980993083365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670714769479422705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86bb985f1816aa94c9af47d9a9c22ace, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAIValueAction: 1000000
+  minAIValueAction: 0
 --- !u!1 &6456686226750173416
 GameObject:
   m_ObjectHideFlags: 0
