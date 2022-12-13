@@ -49,7 +49,6 @@ public class FogOfWar : MonoBehaviour
             if(unit.gameObject.TryGetComponent<ShootAction>(out ShootAction shootAction))
             {
                 viewDistanceShootingRange = shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize();
-                Debug.Log("shooting range: " + viewDistanceShootingRange);
             }
             
             Vector3 baseDir = new Vector3(1, 0, 0);

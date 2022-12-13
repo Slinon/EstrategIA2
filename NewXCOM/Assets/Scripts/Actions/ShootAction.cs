@@ -381,4 +381,21 @@ public class ShootAction : BaseAction
     {
         return hitProbability;
     }
+
+    //Getter daño :C
+    public int GetShootDamage()
+    {
+        return shootDamage;
+    }
+
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        // Recuperamos la unidad objetivo
+        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
+        // Calculamos la vida de cada unidad a la que podemos dar un espadazo
+        return Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f);
+
+    }
 }
