@@ -2392,7 +2392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dee28d12b04d0374695ffbff00a5efc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedUnit: {fileID: 0}
+  selectedUnit: {fileID: 1212333385}
   unitLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -3413,6 +3413,18 @@ MonoBehaviour:
   obstaclesLayerMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &1212333385 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
+    type: 3}
+  m_PrefabInstance: {fileID: 261018386}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd271029597fea147acbfd625861eb16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1213935558
 GameObject:
   m_ObjectHideFlags: 0
