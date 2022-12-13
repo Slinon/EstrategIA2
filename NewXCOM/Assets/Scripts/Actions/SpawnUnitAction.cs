@@ -24,7 +24,8 @@ public class SpawnUnitAction : BaseAction
     public event EventHandler OnSpawnActionCompleted;               // Evento cuando la accion de spawnear se completa
     public static event EventHandler<Vector3> OnAnyUnitSpawned;     // Evento cuando cualquier unidad dispara
 
-    [SerializeField] private int maxSpawnDistance;                  // Distancia maxima de spawn
+    [SerializeField] private int maxSpawnDistanceHeight;                  // Distancia maxima de spawn
+    [SerializeField] private int maxSpawnDistanceWidht;
     private GameObject[] interactionSpheres;
 
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
@@ -39,6 +40,8 @@ public class SpawnUnitAction : BaseAction
     private void Start()
     {
         interactionSpheres = GameObject.FindGameObjectsWithTag("Sphere");
+        maxSpawnDistanceHeight = 7;
+        maxSpawnDistanceWidht = 12;
     }
 
     // @IGM ------------------------
@@ -183,13 +186,15 @@ public class SpawnUnitAction : BaseAction
         List<GridPosition> allPositionsList = new List<GridPosition>(); // Posicion unidad y puntos capturados
 
         // Creamos la lista spawns distances
-        List<int> maxSpawnDistanceList = new List<int>(); // Spawn Distance unidad y puntos capturados
+        List<int> maxSpawnDistanceListWidth = new List<int>(); // Spawn Distance unidad y puntos capturados
+        List<int> maxSpawnDistanceListHeight = new List<int>(); // Spawn Distance unidad y puntos capturados
 
         // Recuperamos la posicion de la unidad
         // GridPosition unitGridPosition = unit.GetGridPosition();
         allPositionsList.Add(unit.GetGridPosition());
 
-        maxSpawnDistanceList.Add(maxSpawnDistance);
+        maxSpawnDistanceListWidth.Add(maxSpawnDistanceWidht);
+        maxSpawnDistanceListHeight.Add(maxSpawnDistanceHeight);
 
         // Comprobar puntos capturados y su distancia maxima alrededor
 
@@ -202,7 +207,8 @@ public class SpawnUnitAction : BaseAction
                 if (sphere.GetInControlState() == InteractSphere.InControlState.Enemy)
                 {
                     allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
+                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
+                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
                 }
             }
         }
@@ -215,7 +221,8 @@ public class SpawnUnitAction : BaseAction
                 if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
                 {
                     allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
+                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
+                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
                 }
             }
         }
@@ -223,9 +230,9 @@ public class SpawnUnitAction : BaseAction
         for (int i = 0; i < allPositionsList.Count; i++)
         {
             // Recorremos todas las posiciones validas alrededor de la malla
-            for (int x = -maxSpawnDistanceList[i]; x <= maxSpawnDistanceList[i]; x++)
+            for (int x = -maxSpawnDistanceListWidth[i]; x <= maxSpawnDistanceListWidth[i]; x++) // width
             {
-                for (int z = -maxSpawnDistanceList[i]; z <= maxSpawnDistanceList[i]; z++)
+                for (int z = -maxSpawnDistanceListHeight[i]; z <= maxSpawnDistanceListHeight[i]; z++) // height
                 {
 
                     // Creamos la posicion alrededor de la posicion del jugador
