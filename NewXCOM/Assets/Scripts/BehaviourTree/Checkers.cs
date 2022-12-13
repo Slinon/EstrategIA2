@@ -612,5 +612,41 @@ public class Checkers : MonoBehaviour
 
     }
 
+    // @IGM ----------------------------------------------------------------------
+    // Funcion para saber si la unidad esta colocada en la mejor posicion posible.
+    // ---------------------------------------------------------------------------
+    public bool UnitInBestPosition(Unit unit)
+    {
+
+        // Comprobamos si la unidad tiene accion de movimiento
+        if (!unit.TryGetComponent(out MoveAction unitMoveAction))
+        {
+
+            // Evitamos hacer todo el calculo
+            return true;
+
+        }
+
+        // Recumeramos el valor de la posicion actual de la unidad
+        int unitGridPositionValue = unitMoveAction.GetTargetValueAtPosition(unit.GetGridPosition());
+
+        // Recorremos la lista de posibles posiciones de la unidad
+        foreach (GridPosition gridPosition in unitMoveAction.GetValidActionGridPositionList())
+        {
+
+            // Comprobamos que el valor de la posible posicion sea mayor que el valor de la posicion de la unidad
+            if (unitGridPositionValue < unitMoveAction.GetTargetValueAtPosition(gridPosition))
+            {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
+
+    }
+
 }
 

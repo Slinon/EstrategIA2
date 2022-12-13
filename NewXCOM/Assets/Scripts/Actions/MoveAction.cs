@@ -262,6 +262,9 @@ public class MoveAction : BaseAction
         // Asignamos el multiplicador por acercamiento a una esfera que no se ha tomado
         gridPositionValue += GetMultiplierForInteractSphere(gridPosition);
 
+        // Asignamos el multiplicador por estar en una cobertura válida
+        gridPositionValue += GetMultiplierForCover(gridPosition);
+
         // Asignamos el multiplicador por acercamiento a la base enemiga
         gridPositionValue += GetMultiplierForEnemyBase(gridPosition);
         
@@ -270,7 +273,7 @@ public class MoveAction : BaseAction
 
         // Añadimos el valor de la cantidad de enemigos a tiro a la casilla
         gridPositionValue += targetCountAtGridPosition;
-        
+        Debug.Log(unit.name + ": " + gridPosition.ToString() + ": " + gridPositionValue);
         return gridPositionValue;
     }
 
@@ -295,10 +298,10 @@ public class MoveAction : BaseAction
         int distanceToEnemyBase = Pathfinding.Instance.GetPathLength(gridPosition, enemyBaseGridPosition);
 
         // Calculamos el inverso del cuadrado de la distancia a la base
-        int multiplierForEnemyBase = Mathf.RoundToInt((1 / Mathf.Pow(distanceToEnemyBase, 2)) * 100000);
+        int multiplierForEnemyBase = Mathf.RoundToInt((1f / distanceToEnemyBase) * 100000);
 
         // Añadimos el valor de la distancia a la base enemiga
-        return multiplierForEnemyBase * 2;
+        return Mathf.Clamp(multiplierForEnemyBase * 2, 0, 5000);
 
     }
 
@@ -442,10 +445,89 @@ public class MoveAction : BaseAction
         }
 
         // Calculamos el inverso del cuadrado de la distancia a la base
-        int multiplierForInteractSphere = Mathf.RoundToInt((1 / Mathf.Pow(distanceToSphere, 2)) * 500000);
-        Debug.Log(gridPosition.ToString() + ": " + multiplierForInteractSphere);
+        int multiplierForInteractSphere = Mathf.RoundToInt((1f / distanceToSphere) * 500000);
+        
         // Añadimos el valor de la distancia a la base enemiga
-        return multiplierForInteractSphere * 4;
+        return Mathf.Clamp(multiplierForInteractSphere * 4, 0, 10000);
+
+    }
+
+    private int GetMultiplierForCover(GridPosition gridPosition)
+    {
+
+        int maxDistanceToCover = 1;
+        int multiplierForCover = 0;
+
+        // Recorremos todas las posiciones validas alrededor de la malla
+        for (int x = -maxDistanceToCover; x <= maxDistanceToCover; x++)
+        {
+
+            for (int z = -maxDistanceToCover; z <= maxDistanceToCover; z++)
+            {
+
+                // Creamos la posicion alrededor de la posicion del jugador
+                GridPosition offsetGridPosition = new GridPosition(x, z);
+                GridPosition testGridPosition = gridPosition + offsetGridPosition;
+
+                // Comprobamos si la posicion esta fuera de la malla
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Calculamos la distancia de la posicion a probar
+
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+
+                // Comprobamos si la distancia es mayor a la de cobertura
+                if (testDistance > maxDistanceToCover)
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es en la que esta la unidad
+                if (gridPosition == testGridPosition)
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion no es un obstaculo
+                if (Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si en la posicion no tenemos una cobertura válida
+
+                // Aumentamos el multiplicador en esa casilla
+                multiplierForCover += 100;
+
+                
+
+            }
+
+            if (multiplierForCover != 0)
+            {
+
+                break;
+
+            }
+
+        }
+
+        return multiplierForCover;
 
     }
 

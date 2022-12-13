@@ -51,7 +51,7 @@ public class UnitAIManager : MonoBehaviour
     {
 
         // Comprobamos si la unidad es una unidad del jugador
-        if (!unit.IsEnemy())
+        if (unit == null || !unit.IsEnemy())
         {
 
             return;
@@ -117,9 +117,15 @@ public class UnitAIManager : MonoBehaviour
             else if (unit.TryGetComponent(out MoveAction moveAction))
             {
 
-                // me muevo
-                SetValues(moveAction, maxAIValueAction, minAIValueAction);
-                return;
+                // no estoy en la mejor posicion
+                if (!Checkers.Instance.UnitInBestPosition(unit))
+                {
+
+                    // me muevo
+                    SetValues(moveAction, maxAIValueAction, minAIValueAction);
+                    return;
+
+                }
 
             }
 
