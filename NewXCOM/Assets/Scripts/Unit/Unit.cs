@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private MeshRenderer gunMeshRenderer;
     [SerializeField] private MeshRenderer selectedVisualMeshRenderer;
     [SerializeField] private Canvas UnitWorldUICanvas;
+    [SerializeField] private bool isBase = false;
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -326,16 +327,21 @@ public class Unit : MonoBehaviour
 
     public void SetIsVisible(bool isVisible)
     {
-        skinnedMeshRenderer.enabled = isVisible;
-        gunMeshRenderer.enabled = isVisible;
-        // get shildren of the gun and make them invisile
-        MeshRenderer[] array = gunMeshRenderer.gameObject.GetComponentsInChildren<MeshRenderer>();
-        foreach (MeshRenderer gunPart in array)
+        if (isBase) return;
+
+        else
         {
-            gunPart.enabled = isVisible;
+            skinnedMeshRenderer.enabled = isVisible;
+            gunMeshRenderer.enabled = isVisible;
+            // get shildren of the gun and make them invisile
+            MeshRenderer[] array = gunMeshRenderer.gameObject.GetComponentsInChildren<MeshRenderer>();
+            foreach (MeshRenderer gunPart in array)
+            {
+                gunPart.enabled = isVisible;
+            }
+            selectedVisualMeshRenderer.enabled = isVisible;
+            UnitWorldUICanvas.enabled = isVisible;
         }
-        selectedVisualMeshRenderer.enabled = isVisible;
-        UnitWorldUICanvas.enabled = isVisible;
 
     }
 
