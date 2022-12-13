@@ -214,6 +214,7 @@ public class EnemyAI : MonoBehaviour
  
             // Lanzamos la accion
             bestBaseAction.TakeAction(bestEnemyAIAction.gridPosition, onEnemyAIActionComplete);
+            Debug.Log(enemyUnit.name + " " + bestBaseAction.GetActionName() + " " + bestEnemyAIAction.actionValue);
             return true;
 
         }

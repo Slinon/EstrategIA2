@@ -269,11 +269,11 @@ public class MoveAction : BaseAction
         gridPositionValue += GetMultiplierForEnemyBase(gridPosition);
         
         // Calculamos la cantidad de de objetivos en la posicion actual
-        int targetCountAtGridPosition = unit.GetAction<ShootAction>().GetTargetCountAtPosition(gridPosition);
+        int targetCountAtGridPosition = unit.GetAction<ShootAction>().GetTargetCountAtPosition(gridPosition) * 100;
 
         // Añadimos el valor de la cantidad de enemigos a tiro a la casilla
         gridPositionValue += targetCountAtGridPosition;
-        Debug.Log(unit.name + ": " + gridPosition.ToString() + ": " + gridPositionValue);
+
         return gridPositionValue;
     }
 
@@ -298,10 +298,10 @@ public class MoveAction : BaseAction
         int distanceToEnemyBase = Pathfinding.Instance.GetPathLength(gridPosition, enemyBaseGridPosition);
 
         // Calculamos el inverso del cuadrado de la distancia a la base
-        int multiplierForEnemyBase = Mathf.RoundToInt((1f / distanceToEnemyBase) * 100000);
+        int multiplierForEnemyBase = Mathf.RoundToInt((1f / distanceToEnemyBase) * 50000);
 
         // Añadimos el valor de la distancia a la base enemiga
-        return Mathf.Clamp(multiplierForEnemyBase * 2, 0, 5000);
+        return Mathf.Clamp(multiplierForEnemyBase * 2, 0, 2000);
 
     }
 
@@ -445,7 +445,7 @@ public class MoveAction : BaseAction
         }
 
         // Calculamos el inverso del cuadrado de la distancia a la base
-        int multiplierForInteractSphere = Mathf.RoundToInt((1f / distanceToSphere) * 500000);
+        int multiplierForInteractSphere = Mathf.RoundToInt((1f / distanceToSphere) * 10000);
         
         // Añadimos el valor de la distancia a la base enemiga
         return Mathf.Clamp(multiplierForInteractSphere * 4, 0, 10000);
@@ -512,7 +512,7 @@ public class MoveAction : BaseAction
                 // Comprobamos si en la posicion no tenemos una cobertura válida
 
                 // Aumentamos el multiplicador en esa casilla
-                multiplierForCover += 100;
+                multiplierForCover += 50;
 
                 
 

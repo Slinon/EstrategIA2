@@ -598,7 +598,7 @@ public class Checkers : MonoBehaviour
                 }
 
             }
-            Debug.Log(unit.name + ": " + allyTurretsInRange);
+
             if (allyTurretsInRange == 0 && enemiesInRange > 2)
             {
 

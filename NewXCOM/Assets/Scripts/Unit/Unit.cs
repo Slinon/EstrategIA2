@@ -323,6 +323,7 @@ public class Unit : MonoBehaviour
             OnAnyUnitMoved(this, EventArgs.Empty);
 
         }
+
     }
 
     public void SetIsVisible(bool isVisible)

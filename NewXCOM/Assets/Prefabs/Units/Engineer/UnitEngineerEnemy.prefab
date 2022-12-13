@@ -99,6 +99,12 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7d22fc6b9a431b043a917fb89a80bcfc, type: 2}
+    - target: {fileID: 3655822717667279192, guid: ac511d283fd173c42a356eaa2af722b3,
+        type: 3}
+      propertyPath: structure
+      value: 
+      objectReference: {fileID: 3552102799453149238, guid: 0b1289ce58904614f80e87c9767e11a4,
+        type: 3}
     - target: {fileID: 3947304531504982156, guid: ac511d283fd173c42a356eaa2af722b3,
         type: 3}
       propertyPath: floatingTextPrebab
@@ -155,7 +161,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3368498996180892270}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8506580143954637268
+--- !u!114 &213700318119393543
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -169,7 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   unit: {fileID: 473588267128752620}
   hitProbabilityText: {fileID: 7597924981416656369}
---- !u!114 &213700318119393543
+--- !u!114 &8506580143954637268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -138,15 +138,15 @@ public class UnitAIManager : MonoBehaviour
             // Si tengo enemigos cerca
             if (Checkers.Instance.AreEnemiesNearby(unit))
             {
-
+                Debug.Log(unit.name + " Teengo enemigos a tiro");
                 // Si puedo palmar
                 if (Checkers.Instance.CouldBeKilled(unit))
                 {
-
+                    Debug.Log(unit.name + " Me pueden matar");
                     // Si me puedo mover
                     if (unit.TryGetComponent(out MoveAction moveAction))
                     {
-
+                        Debug.Log(unit.name + " Me muevo");
                         // me muevo
                         SetValues(moveAction, maxAIValueAction, minAIValueAction);
                         return;
@@ -156,11 +156,11 @@ public class UnitAIManager : MonoBehaviour
                 }
 
                 // si no puedo morir...
-
+                
                 // si los tengo a mele
                 else if (Checkers.Instance.IsEnemyPointBlank(unit))
                 {
-
+                    Debug.Log(unit.name + " Tengo enemigo a mele");
                     // Les meto espadazo si puedo
                     if (unit.TryGetComponent(out SwordAction swordAction))
                     {
@@ -175,11 +175,11 @@ public class UnitAIManager : MonoBehaviour
                 // Si estan lejos, y tengo granada
                 else if (unit.TryGetComponent(out GrenadeAction grenadeAction))
                 {
-
+                    Debug.Log(unit.name + " Puedo lanzar granada");
                     // Si hay una posicion donde lanzar granada
                     if (Checkers.Instance.IsValidGrenade(unit))
                     {
-
+                        Debug.Log(unit.name + " Es correcto lanzar granada");
                         // Granadazo
                         SetValues(grenadeAction, maxAIValueAction, minAIValueAction);
                         return;
@@ -187,17 +187,17 @@ public class UnitAIManager : MonoBehaviour
                     }
 
                 }
-
-                // Si no les pego un tiro
+                Debug.Log(unit.name + " Pego un tiro");
+                // Si no, les pego un tiro
                 SetValues(shootAction, maxAIValueAction, minAIValueAction);
                 return;
 
             }
-
+      
             // si no se cumple ninguna, pero me puedo mover
             else if (unit.TryGetComponent(out MoveAction moveAction))
             {
-
+                Debug.Log(unit.name + " No se ha cumplido ninguna accion, me muevo");
                 // me muevo
                 SetValues(moveAction, maxAIValueAction, minAIValueAction);
                 return;
@@ -230,14 +230,14 @@ public class UnitAIManager : MonoBehaviour
     // ---------------------------------------------------
     private void SetValues(BaseAction chosenAction, int maxValue, int minValue)
     {
-
+        
         // Recorremos la lista de acciones validas
         foreach (BaseAction action in unit.GetBaseActionArray())
         {
-
+            
             if (action == chosenAction)
             {
-
+                Debug.Log(chosenAction.GetActionName() + action.GetActionName());
                 action.SetBaseAIValue(maxValue);
 
             }
