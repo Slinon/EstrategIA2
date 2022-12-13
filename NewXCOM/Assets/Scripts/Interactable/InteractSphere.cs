@@ -23,6 +23,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
     [SerializeField] private Material neutralMaterial;      // Material neutral
     [SerializeField] private MeshRenderer meshRenderer;     // Malla de la esfera
 
+    [SerializeField] private FogOfWar fogOfwar;
+
     [SerializeField] private int maxCaptureDistanceWidth;
     [SerializeField] private int maxCaptureDistanceHeight;
 
@@ -128,7 +130,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
     // ------------------------------------------
     public void Interact(Action onInteractionComplete, Unit unit)
     {
-
         // Asignamos las variables
         this.onInteractionComplete = onInteractionComplete;
         isActive = true;
@@ -170,6 +171,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
             }
         }
+        fogOfwar.UpdateAllFogOfWar();
     }
 
     // @IGM --------------------------

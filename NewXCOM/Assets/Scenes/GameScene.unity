@@ -356,6 +356,11 @@ PrefabInstance:
       objectReference: {fileID: 1391202319}
     - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
+      propertyPath: fogOfwar
+      value: 
+      objectReference: {fileID: 1435897217}
+    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
       propertyPath: maxCaptureDistanceWidth
       value: 12
       objectReference: {fileID: 0}
@@ -5247,6 +5252,11 @@ PrefabInstance:
       propertyPath: area
       value: 
       objectReference: {fileID: 1999923026}
+    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+        type: 3}
+      propertyPath: fogOfwar
+      value: 
+      objectReference: {fileID: 1435897217}
     - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
       propertyPath: maxCaptureDistanceWidth

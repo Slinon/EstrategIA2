@@ -26,13 +26,17 @@ public class FogOfWar : MonoBehaviour
         UpdateAllFogOfWar();
     }
 
+    private void Update()
+    {
+        //UpdateAllFogOfWar();
+    }
     private void UnitManager_OnAnyUnitMovedGridPosition(object sender, System.EventArgs e)
     {
         // Updating fog of war
         UpdateAllFogOfWar();
     }
 
-    void UpdateAllFogOfWar()
+    public void UpdateAllFogOfWar()
     {
 
         List<Vector2Int> revealedGridPositionList = new List<Vector2Int>();
