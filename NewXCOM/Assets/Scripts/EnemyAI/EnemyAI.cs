@@ -211,9 +211,10 @@ public class EnemyAI : MonoBehaviour
         // Comprobamos si tenemos la mejor accion seleccionada y podemos costearla
         if (bestEnemyAIAction != null && enemyUnit.TrySpendActionPointsToTakeAction(bestBaseAction))
         {
-
+ 
             // Lanzamos la accion
             bestBaseAction.TakeAction(bestEnemyAIAction.gridPosition, onEnemyAIActionComplete);
+            Debug.Log(enemyUnit.name + " " + bestBaseAction.GetActionName() + " " + bestEnemyAIAction.actionValue);
             return true;
 
         }
