@@ -9,8 +9,11 @@ public class FogOfWarVisual : MonoBehaviour
     [SerializeField] private Material exposedMaterial;
     [SerializeField] private Material hiddenMaterial;
 
-    private FogOfWarVisualSingle[,] fogOfWarSingleArray;     
-    
+    [SerializeField] private Material playerMaterial;
+
+    private FogOfWarVisualSingle[,] fogOfWarSingleArray;
+
+    [SerializeField] private SpawnUnitAction spawnUnitAction;
 
     void Awake()
     {
@@ -60,8 +63,18 @@ public class FogOfWarVisual : MonoBehaviour
                 if(list.Contains(gridPosition))
                 {
                     //Debug.Log("position revealed");
-                    fogOfWarSingleArray[x, z].Show(exposedMaterial);
-                    continue;
+
+                    // Si la posicion está en la lista de posiciones capturadas
+                    if (spawnUnitAction.GetRealCapturedPositionList().Contains(gridPosition))
+                    {
+                        fogOfWarSingleArray[x, z].Show(playerMaterial);
+                        continue;
+                    }
+                    else
+                    {
+                        fogOfWarSingleArray[x, z].Show(exposedMaterial);
+                        continue;
+                    }
                 }
 
                 fogOfWarSingleArray[x, z].Show(hiddenMaterial);

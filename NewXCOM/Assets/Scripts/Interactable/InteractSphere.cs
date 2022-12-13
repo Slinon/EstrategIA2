@@ -23,11 +23,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
     [SerializeField] private Material neutralMaterial;      // Material neutral
     [SerializeField] private MeshRenderer meshRenderer;     // Malla de la esfera
 
-    [SerializeField] private Material playerMaterialArea;       // Material del jugador
-    [SerializeField] private Material enemyMaterialArea;        // Material del enemigo
-    [SerializeField] private Material neutralMaterialArea;      // Material neutral
-
-    [SerializeField] private MeshRenderer area;
     [SerializeField] private int maxCaptureDistanceWidth;
     [SerializeField] private int maxCaptureDistanceHeight;
 
@@ -104,9 +99,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
         // Establecemos el control en el jugador
         state = InControlState.Player;
         meshRenderer.material = playerMaterial;
-
-        area.material = playerMaterialArea;
-
     }
 
     // @IGM -------------------------------------
@@ -118,9 +110,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
         // Establecemos el control en el enemigo
         state = InControlState.Enemy;
         meshRenderer.material = enemyMaterial;
-
-        area.material = enemyMaterialArea;
-
     }
 
     // @IGM -------------------------------------
@@ -132,9 +121,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
         // No establecemos el control en nadie
         state = InControlState.Neutral;
         meshRenderer.material = neutralMaterial;
-
-        area.material = neutralMaterialArea;
-
     }
 
     // @IGM -------------------------------------
