@@ -36,7 +36,6 @@ public class MoneySystem : MonoBehaviour
         else
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
 
 
