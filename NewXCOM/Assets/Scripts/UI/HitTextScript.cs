@@ -19,26 +19,27 @@ public class HitTextScript : MonoBehaviour
 
     BaseAction selectedAction;
 
-    private GameObject[] allTexts;
+    private UnitManager unitManager;
+
+    private List<Unit> enemyList;
+
+    private LevelGrid levelGrid;
 
 
-    // Start is called before the first frame update
     void Start()
     {
-        
         unitActionSystem = UnitActionSystem.Instance;
         ps = ProbabilitySystem.Instance;
         pathFinding = Pathfinding.Instance;
+        unitManager = UnitManager.Instance;
+        levelGrid = LevelGrid.Instance;
 
         unitSelected = unitActionSystem.GetSelectedUnit();
         unitSelectedShootAction = unitSelected.GetComponent<ShootAction>();
-        
-        allTexts = GetAllProbabilityTexts();
     }
-
-    // Update is called once per frame
     void Update()
     {
+        enemyList = unitManager.GetEnemyUnitList();
         selectedAction = UnitActionSystem.Instance.GetSelectedAction();
 
         unitSelected = unitActionSystem.GetSelectedUnit();
@@ -49,18 +50,17 @@ public class HitTextScript : MonoBehaviour
         {
             // Accion de disparo
             case ShootAction shootAction:
-                ShowAllProbabiltyTexts(allTexts, true);
+                ShowAllProbabiltyTexts(enemyList, true);
 
-                //Debug.Log(ps.CalculateDistanceUnit(unitSelected, unit));
                 UpdateHitProbabilityText();
                 break;
 
             default:
-                ShowAllProbabiltyTexts(allTexts, false);
+                ShowAllProbabiltyTexts(enemyList, false);
                 break;
-        }    
+        }
     }
-
+    
     private void UpdateHitProbabilityText()
     {
 
@@ -71,19 +71,17 @@ public class HitTextScript : MonoBehaviour
 
     public int GetProbabilityHit()
     {
-        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), pathFinding.CalculateDistance(unitSelected.GetGridPosition(), unit.GetGridPosition()) / 10, unitSelectedShootAction.GetMaxShootDistance());
+        // Comprobar si esta cubierto para devolver 0
+        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), unit.GetDistanceBetweenUnits(unitSelected, this.unit), unitSelectedShootAction.GetMaxShootDistance());
     }
 
-    private void ShowAllProbabiltyTexts(GameObject[] allTexts, bool show)
+    private void ShowAllProbabiltyTexts(List<Unit> enemyList, bool show)
     {
-        foreach (GameObject text in allTexts)
+
+        foreach (Unit unit in enemyList)
         {
-            text.SetActive(show);
+            unit.GetComponentInChildren<HitTextScript>().hitProbabilityText.gameObject.SetActive(show);
         }
     }
-
-    private GameObject[] GetAllProbabilityTexts()
-    {
-        return GameObject.FindGameObjectsWithTag("ProbabilityText");
-    }
+    
 }

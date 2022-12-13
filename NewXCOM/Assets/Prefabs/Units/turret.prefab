@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 3266928928870785722}
   m_Layer: 7
   m_Name: turret
-  m_TagString: Untagged
+  m_TagString: Turret
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -680,7 +680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0b251252ff934e49a6df057807226ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ps: {fileID: 0}
   maxShootDistance: 7
   obstacleLayerMask:
     serializedVersion: 2
@@ -703,6 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxActionPoints: 3
   isEnemy: 0
+  coverType: 0
 --- !u!114 &4086565723291860055
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +715,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3be4dd0d838231c4bbd5668e1418f789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrebab: {fileID: 0}
   healthMax: 100
 --- !u!114 &4877465348892913821
 MonoBehaviour:

@@ -22,6 +22,8 @@ public class LevelGrid : MonoBehaviour
     private bool hasFront;
     private bool hasBack;
 
+    RandomizeMap randomizer;
+
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
@@ -45,7 +47,7 @@ public class LevelGrid : MonoBehaviour
         // Creamos la malla
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, 
             (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
-        gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
+        //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
 
 
         for (int x = 0; x < width; x++) {
@@ -68,7 +70,10 @@ public class LevelGrid : MonoBehaviour
     // ----------------------------------------------
     private void Start()
     {
-
+        //Fetcheamos el randomizador
+        randomizer = GetComponent<RandomizeMap>();
+        //Instanciamos los obstaculos
+        randomizer.FillWithObstacles();
         // Asignamos el pathfinding
         Pathfinding.Instance.Setup(width, height, cellSize);
 
@@ -365,7 +370,7 @@ public class LevelGrid : MonoBehaviour
                     {
                         hasBack=true;
                     }else{
-                        Debug.Log("Llegado");
+                
                         hasBack = false;}
                 }else{hasBack = true;}
         }else{hasBack = false;}

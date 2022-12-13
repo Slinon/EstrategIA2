@@ -8,6 +8,7 @@ public class MoveAction : BaseAction
 
     public event EventHandler OnStartMoving;                // Evento cuando la unida se empieza a mover
     public event EventHandler OnStopMoving;                 // Evento cuando la unidad se termina de mover
+    public event EventHandler OnPositionChanged;
 
     [SerializeField] private int maxMoveDistance;           // Distancia maxima del movimiento de la unidad
 
@@ -57,6 +58,9 @@ public class MoveAction : BaseAction
             // Actualizamos el indice
             currentPositionIndex++;
 
+            // @VJT Lanzamos el evento de cambio de posicion
+            OnPositionChanged?.Invoke(this, EventArgs.Empty);
+
             // Comprobamos si es la ultima posicion
             if (currentPositionIndex >= positionList.Count)
             {
@@ -99,10 +103,10 @@ public class MoveAction : BaseAction
         foreach (GridPosition pathGridPosition in pathGridPositionList)
         {
 
-            // Añadimos la posicion en la lista
+            // Aï¿½adimos la posicion en la lista
             positionList.Add(LevelGrid.Instance.GetWorldPosition(pathGridPosition));
-
         }
+
 
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnStartMoving != null)
@@ -198,7 +202,7 @@ public class MoveAction : BaseAction
 
                 }
 
-                // Lo añadimos a la lista
+                // Lo aï¿½adimos a la lista
                 validGridPositionList.Add(testGridPosition);
 
             }
@@ -225,15 +229,12 @@ public class MoveAction : BaseAction
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
 
-        // Calculamos la cantidad de de objetivos en la posicion actual
-        int targetCountAtGridPosition = unit.GetAction<ShootAction>().GetTargetCountAtPosition(gridPosition);
-
         // Devolvemos la accion de la IA
         return new EnemyAIAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + targetCountAtGridPosition * 10
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
 
@@ -246,6 +247,287 @@ public class MoveAction : BaseAction
     { 
     
         return maxMoveDistance; 
+
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        // Asignamos el valor de la casilla
+        int gridPositionValue = 0;
+
+        // Asignamos el multiplicador por acercamiento a una esfera que no se ha tomado
+        gridPositionValue += GetMultiplierForInteractSphere(gridPosition);
+
+        // Asignamos el multiplicador por estar en una cobertura válida
+        gridPositionValue += GetMultiplierForCover(gridPosition);
+
+        // Asignamos el multiplicador por acercamiento a la base enemiga
+        gridPositionValue += GetMultiplierForEnemyBase(gridPosition);
+        
+        // Calculamos la cantidad de de objetivos en la posicion actual
+        int targetCountAtGridPosition = unit.GetAction<ShootAction>().GetTargetCountAtPosition(gridPosition);
+
+        // Añadimos el valor de la cantidad de enemigos a tiro a la casilla
+        gridPositionValue += targetCountAtGridPosition;
+        Debug.Log(unit.name + ": " + gridPosition.ToString() + ": " + gridPositionValue);
+        return gridPositionValue;
+    }
+
+    // @IGM --------------------------------------------------
+    // Metodo para calcular el multiplicador por base enemiga.
+    // -------------------------------------------------------
+    private int GetMultiplierForEnemyBase(GridPosition gridPosition)
+    {
+
+        // Recuperamos la base enemiga
+        GameObject enemyBase = GameObject.FindGameObjectWithTag("MainBase");
+
+        if (enemyBase == null)
+        {
+
+            return 0;
+
+        }
+
+        // Calculamos la distancia entre la casilla y la base enemiga
+        GridPosition enemyBaseGridPosition = LevelGrid.Instance.GetGridPosition(enemyBase.transform.position);
+        int distanceToEnemyBase = Pathfinding.Instance.GetPathLength(gridPosition, enemyBaseGridPosition);
+
+        // Calculamos el inverso del cuadrado de la distancia a la base
+        int multiplierForEnemyBase = Mathf.RoundToInt((1f / distanceToEnemyBase) * 100000);
+
+        // Añadimos el valor de la distancia a la base enemiga
+        return Mathf.Clamp(multiplierForEnemyBase * 2, 0, 5000);
+
+    }
+
+    // @IGM -------------------------------------------------------------------------------------
+    // Metodo para calcular el multiplicador por esfera que no esta bajo el control de la unidad.
+    // ------------------------------------------------------------------------------------------
+    private int GetMultiplierForInteractSphere(GridPosition gridPosition)
+    {
+
+        // Comrpobamos que la unidad tiene la accion de interactuar
+        if (!unit.TryGetComponent(out InteractAction interactAction))
+        {
+
+            return 0;
+
+        }
+
+        // Recuperamos el array de esferas de influencia
+        GameObject[] interactableGameObjectSpheres = GameObject.FindGameObjectsWithTag("Sphere");
+        InteractSphere[] interactSpheres = new InteractSphere[interactableGameObjectSpheres.Length];
+
+        // Asignamos la variable de la distancia entre la posicion a la que nos movemos y la esfera
+        InteractSphere interactSphere = null;
+        int distanceToSphere = int.MaxValue;
+
+        // Recorremos el array de esferas
+        for (int i = 0; i < interactSpheres.Length; i++)
+        {
+
+            // Asignamos la esfera al array
+            interactSpheres[i] = interactableGameObjectSpheres[i].GetComponent<InteractSphere>();
+
+            // Comprobamos si la esfera esta bajo el mismo control que la unidad
+            if ((int)interactSpheres[i].GetInControlState() == Convert.ToInt32(unit.IsEnemy()))
+            {
+
+                // La saltamos
+                continue;
+
+            }
+
+            // Comprobamos la distancia de la celda a la esfera
+            int tempDistanceToSphere = Mathf.RoundToInt(Vector3
+                .Distance(interactSpheres[i].transform.position, unit.transform.position));
+
+            if (tempDistanceToSphere < distanceToSphere)
+            {
+
+                // Asiganamos la esfera a la esfera a la que nos queremos mover
+                distanceToSphere = tempDistanceToSphere;
+                interactSphere = interactSpheres[i];
+
+            }
+
+        }
+
+        // Comprobamos que existe una esfera que aun no esta bajo el control de la unidad
+        if (interactSphere == null)
+        {
+
+            return 0;
+
+        }
+
+        // Calculamos la posicion en la malla de la esfera
+        GridPosition interactSphereGridPosition = LevelGrid.Instance.GetGridPosition(interactSphere.transform.position);
+        int maxInteractDistance = interactAction.GetMaxInteractDistance();
+        distanceToSphere = int.MaxValue;
+
+        // Recorremos todas las posiciones validas alrededor de la malla
+        for (int x = -maxInteractDistance; x <= maxInteractDistance; x++)
+        {
+
+            for (int z = -maxInteractDistance; z <= maxInteractDistance; z++)
+            {
+
+                // Creamos la posicion alrededor de la posicion del jugador
+                GridPosition offsetGridPosition = new GridPosition(x, z);
+                GridPosition testGridPosition = interactSphereGridPosition + offsetGridPosition;
+
+                // Comprobamos si la posicion esta fuera de la malla
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es en la que esta la unidad
+                if (interactSphereGridPosition == testGridPosition)
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion tiene unidades dentro
+                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                {
+                    
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es un obstaculo
+                if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+                    
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es alcanzable
+                if (!Pathfinding.Instance.HasPath(unit.GetGridPosition(), testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos que la distancia de la posicion temporal a la posicion donde nos queremos mover es menor a la que tenemos
+                int tempDistanceToSphere = Mathf.Clamp(Pathfinding.Instance
+                    .GetPathLength(gridPosition, testGridPosition), 1, int.MaxValue);
+
+
+                if (tempDistanceToSphere <= distanceToSphere)
+                {
+
+                    // Actualizamos la distancia
+                    distanceToSphere = tempDistanceToSphere;
+
+                }
+
+            }
+
+        }
+
+        // Calculamos el inverso del cuadrado de la distancia a la base
+        int multiplierForInteractSphere = Mathf.RoundToInt((1f / distanceToSphere) * 500000);
+        
+        // Añadimos el valor de la distancia a la base enemiga
+        return Mathf.Clamp(multiplierForInteractSphere * 4, 0, 10000);
+
+    }
+
+    private int GetMultiplierForCover(GridPosition gridPosition)
+    {
+
+        int maxDistanceToCover = 1;
+        int multiplierForCover = 0;
+
+        // Recorremos todas las posiciones validas alrededor de la malla
+        for (int x = -maxDistanceToCover; x <= maxDistanceToCover; x++)
+        {
+
+            for (int z = -maxDistanceToCover; z <= maxDistanceToCover; z++)
+            {
+
+                // Creamos la posicion alrededor de la posicion del jugador
+                GridPosition offsetGridPosition = new GridPosition(x, z);
+                GridPosition testGridPosition = gridPosition + offsetGridPosition;
+
+                // Comprobamos si la posicion esta fuera de la malla
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Calculamos la distancia de la posicion a probar
+
+                int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
+
+                // Comprobamos si la distancia es mayor a la de cobertura
+                if (testDistance > maxDistanceToCover)
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es en la que esta la unidad
+                if (gridPosition == testGridPosition)
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion no es un obstaculo
+                if (Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si en la posicion no tenemos una cobertura válida
+
+                // Aumentamos el multiplicador en esa casilla
+                multiplierForCover += 100;
+
+                
+
+            }
+
+            if (multiplierForCover != 0)
+            {
+
+                break;
+
+            }
+
+        }
+
+        return multiplierForCover;
 
     }
 

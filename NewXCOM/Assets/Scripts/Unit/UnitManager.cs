@@ -12,6 +12,8 @@ public class UnitManager : MonoBehaviour
     private List<Unit> friendlyUnitList;                            // Lista de unidades aliadas
     private List<Unit> enemyUnitList;                               // Lista de unidades enemigas
 
+    public static event EventHandler OnAnyUnitMovedGridPosition;
+
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
@@ -48,6 +50,7 @@ public class UnitManager : MonoBehaviour
         // Asignamos los eventos
         Unit.OnAnyUnitSpawned += Unit_OnAnyUnitSpawned;
         Unit.OnAnyUnitDied += Unit_OnAnyUnitDied;
+        Unit.OnAnyUnitMoved += Unit_OnAnyUnitMoved;
 
     }
 
@@ -60,21 +63,21 @@ public class UnitManager : MonoBehaviour
         // Recuperamos la unidad
         Unit unit = sender as Unit;
 
-        // La añadimos a la lista de unidades
+        // La aï¿½adimos a la lista de unidades
         unitList.Add(unit);
 
         // Comprobamos si la unidad es un enemigo
         if (unit.IsEnemy())
         {
 
-            // Añadimos la unidad a la lista de enemigos
+            // Aï¿½adimos la unidad a la lista de enemigos
             enemyUnitList.Add(unit);
 
         }
         else
         {
 
-            // Añadimos la unidad a la lista de aliados
+            // Aï¿½adimos la unidad a la lista de aliados
             friendlyUnitList.Add(unit);
 
         }
@@ -92,7 +95,7 @@ public class UnitManager : MonoBehaviour
 
         // La borramos de la lista de unidades
         unitList.Remove(unit);
-
+ 
         // Comprobamos si la unidad es un enemigo
         if (unit.IsEnemy())
         {
@@ -155,4 +158,36 @@ public class UnitManager : MonoBehaviour
 
     }
 
+    // @VJT --------------------------------------
+    // Handler del evento cuando se mueve cualquier unidad
+    // -------------------------------------------
+    private void Unit_OnAnyUnitMoved(object sender, EventArgs empty)
+    {
+        // Comprobamos si hay alguna clase escuchando el evento
+        if (OnAnyUnitMovedGridPosition != null)
+        {
+
+            // Lanzamos el evento
+            OnAnyUnitMovedGridPosition(this, EventArgs.Empty);
+
+        }
+    }
+
+    // @VJT --------------------------------------
+    // Escconde los enemigos
+    // -------------------------------------------
+    public void hideOrShowEnemies(List<Vector2Int> revealedPositionGrid)
+    {
+        foreach (Unit enemy in enemyUnitList)
+        {
+            if(revealedPositionGrid.Contains(enemy.GetGridPosition()))
+            {
+                enemy.SetIsVisible(true);
+            }
+            else
+            {
+                enemy.SetIsVisible(false);
+            }
+        }
+    }
 }

@@ -5,7 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Sphere
-  - ProbabilityText
+  - MainBase
+  - EnemyMainBase
+  - Turret
   layers:
   - Default
   - TransparentFX

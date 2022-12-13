@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildStructureAction : BaseAction
+public class BuildShieldAction : BaseAction
 {
     [SerializeField] private int maxBuildDistance;      // Distancia maxima de construcción
     [SerializeField] private GameObject structure;      // Torreta
@@ -111,7 +111,7 @@ public class BuildStructureAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue,
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
     }
@@ -122,4 +122,15 @@ public class BuildStructureAction : BaseAction
         return "Build turret";
 
     }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        return 0;
+
+    }
+
 }

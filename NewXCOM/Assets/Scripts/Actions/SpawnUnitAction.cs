@@ -164,7 +164,7 @@ public class SpawnUnitAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
 
@@ -295,6 +295,16 @@ public class SpawnUnitAction : BaseAction
         
         ActionStart(onActionComplete);
         
+    }
+
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        return 0;
+
     }
 
 }

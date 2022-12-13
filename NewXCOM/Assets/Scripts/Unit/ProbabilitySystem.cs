@@ -83,11 +83,15 @@ public class ProbabilitySystem : MonoBehaviour
 
         if (distance >= 2 && distance < 4)
         {
-            percentage = 40;
+            percentage = 10;
         }
-        else if (distance >= 4)
+        else if (distance >= 4 && distance <= 6)
         {
-            percentage = 60;
+            percentage = 20;
+        }
+        else if (distance > 6)
+        {
+            percentage = 30;
         }
 
         return percentage;

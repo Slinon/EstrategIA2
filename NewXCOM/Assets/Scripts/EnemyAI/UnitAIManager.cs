@@ -51,13 +51,13 @@ public class UnitAIManager : MonoBehaviour
     {
 
         // Comprobamos si la unidad es una unidad del jugador
-        if (!unit.IsEnemy())
+        if (unit == null || !unit.IsEnemy())
         {
 
             return;
 
         }
-        Debug.Log(unit.name);
+
         // Reestablecemos los valores de las acciones
         RestartValues();
         
@@ -68,11 +68,11 @@ public class UnitAIManager : MonoBehaviour
             // Y tengo una esfera cerca
             if (Checkers.Instance.IsCloseToSphere(unit))
             {
-                Debug.Log("hola");
+           
                 // Si la esfera esta al lado
                 if (Checkers.Instance.IsSphereNearby(unit))
                 {
-                    Debug.Log("muybuenas");
+               
                     // interactuo
                     SetValues(interactAction, maxAIValueAction, minAIValueAction);
                     return;
@@ -97,13 +97,35 @@ public class UnitAIManager : MonoBehaviour
         if (Checkers.Instance.GetRemainingActionPoints(unit) > 1)
         {
 
-            // y puedo moverme
-            if (unit.TryGetComponent(out MoveAction moveAction))
+            // puedo construir
+            if (unit.TryGetComponent(out BuildStructureAction buildStructureAction))
             {
 
-                // me muevo
-                SetValues(moveAction, maxAIValueAction, minAIValueAction);
-                return;
+                // es factible construir
+                if (Checkers.Instance.IsValidStructure(unit))
+                {
+
+                    // construyo
+                    SetValues(buildStructureAction, maxAIValueAction, minAIValueAction);
+                    return;
+
+                }
+
+            }
+
+            // puedo moverme
+            else if (unit.TryGetComponent(out MoveAction moveAction))
+            {
+
+                // no estoy en la mejor posicion
+                if (!Checkers.Instance.UnitInBestPosition(unit))
+                {
+
+                    // me muevo
+                    SetValues(moveAction, maxAIValueAction, minAIValueAction);
+                    return;
+
+                }
 
             }
 
