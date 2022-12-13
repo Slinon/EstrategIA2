@@ -105,8 +105,8 @@ public class MoveAction : BaseAction
 
             // A�adimos la posicion en la lista
             positionList.Add(LevelGrid.Instance.GetWorldPosition(pathGridPosition));
-
         }
+
 
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnStartMoving != null)

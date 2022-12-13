@@ -36,7 +36,6 @@ public class ShootAction : BaseAction
     private float stateTimer;                                   // Timer de la maquina de estados
 
     private UnitManager unitManager;
-    private List<Unit> enemiesList;
     private Pathfinding pathFinding;
 
 
@@ -46,9 +45,6 @@ public class ShootAction : BaseAction
         ps = ProbabilitySystem.Instance;
         unitManager = UnitManager.Instance;
         pathFinding = Pathfinding.Instance;
-
-        enemiesList = unitManager.GetEnemyUnitList();
-
     }
     // @IGM ------------------------
     // Update is called every frame.
@@ -175,9 +171,9 @@ public class ShootAction : BaseAction
         
 
         Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance));
+            criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(this.unit, targetUnit), maxShootDistance));
 
-        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance);
+        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, unit.GetDistanceBetweenUnits(this.unit, targetUnit), maxShootDistance);
 
         targetUnit.Damage(damagetmp);
 
@@ -213,14 +209,12 @@ public class ShootAction : BaseAction
     // -------------------------------------------------------------------
     private List<GridPosition> GetValidActionGridPositionList(GridPosition unitGridPosition)
     {
-
         // Creamos la lista
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         // Recorremos todas las posiciones validas alrededor de la malla
         for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
-
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
             {
 
@@ -238,6 +232,7 @@ public class ShootAction : BaseAction
                 }
 
                 // Calculamos la distancia de la posicion a probar
+                
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
 
                 // Comprobamos si la distancia es mayor a la de diparo
@@ -248,6 +243,7 @@ public class ShootAction : BaseAction
                     continue;
 
                 }
+                
 
                 // Comprobamos si la posicion no tiene unidades dentro
                 if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
@@ -279,6 +275,7 @@ public class ShootAction : BaseAction
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
 
                 // Definimos un offset para poder disparar por encima de obstaculos bajos
+
                 if(targetUnit.GetCoverType() == CoverType.Covered)
                 {
                     if(unitPosition.GetCoverType() == CoverType.Covered)
@@ -364,7 +361,7 @@ public class ShootAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
+            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
 
         };
 
@@ -384,25 +381,4 @@ public class ShootAction : BaseAction
     {
         return hitProbability;
     }
-
-    //Getter daño :C
-    public int GetShootDamage()
-    {
-        return shootDamage;
-    }
-
-    // @IGM ------------------------------------------------
-    // Funcion para calcular la mejor posicion de la accion.
-    // -----------------------------------------------------
-    public override int GetTargetValueAtPosition(GridPosition gridPosition)
-    {
-
-        // Recuperamos la unidad objetivo
-        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
-
-        // Calculamos la vida de cada unidad a la que podemos dar un espadazo
-        return Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f);
-
-    }
-
 }

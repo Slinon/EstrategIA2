@@ -139,9 +139,6 @@ public class UnitActionSystem : MonoBehaviour
 
                 if (selectedAction.MoneyCost() < MoneySystem.Instance.player.money)
                 {
-
-                    Debug.Log("Esta acción se puede realizar");
-
                     SetBusy();
                     selectedAction.TakeAction(mouseGridPosition, ClearBusy);
                     MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.player);
