@@ -268,7 +268,7 @@ public class GridSystemVisual : MonoBehaviour
                 break;
 
             // Accion de rodar
-            case SpinAction spinAction:
+            case PassAction spinAction:
 
                 // Color azul
                 gridVisualType = GridVisualType.Blue;

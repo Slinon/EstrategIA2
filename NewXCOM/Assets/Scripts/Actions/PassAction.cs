@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpinAction : BaseAction
+public class PassAction : BaseAction
 {
 
-    private float totalSpinAmount;                             // Cantidad total de giro de la unidad
+    private float timeElapsed;                             
 
 
     // @IGM ------------------------
@@ -25,12 +25,10 @@ public class SpinAction : BaseAction
         }
 
         // Rotamos la unidad
-        float spinAddAmount = 360f * Time.deltaTime;
-        transform.eulerAngles += new Vector3(0, spinAddAmount, 0);
-        totalSpinAmount += spinAddAmount;
+        timeElapsed += Time.deltaTime;
 
         // Comprobamos si ya se ha girado una vuelta completa
-        if (totalSpinAmount >= 360f)
+        if (timeElapsed >= 1f)
         {
 
             // Terminamos la accion
@@ -46,9 +44,7 @@ public class SpinAction : BaseAction
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
 
-        // Establecemos el valor de giro a 0
-        totalSpinAmount = 0;
-
+        Debug.Log(unit.name + " pasa este turno");
         // Empezamos la accion
         ActionStart(onActionComplete);
 
@@ -60,7 +56,7 @@ public class SpinAction : BaseAction
     public override string GetActionName()
     {
 
-        return "Spin";
+        return "Pass";
 
     }
 
