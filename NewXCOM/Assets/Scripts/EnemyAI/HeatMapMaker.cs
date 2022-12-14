@@ -52,6 +52,7 @@ public class HeatMapMaker : MonoBehaviour
         UnitAIManager.OnAnyUnitThrowGrenade += UnitAIManager_OnAnyUnitThrowGrenade;
         UnitAIManager.OnAnyUnitBuildStructure += UnitAIManager_OnAnyUnitBuildStructure;
         UnitAIManager.OnAnyUnitMoveAction += UnitAIManager_OnAnyUnitMoveAction;
+        BaseAIManager.OnAnyUnitSpawnedAction += BaseAIManager_OnAnyUnitSpawnedAction;
 
     }
 
@@ -87,6 +88,20 @@ public class HeatMapMaker : MonoBehaviour
     // Handler del evento cuando una unidad decide moverse.
     // ----------------------------------------------------
     private void UnitAIManager_OnAnyUnitMoveAction(object sender, Unit unit)
+    {
+
+        // Limpiamos el mapa de influencia
+        LevelGrid.Instance.ClearHeatMap();
+
+        // Asignamos los valores de las acciones
+        MakeMoveActionHeatMap(unit);
+
+    }
+
+    // @IGM ---------------------------------------------------
+    // Handler del evento cuando se decide spawnear una unidad.
+    // --------------------------------------------------------
+    private void BaseAIManager_OnAnyUnitSpawnedAction(object sender, Unit unit)
     {
 
         // Limpiamos el mapa de influencia
@@ -320,6 +335,46 @@ public class HeatMapMaker : MonoBehaviour
             }
 
         }
+
+    }
+
+    // @IGM ------------------------------------------
+    // Setter del valor de la base enemiga al moverse.
+    // -----------------------------------------------
+    public void SetEnemyBaseMoveValue(int enemyBaseMoveValue)
+    {
+
+        this.enemyBaseMoveValue = enemyBaseMoveValue;
+
+    }
+
+    // @IGM ------------------------------------------
+    // Getter del valor de la base enemiga al moverse.
+    // -----------------------------------------------
+    public int GetEnemyBaseMoveValue()
+    {
+
+        return enemyBaseMoveValue;
+
+    }
+
+    // @IGM -----------------------------------------
+    // Setter del valor de la base aliada al moverse.
+    // ----------------------------------------------
+    public void SetAllyBaseMoveValue(int allyBaseMoveValue)
+    {
+
+        this.allyBaseMoveValue = allyBaseMoveValue;
+
+    }
+
+    // @IGM -----------------------------------------
+    // Getter del valor de la base aliada al moverse.
+    // ----------------------------------------------
+    public int GetAllyBaseMoveValue()
+    {
+
+        return allyBaseMoveValue;
 
     }
 

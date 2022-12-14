@@ -76,7 +76,7 @@ public class UnitAIManager : MonoBehaviour
                 // Si la esfera esta al lado
                 if (Checkers.Instance.IsSphereNearby(unit))
                 {
-               
+
                     // interactuo
                     SetValues(interactAction, maxAIValueAction, minAIValueAction);
                     return;

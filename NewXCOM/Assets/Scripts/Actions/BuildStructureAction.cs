@@ -5,17 +5,33 @@ using UnityEngine;
 
 public class BuildStructureAction : BaseAction
 {
-    [SerializeField] private int maxBuildDistance;      // Distancia maxima de construcción
-    [SerializeField] private GameObject structure;      // shield
-    [SerializeField] LayerMask obstacleLayerMask;       // Capa de los obstaculos
+
+    // @IGM -----------------------------------------------------
+    // Maquina de estados de de la accion de spawnear una unidad.
+    // ----------------------------------------------------------
+    private enum State
+    {
+
+        WaitingBeforeSpawn,
+        WaitingAfterSpawn
+
+    }
 
     public event EventHandler OnStartBuilding;
     public event EventHandler OnStopBuilding;
 
+    [SerializeField] private int maxBuildDistance;      // Distancia maxima de construcción
+    [SerializeField] private GameObject structure;      // shield
+    [SerializeField] LayerMask obstacleLayerMask;       // Capa de los obstaculos
+
+    private State state;                                // Estado actual de la accion
+    private float stateTimer;                           // Timer de la maquina de estados
+    private Vector3 spawnPoint;                         // Punto donde spawnea la unidad
 
     // Update is called once per frame
     void Update()
     {
+
         // Comprobamos si la accion se ha activado
         if (!isActive)
         {
@@ -25,25 +41,95 @@ public class BuildStructureAction : BaseAction
 
         }
 
-        if (OnStopBuilding != null)
+        // Restamos el timer
+        stateTimer -= Time.deltaTime;
+
+        // Comprobamos el estado de la accion
+        switch (state)
         {
-            OnStopBuilding(this, EventArgs.Empty);
+
+            case State.WaitingBeforeSpawn:
+
+                // Comprobamos si hay alguna clase escuchando el evento
+                if (OnStartBuilding != null)
+                {
+
+                    // Lanzamos el evento
+                    OnStartBuilding(this, EventArgs.Empty);
+
+                }
+
+                break;
+            case State.WaitingAfterSpawn:
+
+                break;
+
         }
 
-        ActionComplete();
+        // Comprobamos si el timer ha llegado a 0
+        if (stateTimer <= 0)
+        {
+
+            // Pasamos al siguiente estado
+            NextState();
+
+        }
+
+    }
+
+    // @IGM ---------------------------------
+    // Metodo para pasar al siguiente estado.
+    // --------------------------------------
+    private void NextState()
+    {
+
+        // Comprobamos el estado de la accion
+        switch (state)
+        {
+
+            case State.WaitingBeforeSpawn:
+
+                // Cambiamos el estado y los parametros
+                state = State.WaitingAfterSpawn;
+                float afterSpawnStateTime = 0.5f;
+                stateTimer = afterSpawnStateTime;
+
+                // Spawneamos la unidad
+                Unit newStructure = Instantiate(structure, spawnPoint, Quaternion.identity).GetComponent<Unit>();
+
+                // Le quitamos los puntos de accion
+                newStructure.SpendActionPoints(newStructure.GetActionPoints());
+
+                break;
+
+            case State.WaitingAfterSpawn:
+
+                // Comprobamos si hay alguna clase escuchando el evento
+                if (OnStopBuilding != null)
+                {
+
+                    // Lanzamos el evento
+                    OnStopBuilding(this, EventArgs.Empty);
+
+                }
+
+                // Terminamos la accion
+                ActionComplete();
+
+                break;
+
+        }
+
     }
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        Instantiate(structure, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity);
 
-        if (OnStartBuilding != null)
-        {
-
-            // Lanzamos el evento
-            OnStartBuilding(this, EventArgs.Empty);
-
-        }
+        // Asignamos las variables
+        state = State.WaitingBeforeSpawn;
+        spawnPoint = LevelGrid.Instance.GetWorldPosition(gridPosition);
+        float beforeSpawnStateTime = 0.7f;
+        stateTimer = beforeSpawnStateTime;
 
         ActionStart(onActionComplete);
     }
@@ -120,7 +206,7 @@ public class BuildStructureAction : BaseAction
     public override string GetActionName()
     {
 
-        return "Shield";
+        return "Turret";
 
     }
 

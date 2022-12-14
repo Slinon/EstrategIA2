@@ -6,9 +6,6 @@ using UnityEngine;
 public class SpawnUnitAction : BaseAction
 {
 
-    [SerializeField] protected int unitCost;
-    [SerializeField] protected Transform unitSpawned;                 // Unidad que queremos spawnear
-
     // @IGM -----------------------------------------------------
     // Maquina de estados de de la accion de spawnear una unidad.
     // ----------------------------------------------------------
@@ -24,10 +21,12 @@ public class SpawnUnitAction : BaseAction
     public event EventHandler OnSpawnActionCompleted;               // Evento cuando la accion de spawnear se completa
     public static event EventHandler<Vector3> OnAnyUnitSpawned;     // Evento cuando cualquier unidad dispara
 
-    private int maxSpawnDistanceHeight;                  // Distancia maxima de spawn
+    [SerializeField] protected int unitCost;
+    [SerializeField] protected Transform unitSpawned;               // Unidad que queremos spawnear
+
+    private int maxSpawnDistanceHeight;                             // Distancia maxima de spawn
     private int maxSpawnDistanceWidht;
     private GameObject[] interactionSpheres;
-
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
     private float stateTimer;                                       // Timer de la maquina de estados
@@ -123,7 +122,10 @@ public class SpawnUnitAction : BaseAction
                 }
 
                 // Spawneamos la unidad
-                Instantiate(unitSpawned, spawnPoint, Quaternion.identity);
+                Unit newUnit = Instantiate(unitSpawned, spawnPoint, Quaternion.identity).GetComponent<Unit>();
+
+                // Le quitamos los puntos de accion
+                newUnit.SpendActionPoints(newUnit.GetActionPoints());
 
                 // Comprobamos si hay alguna clase escuchando el evento
                 if (OnAnyUnitSpawned != null)
@@ -177,7 +179,7 @@ public class SpawnUnitAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
+            actionValue = baseAIValue + LevelGrid.Instance.GetHeatMapValueAtGridPosition(gridPosition)
 
         };
 

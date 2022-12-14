@@ -35,7 +35,9 @@ public class BuildShieldAction : BaseAction
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
-        Instantiate(structure, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity);
+        Unit newStructure = Instantiate(structure, LevelGrid.Instance.GetWorldPosition(gridPosition), Quaternion.identity).GetComponent<Unit>();
+        // Le quitamos los puntos de accion
+        newStructure.SpendActionPoints(newStructure.GetActionPoints());
 
         if (OnStartBuilding != null)
         {

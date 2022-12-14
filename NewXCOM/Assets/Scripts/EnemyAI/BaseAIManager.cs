@@ -5,10 +5,13 @@ using UnityEngine;
 
 public class BaseAIManager : MonoBehaviour
 {
-    Unit enemyBase;
+
+    public static event EventHandler<Unit> OnAnyUnitSpawnedAction;  // Evento cuando se lanza una accion 
+
     [SerializeField] private int maxAIValueAction;                  // Valor maximo de una accion para la IA
     [SerializeField] private int minAIValueAction;                  // Valor minimode una accion para la IA
 
+    private Unit enemyBase;
     private int scoutCost, granadierCost, engineerCost, berserkCost, juggernautCost;
 
     // @GRG ----------------------------------------------------

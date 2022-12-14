@@ -2656,7 +2656,7 @@ MonoBehaviour:
   structureCenterInfluence: 1
   allyStructuresExpansion: 10
   enemiesStructuresExpansion: 10
-  enemyBaseMoveValue: -20
+  enemyBaseMoveValue: 20
   allyBaseMoveValue: 20
   sphereMoveValue: 60
   enemyMoveValue: 5
@@ -3864,6 +3864,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 44018852}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1462195611 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 44018852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462195609}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06db1dd747ad80c47b76e5901e0273c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1470498046
 GameObject:
   m_ObjectHideFlags: 0
@@ -3876,6 +3888,7 @@ GameObject:
   - component: {fileID: 1470498047}
   - component: {fileID: 1470498049}
   - component: {fileID: 1470498050}
+  - component: {fileID: 1470498051}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -3937,6 +3950,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6c0c0e07608eb41ab138917bc8ef59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1470498051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470498046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c703754aeceb594388aaeda0a32c233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heatMapMaker: {fileID: 1008373987}
+  closeSphere: {fileID: 1462195611}
+  farSphere: {fileID: 1825145544}
 --- !u!1001 &1476803966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4727,6 +4755,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1825145541}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1825145544 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 1825145541}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385764541}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06db1dd747ad80c47b76e5901e0273c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1854260439
 GameObject:
   m_ObjectHideFlags: 0
@@ -5391,6 +5431,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2674505501862230149, guid: 2abbe493b0edbf94898916aa814199a0,
+        type: 3}
+      propertyPath: maxActionPoints
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 2674505501862230150, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}

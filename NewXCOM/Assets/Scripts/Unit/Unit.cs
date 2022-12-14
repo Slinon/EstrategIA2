@@ -205,7 +205,7 @@ public class Unit : MonoBehaviour
     // @IGM -------------------------------
     // Metodo para gastar puntos de accion.
     // ------------------------------------
-    private void SpendActionPoints(int amount)
+    public void SpendActionPoints(int amount)
     {
 
         // Restamos la cantidad de puntos que cuesta la accion
