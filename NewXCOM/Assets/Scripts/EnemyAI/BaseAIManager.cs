@@ -9,7 +9,7 @@ public class BaseAIManager : MonoBehaviour
     [SerializeField] private int maxAIValueAction;                  // Valor maximo de una accion para la IA
     [SerializeField] private int minAIValueAction;                  // Valor minimode una accion para la IA
 
-    private int soldierCost, scoutCost, granadierCost, engineerCost, berserkCost, juggernautCost;
+    private int scoutCost, granadierCost, engineerCost, berserkCost, juggernautCost;
 
     // @GRG ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -129,17 +129,10 @@ public class BaseAIManager : MonoBehaviour
                 }
 
                 //Scout
-                else if (MoneySystem.Instance.enemyAI.money >= scoutCost)
+                else
                 {
                     //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
                     SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
-                    return;
-                }
-
-                //Soldadito
-                else
-                {
-                    SetValues(enemyBase.GetComponent<SpawnSoldier>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
                
@@ -207,7 +200,6 @@ public class BaseAIManager : MonoBehaviour
     //------------------------------
     public void GetUnitCosts()
     {
-        soldierCost = enemyBase.GetComponent<SpawnSoldier>().MoneyCost();
         scoutCost = enemyBase.GetComponent<SpawnScout>().MoneyCost();
         granadierCost = enemyBase.GetComponent<SpawnGranadier>().MoneyCost();
         engineerCost = enemyBase.GetComponent<SpawnEngineer>().MoneyCost();

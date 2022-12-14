@@ -21,7 +21,7 @@ PrefabInstance:
         type: 3}
       propertyPath: gunMeshRenderer
       value: 
-      objectReference: {fileID: 3552102800491721494}
+      objectReference: {fileID: 0}
     - target: {fileID: 2179087994159532964, guid: c0ba9eaf1ef70594292206293c2d21df,
         type: 3}
       propertyPath: UnitWorldUICanvas
@@ -34,8 +34,13 @@ PrefabInstance:
       objectReference: {fileID: 7670899917181018510}
     - target: {fileID: 3190301843619132455, guid: c0ba9eaf1ef70594292206293c2d21df,
         type: 3}
+      propertyPath: isEnemy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3190301843619132455, guid: c0ba9eaf1ef70594292206293c2d21df,
+        type: 3}
       propertyPath: isStructure
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3266928927735777691, guid: c0ba9eaf1ef70594292206293c2d21df,
         type: 3}
@@ -107,12 +112,6 @@ PrefabInstance:
 --- !u!223 &1661179522659691928 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 797240321247385365, guid: c0ba9eaf1ef70594292206293c2d21df,
-    type: 3}
-  m_PrefabInstance: {fileID: 2026035031060331149}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &3552102800491721494 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3266928927735777691, guid: c0ba9eaf1ef70594292206293c2d21df,
     type: 3}
   m_PrefabInstance: {fileID: 2026035031060331149}
   m_PrefabAsset: {fileID: 0}

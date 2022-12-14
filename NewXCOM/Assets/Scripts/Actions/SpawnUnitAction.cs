@@ -112,6 +112,16 @@ public class SpawnUnitAction : BaseAction
                 float afterSpawnStateTime = 0.5f;
                 stateTimer = afterSpawnStateTime;
 
+                if (unit.IsEnemy())
+                {
+                    MoneySystem.Instance.GiveTakeMoney(-unitCost, MoneySystem.Instance.enemyAI);
+                }
+
+                else
+                {
+                    MoneySystem.Instance.GiveTakeMoney(-unitCost, MoneySystem.Instance.player);
+                }
+
                 // Spawneamos la unidad
                 Instantiate(unitSpawned, spawnPoint, Quaternion.identity);
 

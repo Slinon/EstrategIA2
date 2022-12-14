@@ -146,7 +146,6 @@ GameObject:
   - component: {fileID: 6315176357458564335}
   - component: {fileID: 6830159223452896923}
   - component: {fileID: 2538739146799923764}
-  - component: {fileID: 299142082}
   - component: {fileID: 3344261072039339219}
   - component: {fileID: 3873654586206528798}
   - component: {fileID: 9111971099781955217}
@@ -225,7 +224,7 @@ MonoBehaviour:
   gunMeshRenderer: {fileID: 0}
   selectedVisualMeshRenderer: {fileID: 0}
   UnitWorldUICanvas: {fileID: 0}
-  isStructure: 0
+  isStructure: 1
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,21 +252,6 @@ MonoBehaviour:
   floatingTextPrebab: {fileID: 3181831354123590032, guid: 8628eb414de0834498130c598e600dc7,
     type: 3}
   healthMax: 500
---- !u!114 &299142082
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fa0a694f01db444b0f3b36b5563af1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitCost: 300
-  unitSpawned: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
-    type: 3}
 --- !u!114 &3344261072039339219
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -280,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368c68338e519e54db23c1263c2f61b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitCost: 500
+  unitCost: 300
   unitSpawned: {fileID: 2674505501862230148, guid: 2abbe493b0edbf94898916aa814199a0,
     type: 3}
 --- !u!114 &3873654586206528798
@@ -295,7 +279,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4336720ee7def4b8a8ad8954e0addc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitCost: 800
+  unitCost: 700
   unitSpawned: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
     type: 3}
 --- !u!114 &9111971099781955217

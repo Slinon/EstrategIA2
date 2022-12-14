@@ -140,8 +140,7 @@ public class UnitActionSystem : MonoBehaviour
                 if (selectedAction.MoneyCost() <= MoneySystem.Instance.player.money)
                 {
                     SetBusy();
-                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-                    MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.player);
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);                 
 
                 }
 
@@ -149,39 +148,12 @@ public class UnitActionSystem : MonoBehaviour
                 {
 
                     Debug.Log("Esta acción NO se puede realizar, devolviendo el punto de acción");
-
                     selectedUnit.GiveActionPointBack();
-                    //Actualizar visual!!!
 
                 }
 
             }
-
-            else //Si se trata de la IA
-            {
-
-                if (selectedAction.MoneyCost() < MoneySystem.Instance.enemyAI.money)
-                {
-
-                    SetBusy();
-                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
-                    MoneySystem.Instance.GiveTakeMoney(-selectedAction.MoneyCost(), MoneySystem.Instance.enemyAI);
-
-                }
-
-                else
-                {
-
-                    selectedUnit.GiveActionPointBack();
-                    //Actualizar visual!!!
-
-                }
-
-            }
-
-
-
-
+         
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////

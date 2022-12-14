@@ -44,14 +44,10 @@ public class MoneySystem : MonoBehaviour
         enemyAI = new Target();
 
         //Set player and AI money to the starting amount
-        player.money = enemyAI.money = startingAmount;
+        player.money = startingAmount;
 
     }
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {

@@ -643,12 +643,12 @@ GameObject:
   - component: {fileID: 465745189711302296}
   - component: {fileID: 465745189711302274}
   - component: {fileID: 465745189711302297}
-  - component: {fileID: 6907950213565593949}
   - component: {fileID: 2306246379101098705}
   - component: {fileID: 6862391898596515520}
   - component: {fileID: 847886006889148770}
   - component: {fileID: 7707601630530221458}
   - component: {fileID: 5496302085300907835}
+  - component: {fileID: 1101494743}
   m_Layer: 7
   m_Name: EnemyMainBase
   m_TagString: EnemyMainBase
@@ -722,7 +722,7 @@ MonoBehaviour:
   gunMeshRenderer: {fileID: 0}
   selectedVisualMeshRenderer: {fileID: 0}
   UnitWorldUICanvas: {fileID: 0}
-  isStructure: 0
+  isStructure: 1
 --- !u!114 &465745189711302274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -750,21 +750,6 @@ MonoBehaviour:
   floatingTextPrebab: {fileID: 3181831354123590032, guid: 8628eb414de0834498130c598e600dc7,
     type: 3}
   healthMax: 500
---- !u!114 &6907950213565593949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465745189711302299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c0fa0a694f01db444b0f3b36b5563af1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitCost: 300
-  unitSpawned: {fileID: 1672859388607310, guid: 96b113a755cdb824ba5b09a4f7b08ad6,
-    type: 3}
 --- !u!114 &2306246379101098705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,7 +762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 368c68338e519e54db23c1263c2f61b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitCost: 500
+  unitCost: 300
   unitSpawned: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
     type: 3}
 --- !u!114 &6862391898596515520
@@ -792,7 +777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f4336720ee7def4b8a8ad8954e0addc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unitCost: 800
+  unitCost: 700
   unitSpawned: {fileID: 7078400495500296147, guid: baded0d98baa166469d568497c2b4484,
     type: 3}
 --- !u!114 &847886006889148770
@@ -840,6 +825,20 @@ MonoBehaviour:
   unitCost: 2500
   unitSpawned: {fileID: 38327701121909258, guid: ba986151f45cc3c4faf1830cba95f74f,
     type: 3}
+--- !u!114 &1101494743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465745189711302299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021302aff2e442f47a2ba4e045d1ed84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAIValueAction: 100000
+  minAIValueAction: 0
 --- !u!1 &465745189760989634
 GameObject:
   m_ObjectHideFlags: 0

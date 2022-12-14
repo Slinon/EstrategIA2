@@ -7,6 +7,7 @@ public class Structure : MonoBehaviour
 {
 
     [SerializeField] private HealthSystem healthSystem;               // Sistema de salud de la unidad
+    [SerializeField] private ParticleSystem explosion;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +26,7 @@ public class Structure : MonoBehaviour
         // Eliminamos la unidad de la malla
         Destroy(gameObject);
 
-        //Explosiones chulas!!!
+        explosion.Play();
 
     }
 

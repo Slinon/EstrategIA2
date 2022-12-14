@@ -344,6 +344,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthSystem: {fileID: 1409105761581332910}
+  explosion: {fileID: 2619375967827688807, guid: 51edd039c637e9240bcd70808cd1b8d7,
+    type: 3}
 --- !u!65 &7594322891472278922
 BoxCollider:
   m_ObjectHideFlags: 0
