@@ -10,6 +10,8 @@ public class GridObject
     private List<Unit> unitList;                        // Lista de unidades que contiene
     private IInteractable interactable;                 // Puerta que contiene la posicion
     private CoverType coverType;
+    private int heatMapValue;                           // Valor de la posicion de la malla
+
     // @IGM -------------------
     // Constructor de la clase.
     // ------------------------
@@ -20,6 +22,7 @@ public class GridObject
         this.gridSystem = gridSystem;
         this.gridPosition = gridPosition;
         unitList = new List<Unit>();
+        heatMapValue = 0;
 
     }
 
@@ -125,6 +128,25 @@ public class GridObject
 
     }
 
+    // @IGM -----------------------------------
+    // Setter del valor del mapa de influencia. 
+    // ----------------------------------------
+    public void SetHeatMapValue(int value)
+    {
+
+        this.heatMapValue = value;
+
+    }
+
+    // @IGM -----------------------------------
+    // Getter del valor del mapa de influencia. 
+    // ----------------------------------------
+    public int GetHeatMapValue()
+    {
+
+        return heatMapValue;
+
+    }
 
     public void SetCoverType(CoverType coverType)
     {
