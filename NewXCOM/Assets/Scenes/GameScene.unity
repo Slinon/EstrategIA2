@@ -356,11 +356,6 @@ PrefabInstance:
       objectReference: {fileID: 1391202319}
     - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
-      propertyPath: fogOfwar
-      value: 
-      objectReference: {fileID: 1435897217}
-    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
-        type: 3}
       propertyPath: maxCaptureDistanceWidth
       value: 12
       objectReference: {fileID: 0}
@@ -372,7 +367,7 @@ PrefabInstance:
     - target: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
       propertyPath: m_Name
-      value: InteractSphere
+      value: InteractSphere_Area3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc9d85b794241ef418d2522dd0219f0a, type: 3}
@@ -2588,18 +2583,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadeShake: 5
   swordShake: 2
---- !u!114 &824591340 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 465745189711302275, guid: 16902b0745a39fb47bd3eeeacdc812a4,
-    type: 3}
-  m_PrefabInstance: {fileID: 687042890}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -4333,6 +4316,12 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391202316}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1429363981 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 465745189711302299, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+    type: 3}
+  m_PrefabInstance: {fileID: 687042890}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1435897216
 GameObject:
   m_ObjectHideFlags: 0
@@ -4400,20 +4389,8 @@ MonoBehaviour:
   hiddenMaterial: {fileID: 2100000, guid: 953b9105585ade743a5c4a274068d431, type: 2}
   playerMaterial: {fileID: 2100000, guid: 515929836ab33ef4981a0296ddbd4d42, type: 2}
   enemyMaterial: {fileID: 2100000, guid: 84cbfbb686c44994cacfbd2836475698, type: 2}
-  spawnUnitActionAlly: {fileID: 1443810010}
-  spawnUnitActionEnemy: {fileID: 824591340}
---- !u!114 &1443810010 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -1803460875891568307, guid: c7c2f787643e4e2449140e58fb1f2218,
-    type: 3}
-  m_PrefabInstance: {fileID: 299142070}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  playerBase: {fileID: 2094705002}
+  enemyBase: {fileID: 1429363981}
 --- !u!1 &1462195609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
@@ -5254,11 +5231,6 @@ PrefabInstance:
       objectReference: {fileID: 1999923026}
     - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
-      propertyPath: fogOfwar
-      value: 
-      objectReference: {fileID: 1435897217}
-    - target: {fileID: 3433141471728767318, guid: fc9d85b794241ef418d2522dd0219f0a,
-        type: 3}
       propertyPath: maxCaptureDistanceWidth
       value: 12
       objectReference: {fileID: 0}
@@ -5270,7 +5242,7 @@ PrefabInstance:
     - target: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
         type: 3}
       propertyPath: m_Name
-      value: InteractSphere
+      value: InteractSphere_Area2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc9d85b794241ef418d2522dd0219f0a, type: 3}
@@ -6455,6 +6427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2094705002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
+    type: 3}
+  m_PrefabInstance: {fileID: 299142070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2117962388
 GameObject:
   m_ObjectHideFlags: 0
