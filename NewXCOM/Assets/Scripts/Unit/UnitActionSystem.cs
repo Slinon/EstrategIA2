@@ -312,7 +312,7 @@ public class UnitActionSystem : MonoBehaviour
         else
         {
 
-            SetSelectedAction(unit.GetAction<SpinAction>());
+            SetSelectedAction(unit.GetAction<PassAction>());
 
         }
         

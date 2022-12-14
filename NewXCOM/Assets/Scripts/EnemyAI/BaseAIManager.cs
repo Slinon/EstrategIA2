@@ -72,7 +72,7 @@ public class BaseAIManager : MonoBehaviour
             //Doy la media vuelta, danza kuduro.
             Debug.Log("No tengo dinero para spawnear más tropas, paso");
 
-            SetValues(enemyBase.GetComponent<SpinAction>(), maxAIValueAction, minAIValueAction);  
+            SetValues(enemyBase.GetComponent<PassAction>(), maxAIValueAction, minAIValueAction);  
 
             return;
         }
@@ -86,7 +86,7 @@ public class BaseAIManager : MonoBehaviour
                 //Ahorro
                 Debug.Log("Tengo demasiadas tropas en juego, ahorro.");
 
-                SetValues(enemyBase.GetComponent<SpinAction>(), maxAIValueAction, minAIValueAction);
+                SetValues(enemyBase.GetComponent<PassAction>(), maxAIValueAction, minAIValueAction);
 
                 return;
             }
