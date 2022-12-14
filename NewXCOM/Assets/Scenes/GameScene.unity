@@ -791,6 +791,36 @@ PrefabInstance:
       propertyPath: hitProbabilityText
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4982671606360440177, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982671606360440177, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982671606360440177, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982671606360440177, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982671606360440177, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4982671606360440177, guid: c7c2f787643e4e2449140e58fb1f2218,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
         type: 3}
       propertyPath: m_Name
@@ -2022,6 +2052,36 @@ PrefabInstance:
     - target: {fileID: 465745188573743197, guid: 16902b0745a39fb47bd3eeeacdc812a4,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302272, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302272, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302272, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302272, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302272, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 465745189711302272, guid: 16902b0745a39fb47bd3eeeacdc812a4,
+        type: 3}
+      propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 465745189711302296, guid: 16902b0745a39fb47bd3eeeacdc812a4,
