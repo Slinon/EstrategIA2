@@ -178,8 +178,13 @@ public class SpawnUnitAction : BaseAction
     // ------------------------------------------------------------------
     public override List<GridPosition> GetValidActionGridPositionList()
     {
+        return GetCapturedPositionList(false);
+    }
 
-        // Creamos la lista
+    public List<GridPosition> GetCapturedPositionList(bool painting)
+    {
+        InteractSphere.InControlState state = InteractSphere.InControlState.Player;
+
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         // Creamos la lista posiciones
@@ -200,30 +205,18 @@ public class SpawnUnitAction : BaseAction
 
         if (unit.IsEnemy())
         {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
-
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Enemy)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
-                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
-                }
-            }
+            state = InteractSphere.InControlState.Enemy;
         }
-        else
-        {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
 
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
-                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
-                }
+        foreach (GameObject child in interactionSpheres)
+        {
+            InteractSphere sphere = child.GetComponent<InteractSphere>();
+
+            if (sphere.GetInControlState() == state)
+            {
+                allPositionsList.Add(sphere.GetGridPosition());
+                maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
+                maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
             }
         }
 
@@ -258,7 +251,7 @@ public class SpawnUnitAction : BaseAction
                     }
 
                     // Comprobamos si la posicion tiene unidades dentro
-                    if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    if (!painting && LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                     {
 
                         // La saltamos
@@ -267,7 +260,7 @@ public class SpawnUnitAction : BaseAction
                     }
 
                     // Comprobamos si la posicion es un obstaculo
-                    if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                    if (!painting && !Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
                     {
 
                         // La saltamos
@@ -280,7 +273,7 @@ public class SpawnUnitAction : BaseAction
                     {
                         // Lo añadimos a la lista
                         validGridPositionList.Add(testGridPosition);
-                    }  
+                    }
                 }
             }
         }

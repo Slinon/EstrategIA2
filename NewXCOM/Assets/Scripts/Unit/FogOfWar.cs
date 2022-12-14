@@ -5,7 +5,8 @@ using UnityEngine;
 // @VJT 
 public class FogOfWar : MonoBehaviour
 {
-    public static FogOfWar Instance;
+    public static FogOfWar Instance { get; private set; }
+
     [Range (1, 5)] [SerializeField] private float viewDistanceMax = 5f;
     [SerializeField] private LayerMask layerMask;
 
@@ -32,7 +33,7 @@ public class FogOfWar : MonoBehaviour
         UpdateAllFogOfWar();
     }
 
-    void UpdateAllFogOfWar()
+    public void UpdateAllFogOfWar()
     {
 
         List<Vector2Int> revealedGridPositionList = new List<Vector2Int>();

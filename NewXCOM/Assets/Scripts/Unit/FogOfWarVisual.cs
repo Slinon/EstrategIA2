@@ -5,9 +5,20 @@ using UnityEngine;
 public class FogOfWarVisual : MonoBehaviour
 {
     public static FogOfWarVisual Instance {get; private set;}
+
+    
     [SerializeField] private Transform FogOfWarGridSingle;        // Prefab con el material de "oculto"
     [SerializeField] private Material exposedMaterial;
     [SerializeField] private Material hiddenMaterial;
+
+    [Header("Materiales")]
+    [SerializeField] private Material playerMaterial;
+    [SerializeField] private Material enemyMaterial;
+    [Space(10)]
+
+    [Header("Bases")]
+    [SerializeField] private GameObject playerBase;
+    [SerializeField] private GameObject enemyBase;
 
     private FogOfWarVisualSingle[,] fogOfWarSingleArray;     
     
@@ -60,8 +71,24 @@ public class FogOfWarVisual : MonoBehaviour
                 if(list.Contains(gridPosition))
                 {
                     //Debug.Log("position revealed");
-                    fogOfWarSingleArray[x, z].Show(exposedMaterial);
-                    continue;
+
+                    // Si es aliado
+                    if (playerBase.GetComponent<SpawnUnitAction>().GetCapturedPositionList(true).Contains(gridPosition))
+                    {
+                        fogOfWarSingleArray[x, z].Show(playerMaterial);
+                        continue;
+                    }
+                    // Si es enemigo
+                    else if (enemyBase.GetComponent<SpawnUnitAction>().GetCapturedPositionList(true).Contains(gridPosition))
+                    {
+                        fogOfWarSingleArray[x, z].Show(enemyMaterial);
+                        continue;
+                    }
+                    else
+                    {
+                        fogOfWarSingleArray[x, z].Show(exposedMaterial);
+                        continue;
+                    }  
                 }
 
                 fogOfWarSingleArray[x, z].Show(hiddenMaterial);

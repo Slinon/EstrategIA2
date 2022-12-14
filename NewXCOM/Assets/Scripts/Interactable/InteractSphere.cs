@@ -184,6 +184,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
             }
         }
+
+        FogOfWar.Instance.UpdateAllFogOfWar();
     }
 
     // @IGM --------------------------
