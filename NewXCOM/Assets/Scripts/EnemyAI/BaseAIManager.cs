@@ -81,7 +81,7 @@ public class BaseAIManager : MonoBehaviour
         else
         {
             //Si tengo demasiadas tropas
-            if (BaseCheckers.Instance.AmountOfUnitsDeployed() >= 8)
+            if (BaseCheckers.Instance.AmountOfUnitsDeployed() >= 7)
             {
                 //Ahorro
                 Debug.Log("Tengo demasiadas tropas en juego, ahorro.");
@@ -92,14 +92,13 @@ public class BaseAIManager : MonoBehaviour
             }
 
 
-            else if (BaseCheckers.Instance.AmountOfUnitsDeployed() >= 4)
+            else if (BaseCheckers.Instance.AmountOfUnitsDeployed() >= 4) //3 o más soldados en juego
             {
                 Debug.Log("Tengo una cantidad de tropas aceptable, voy a plantar la más cara");
 
                 //Juggernaut
                 if (MoneySystem.Instance.enemyAI.money >= juggernautCost)
                 {
-                    //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
                     SetValues(enemyBase.GetComponent<SpawnJuggernaut>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
@@ -107,7 +106,6 @@ public class BaseAIManager : MonoBehaviour
                 //Berserk
                 else if (MoneySystem.Instance.enemyAI.money >= berserkCost)
                 {
-                    //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
                     SetValues(enemyBase.GetComponent<SpawnBerserk>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
@@ -115,7 +113,6 @@ public class BaseAIManager : MonoBehaviour
                 //Engineer
                 else if (MoneySystem.Instance.enemyAI.money >= engineerCost)
                 {
-                    //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
                     SetValues(enemyBase.GetComponent<SpawnEngineer>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
@@ -123,7 +120,6 @@ public class BaseAIManager : MonoBehaviour
                 //Granadier
                 else if (MoneySystem.Instance.enemyAI.money >= granadierCost)
                 {
-                    //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
                     SetValues(enemyBase.GetComponent<SpawnGranadier>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
@@ -131,7 +127,6 @@ public class BaseAIManager : MonoBehaviour
                 //Scout
                 else
                 {
-                    //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
                     SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
@@ -142,7 +137,7 @@ public class BaseAIManager : MonoBehaviour
             {
                 Debug.Log("Tengo muy pocas unidades en juego, voy a plantar varias unidades baratujas");
 
-                SetValues(enemyBase.GetComponent<SpawnSoldier>(), maxAIValueAction, minAIValueAction);
+                SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
 
                 return;
             }

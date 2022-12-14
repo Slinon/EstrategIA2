@@ -28,6 +28,7 @@ public class BaseCheckers : MonoBehaviour
     //-------------------------------------------------------------------------
     public bool CanSpawnAnyUnit()
     {
+        Debug.Log(MoneySystem.Instance.enemyAI.money);
         return MoneySystem.Instance.enemyAI.money >= 300;
     }
 
