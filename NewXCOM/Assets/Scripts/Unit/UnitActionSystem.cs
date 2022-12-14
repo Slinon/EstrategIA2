@@ -137,7 +137,7 @@ public class UnitActionSystem : MonoBehaviour
             if (!selectedUnit.IsEnemy()) //Si se trata del jugador
             {
 
-                if (selectedAction.MoneyCost() < MoneySystem.Instance.player.money)
+                if (selectedAction.MoneyCost() <= MoneySystem.Instance.player.money)
                 {
                     SetBusy();
                     selectedAction.TakeAction(mouseGridPosition, ClearBusy);

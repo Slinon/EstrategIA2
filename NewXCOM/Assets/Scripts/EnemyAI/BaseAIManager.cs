@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class BaseAIManager : MonoBehaviour
     [SerializeField] private int maxAIValueAction;                  // Valor maximo de una accion para la IA
     [SerializeField] private int minAIValueAction;                  // Valor minimode una accion para la IA
 
-    private int soldierCost, granadierCost, scoutCost, ingenieerCost, berserkCost, juggernautCost;
+    private int soldierCost, scoutCost, granadierCost, engineerCost, berserkCost, juggernautCost;
 
     // @GRG ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -19,8 +20,31 @@ public class BaseAIManager : MonoBehaviour
         // Asignamos la unidad
         enemyBase = GetComponent<Unit>();
 
-        //Implementar una forma de obtener el coste de las tropas
+    }
 
+    // @IGM -----------------------------------------
+    // Start is called before the first frame update.
+    // ----------------------------------------------
+    private void Start()
+    {
+
+        // Asignamos los eventos
+        EnemyAI.OnAnyAIUnitIsSelected += EnemyAI_OnAnyAIUnitIsSelected;
+
+        //Conseguir los costes
+        GetUnitCosts();
+
+    }
+
+    // @IGM ------------------------------------------------------------
+    // Handler del evento cuando se ha seleccionado una unidad de la IA.
+    // -----------------------------------------------------------------
+    private void EnemyAI_OnAnyAIUnitIsSelected(object sender, EventArgs empty)
+    {
+
+        // Asignamos los valores de las acciones
+        CheckBaseConditions();
+       
     }
 
 
@@ -29,6 +53,19 @@ public class BaseAIManager : MonoBehaviour
     //------------------------------
     private void CheckBaseConditions()
     {
+
+        // Comprobamos si la unidad es una unidad del jugador
+        if (enemyBase == null || !enemyBase.IsEnemy())
+        {
+
+            return;
+
+        }
+
+        // Reestablecemos los valores de las acciones
+        RestartValues();
+
+
         //Si estoy pobre...
         if (!BaseCheckers.Instance.CanSpawnAnyUnit())
         {
@@ -59,14 +96,11 @@ public class BaseAIManager : MonoBehaviour
             {
                 Debug.Log("Tengo una cantidad de tropas aceptable, voy a plantar la más cara");
 
-                //Lógica para comprobar cual es la mejor tropa.
-                //Tal vez podria hacer un switch, pero parece más sencillo así
-
                 //Juggernaut
                 if (MoneySystem.Instance.enemyAI.money >= juggernautCost)
                 {
                     //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
-                    SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                    SetValues(enemyBase.GetComponent<SpawnJuggernaut>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
 
@@ -74,15 +108,15 @@ public class BaseAIManager : MonoBehaviour
                 else if (MoneySystem.Instance.enemyAI.money >= berserkCost)
                 {
                     //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
-                    SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                    SetValues(enemyBase.GetComponent<SpawnBerserk>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
 
-                //Ingenieer
-                else if (MoneySystem.Instance.enemyAI.money >= ingenieerCost)
+                //Engineer
+                else if (MoneySystem.Instance.enemyAI.money >= engineerCost)
                 {
                     //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
-                    SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                    SetValues(enemyBase.GetComponent<SpawnEngineer>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
 
@@ -90,7 +124,7 @@ public class BaseAIManager : MonoBehaviour
                 else if (MoneySystem.Instance.enemyAI.money >= granadierCost)
                 {
                     //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
-                    SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                    SetValues(enemyBase.GetComponent<SpawnGranadier>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
 
@@ -98,14 +132,14 @@ public class BaseAIManager : MonoBehaviour
                 else if (MoneySystem.Instance.enemyAI.money >= scoutCost)
                 {
                     //Falta añadir una forma de saber que es esa SpawnUnitAction y no otra.
-                    SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                    SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
 
                 //Soldadito
                 else
                 {
-                    SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                    SetValues(enemyBase.GetComponent<SpawnSoldier>(), maxAIValueAction, minAIValueAction);
                     return;
                 }
                
@@ -115,17 +149,30 @@ public class BaseAIManager : MonoBehaviour
             {
                 Debug.Log("Tengo muy pocas unidades en juego, voy a plantar varias unidades baratujas");
 
-                //Lógica para spawnear soldaditos
-                //como le puedo indicar que de todas las SpawnUnitAction quiero una en concreto?
-                //Debería cambiarlo y que fueran acciones independientes? meter un booleano 
-                //Ejemplo: isScout y que busque ese booleano para saber si es la acción que quiero?
-
-                SetValues(enemyBase.GetComponent<SpawnUnitAction>(), maxAIValueAction, minAIValueAction);
+                SetValues(enemyBase.GetComponent<SpawnSoldier>(), maxAIValueAction, minAIValueAction);
 
                 return;
             }
 
         }
+    }
+
+
+    // @GRG ------------------------------------------------
+    // Metodo para reestablecer los valores de las acciones.
+    // -----------------------------------------------------
+    private void RestartValues()
+    {
+
+        // Recorremos la lista de acciones validas
+        foreach (BaseAction action in enemyBase.GetBaseActionArray())
+        {
+
+            // Establecemos su valor de IA base a 0
+            action.SetBaseAIValue(0);
+
+        }
+
     }
 
     // @IGM ----------------------------------------------
@@ -154,4 +201,18 @@ public class BaseAIManager : MonoBehaviour
         }
 
     }
+
+    //------------------------------
+    //@GRG Fetchear el coste de cada tropa
+    //------------------------------
+    public void GetUnitCosts()
+    {
+        soldierCost = enemyBase.GetComponent<SpawnSoldier>().MoneyCost();
+        scoutCost = enemyBase.GetComponent<SpawnScout>().MoneyCost();
+        granadierCost = enemyBase.GetComponent<SpawnGranadier>().MoneyCost();
+        engineerCost = enemyBase.GetComponent<SpawnEngineer>().MoneyCost();
+        berserkCost = enemyBase.GetComponent<SpawnBerserk>().MoneyCost();
+        juggernautCost = enemyBase.GetComponent<SpawnJuggernaut>().MoneyCost();
+    }
+
 }

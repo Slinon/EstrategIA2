@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class SpawnUnitAction : BaseAction
 {
-    [SerializeField] private string unitName;
-    [SerializeField] private int unitCost;
-    [SerializeField] private Transform unitSpawned;                 // Unidad que queremos spawnear
+
+    [SerializeField] protected int unitCost;
+    [SerializeField] protected Transform unitSpawned;                 // Unidad que queremos spawnear
 
     // @IGM -----------------------------------------------------
     // Maquina de estados de de la accion de spawnear una unidad.
@@ -24,8 +24,8 @@ public class SpawnUnitAction : BaseAction
     public event EventHandler OnSpawnActionCompleted;               // Evento cuando la accion de spawnear se completa
     public static event EventHandler<Vector3> OnAnyUnitSpawned;     // Evento cuando cualquier unidad dispara
 
-    [SerializeField] private int maxSpawnDistanceHeight;                  // Distancia maxima de spawn
-    [SerializeField] private int maxSpawnDistanceWidht;
+    private int maxSpawnDistanceHeight;                  // Distancia maxima de spawn
+    private int maxSpawnDistanceWidht;
     private GameObject[] interactionSpheres;
 
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
@@ -152,7 +152,7 @@ public class SpawnUnitAction : BaseAction
     public override string GetActionName()
     {
 
-        return "Spawn " + unitName.ToString();
+        return "Spawn ";
 
     }
 
