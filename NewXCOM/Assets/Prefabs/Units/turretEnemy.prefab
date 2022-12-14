@@ -32,6 +32,11 @@ PrefabInstance:
       propertyPath: selectedVisualMeshRenderer
       value: 
       objectReference: {fileID: 7670899917181018510}
+    - target: {fileID: 3190301843619132455, guid: c0ba9eaf1ef70594292206293c2d21df,
+        type: 3}
+      propertyPath: isStructure
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3266928927735777691, guid: c0ba9eaf1ef70594292206293c2d21df,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

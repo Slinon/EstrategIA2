@@ -25,6 +25,8 @@ public class Structure : MonoBehaviour
         // Eliminamos la unidad de la malla
         Destroy(gameObject);
 
+        //Explosiones chulas!!!
+
     }
 
 }
