@@ -27,10 +27,6 @@ public class FogOfWar : MonoBehaviour
         UpdateAllFogOfWar();
     }
 
-    private void Update()
-    {
-        //UpdateAllFogOfWar();
-    }
     private void UnitManager_OnAnyUnitMovedGridPosition(object sender, System.EventArgs e)
     {
         // Updating fog of war

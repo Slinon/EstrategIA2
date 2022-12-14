@@ -181,6 +181,8 @@ public class SpawnUnitAction : BaseAction
         return GetCapturedPositionList(false);
     }
 
+    // Si el bool paiting es false ignorará las posiciones con obstáculos y unidades
+    // Si es false las tendrá en cuenta. Uso para pintar areas de las zonas capturadas
     public List<GridPosition> GetCapturedPositionList(bool painting)
     {
         InteractSphere.InControlState state = InteractSphere.InControlState.Player;

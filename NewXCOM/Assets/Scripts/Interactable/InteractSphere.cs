@@ -18,18 +18,19 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
     }
 
+    [Header("Materiales:")]
     [SerializeField] private Material playerMaterial;       // Material del jugador
     [SerializeField] private Material enemyMaterial;        // Material del enemigo
     [SerializeField] private Material neutralMaterial;      // Material neutral
+    [Space(10)]
+
+    [Header("Meshes:")]
     [SerializeField] private MeshRenderer meshRenderer;     // Malla de la esfera
+    [Space(10)]
 
-    [SerializeField] private Material playerMaterialArea;       // Material del jugador
-    [SerializeField] private Material enemyMaterialArea;        // Material del enemigo
-    [SerializeField] private Material neutralMaterialArea;      // Material neutral
-
-    [SerializeField] private MeshRenderer area;
-    [SerializeField] private int maxCaptureDistanceWidth;
-    [SerializeField] private int maxCaptureDistanceHeight;
+    [Header("Capture area size")]
+    [SerializeField] private int maxCaptureDistanceWidth;   // Distancia de captura ancho
+    [SerializeField] private int maxCaptureDistanceHeight;  // Distancia de captura alto
 
     private GridPosition gridPosition;                      // Posicion en la malla de la puerta
     private InControlState state;                           // Estado para saber de quien es el control 
@@ -42,7 +43,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
     // ----------------------------------------------
     private void Start()
     {
-
         // Establecemos la puerta en la celda en la que se situe
         gridPosition = LevelGrid.Instance.GetGridPosition(transform.position);
         LevelGrid.Instance.SetInteractableAtGridPosition(this, gridPosition);
@@ -105,8 +105,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
         state = InControlState.Player;
         meshRenderer.material = playerMaterial;
 
-        area.material = playerMaterialArea;
-
     }
 
     // @IGM -------------------------------------
@@ -119,8 +117,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
         state = InControlState.Enemy;
         meshRenderer.material = enemyMaterial;
 
-        area.material = enemyMaterialArea;
-
     }
 
     // @IGM -------------------------------------
@@ -132,8 +128,6 @@ public class InteractSphere : MonoBehaviour, IInteractable
         // No establecemos el control en nadie
         state = InControlState.Neutral;
         meshRenderer.material = neutralMaterial;
-
-        area.material = neutralMaterialArea;
 
     }
 
