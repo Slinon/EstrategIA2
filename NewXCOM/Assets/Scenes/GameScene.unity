@@ -5532,6 +5532,16 @@ MonoBehaviour:
   structureCenterInfluence: 1
   allyStructuresExpansion: 10
   enemiesStructuresExpansion: 5
+  enemyBaseMoveValue: 20
+  allyBaseMoveValue: 10
+  sphereMoveValue: 60
+  enemyMoveValue: 5
+  allyMoveValue: 1
+  coverMoveValue: 10
+  moveCenterInfluence: 1
+  sphereMoveExpansion: 15
+  baseMoveExpansion: 20
+  coverMoveExpansion: 5
 --- !u!1 &1950730850
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,8 @@ public class UnitAIManager : MonoBehaviour
 {
 
     public static event EventHandler<Unit> OnAnyUnitThrowGrenade;   // Evento cuando una unidad decide lanzar una granada
-    public static event EventHandler<Unit> OnAnyUnitBuildStructure; // Evento cuando una unidad decide lanzar una granada
+    public static event EventHandler<Unit> OnAnyUnitBuildStructure; // Evento cuando una unidad decide construir una estructura
+    public static event EventHandler<Unit> OnAnyUnitMoveAction;     // Evento cuando una unidad decide moverse
 
     [SerializeField] private int maxAIValueAction;                  // Valor maximo de una accion para la IA
     [SerializeField] private int minAIValueAction;                  // Valor minimode una accion para la IA
@@ -86,6 +87,15 @@ public class UnitAIManager : MonoBehaviour
                 else if (unit.TryGetComponent(out MoveAction moveAction))
                 {
 
+                    // Comprobamos si hay alguna clase escuchando el evento
+                    if (OnAnyUnitMoveAction != null)
+                    {
+
+                        // Lanzamos el evento
+                        OnAnyUnitMoveAction(this, unit);
+
+                    }
+
                     // me muevo (a la esfera)
                     SetValues(moveAction, maxAIValueAction, minAIValueAction);
                     return;
@@ -133,6 +143,15 @@ public class UnitAIManager : MonoBehaviour
                 if (!Checkers.Instance.UnitInBestPosition(unit))
                 {
 
+                    // Comprobamos si hay alguna clase escuchando el evento
+                    if (OnAnyUnitMoveAction != null)
+                    {
+
+                        // Lanzamos el evento
+                        OnAnyUnitMoveAction(this, unit);
+
+                    }
+
                     // me muevo
                     SetValues(moveAction, maxAIValueAction, minAIValueAction);
                     return;
@@ -158,7 +177,16 @@ public class UnitAIManager : MonoBehaviour
                     // Si me puedo mover
                     if (unit.TryGetComponent(out MoveAction moveAction))
                     {
-                      
+
+                        // Comprobamos si hay alguna clase escuchando el evento
+                        if (OnAnyUnitMoveAction != null)
+                        {
+
+                            // Lanzamos el evento
+                            OnAnyUnitMoveAction(this, unit);
+
+                        }
+
                         // me muevo
                         SetValues(moveAction, maxAIValueAction, minAIValueAction);
                         return;
@@ -218,7 +246,16 @@ public class UnitAIManager : MonoBehaviour
             // si no se cumple ninguna, pero me puedo mover
             else if (unit.TryGetComponent(out MoveAction moveAction))
             {
-      
+
+                // Comprobamos si hay alguna clase escuchando el evento
+                if (OnAnyUnitMoveAction != null)
+                {
+
+                    // Lanzamos el evento
+                    OnAnyUnitMoveAction(this, unit);
+
+                }
+
                 // me muevo
                 SetValues(moveAction, maxAIValueAction, minAIValueAction);
                 return;

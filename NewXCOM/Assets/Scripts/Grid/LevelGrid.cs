@@ -332,22 +332,8 @@ public class LevelGrid : MonoBehaviour
                 if (radius > fullValueRange)
                 {
 
-                    // Comrpobamos que el valor es mayor que 0
-                    if (value > 0)
-                    {
-
-                        // Restamos el valor
-                        addValueAmount -= lowerValueAmount * (radius - fullValueRange);
-
-                    }
-                    else
-                    {
-
-                        // Sumamos el valor
-                        addValueAmount += lowerValueAmount * (radius - fullValueRange);
-
-                    }
-                    
+                    // Restamos el valor
+                    addValueAmount -= lowerValueAmount * (radius - fullValueRange); 
 
                 }
 
