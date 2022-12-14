@@ -351,14 +351,21 @@ public class Checkers : MonoBehaviour
     {
 
         // Recuperamos la lista de unidades enemigas
-        List<Unit> enemies = UnitManager.Instance.GetEnemyUnitList();
+        List<Unit> enemies = UnitManager.Instance.GetFriendlyUnitList();
 
         // Recorremos la lista de unidades enemigas
         foreach (Unit enemy in enemies)
         {
 
+            if (!enemy.TryGetComponent(out ShootAction shootAction))
+            {
+
+                continue;
+
+            }
+
             // Recuperamos las posiciones de las unidades aliadas que tiene el enemigo a tiro
-            List<GridPosition> allyUnitsGridPosition = enemy.GetAction<ShootAction>().GetValidActionGridPositionList();
+            List<GridPosition> allyUnitsGridPosition = shootAction.GetValidActionGridPositionList();
 
             // Recorremos la lista de las posiciones aliadas
             foreach (GridPosition allyGridPosition in allyUnitsGridPosition)
@@ -372,7 +379,7 @@ public class Checkers : MonoBehaviour
                 {
 
                     // Comrpobamos si el enemigo la puede matar de un tiro
-                    if ((unit.GetHealthNormalized() * 100f) < enemy.GetComponent<ShootAction>().GetShootDamage())
+                    if ((unit.GetHealthNormalized() * 100f) < shootAction.GetShootDamage())
                     {
 
                         return true;
