@@ -45,6 +45,9 @@ public class PassAction : BaseAction
     {
 
         Debug.Log(unit.name + " pasa este turno");
+
+        timeElapsed = 0f;
+
         // Empezamos la accion
         ActionStart(onActionComplete);
 
