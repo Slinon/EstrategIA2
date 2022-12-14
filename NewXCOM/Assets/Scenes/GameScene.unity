@@ -549,7 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRandomSeed: 0
   seed: holiwis
-  obstaclesPercentage: 15
+  obstaclesPercentage: 25
   obstacles:
   - {fileID: 3188524047625887889, guid: 973183692a0c1714fae22433d6922691, type: 3}
   - {fileID: 2251585465705912431, guid: f23a678dc7969f84ba56fa6df8491823, type: 3}
@@ -879,17 +879,17 @@ PrefabInstance:
     - target: {fileID: 1603605271383072597, guid: 27efd99d758fe4548a459f9d33f9b8cb,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.2537556
-      objectReference: {fileID: 0}
-    - target: {fileID: 1603605271383072597, guid: 27efd99d758fe4548a459f9d33f9b8cb,
-        type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1603605271383072597, guid: 27efd99d758fe4548a459f9d33f9b8cb,
         type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1603605271383072597, guid: 27efd99d758fe4548a459f9d33f9b8cb,
+        type: 3}
       propertyPath: m_LocalPosition.z
-      value: -8.421944
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1603605271383072597, guid: 27efd99d758fe4548a459f9d33f9b8cb,
         type: 3}
@@ -4056,6 +4056,10 @@ MonoBehaviour:
     type: 3}
   exposedMaterial: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   hiddenMaterial: {fileID: 2100000, guid: 953b9105585ade743a5c4a274068d431, type: 2}
+  playerMaterial: {fileID: 0}
+  enemyMaterial: {fileID: 0}
+  spawnUnitActionAlly: {fileID: 0}
+  spawnUnitActionEnemy: {fileID: 0}
 --- !u!1 &1462195609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3433141471728767319, guid: fc9d85b794241ef418d2522dd0219f0a,
