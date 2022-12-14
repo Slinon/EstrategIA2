@@ -367,6 +367,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 44018852}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &54040344 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
+    type: 3}
+  m_PrefabInstance: {fileID: 299142070}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &168758547
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,20 +792,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1640828378}
     m_Modifications:
-    - target: {fileID: 4194109987388807241, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: hitProbabilityText
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
         type: 3}
       propertyPath: m_Name
       value: MainBase
-      objectReference: {fileID: 0}
-    - target: {fileID: 5525236020020757582, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5525236020020757583, guid: c7c2f787643e4e2449140e58fb1f2218,
         type: 3}
@@ -864,6 +860,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 299142070}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &299142082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 54040344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0fa0a694f01db444b0f3b36b5563af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCost: 300
+  unitSpawned: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
+    type: 3}
 --- !u!1001 &308694190
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4151,6 +4162,7 @@ GameObject:
   - component: {fileID: 1470498048}
   - component: {fileID: 1470498047}
   - component: {fileID: 1470498049}
+  - component: {fileID: 1470498050}
   m_Layer: 0
   m_Name: EnemyAI
   m_TagString: Untagged
@@ -4200,6 +4212,18 @@ MonoBehaviour:
   obstacleLayerMask:
     serializedVersion: 2
     m_Bits: 256
+--- !u!114 &1470498050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470498046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e6c0c0e07608eb41ab138917bc8ef59, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1476803966
 PrefabInstance:
   m_ObjectHideFlags: 0
