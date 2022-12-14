@@ -6,17 +6,22 @@ public class FogOfWarVisual : MonoBehaviour
 {
     public static FogOfWarVisual Instance {get; private set;}
 
+    
     [SerializeField] private Transform FogOfWarGridSingle;        // Prefab con el material de "oculto"
     [SerializeField] private Material exposedMaterial;
     [SerializeField] private Material hiddenMaterial;
 
+    [Header("Materiales")]
     [SerializeField] private Material playerMaterial;
     [SerializeField] private Material enemyMaterial;
+    [Space(10)]
 
-    private FogOfWarVisualSingle[,] fogOfWarSingleArray;
+    [Header("Bases")]
+    [SerializeField] private GameObject playerBase;
+    [SerializeField] private GameObject enemyBase;
 
-    [SerializeField] private SpawnUnitAction spawnUnitActionAlly;
-    [SerializeField] private SpawnUnitAction spawnUnitActionEnemy;
+    private FogOfWarVisualSingle[,] fogOfWarSingleArray;     
+    
 
     void Awake()
     {
@@ -67,13 +72,14 @@ public class FogOfWarVisual : MonoBehaviour
                 {
                     //Debug.Log("position revealed");
 
-                    // Si la posicion está en la lista de posiciones capturadas
-                    if (spawnUnitActionAlly.GetRealCapturedPositionList().Contains(gridPosition))
+                    // Si es aliado
+                    if (playerBase.GetComponent<SpawnUnitAction>().GetCapturedPositionList(true).Contains(gridPosition))
                     {
                         fogOfWarSingleArray[x, z].Show(playerMaterial);
                         continue;
                     }
-                    else if (spawnUnitActionEnemy.GetRealCapturedPositionList().Contains(gridPosition))
+                    // Si es enemigo
+                    else if (enemyBase.GetComponent<SpawnUnitAction>().GetCapturedPositionList(true).Contains(gridPosition))
                     {
                         fogOfWarSingleArray[x, z].Show(enemyMaterial);
                         continue;
@@ -82,8 +88,9 @@ public class FogOfWarVisual : MonoBehaviour
                     {
                         fogOfWarSingleArray[x, z].Show(exposedMaterial);
                         continue;
-                    }
+                    }  
                 }
+
                 fogOfWarSingleArray[x, z].Show(hiddenMaterial);
             }
         }
