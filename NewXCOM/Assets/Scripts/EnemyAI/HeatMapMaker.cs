@@ -51,6 +51,9 @@ public class HeatMapMaker : MonoBehaviour
     private void UnitAIManager_OnAnyUnitThrowGrenade(object sender, Unit unit)
     {
 
+        // Limpiamos el mapa de influencia
+        LevelGrid.Instance.ClearHeatMap();
+
         // Asignamos los valores de las acciones
         MakeGrenadeActionHeatMap(unit);
 
@@ -62,6 +65,9 @@ public class HeatMapMaker : MonoBehaviour
     private void UnitAIManager_OnAnyUnitBuildStructure(object sender, Unit unit)
     {
 
+        // Limpiamos el mapa de influencia
+        LevelGrid.Instance.ClearHeatMap();
+
         // Asignamos los valores de las acciones
         MakeBuildStructureActionHeatMap(unit);
 
@@ -72,9 +78,6 @@ public class HeatMapMaker : MonoBehaviour
     // -----------------------------------------------------------------------
     private void MakeGrenadeActionHeatMap(Unit unit)
     {
-
-        // Limpiamos el mapa de influencia
-        LevelGrid.Instance.ClearHeatMap();
 
         // Recorremos la malla
         for (int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
@@ -128,9 +131,6 @@ public class HeatMapMaker : MonoBehaviour
     private void MakeBuildStructureActionHeatMap(Unit unit)
     {
 
-        // Limpiamos el mapa de influencia
-        LevelGrid.Instance.ClearHeatMap();
-
         // Recorremos la malla
         for (int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
         {
@@ -169,11 +169,11 @@ public class HeatMapMaker : MonoBehaviour
                     // Comprobamos si el target esta en el mismo equipo que la unidad que va a disparar
                     if (targetUnit.IsEnemy() == unit.IsEnemy())
                     {
-
+                        Debug.Log(targetUnit.name + " aliado");
                         // Comprobamos si es una torre aliada
                         if (targetUnit.tag == "Turret")
                         {
-
+                            Debug.Log("Torre Aliada");
                             // Generamos un punto de peligro
                             LevelGrid.Instance.AddValue(gridPosition, allyTurretsStructureValue, structureCenterInfluence,
                                 targetUnit.GetAction<ShootAction>().GetMaxShootDistance());
@@ -189,7 +189,7 @@ public class HeatMapMaker : MonoBehaviour
                             continue;
 
                         }
-
+                        Debug.Log("No es estructura");
                     }
                     else
                     {

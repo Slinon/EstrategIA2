@@ -4,9 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGrid : MonoBehaviour
-{
-
-    private const int HEAT_MAP_MAX_VALUE =  100;                        // Constante del valor maximo del mapa de influencia       
+{    
 
     public static LevelGrid Instance { get; private set; }              // Instancia del singleton
 
@@ -50,7 +48,7 @@ public class LevelGrid : MonoBehaviour
         // Creamos la malla
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, 
             (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
-        //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
+        gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
 
 
         for (int x = 0; x < width; x++) {
@@ -334,8 +332,22 @@ public class LevelGrid : MonoBehaviour
                 if (radius > fullValueRange)
                 {
 
-                    // Restamos el valor
-                    addValueAmount -= lowerValueAmount * (radius - fullValueRange);
+                    // Comrpobamos que el valor es mayor que 0
+                    if (value > 0)
+                    {
+
+                        // Restamos el valor
+                        addValueAmount -= lowerValueAmount * (radius - fullValueRange);
+
+                    }
+                    else
+                    {
+
+                        // Sumamos el valor
+                        addValueAmount += lowerValueAmount * (radius - fullValueRange);
+
+                    }
+                    
 
                 }
 
@@ -385,7 +397,31 @@ public class LevelGrid : MonoBehaviour
     public int GetMaxHeatMapValue() 
     {
 
-        return HEAT_MAP_MAX_VALUE;
+        int heatMapMaxValue = 0;
+
+        // Recorremos la malla
+        for (int x = 0; x < width; x++)
+        {
+
+            for (int z = 0; z < height - x; z++)
+            {
+
+                // Creamos la posicion de la malla
+                GridPosition gridPosition = new GridPosition(x, z);
+
+                // Comprobamos que el valor del mapa de influencia que tenemos es menor que el de la posicion actual
+                if (heatMapMaxValue < GetHeatMapValueAtGridPosition(gridPosition))
+                {
+
+                    heatMapMaxValue = GetHeatMapValueAtGridPosition(gridPosition);
+
+                }
+
+            }
+
+        }
+
+        return heatMapMaxValue;
     
     }
 

@@ -258,7 +258,7 @@ public class UnitAIManager : MonoBehaviour
             
             if (action == chosenAction)
             {
-                Debug.Log(chosenAction.GetActionName() + action.GetActionName());
+
                 action.SetBaseAIValue(maxValue);
 
             }

@@ -39,7 +39,7 @@ public class GridObject
             unitString += unit + "\n";
 
         }
-        return gridPosition.ToString() + "\n" + unitString;
+        return gridPosition.ToString() + "\n" + unitString + "\n" + heatMapValue;
 
     }
 
