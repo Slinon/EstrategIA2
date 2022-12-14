@@ -188,7 +188,15 @@ public class SpawnUnitAction : BaseAction
     // ------------------------------------------------------------------
     public override List<GridPosition> GetValidActionGridPositionList()
     {
-        // Creamos la lista
+        return GetCapturedPositionList(false);
+    }
+
+    // Si el bool paiting es false ignorará las posiciones con obstáculos y unidades
+    // Si es false las tendrá en cuenta. Uso para pintar areas de las zonas capturadas
+    public List<GridPosition> GetCapturedPositionList(bool painting)
+    {
+        InteractSphere.InControlState state = InteractSphere.InControlState.Player;
+
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         // Creamos la lista posiciones
@@ -209,30 +217,18 @@ public class SpawnUnitAction : BaseAction
 
         if (unit.IsEnemy())
         {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
-
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Enemy)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
-                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
-                }
-            }
+            state = InteractSphere.InControlState.Enemy;
         }
-        else
-        {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
 
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
-                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
-                }
+        foreach (GameObject child in interactionSpheres)
+        {
+            InteractSphere sphere = child.GetComponent<InteractSphere>();
+
+            if (sphere.GetInControlState() == state)
+            {
+                allPositionsList.Add(sphere.GetGridPosition());
+                maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
+                maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
             }
         }
 
@@ -267,7 +263,7 @@ public class SpawnUnitAction : BaseAction
                     }
 
                     // Comprobamos si la posicion tiene unidades dentro
-                    if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    if (!painting && LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                     {
 
                         // La saltamos
@@ -276,7 +272,7 @@ public class SpawnUnitAction : BaseAction
                     }
 
                     // Comprobamos si la posicion es un obstaculo
-                    if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                    if (!painting && !Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
                     {
 
                         // La saltamos
@@ -297,102 +293,6 @@ public class SpawnUnitAction : BaseAction
         return validGridPositionList;
 
     }
-
-    public List<GridPosition> GetRealCapturedPositionList()
-    {
-        // Creamos la lista
-        List<GridPosition> validGridPositionList = new List<GridPosition>();
-
-        // Creamos la lista posiciones
-        List<GridPosition> allPositionsList = new List<GridPosition>(); // Posicion unidad y puntos capturados
-
-        // Creamos la lista spawns distances
-        List<int> maxSpawnDistanceListWidth = new List<int>(); // Spawn Distance unidad y puntos capturados
-        List<int> maxSpawnDistanceListHeight = new List<int>(); // Spawn Distance unidad y puntos capturados
-
-        // Recuperamos la posicion de la unidad
-        // GridPosition unitGridPosition = unit.GetGridPosition();
-        allPositionsList.Add(unit.GetGridPosition());
-
-        maxSpawnDistanceListWidth.Add(maxSpawnDistanceWidht);
-        maxSpawnDistanceListHeight.Add(maxSpawnDistanceHeight);
-
-        // Comprobar puntos capturados y su distancia maxima alrededor
-
-        if (unit.IsEnemy())
-        {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
-
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Enemy)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
-                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
-                }
-            }
-        }
-        else
-        {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
-
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
-                    maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
-                }
-            }
-        }
-
-        for (int i = 0; i < allPositionsList.Count; i++)
-        {
-            // Recorremos todas las posiciones validas alrededor de la malla
-            for (int x = -maxSpawnDistanceListWidth[i]; x <= maxSpawnDistanceListWidth[i]; x++) // width
-            {
-                for (int z = -maxSpawnDistanceListHeight[i]; z <= maxSpawnDistanceListHeight[i]; z++) // height
-                {
-
-                    // Creamos la posicion alrededor de la posicion del jugador
-                    GridPosition offsetGridPosition = new GridPosition(x, z);
-                    GridPosition testGridPosition = allPositionsList[i] + offsetGridPosition;
-
-                    // Comprobamos si la posicion esta fuera de la malla
-                    if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
-                    {
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    // Comprobamos si la posicion es en la que esta la unidad
-                    if (allPositionsList[i] == testGridPosition)
-                    {
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    // Comprobamos que la posicion no esta ya en la lista
-                    if (!validGridPositionList.Contains(allPositionsList[i]))
-                    {
-                        // Lo añadimos a la lista
-                        validGridPositionList.Add(testGridPosition);
-                    }
-                }
-            }
-        }
-
-        return validGridPositionList;
-
-    }
-
-
 
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
