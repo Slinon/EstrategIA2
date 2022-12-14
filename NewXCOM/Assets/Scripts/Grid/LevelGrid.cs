@@ -4,19 +4,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelGrid : MonoBehaviour
-{
+{    
 
-    public static LevelGrid Instance { get; private set; }      // Instancia del singleton
+    public static LevelGrid Instance { get; private set; }              // Instancia del singleton
 
-    public event EventHandler OnAnyUnitMovedGridPosition;       // Evento cuano una unidad se cambia de posicion en la malla
+    public event EventHandler OnAnyUnitMovedGridPosition;               // Evento cuano una unidad se cambia de posicion en la malla
+    public event EventHandler<GridPosition> OnAnyHeatMapValueChanged;   // Evento cuando un valor del mapa de influencia cambia
 
-    [SerializeField] private Transform gridDebugObjectPrefab;   // Prefab del nodo que se genera en la malla
-    [SerializeField] private int width;                         // Alto de la malla
-    [SerializeField] private int height;                        // Ancho de la malla
-    [SerializeField] private float cellSize;                    // Tama�o de la celda
+    [SerializeField] private Transform gridDebugObjectPrefab;           // Prefab del nodo que se genera en la malla
+    [SerializeField] private int width;                                 // Alto de la malla
+    [SerializeField] private int height;                                // Ancho de la malla
+    [SerializeField] private float cellSize;                            // Tama�o de la celda
 
     private CoverType coverType;
-    private GridSystem<GridObject> gridSystem;                  // Malla que utilizamos
+    private GridSystem<GridObject> gridSystem;                          // Malla que utilizamos
     private bool hasLeft;
     private bool hasRight;
     private bool hasFront;
@@ -47,7 +48,7 @@ public class LevelGrid : MonoBehaviour
         // Creamos la malla
         gridSystem = new GridSystem<GridObject>(width, height, cellSize, 
             (GridSystem<GridObject> g, GridPosition gridPosition) => new GridObject(g, gridPosition));
-        //gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
+        gridSystem.CreateDebugObjects(gridDebugObjectPrefab);
 
 
         for (int x = 0; x < width; x++) {
@@ -250,6 +251,188 @@ public class LevelGrid : MonoBehaviour
 
     }
 
+    // @IGM ------------------------------------------------------
+    // Getter del valor del mapa de influencia que tiene la celda.
+    // -----------------------------------------------------------
+    public int GetHeatMapValueAtGridPosition(GridPosition gridPosition)
+    {
+
+        GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+        return gridObject.GetHeatMapValue();
+
+    }
+
+    // @IGM ----------------------------------------------
+    // Setter del objeto interacuable que hay en la celda.
+    // ---------------------------------------------------
+    public void SetHeatMatValueAtGridPosition(int value, GridPosition gridPosition)
+    {
+
+        // Comrpobamos que es una posicion valida
+        if (!gridSystem.IsValidGridPosition(gridPosition))
+        {
+
+            return;
+
+        }
+
+        GridObject gridObject = gridSystem.GetGridObject(gridPosition);
+        gridObject.SetHeatMapValue(value);
+
+        // Comprobamos si hay alguna clase escuchando el evento
+        if (OnAnyHeatMapValueChanged != null)
+        {
+
+            // Lanzamos el evento
+            OnAnyHeatMapValueChanged(this, gridPosition);
+
+        }
+
+    }
+
+    // @IGM ---------------------------------------------------------------------
+    // Metodo para aumentar el valor del punto caliente en el mapa de influencia.
+    // --------------------------------------------------------------------------
+    public void AddValue(GridPosition gridPosition, int value)
+    {
+
+        // Comrpobamos que es una posicion valida
+        if (!gridSystem.IsValidGridPosition(gridPosition))
+        {
+
+            return;
+
+        }
+
+        SetHeatMatValueAtGridPosition(GetHeatMapValueAtGridPosition(gridPosition) + value, gridPosition);
+
+    }
+
+    // @IGM ---------------------------------------------------------
+    // Metodo para añadir un punto caliente en el mapa de influencia.
+    // --------------------------------------------------------------
+    public void AddValue(GridPosition gridPosition, int value, int fullValueRange, int totalRange)
+    {
+
+        // Calculamos la cantidad de dispersion en las casillas
+        int lowerValueAmount = Mathf.RoundToInt((float)value / (totalRange - fullValueRange));
+
+        // Recorremos la malla dentro del rango dado
+        for (int x = 0; x < totalRange; x++)
+        {
+
+            for (int z = 0; z < totalRange - x; z++)
+            {
+
+                // Calculamos el radio
+                int radius = x + z;
+                int addValueAmount = value;
+
+                // Comprobamos si el radio ha superado al rango de valos maximo
+                if (radius > fullValueRange)
+                {
+
+                    // Restamos el valor
+                    addValueAmount -= lowerValueAmount * (radius - fullValueRange); 
+
+                }
+
+                // Añadimos el valor al mapa de influencia
+                GridPosition testGridPosition = new GridPosition(gridPosition.x + x, gridPosition.z + z);    
+                AddValue(testGridPosition, addValueAmount);
+
+                // Comprobamos que no sea la primera fila
+                if (x != 0)
+                {
+
+                    // Añadimos el valor al mapa de influencia
+                    testGridPosition = new GridPosition(gridPosition.x - x, gridPosition.z + z);
+                    AddValue(testGridPosition, addValueAmount);
+
+                }
+
+                // Comprobamos que no sea la primera fila
+                if (z != 0)
+                {
+
+                    // Añadimos el valor al mapa de influencia
+                    testGridPosition = new GridPosition(gridPosition.x + x, gridPosition.z - z);
+                    AddValue(testGridPosition, addValueAmount);
+
+                    // Comprobamos que no sea la primera fila
+                    if (x != 0)
+                    {
+
+                        // Añadimos el valor al mapa de influencia
+                        testGridPosition = new GridPosition(gridPosition.x - x, gridPosition.z - z);
+                        AddValue(testGridPosition, addValueAmount);
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+    
+    // @IGM -----------------------------------------
+    // Getter del valor maximo del mapade influencia.
+    // ----------------------------------------------
+    public int GetMaxHeatMapValue() 
+    {
+
+        int heatMapMaxValue = 0;
+
+        // Recorremos la malla
+        for (int x = 0; x < width; x++)
+        {
+
+            for (int z = 0; z < height - x; z++)
+            {
+
+                // Creamos la posicion de la malla
+                GridPosition gridPosition = new GridPosition(x, z);
+
+                // Comprobamos que el valor del mapa de influencia que tenemos es menor que el de la posicion actual
+                if (heatMapMaxValue < GetHeatMapValueAtGridPosition(gridPosition))
+                {
+
+                    heatMapMaxValue = GetHeatMapValueAtGridPosition(gridPosition);
+
+                }
+
+            }
+
+        }
+
+        return heatMapMaxValue;
+    
+    }
+
+    // @IGM -------------------------------------
+    // Metodo para limpiar el mapa de influencia.
+    // ------------------------------------------
+    public void ClearHeatMap()
+    {
+
+        // Recorremos la malla
+        for (int x = 0; x < width; x++)
+        {
+
+            for (int z = 0; z < height; z++)
+            {
+
+                // Establecemos el valor del mapa de influencia a 0 en esa casilla
+                GridPosition gridPosition = new GridPosition(x, z);
+                SetHeatMatValueAtGridPosition(0, gridPosition);
+
+            }
+
+        }
+
+    }
 
     public void GetWidthHeight(out int width, out int height) 
     {

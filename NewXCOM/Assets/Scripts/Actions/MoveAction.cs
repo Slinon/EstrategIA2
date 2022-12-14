@@ -234,7 +234,7 @@ public class MoveAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
+            actionValue = baseAIValue + LevelGrid.Instance.GetHeatMapValueAtGridPosition(gridPosition)
 
         };
 

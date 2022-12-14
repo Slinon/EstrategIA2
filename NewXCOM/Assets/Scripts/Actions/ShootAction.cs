@@ -36,6 +36,7 @@ public class ShootAction : BaseAction
     private float stateTimer;                                   // Timer de la maquina de estados
 
     private UnitManager unitManager;
+    private List<Unit> enemiesList;
     private Pathfinding pathFinding;
 
 
@@ -45,6 +46,9 @@ public class ShootAction : BaseAction
         ps = ProbabilitySystem.Instance;
         unitManager = UnitManager.Instance;
         pathFinding = Pathfinding.Instance;
+
+        enemiesList = unitManager.GetEnemyUnitList();
+
     }
     // @IGM ------------------------
     // Update is called every frame.
@@ -171,9 +175,9 @@ public class ShootAction : BaseAction
         
 
         Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(this.unit, targetUnit), maxShootDistance));
+            criticalPercentage, hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance));
 
-        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, unit.GetDistanceBetweenUnits(this.unit, targetUnit), maxShootDistance);
+        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance);
 
         targetUnit.Damage(damagetmp);
 
@@ -209,12 +213,14 @@ public class ShootAction : BaseAction
     // -------------------------------------------------------------------
     private List<GridPosition> GetValidActionGridPositionList(GridPosition unitGridPosition)
     {
+
         // Creamos la lista
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         // Recorremos todas las posiciones validas alrededor de la malla
         for (int x = -maxShootDistance; x <= maxShootDistance; x++)
         {
+
             for (int z = -maxShootDistance; z <= maxShootDistance; z++)
             {
 
@@ -232,7 +238,6 @@ public class ShootAction : BaseAction
                 }
 
                 // Calculamos la distancia de la posicion a probar
-                
                 int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
 
                 // Comprobamos si la distancia es mayor a la de diparo
@@ -243,7 +248,6 @@ public class ShootAction : BaseAction
                     continue;
 
                 }
-                
 
                 // Comprobamos si la posicion no tiene unidades dentro
                 if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
@@ -275,6 +279,9 @@ public class ShootAction : BaseAction
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
 
                 // Definimos un offset para poder disparar por encima de obstaculos bajos
+
+                
+
 
                 if(targetUnit.GetCoverType() == CoverType.Covered)
                 {
@@ -374,17 +381,9 @@ public class ShootAction : BaseAction
 
     }
 
-    public int GetShootHitProbability()
-    {
-        return hitProbability;
-    }
-
-    //Getter daño :C
-    public int GetShootDamage()
-    {
-        return shootDamage;
-    }
-
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
     public override int GetTargetValueAtPosition(GridPosition gridPosition)
     {
 
@@ -393,6 +392,21 @@ public class ShootAction : BaseAction
 
         // Calculamos la vida de cada unidad a la que podemos dar un espadazo
         return Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f);
+
+    }
+
+    public int GetShootHitProbability()
+    {
+        return hitProbability;
+    }
+
+    // @GRG --------------------------------------
+    // Getter del daño que puede hacer el disparo.
+    // -------------------------------------------
+    public int GetShootDamage()
+    {
+
+        return shootDamage;
 
     }
 }
