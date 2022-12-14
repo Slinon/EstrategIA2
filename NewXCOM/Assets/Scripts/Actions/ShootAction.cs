@@ -360,15 +360,12 @@ public class ShootAction : BaseAction
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
 
-        // Recuperamos la unidad objetivo
-        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
-
         // Devolvemos la accion de la IA
         return new EnemyAIAction
         {
 
             gridPosition = gridPosition,
-            actionValue = 100 + Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f)
+            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
 
         };
 
@@ -384,8 +381,32 @@ public class ShootAction : BaseAction
 
     }
 
+    // @IGM ------------------------------------------------
+    // Funcion para calcular la mejor posicion de la accion.
+    // -----------------------------------------------------
+    public override int GetTargetValueAtPosition(GridPosition gridPosition)
+    {
+
+        // Recuperamos la unidad objetivo
+        Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
+
+        // Calculamos la vida de cada unidad a la que podemos dar un espadazo
+        return Mathf.RoundToInt((1 - targetUnit.GetHealthNormalized()) * 100f);
+
+    }
+
     public int GetShootHitProbability()
     {
         return hitProbability;
+    }
+
+    // @GRG --------------------------------------
+    // Getter del daño que puede hacer el disparo.
+    // -------------------------------------------
+    public int GetShootDamage()
+    {
+
+        return shootDamage;
+
     }
 }
