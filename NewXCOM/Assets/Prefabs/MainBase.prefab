@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3907838985071982341}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -3.01, y: 1.4705884, z: 0}
+  m_LocalPosition: {x: -2.636981, y: 1.4705884, z: 0.00000005843593}
   m_LocalScale: {x: 1.9803268, y: 2.9608, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -145,12 +145,12 @@ GameObject:
   - component: {fileID: -3147024549923208559}
   - component: {fileID: 6315176357458564335}
   - component: {fileID: 6830159223452896923}
-  - component: {fileID: -1803460875891568307}
-  - component: {fileID: 1870813685670864508}
-  - component: {fileID: 489632006182357166}
-  - component: {fileID: 2229958808863480921}
-  - component: {fileID: 5812569492142175501}
   - component: {fileID: 2538739146799923764}
+  - component: {fileID: 3344261072039339219}
+  - component: {fileID: 3873654586206528798}
+  - component: {fileID: 9111971099781955217}
+  - component: {fileID: 2646342428760882231}
+  - component: {fileID: 6572504979355698165}
   m_Layer: 7
   m_Name: MainBase
   m_TagString: MainBase
@@ -187,8 +187,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.3962746, y: 3.117995, z: 6.099913}
-  m_Center: {x: -0.14200783, y: 1.5158912, z: -0.018522501}
+  m_Size: {x: 3.5, y: 3.5, z: 3.5}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!114 &-3147024549923208559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,6 +220,11 @@ MonoBehaviour:
   maxActionPoints: 2
   isEnemy: 0
   coverType: 0
+  skinnedMeshRenderer: {fileID: 0}
+  gunMeshRenderer: {fileID: 0}
+  selectedVisualMeshRenderer: {fileID: 0}
+  UnitWorldUICanvas: {fileID: 0}
+  isStructure: 1
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,91 +237,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8526230dc960dc94793498027384e2f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-1803460875891568307
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Soldier
-  unitCost: 300
-  unitSpawned: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
-    type: 3}
-  maxSpawnDistance: 2
---- !u!114 &1870813685670864508
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Granadier
-  unitCost: 700
-  unitSpawned: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
-    type: 3}
-  maxSpawnDistance: 2
---- !u!114 &489632006182357166
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Scout
-  unitCost: 700
-  unitSpawned: {fileID: 2674505501862230148, guid: 2abbe493b0edbf94898916aa814199a0,
-    type: 3}
-  maxSpawnDistance: 2
---- !u!114 &2229958808863480921
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Berserk
-  unitCost: 1200
-  unitSpawned: {fileID: 3301654557798298561, guid: 3c8e2994b196057439b8a649fcf9f89f,
-    type: 3}
-  maxSpawnDistance: 2
---- !u!114 &5812569492142175501
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 990822375cfd09f4c980a370ded00967, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  unitName: Juggernaut
-  unitCost: 2000
-  unitSpawned: {fileID: 2340227495752026276, guid: c9cdf2952cd873f4c8d50bec81344437,
-    type: 3}
-  maxSpawnDistance: 2
 --- !u!114 &2538739146799923764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -332,6 +252,81 @@ MonoBehaviour:
   floatingTextPrebab: {fileID: 3181831354123590032, guid: 8628eb414de0834498130c598e600dc7,
     type: 3}
   healthMax: 500
+--- !u!114 &3344261072039339219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 368c68338e519e54db23c1263c2f61b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCost: 300
+  unitSpawned: {fileID: 2674505501862230148, guid: 2abbe493b0edbf94898916aa814199a0,
+    type: 3}
+--- !u!114 &3873654586206528798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4336720ee7def4b8a8ad8954e0addc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCost: 700
+  unitSpawned: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
+    type: 3}
+--- !u!114 &9111971099781955217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2ebba7420a4324428c37294583dca55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCost: 1200
+  unitSpawned: {fileID: 2895192204565787523, guid: ac511d283fd173c42a356eaa2af722b3,
+    type: 3}
+--- !u!114 &2646342428760882231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9559079ccaa13741b30a7166ed145df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCost: 1500
+  unitSpawned: {fileID: 3301654557798298561, guid: 3c8e2994b196057439b8a649fcf9f89f,
+    type: 3}
+--- !u!114 &6572504979355698165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5525236020020757582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eafc3c914886d604ba7bc62e86fd98bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  unitCost: 2500
+  unitSpawned: {fileID: 2340227495752026276, guid: c9cdf2952cd873f4c8d50bec81344437,
+    type: 3}
 --- !u!1 &5525236020238794742
 GameObject:
   m_ObjectHideFlags: 0
@@ -360,7 +355,7 @@ Transform:
   m_GameObject: {fileID: 5525236020238794742}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 3.27, z: 0}
-  m_LocalScale: {x: 6, y: 6.5, z: 6}
+  m_LocalScale: {x: 5, y: 6.5, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4448704837045937342}
@@ -758,7 +753,7 @@ Transform:
   m_GameObject: {fileID: 7614299492959762685}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 6.0000005, y: 6.0000005, z: 6.0000005}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5525236020020757583}
@@ -1033,7 +1028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4583629038515028, guid: 6c9c8f866a80807479f0038322f300da, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.7630196
+      value: -2.39
       objectReference: {fileID: 0}
     - target: {fileID: 4583629038515028, guid: 6c9c8f866a80807479f0038322f300da, type: 3}
       propertyPath: m_LocalPosition.y

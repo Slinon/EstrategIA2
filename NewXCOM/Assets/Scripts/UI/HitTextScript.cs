@@ -71,8 +71,13 @@ public class HitTextScript : MonoBehaviour
 
     public int GetProbabilityHit()
     {
+        int probability = 0;
         // Comprobar si esta cubierto para devolver 0
-        return ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), unit.GetDistanceBetweenUnits(unitSelected, this.unit), unitSelectedShootAction.GetMaxShootDistance());
+        if (this.unit.GetCoverType() == CoverType.None)
+        {
+            probability = ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), unit.GetDistanceBetweenUnits(unitSelected, this.unit), unitSelectedShootAction.GetMaxShootDistance());
+        }
+        return probability;
     }
 
     private void ShowAllProbabiltyTexts(List<Unit> enemyList, bool show)

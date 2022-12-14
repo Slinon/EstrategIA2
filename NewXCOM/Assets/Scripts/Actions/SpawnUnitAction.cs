@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class SpawnUnitAction : BaseAction
 {
-    [SerializeField] private string unitName;
-    [SerializeField] private int unitCost;
-    [SerializeField] private Transform unitSpawned;                 // Unidad que queremos spawnear
 
     // @IGM -----------------------------------------------------
     // Maquina de estados de de la accion de spawnear una unidad.
@@ -24,9 +21,12 @@ public class SpawnUnitAction : BaseAction
     public event EventHandler OnSpawnActionCompleted;               // Evento cuando la accion de spawnear se completa
     public static event EventHandler<Vector3> OnAnyUnitSpawned;     // Evento cuando cualquier unidad dispara
 
-    [SerializeField] private int maxSpawnDistance;                  // Distancia maxima de spawn
-    private GameObject[] interactionSpheres;
+    [SerializeField] protected int unitCost;
+    [SerializeField] protected Transform unitSpawned;               // Unidad que queremos spawnear
 
+    private int maxSpawnDistanceHeight;                             // Distancia maxima de spawn
+    private int maxSpawnDistanceWidht;
+    private GameObject[] interactionSpheres;
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
     private float stateTimer;                                       // Timer de la maquina de estados
@@ -39,6 +39,8 @@ public class SpawnUnitAction : BaseAction
     private void Start()
     {
         interactionSpheres = GameObject.FindGameObjectsWithTag("Sphere");
+        maxSpawnDistanceHeight = 7;
+        maxSpawnDistanceWidht = 12;
     }
 
     // @IGM ------------------------
@@ -109,8 +111,21 @@ public class SpawnUnitAction : BaseAction
                 float afterSpawnStateTime = 0.5f;
                 stateTimer = afterSpawnStateTime;
 
+                if (unit.IsEnemy())
+                {
+                    MoneySystem.Instance.GiveTakeMoney(-unitCost, MoneySystem.Instance.enemyAI);
+                }
+
+                else
+                {
+                    MoneySystem.Instance.GiveTakeMoney(-unitCost, MoneySystem.Instance.player);
+                }
+
                 // Spawneamos la unidad
-                Instantiate(unitSpawned, spawnPoint, Quaternion.identity);
+                Unit newUnit = Instantiate(unitSpawned, spawnPoint, Quaternion.identity).GetComponent<Unit>();
+
+                // Le quitamos los puntos de accion
+                newUnit.SpendActionPoints(newUnit.GetActionPoints());
 
                 // Comprobamos si hay alguna clase escuchando el evento
                 if (OnAnyUnitSpawned != null)
@@ -149,7 +164,7 @@ public class SpawnUnitAction : BaseAction
     public override string GetActionName()
     {
 
-        return "Spawn " + unitName.ToString();
+        return "Spawn ";
 
     }
 
@@ -164,7 +179,7 @@ public class SpawnUnitAction : BaseAction
         {
 
             gridPosition = gridPosition,
-            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
+            actionValue = baseAIValue + LevelGrid.Instance.GetHeatMapValueAtGridPosition(gridPosition)
 
         };
 
@@ -175,57 +190,56 @@ public class SpawnUnitAction : BaseAction
     // ------------------------------------------------------------------
     public override List<GridPosition> GetValidActionGridPositionList()
     {
+        return GetCapturedPositionList(false);
+    }
 
-        // Creamos la lista
+    // Si el bool paiting es false ignorará las posiciones con obstáculos y unidades
+    // Si es false las tendrá en cuenta. Uso para pintar areas de las zonas capturadas
+    public List<GridPosition> GetCapturedPositionList(bool painting)
+    {
+        InteractSphere.InControlState state = InteractSphere.InControlState.Player;
+
         List<GridPosition> validGridPositionList = new List<GridPosition>();
 
         // Creamos la lista posiciones
         List<GridPosition> allPositionsList = new List<GridPosition>(); // Posicion unidad y puntos capturados
 
         // Creamos la lista spawns distances
-        List<int> maxSpawnDistanceList = new List<int>(); // Spawn Distance unidad y puntos capturados
+        List<int> maxSpawnDistanceListWidth = new List<int>(); // Spawn Distance unidad y puntos capturados
+        List<int> maxSpawnDistanceListHeight = new List<int>(); // Spawn Distance unidad y puntos capturados
 
         // Recuperamos la posicion de la unidad
         // GridPosition unitGridPosition = unit.GetGridPosition();
         allPositionsList.Add(unit.GetGridPosition());
 
-        maxSpawnDistanceList.Add(maxSpawnDistance);
+        maxSpawnDistanceListWidth.Add(maxSpawnDistanceWidht);
+        maxSpawnDistanceListHeight.Add(maxSpawnDistanceHeight);
 
         // Comprobar puntos capturados y su distancia maxima alrededor
 
         if (unit.IsEnemy())
         {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
-
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Enemy)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
-                }
-            }
+            state = InteractSphere.InControlState.Enemy;
         }
-        else
-        {
-            foreach (GameObject child in interactionSpheres)
-            {
-                InteractSphere sphere = child.GetComponent<InteractSphere>();
 
-                if (sphere.GetInControlState() == InteractSphere.InControlState.Player)
-                {
-                    allPositionsList.Add(sphere.GetGridPosition());
-                    maxSpawnDistanceList.Add(sphere.GetMaxCaptureDistance());
-                }
+        foreach (GameObject child in interactionSpheres)
+        {
+            InteractSphere sphere = child.GetComponent<InteractSphere>();
+
+            if (sphere.GetInControlState() == state)
+            {
+                allPositionsList.Add(sphere.GetGridPosition());
+                maxSpawnDistanceListWidth.Add(sphere.GetMaxCaptureDistanceWidth());
+                maxSpawnDistanceListHeight.Add(sphere.GetMaxCaptureDistanceHeight());
             }
         }
 
         for (int i = 0; i < allPositionsList.Count; i++)
         {
             // Recorremos todas las posiciones validas alrededor de la malla
-            for (int x = -maxSpawnDistanceList[i]; x <= maxSpawnDistanceList[i]; x++)
+            for (int x = -maxSpawnDistanceListWidth[i]; x <= maxSpawnDistanceListWidth[i]; x++) // width
             {
-                for (int z = -maxSpawnDistanceList[i]; z <= maxSpawnDistanceList[i]; z++)
+                for (int z = -maxSpawnDistanceListHeight[i]; z <= maxSpawnDistanceListHeight[i]; z++) // height
                 {
 
                     // Creamos la posicion alrededor de la posicion del jugador
@@ -251,7 +265,7 @@ public class SpawnUnitAction : BaseAction
                     }
 
                     // Comprobamos si la posicion tiene unidades dentro
-                    if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                    if (!painting && LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                     {
 
                         // La saltamos
@@ -260,7 +274,7 @@ public class SpawnUnitAction : BaseAction
                     }
 
                     // Comprobamos si la posicion es un obstaculo
-                    if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                    if (!painting && !Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
                     {
 
                         // La saltamos
@@ -273,7 +287,7 @@ public class SpawnUnitAction : BaseAction
                     {
                         // Lo añadimos a la lista
                         validGridPositionList.Add(testGridPosition);
-                    }  
+                    }
                 }
             }
         }

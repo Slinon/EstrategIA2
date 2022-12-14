@@ -6,6 +6,10 @@ using UnityEngine;
 public class UnitAIManager : MonoBehaviour
 {
 
+    public static event EventHandler<Unit> OnAnyUnitThrowGrenade;   // Evento cuando una unidad decide lanzar una granada
+    public static event EventHandler<Unit> OnAnyUnitBuildStructure; // Evento cuando una unidad decide construir una estructura
+    public static event EventHandler<Unit> OnAnyUnitMoveAction;     // Evento cuando una unidad decide moverse
+
     [SerializeField] private int maxAIValueAction;                  // Valor maximo de una accion para la IA
     [SerializeField] private int minAIValueAction;                  // Valor minimode una accion para la IA
 
@@ -72,7 +76,7 @@ public class UnitAIManager : MonoBehaviour
                 // Si la esfera esta al lado
                 if (Checkers.Instance.IsSphereNearby(unit))
                 {
-               
+
                     // interactuo
                     SetValues(interactAction, maxAIValueAction, minAIValueAction);
                     return;
@@ -82,6 +86,15 @@ public class UnitAIManager : MonoBehaviour
                 // Si no esta al lado, me muevo
                 else if (unit.TryGetComponent(out MoveAction moveAction))
                 {
+
+                    // Comprobamos si hay alguna clase escuchando el evento
+                    if (OnAnyUnitMoveAction != null)
+                    {
+
+                        // Lanzamos el evento
+                        OnAnyUnitMoveAction(this, unit);
+
+                    }
 
                     // me muevo (a la esfera)
                     SetValues(moveAction, maxAIValueAction, minAIValueAction);
@@ -100,6 +113,15 @@ public class UnitAIManager : MonoBehaviour
             // puedo construir
             if (unit.TryGetComponent(out BuildStructureAction buildStructureAction))
             {
+
+                // Comprobamos si hay alguna clase escuchando el evento
+                if (OnAnyUnitBuildStructure != null)
+                {
+
+                    // Lanzamos el evento
+                    OnAnyUnitBuildStructure(this, unit);
+
+                }
 
                 // es factible construir
                 if (Checkers.Instance.IsValidStructure(unit))
@@ -121,6 +143,15 @@ public class UnitAIManager : MonoBehaviour
                 if (!Checkers.Instance.UnitInBestPosition(unit))
                 {
 
+                    // Comprobamos si hay alguna clase escuchando el evento
+                    if (OnAnyUnitMoveAction != null)
+                    {
+
+                        // Lanzamos el evento
+                        OnAnyUnitMoveAction(this, unit);
+
+                    }
+
                     // me muevo
                     SetValues(moveAction, maxAIValueAction, minAIValueAction);
                     return;
@@ -138,14 +169,23 @@ public class UnitAIManager : MonoBehaviour
             // Si tengo enemigos cerca
             if (Checkers.Instance.AreEnemiesNearby(unit))
             {
-
+  
                 // Si puedo palmar
                 if (Checkers.Instance.CouldBeKilled(unit))
                 {
-
+          
                     // Si me puedo mover
                     if (unit.TryGetComponent(out MoveAction moveAction))
                     {
+
+                        // Comprobamos si hay alguna clase escuchando el evento
+                        if (OnAnyUnitMoveAction != null)
+                        {
+
+                            // Lanzamos el evento
+                            OnAnyUnitMoveAction(this, unit);
+
+                        }
 
                         // me muevo
                         SetValues(moveAction, maxAIValueAction, minAIValueAction);
@@ -156,11 +196,11 @@ public class UnitAIManager : MonoBehaviour
                 }
 
                 // si no puedo morir...
-
+                
                 // si los tengo a mele
                 else if (Checkers.Instance.IsEnemyPointBlank(unit))
                 {
-
+             
                     // Les meto espadazo si puedo
                     if (unit.TryGetComponent(out SwordAction swordAction))
                     {
@@ -175,10 +215,19 @@ public class UnitAIManager : MonoBehaviour
                 // Si estan lejos, y tengo granada
                 else if (unit.TryGetComponent(out GrenadeAction grenadeAction))
                 {
-
+                 
                     // Si hay una posicion donde lanzar granada
                     if (Checkers.Instance.IsValidGrenade(unit))
                     {
+
+                        // Comprobamos si hay alguna clase escuchando el evento
+                        if (OnAnyUnitThrowGrenade != null)
+                        {
+
+                            // Lanzamos el evento
+                            OnAnyUnitThrowGrenade(this, unit);
+
+                        }
 
                         // Granadazo
                         SetValues(grenadeAction, maxAIValueAction, minAIValueAction);
@@ -188,15 +237,24 @@ public class UnitAIManager : MonoBehaviour
 
                 }
 
-                // Si no les pego un tiro
+                // Si no, les pego un tiro
                 SetValues(shootAction, maxAIValueAction, minAIValueAction);
                 return;
 
             }
-
+      
             // si no se cumple ninguna, pero me puedo mover
             else if (unit.TryGetComponent(out MoveAction moveAction))
             {
+
+                // Comprobamos si hay alguna clase escuchando el evento
+                if (OnAnyUnitMoveAction != null)
+                {
+
+                    // Lanzamos el evento
+                    OnAnyUnitMoveAction(this, unit);
+
+                }
 
                 // me muevo
                 SetValues(moveAction, maxAIValueAction, minAIValueAction);
@@ -230,11 +288,11 @@ public class UnitAIManager : MonoBehaviour
     // ---------------------------------------------------
     private void SetValues(BaseAction chosenAction, int maxValue, int minValue)
     {
-
+        
         // Recorremos la lista de acciones validas
         foreach (BaseAction action in unit.GetBaseActionArray())
         {
-
+            
             if (action == chosenAction)
             {
 
