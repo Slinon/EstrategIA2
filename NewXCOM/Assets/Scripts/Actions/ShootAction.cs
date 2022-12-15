@@ -181,7 +181,7 @@ public class ShootAction : BaseAction
 
         targetUnit.Damage(damagetmp);
 
-        Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
+        //Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
 
         // Debug -------------------------------------------------------------------
     }
@@ -275,24 +275,21 @@ public class ShootAction : BaseAction
 
                 // Calculamos la direccion de disparo
                 Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+
+
                 Unit unitPosition = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
+
                 Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
-
-                // Definimos un offset para poder disparar por encima de obstaculos bajos
-
                 
-
-
                 if(targetUnit.GetCoverType() == CoverType.Covered)
                 {
-                    if(unitPosition.GetCoverType() == CoverType.Covered)
-                    {
-                        unitShoulderHeight = 0.6f;
-                    }else{unitShoulderHeight = 1.7f;}         
-                }
+                    shootDirection = ((targetUnit.GetWorldPosition()+ Vector3.down * 1f) - unitWorldPosition).normalized;
+                    //Debug.Log("Cambiado");
+                }else{shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;}
+                //Debug.Log("El shoot 2 es " + shootDirection);
 
                 // Comprobamos si la unidad no tiene visual del objetivo
-                if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
+                if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection ,
                     Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()), obstacleLayerMask))
                 {
 

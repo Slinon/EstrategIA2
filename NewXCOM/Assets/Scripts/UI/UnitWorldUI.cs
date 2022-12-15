@@ -13,6 +13,7 @@ public class UnitWorldUI : MonoBehaviour
     [SerializeField] private Image healthBarImage;                  // Imagen de la barra de vida
     [SerializeField] private HealthSystem healthSystem;             // Sistema de vida de la unidad
 
+
     // @IGM -----------------------------------------
     // Start is called before the first frame update.
     // ----------------------------------------------
@@ -21,10 +22,13 @@ public class UnitWorldUI : MonoBehaviour
         // Asignamos los eventos
         Unit.OnAnyActionPointsChanged += Unit_OnAnyActionPointsChanged;
         healthSystem.OnDamaged += HealthSystem_OnDamaged;
+        
+       
 
         // Actualizamos las variables
         UpdateActionPointsText();
         UpdateHelthBar();
+
     }
 
     // @IGM -----------------------------------------------------
@@ -50,7 +54,7 @@ public class UnitWorldUI : MonoBehaviour
     }
 
     // @IGM ---------------------------------------
-    // Handler del evento cuando se daña la unidad.
+    // Handler del evento cuando se daï¿½a la unidad.
     // --------------------------------------------
     private void HealthSystem_OnDamaged(object sender, EventArgs empty)
     {
@@ -70,5 +74,8 @@ public class UnitWorldUI : MonoBehaviour
         healthBarImage.fillAmount = healthSystem.GetHealthNormalized();
 
     }
+
+
+
 
 }
