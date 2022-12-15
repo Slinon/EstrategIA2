@@ -83,25 +83,6 @@ public class UnitAIManager : MonoBehaviour
 
                 }
 
-                // Si no esta al lado, me muevo
-                else if (unit.TryGetComponent(out MoveAction moveAction))
-                {
-
-                    // Comprobamos si hay alguna clase escuchando el evento
-                    if (OnAnyUnitMoveAction != null)
-                    {
-
-                        // Lanzamos el evento
-                        OnAnyUnitMoveAction(this, unit);
-
-                    }
-
-                    // me muevo (a la esfera)
-                    SetValues(moveAction, maxAIValueAction, minAIValueAction);
-                    return;
-
-                }
-
             }
 
         }
@@ -139,18 +120,18 @@ public class UnitAIManager : MonoBehaviour
             else if (unit.TryGetComponent(out MoveAction moveAction))
             {
 
+                // Comprobamos si hay alguna clase escuchando el evento
+                if (OnAnyUnitMoveAction != null)
+                {
+
+                    // Lanzamos el evento
+                    OnAnyUnitMoveAction(this, unit);
+
+                }
+
                 // no estoy en la mejor posicion
                 if (!Checkers.Instance.UnitInBestPosition(unit))
                 {
-
-                    // Comprobamos si hay alguna clase escuchando el evento
-                    if (OnAnyUnitMoveAction != null)
-                    {
-
-                        // Lanzamos el evento
-                        OnAnyUnitMoveAction(this, unit);
-
-                    }
 
                     // me muevo
                     SetValues(moveAction, maxAIValueAction, minAIValueAction);
@@ -256,9 +237,25 @@ public class UnitAIManager : MonoBehaviour
 
                 }
 
-                // me muevo
-                SetValues(moveAction, maxAIValueAction, minAIValueAction);
-                return;
+                // Comprobamos que no estamos en la mejor posicion
+                if (!Checkers.Instance.UnitInBestPosition(unit))
+                {
+
+                    // me muevo
+                    SetValues(moveAction, maxAIValueAction, minAIValueAction);
+                    return;
+
+                }
+
+                // Comprobamos que tenemos accion de pasar
+                if (unit.TryGetComponent(out PassAction passAction))
+                {
+
+                    // pasamos
+                    SetValues(passAction, maxAIValueAction, minAIValueAction);
+                    return;
+
+                }
 
             }
 

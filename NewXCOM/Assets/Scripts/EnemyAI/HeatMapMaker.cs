@@ -11,6 +11,7 @@ public class HeatMapMaker : MonoBehaviour
     [SerializeField] private int allyGrenadeValue;              // Valor que tiene un aliado al lanzar una granada
     [SerializeField] private int grenadeCenterInfluence;        // Influencia desde el centro de los puntos de influencia
     [SerializeField] private int grenadeExpansion;              // Expansion de los puntos de influencia
+    [Space(10)]
 
     [Header("BuildStructureAction")]
     [SerializeField] private int enemyStructureValue;           // Valor que tiene el enemigo al construir una torre
@@ -20,12 +21,14 @@ public class HeatMapMaker : MonoBehaviour
     [SerializeField] private int structureCenterInfluence;      // Influencia desde el centro de los puntos de influencia
     [SerializeField] private int allyStructuresExpansion;       // Expansion de los puntos de influencia estructuras aliadas
     [SerializeField] private int enemiesStructuresExpansion;    // Expansion de los puntos de influencia enemigos
+    [Space(10)]
 
     [Header("MoveAction")]
     [SerializeField] private int enemyBaseMoveValue;            // Valor que tiene la base enemiga al moverse
     [SerializeField] private int allyBaseMoveValue;             // Valor que tiene la base aliada al moverse
     [SerializeField] private int sphereMoveValue;               // Valor que tiene la esfera de influencia al moverse
     [SerializeField] private int enemyMoveValue;                // Valor que tiene el enemigo al moverse
+    [SerializeField] private int berserkMoveValue;              // Valor que tiene el berserk al moverse
     [SerializeField] private int allyMoveValue;                 // Valor que tiene un aliado al moverse
     [SerializeField] private int coverMoveValue;                // Valor que tiene una cobertura al moverse
     [SerializeField] private int moveCenterInfluence;           // Influencia desde el centro de los puntos de influencia
@@ -277,16 +280,14 @@ public class HeatMapMaker : MonoBehaviour
 
                         // Generamos un punto de influencia
                         LevelGrid.Instance.AddValue(gridPosition, sphereMoveValue, moveCenterInfluence, sphereMoveExpansion);
-                        continue;
 
                     }
 
                 }
-
-                // Comprobamos si la posicion tiene unidades dentro
-                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(gridPosition))
+                else if (LevelGrid.Instance.HasAnyUnitOnGridPosition(gridPosition))
                 {
 
+                    // La posicion tiene unidades dentro
                     // Recuperamos el target de la posicion
                     Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
 
@@ -300,14 +301,16 @@ public class HeatMapMaker : MonoBehaviour
 
                             // Generamos un punto de influencia
                             LevelGrid.Instance.AddValue(gridPosition, allyBaseMoveValue, moveCenterInfluence, baseMoveExpansion);
-                            continue;
 
                         }
+                        else
+                        {
 
-                        // Es una unidad aliada
-                        LevelGrid.Instance.AddValue(gridPosition, allyMoveValue, moveCenterInfluence, 
-                            targetUnit.GetAction<ShootAction>().GetMaxShootDistance());
-                        continue;
+                            // Es una unidad aliada
+                            LevelGrid.Instance.AddValue(gridPosition, allyMoveValue, moveCenterInfluence,
+                                targetUnit.GetAction<ShootAction>().GetMaxShootDistance());
+
+                        }
 
                     }
                     else
@@ -320,26 +323,49 @@ public class HeatMapMaker : MonoBehaviour
 
                             // Generamos un punto de influencia
                             LevelGrid.Instance.AddValue(gridPosition, enemyBaseMoveValue, moveCenterInfluence, baseMoveExpansion);
-                            continue;
 
                         }
+                        else
+                        {
 
-                        // Es una unidad enemiga
-                        LevelGrid.Instance.AddValue(gridPosition, enemyMoveValue, moveCenterInfluence, 
-                            targetUnit.GetAction<ShootAction>().GetMaxShootDistance());
-                        continue;
+                            // Comprobamos que la unidad pueda pegar espadazo
+                            if (unit.TryGetComponent(out SwordAction swordAction))
+                            {
+
+                                // Es un berserk
+                                LevelGrid.Instance.AddValue(gridPosition, berserkMoveValue, moveCenterInfluence,
+                                    targetUnit.GetAction<ShootAction>().GetMaxShootDistance());
+
+                            }
+                            else if (unit.TryGetComponent(out BuildStructureAction buildStructureAction))
+                            {
+
+                                // La unidad puedde construir torres
+                                // Añadimos el mapa de influencia de la torre para que la unidad se mueva hacia la posición donde construir torre
+                                MakeBuildStructureActionHeatMap(unit);
+
+                            }
+                            else
+                            {
+
+                                // Es una unidad enemiga
+                                LevelGrid.Instance.AddValue(gridPosition, enemyMoveValue, moveCenterInfluence,
+                                    targetUnit.GetAction<ShootAction>().GetMaxShootDistance());
+                               
+                            }
+
+                        }
 
                     }
 
                 }
 
-                // Comprobamos si en esa posición la unidad estaría cubierta
-                if (!LevelGrid.Instance.SomeoneSeesYou(unit, gridPosition))
+                // Comprobamos si en esa posición la unidad no esta a tiro de nadie
+                if (LevelGrid.Instance.SomeoneSeesYou(unit, gridPosition))
                 {
 
                     // Generamos un punto de influencia
                     LevelGrid.Instance.AddValue(gridPosition, coverMoveValue, coverMoveCenterInfluence, coverMoveExpansion);
-                    continue;
 
                 }
 

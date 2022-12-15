@@ -2713,8 +2713,9 @@ MonoBehaviour:
   allyBaseMoveValue: 20
   sphereMoveValue: 60
   enemyMoveValue: 0
+  berserkMoveValue: 5
   allyMoveValue: 0
-  coverMoveValue: 10
+  coverMoveValue: -10
   moveCenterInfluence: 1
   coverMoveCenterInfluence: 0
   sphereMoveExpansion: 11
