@@ -181,7 +181,7 @@ public class ShootAction : BaseAction
 
         targetUnit.Damage(damagetmp);
 
-        Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
+        //Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
 
         // Debug -------------------------------------------------------------------
     }
@@ -286,10 +286,10 @@ public class ShootAction : BaseAction
                     shootDirection = ((targetUnit.GetWorldPosition()+ Vector3.down * 1f) - unitWorldPosition).normalized;
                     //Debug.Log("Cambiado");
                 }else{shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;}
-                Debug.Log(shootDirection);
+                //Debug.Log("El shoot 2 es " + shootDirection);
 
                 // Comprobamos si la unidad no tiene visual del objetivo
-                if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
+                if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection ,
                     Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()), obstacleLayerMask))
                 {
 

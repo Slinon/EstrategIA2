@@ -673,6 +673,9 @@ MonoBehaviour:
   width: 16
   height: 32
   cellSize: 2
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &230689516
 GameObject:
   m_ObjectHideFlags: 0
@@ -3646,7 +3649,7 @@ PrefabInstance:
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
@@ -3656,7 +3659,7 @@ PrefabInstance:
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 52
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
@@ -5531,7 +5534,7 @@ PrefabInstance:
     - target: {fileID: 2674505501862230148, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2674505501862230148, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}
@@ -5845,7 +5848,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2124287925}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15, y: -0, z: 8}
+  m_LocalPosition: {x: 14, y: -0, z: 8}
   m_LocalScale: {x: 3.2, y: 1, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []

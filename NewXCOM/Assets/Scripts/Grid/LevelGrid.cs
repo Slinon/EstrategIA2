@@ -15,6 +15,7 @@ public class LevelGrid : MonoBehaviour
     [SerializeField] private int width;                                 // Alto de la malla
     [SerializeField] private int height;                                // Ancho de la malla
     [SerializeField] private float cellSize;                            // Tama�o de la celda
+    [SerializeField] LayerMask obstacleLayerMask;
 
     private CoverType coverType;
     private GridSystem<GridObject> gridSystem;                          // Malla que utilizamos
@@ -438,6 +439,65 @@ public class LevelGrid : MonoBehaviour
     {
         width = gridSystem.GetWidth();
         height = gridSystem.GetHeight();
+    }
+
+    public bool SomeoneSeeYouAtCover(Unit unit)
+    {
+        float unitShoulderHeight = 1.7f;
+        bool visto = false;
+        int width = LevelGrid.Instance.GetWidth();
+        int height = LevelGrid.Instance.GetHeight();
+
+        GridPosition unitGridPosition = GetGridPosition(unit.transform.position);
+        Vector3 unitPosition = unit.GetWorldPosition();
+        //Debug.Log("Leo la funcion");
+        if(unit.GetCoverType() == CoverType.Covered)
+        {
+            for (int x = 0; x < width; x++)
+            {
+
+                for (int z = 0; z < height; z++)
+                {
+                    
+                    GridPosition enemyGridPostion = new GridPosition(x,z);
+                    
+                    
+                    if(LevelGrid.Instance.HasAnyUnitOnGridPosition(enemyGridPostion))
+                    {
+                        
+                        Unit enemy = LevelGrid.Instance.GetUnitAtGridPosition(enemyGridPostion);
+                        
+
+                        if(unit.IsEnemy() != enemy.IsEnemy())
+                        {
+                            
+                            //Debug.Log("He encontrado una unidad en " + enemy.GetWorldPosition() + " y enemigo " + enemy.IsEnemy());
+                            //Debug.Log("Soy aliado en  " + unit.GetWorldPosition() + " y enemigo " + unit.IsEnemy());
+                            
+                            Vector3 shootDirection = ((enemy.GetWorldPosition()+ Vector3.down * 1f) - unitPosition).normalized;
+
+                            //Debug.Log("El shootDirection_1 es " + shootDirection);
+                            
+ 
+                            //Debug.Log(Physics.Raycast(enemy.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, Vector3.Distance(enemy.GetWorldPosition(), unit.GetWorldPosition()), obstacleLayerMask));
+
+                            // Comprobamos si la unidad no tiene visual del objetivo
+                            if (Physics.Raycast(enemy.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection ,
+                            Vector3.Distance(enemy.GetWorldPosition(), unitPosition), obstacleLayerMask))
+                            {
+                         
+                                Debug.Log("Te veo");
+                                visto = true;
+                                return visto;
+                            }else{Debug.Log("No te veo");}
+                        }
+                    }
+
+                }
+            }
+        }
+
+        return visto;
     }
 
     public void SetCoverTypeAtGridPosition(CoverType coverType, GridPosition gridPosition)
