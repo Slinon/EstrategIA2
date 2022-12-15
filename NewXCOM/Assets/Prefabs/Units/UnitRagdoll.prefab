@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5670714769479422707}
   - component: {fileID: -1924687427025178479}
+  - component: {fileID: 3628792549600615593}
   m_Layer: 7
   m_Name: UnitRagdoll
   m_TagString: Untagged
@@ -46,6 +47,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ragdollRootBone: {fileID: 5666594676002316301}
+--- !u!114 &3628792549600615593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5670714769479422705}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dff5fbc0c04a414b91e1c8a475627b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeAfterDestroy: 2
+  destroyingTimer: 3
 --- !u!1 &7879330601653882889
 GameObject:
   m_ObjectHideFlags: 0

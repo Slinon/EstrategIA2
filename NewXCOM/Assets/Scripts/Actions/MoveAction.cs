@@ -256,25 +256,8 @@ public class MoveAction : BaseAction
     public override int GetTargetValueAtPosition(GridPosition gridPosition)
     {
 
-        // Asignamos el valor de la casilla
-        int gridPositionValue = 0;
+        return LevelGrid.Instance.GetHeatMapValueAtGridPosition(gridPosition);
 
-        // Asignamos el multiplicador por acercamiento a una esfera que no se ha tomado
-        gridPositionValue += GetMultiplierForInteractSphere(gridPosition);
-
-        // Asignamos el multiplicador por estar en una cobertura válida
-        gridPositionValue += GetMultiplierForCover(gridPosition);
-
-        // Asignamos el multiplicador por acercamiento a la base enemiga
-        gridPositionValue += GetMultiplierForEnemyBase(gridPosition);
-        
-        // Calculamos la cantidad de de objetivos en la posicion actual
-        int targetCountAtGridPosition = unit.GetAction<ShootAction>().GetTargetCountAtPosition(gridPosition) * 100;
-
-        // Añadimos el valor de la cantidad de enemigos a tiro a la casilla
-        gridPositionValue += targetCountAtGridPosition;
-
-        return gridPositionValue;
     }
 
     // @IGM --------------------------------------------------
