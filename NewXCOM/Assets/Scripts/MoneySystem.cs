@@ -54,7 +54,7 @@ public class MoneySystem : MonoBehaviour
     void Update()
     {
 
-        DisplayPlayerMoney(enemyAI.money);
+        DisplayPlayerMoney(player.money);
         
     }
 

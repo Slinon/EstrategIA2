@@ -68,7 +68,7 @@ public class TurnSystem : MonoBehaviour
         {
             //Si es el turno del jugador, dar dinero
             moneySystem.GiveTakeMoney(moneySystem.MoneyPerTurn(), moneySystem.player);
-            Time.timeScale = 1;
+            //Time.timeScale = 1;
 
         }
 
@@ -76,7 +76,7 @@ public class TurnSystem : MonoBehaviour
         {
             //Si es el turno de la IA, dar dinero
             moneySystem.GiveTakeMoney(moneySystem.MoneyPerTurn(), moneySystem.enemyAI);
-            Time.timeScale = 3;
+            //Time.timeScale = 3;
 
         }
 
