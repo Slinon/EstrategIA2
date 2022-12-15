@@ -2712,13 +2712,14 @@ MonoBehaviour:
   enemyBaseMoveValue: 20
   allyBaseMoveValue: 20
   sphereMoveValue: 60
-  enemyMoveValue: -5
+  enemyMoveValue: 0
   allyMoveValue: 0
   coverMoveValue: 10
   moveCenterInfluence: 1
+  coverMoveCenterInfluence: 0
   sphereMoveExpansion: 11
   baseMoveExpansion: 20
-  coverMoveExpansion: 5
+  coverMoveExpansion: 1
 --- !u!23 &1008373988
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3549,7 +3550,7 @@ PrefabInstance:
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
@@ -3559,7 +3560,7 @@ PrefabInstance:
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}

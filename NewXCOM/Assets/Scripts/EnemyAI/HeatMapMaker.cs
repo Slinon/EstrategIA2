@@ -29,6 +29,7 @@ public class HeatMapMaker : MonoBehaviour
     [SerializeField] private int allyMoveValue;                 // Valor que tiene un aliado al moverse
     [SerializeField] private int coverMoveValue;                // Valor que tiene una cobertura al moverse
     [SerializeField] private int moveCenterInfluence;           // Influencia desde el centro de los puntos de influencia
+    [SerializeField] private int coverMoveCenterInfluence;      // Influencia desde el centro de las coberturas
     [SerializeField] private int sphereMoveExpansion;           // Expansion de los puntos de influencia de las esferas
     [SerializeField] private int baseMoveExpansion;             // Expansion de los puntos de influencia de las bases
     [SerializeField] private int coverMoveExpansion;            // Expansion de los puntos de influencia de la cobertura
@@ -329,6 +330,16 @@ public class HeatMapMaker : MonoBehaviour
                         continue;
 
                     }
+
+                }
+
+                // Comprobamos si en esa posición la unidad estaría cubierta
+                if (!LevelGrid.Instance.SomeoneSeesYou(unit, gridPosition))
+                {
+
+                    // Generamos un punto de influencia
+                    LevelGrid.Instance.AddValue(gridPosition, coverMoveValue, coverMoveCenterInfluence, coverMoveExpansion);
+                    continue;
 
                 }
 

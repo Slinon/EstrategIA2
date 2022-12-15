@@ -98,7 +98,7 @@ public class Unit : MonoBehaviour
         // Field of view
         //fieldOfView.SetOrigin(transform.position);
         //Debug.Log("setting new origin: " + transform.position);
-        LevelGrid.Instance.SomeoneSeeYouAtCover(this);
+        LevelGrid.Instance.SomeoneSeesYou(this, gridPosition);
         
     } 
 

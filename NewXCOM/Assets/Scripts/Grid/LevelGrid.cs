@@ -441,63 +441,52 @@ public class LevelGrid : MonoBehaviour
         height = gridSystem.GetHeight();
     }
 
-    public bool SomeoneSeeYouAtCover(Unit unit)
+    public bool SomeoneSeesYou(Unit unit, GridPosition testGridPosition)
     {
         float unitShoulderHeight = 1.7f;
         bool visto = false;
-        int width = LevelGrid.Instance.GetWidth();
-        int height = LevelGrid.Instance.GetHeight();
 
-        GridPosition unitGridPosition = GetGridPosition(unit.transform.position);
-        Vector3 unitPosition = unit.GetWorldPosition();
-        //Debug.Log("Leo la funcion");
-        if(unit.GetCoverType() == CoverType.Covered)
+        Vector3 testWorldPosition = GetWorldPosition(testGridPosition);
+
+        foreach (Unit enemyUnit in UnitManager.Instance.GetUnitList())
         {
-            for (int x = 0; x < width; x++)
+
+            if (unit.IsEnemy() != enemyUnit.IsEnemy())
             {
 
-                for (int z = 0; z < height; z++)
+                if (!enemyUnit.TryGetComponent(out ShootAction shootAction))
                 {
-                    
-                    GridPosition enemyGridPostion = new GridPosition(x,z);
-                    
-                    
-                    if(LevelGrid.Instance.HasAnyUnitOnGridPosition(enemyGridPostion))
-                    {
-                        
-                        Unit enemy = LevelGrid.Instance.GetUnitAtGridPosition(enemyGridPostion);
-                        
 
-                        if(unit.IsEnemy() != enemy.IsEnemy())
-                        {
-                            
-                            //Debug.Log("He encontrado una unidad en " + enemy.GetWorldPosition() + " y enemigo " + enemy.IsEnemy());
-                            //Debug.Log("Soy aliado en  " + unit.GetWorldPosition() + " y enemigo " + unit.IsEnemy());
-                            
-                            Vector3 shootDirection = ((enemy.GetWorldPosition()+ Vector3.down * 1f) - unitPosition).normalized;
-
-                            //Debug.Log("El shootDirection_1 es " + shootDirection);
-                            
- 
-                            //Debug.Log(Physics.Raycast(enemy.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, Vector3.Distance(enemy.GetWorldPosition(), unit.GetWorldPosition()), obstacleLayerMask));
-
-                            // Comprobamos si la unidad no tiene visual del objetivo
-                            if (Physics.Raycast(enemy.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection ,
-                            Vector3.Distance(enemy.GetWorldPosition(), unitPosition), obstacleLayerMask))
-                            {
-                         
-                                Debug.Log("Te veo");
-                                visto = true;
-                                return visto;
-                            }else{Debug.Log("No te veo");}
-                        }
-                    }
+                    continue;
 
                 }
+
+                if (Vector3.Distance(enemyUnit.GetWorldPosition(), testWorldPosition) > shootAction.GetMaxShootDistance() * cellSize)
+                {
+
+                    continue;
+
+                }
+
+                Vector3 shootDirection = (testWorldPosition + Vector3.down * 1f - enemyUnit.GetWorldPosition()).normalized;
+
+                //Debug.DrawLine(enemyUnit.GetWorldPosition() + Vector3.up * unitShoulderHeight, enemyUnit.GetWorldPosition() + Vector3.up * unitShoulderHeight + shootDirection * Vector3.Distance(enemyUnit.GetWorldPosition(), testWorldPosition), Color.red, 10);
+                // Comprobamos si la unidad tiene visual del objetivo
+                if (!Physics.Raycast(enemyUnit.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection,
+                Vector3.Distance(enemyUnit.GetWorldPosition(), testWorldPosition), obstacleLayerMask))
+                {
+            
+                    visto = true;
+                    return visto;
+
+                }
+
             }
+
         }
 
         return visto;
+
     }
 
     public void SetCoverTypeAtGridPosition(CoverType coverType, GridPosition gridPosition)
