@@ -7,7 +7,7 @@ public class CameraController : MonoBehaviour
 {
 
     private const float MIN_FOLLOW_Y_OFFSET = 2f;                                   // Constante zoom minimo
-    private const float MAX_FOLLOW_Y_OFFSET = 12f;                                  // Constante zoom maximo
+    private const float MAX_FOLLOW_Y_OFFSET = 20f;                                  // Constante zoom maximo
 
     [SerializeField] private CinemachineVirtualCamera cinemachineVirtualCamera;     // Objeto cinemachine
 

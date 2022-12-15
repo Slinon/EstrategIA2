@@ -46,7 +46,7 @@ public class GrenadeAction : BaseAction
         return new EnemyAIAction
         {
             gridPosition = gridPosition,
-            actionValue = baseAIValue + GetTargetValueAtPosition(gridPosition)
+            actionValue = baseAIValue + LevelGrid.Instance.GetHeatMapValueAtGridPosition(gridPosition)
         };
 
     }

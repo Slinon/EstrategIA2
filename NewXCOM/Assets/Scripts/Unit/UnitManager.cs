@@ -95,7 +95,7 @@ public class UnitManager : MonoBehaviour
 
         // La borramos de la lista de unidades
         unitList.Remove(unit);
-
+ 
         // Comprobamos si la unidad es un enemigo
         if (unit.IsEnemy())
         {

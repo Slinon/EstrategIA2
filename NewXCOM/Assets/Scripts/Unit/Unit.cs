@@ -24,7 +24,7 @@ public class Unit : MonoBehaviour
     [SerializeField] private MeshRenderer gunMeshRenderer;
     [SerializeField] private MeshRenderer selectedVisualMeshRenderer;
     [SerializeField] private Canvas UnitWorldUICanvas;
-    [SerializeField] private bool isBase = false;
+    [SerializeField] private bool isStructure = false;
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -98,7 +98,8 @@ public class Unit : MonoBehaviour
         // Field of view
         //fieldOfView.SetOrigin(transform.position);
         //Debug.Log("setting new origin: " + transform.position);
-
+        LevelGrid.Instance.SomeoneSeesYou(this, gridPosition);
+        
     } 
 
     // @IGM ------------------------------------------
@@ -205,7 +206,7 @@ public class Unit : MonoBehaviour
     // @IGM -------------------------------
     // Metodo para gastar puntos de accion.
     // ------------------------------------
-    private void SpendActionPoints(int amount)
+    public void SpendActionPoints(int amount)
     {
 
         // Restamos la cantidad de puntos que cuesta la accion
@@ -323,11 +324,12 @@ public class Unit : MonoBehaviour
             OnAnyUnitMoved(this, EventArgs.Empty);
 
         }
+
     }
 
     public void SetIsVisible(bool isVisible)
     {
-        if (isBase) return;
+        if (isStructure) return; //Las estructuras como torretas y la base no son camufladas por el FoW, al ser entidades inmoviles.
 
         else
         {

@@ -351,14 +351,21 @@ public class Checkers : MonoBehaviour
     {
 
         // Recuperamos la lista de unidades enemigas
-        List<Unit> enemies = UnitManager.Instance.GetEnemyUnitList();
+        List<Unit> enemies = UnitManager.Instance.GetFriendlyUnitList();
 
         // Recorremos la lista de unidades enemigas
         foreach (Unit enemy in enemies)
         {
 
+            if (!enemy.TryGetComponent(out ShootAction shootAction))
+            {
+
+                continue;
+
+            }
+
             // Recuperamos las posiciones de las unidades aliadas que tiene el enemigo a tiro
-            List<GridPosition> allyUnitsGridPosition = enemy.GetAction<ShootAction>().GetValidActionGridPositionList();
+            List<GridPosition> allyUnitsGridPosition = shootAction.GetValidActionGridPositionList();
 
             // Recorremos la lista de las posiciones aliadas
             foreach (GridPosition allyGridPosition in allyUnitsGridPosition)
@@ -372,7 +379,7 @@ public class Checkers : MonoBehaviour
                 {
 
                     // Comrpobamos si el enemigo la puede matar de un tiro
-                    if ((unit.GetHealthNormalized() * 100f) < enemy.GetComponent<ShootAction>().GetShootDamage())
+                    if ((unit.GetHealthNormalized() * 100f) < shootAction.GetShootDamage())
                     {
 
                         return true;
@@ -501,105 +508,8 @@ public class Checkers : MonoBehaviour
         foreach (GridPosition gridPosition in buildStructureAction.GetValidActionGridPositionList())
         {
 
-            int allyTurretsInRange = 0;
-            int enemiesInRange = 0;
-
-            // Recorremos todas las posiciones validas alrededor de la malla
-            for (int x = -maxTurretRange; x <= maxTurretRange; x++)
-            {
-
-                for (int z = -maxTurretRange; z <= maxTurretRange; z++)
-                {
-
-                    // Creamos la posicion alrededor de la posicion del jugador
-                    GridPosition offsetGridPosition = new GridPosition(x, z);
-                    GridPosition testGridPosition = gridPosition + offsetGridPosition;
-
-                    // Comprobamos si la posicion esta fuera de la malla
-                    if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
-                    {
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    // Calculamos la distancia de la posicion a probar
-                    int testDistance = Mathf.Abs(x) + Mathf.Abs(z);
-
-                    // Comprobamos si la distancia es mayor a la de diparo
-                    if (testDistance > maxTurretRange)
-                    {
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    // Comprobamos si la posicion no tiene unidades dentro
-                    if (!LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
-                    {
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    // Recuperamos el target de la posicion
-                    Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
-
-                    // Comprobamos si el target esta en el mismo equipo que la unidad
-                    if (targetUnit.IsEnemy() == unit.IsEnemy())
-                    {
-
-                        // Comprobamos si la unidad es una torre
-                        if (targetUnit.tag == "Turret")
-                        {
-
-                            allyTurretsInRange++;
-
-                        }
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    // Definimos un offset para poder disparar por encima de obstaculos bajos
-                    float unitShoulderHeight = 1.7f;
-
-                    // Calculamos la direccion de disparo
-                    Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(gridPosition);
-                    Unit unitPosition = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
-                    Vector3 shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
-
-                    // Definimos un offset para poder disparar por encima de obstaculos bajos
-                    if (targetUnit.GetCoverType() == CoverType.Covered)
-                    {
-                        if (unitPosition.GetCoverType() == CoverType.Covered)
-                        {
-                            unitShoulderHeight = 0.6f;
-                        }
-                        else { unitShoulderHeight = 1.7f; }
-                    }
-
-                    // Comprobamos si la unidad no tiene visual del objetivo
-                    if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection,
-                        Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()), obstacleLayerMask))
-                    {
-
-                        // La saltamos
-                        continue;
-
-                    }
-
-                    enemiesInRange++;
-
-                }
-
-            }
-            Debug.Log(unit.name + ": " + allyTurretsInRange);
-            if (allyTurretsInRange == 0 && enemiesInRange > 2)
+            // Comprobamos si el mapa de influencia supera un umbral de 20
+            if (LevelGrid.Instance.GetHeatMapValueAtGridPosition(gridPosition) > 20)
             {
 
                 return true;
@@ -609,6 +519,42 @@ public class Checkers : MonoBehaviour
         }
 
         return false;
+
+    }
+
+    // @IGM ----------------------------------------------------------------------
+    // Funcion para saber si la unidad esta colocada en la mejor posicion posible.
+    // ---------------------------------------------------------------------------
+    public bool UnitInBestPosition(Unit unit)
+    {
+
+        // Comprobamos si la unidad tiene accion de movimiento
+        if (!unit.TryGetComponent(out MoveAction unitMoveAction))
+        {
+
+            // Evitamos hacer todo el calculo
+            return true;
+
+        }
+
+        // Recumeramos el valor de la posicion actual de la unidad
+        int unitGridPositionValue = unitMoveAction.GetTargetValueAtPosition(unit.GetGridPosition());
+
+        // Recorremos la lista de posibles posiciones de la unidad
+        foreach (GridPosition gridPosition in unitMoveAction.GetValidActionGridPositionList())
+        {
+
+            // Comprobamos que el valor de la posible posicion sea mayor que el valor de la posicion de la unidad
+            if (unitGridPositionValue < unitMoveAction.GetTargetValueAtPosition(gridPosition))
+            {
+
+                return false;
+
+            }
+
+        }
+
+        return true;
 
     }
 

@@ -257,7 +257,7 @@ MonoBehaviour:
   gunMeshRenderer: {fileID: 5684564054465811295}
   selectedVisualMeshRenderer: {fileID: 3971381634955791457}
   UnitWorldUICanvas: {fileID: 4730256894191432498}
-  isBase: 0
+  isStructure: 0
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0

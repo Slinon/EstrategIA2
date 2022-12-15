@@ -16,7 +16,8 @@ public class MoneySystem : MonoBehaviour
     //-----------------------------------
     //@GRG - Money System
     //-----------------------------------
-    [SerializeField] private int startingAmount = 500;
+    [SerializeField] private int startingAmountPlayer = 500;
+    [SerializeField] private int startingAmountAI = 500;
     [SerializeField] private int moneyPerTurn = 500;
     [SerializeField] private float timeToFill = 2f;
 
@@ -44,14 +45,11 @@ public class MoneySystem : MonoBehaviour
         enemyAI = new Target();
 
         //Set player and AI money to the starting amount
-        player.money = enemyAI.money = startingAmount;
+        player.money = startingAmountPlayer;
+        enemyAI.money = startingAmountAI;
 
     }
 
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
