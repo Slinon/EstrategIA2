@@ -126,11 +126,11 @@ PrefabInstance:
         type: 3}
       propertyPath: gunMeshRenderer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4969819411743595339}
     - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: meshRenderers.Array.size
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
@@ -152,11 +152,6 @@ PrefabInstance:
       propertyPath: meshRenderers.Array.data[3]
       value: 
       objectReference: {fileID: 6679545314807801366}
-    - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
-        type: 3}
-      propertyPath: meshRenderers.Array.data[4]
-      value: 
-      objectReference: {fileID: 6265208225588917569}
     - target: {fileID: 5670714769479422707, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: m_RootOrder
@@ -338,15 +333,6 @@ MeshRenderer:
 --- !u!23 &4969819411743595339 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4721912385525569799, guid: ac440551d1eccea44b91761e4cb51962,
-    type: 3}
-  m_PrefabInstance: {fileID: 8827123269630590386}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &6265208225588917569 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3202693167828650227, guid: ac440551d1eccea44b91761e4cb51962,
-    type: 3}
-  m_PrefabInstance: {fileID: 8827123269630590386}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9010159848785386073 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac440551d1eccea44b91761e4cb51962,
