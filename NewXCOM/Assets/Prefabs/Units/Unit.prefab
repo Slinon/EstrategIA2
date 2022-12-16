@@ -254,8 +254,11 @@ MonoBehaviour:
   isEnemy: 0
   coverType: 0
   skinnedMeshRenderer: {fileID: 5718205366572282113}
-  gunMeshRenderer: {fileID: 5684564054465811295}
-  selectedVisualMeshRenderer: {fileID: 3971381634955791457}
+  meshRenderers:
+  - {fileID: 5684033532048706139}
+  - {fileID: 5684530500909691715}
+  - {fileID: 5685608995287894955}
+  - {fileID: 3971381634955791457}
   UnitWorldUICanvas: {fileID: 4730256894191432498}
   isStructure: 0
 --- !u!114 &2829561667425429965
@@ -1329,9 +1332,21 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 5670714769087910261}
   m_PrefabAsset: {fileID: 0}
---- !u!23 &5684564054465811295 stripped
+--- !u!23 &5684033532048706139 stripped
 MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 23025878479421994, guid: c25ac4fdc903e7d49a7520930673ecd6,
+  m_CorrespondingSourceObject: {fileID: 23594868763253550, guid: c25ac4fdc903e7d49a7520930673ecd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5670714769087910261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5684530500909691715 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23062629242348086, guid: c25ac4fdc903e7d49a7520930673ecd6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5670714769087910261}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &5685608995287894955 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23989455105645278, guid: c25ac4fdc903e7d49a7520930673ecd6,
     type: 3}
   m_PrefabInstance: {fileID: 5670714769087910261}
   m_PrefabAsset: {fileID: 0}
