@@ -35,7 +35,7 @@ public class RandomizeMap : MonoBehaviour
 
         for (int i = 1; i < width - 1; i++)
         {
-            for (int j = 2; j < height - 2; j++) //El bucle va de 2 a height-2 porque evitamos las dos primeras/últimas filas, que es donde va la base.
+            for (int j = 4; j < height - 4; j++) //El bucle va de 4 a height-4 porque evitamos donde va la base.
             {
                 if (pseudoRandom.Next(0, 100) < obstaclesPercentage)
                 {

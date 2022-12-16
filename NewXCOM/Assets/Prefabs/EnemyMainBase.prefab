@@ -649,6 +649,7 @@ GameObject:
   - component: {fileID: 7707601630530221458}
   - component: {fileID: 5496302085300907835}
   - component: {fileID: 1101494743}
+  - component: {fileID: 1429363993}
   m_Layer: 7
   m_Name: EnemyMainBase
   m_TagString: EnemyMainBase
@@ -719,8 +720,7 @@ MonoBehaviour:
   isEnemy: 1
   coverType: 0
   skinnedMeshRenderer: {fileID: 0}
-  gunMeshRenderer: {fileID: 0}
-  selectedVisualMeshRenderer: {fileID: 0}
+  meshRenderers: []
   UnitWorldUICanvas: {fileID: 0}
   isStructure: 1
 --- !u!114 &465745189711302274
@@ -840,6 +840,18 @@ MonoBehaviour:
   maxAIValueAction: 100000
   minAIValueAction: 0
   enemyManager: {fileID: 0}
+--- !u!114 &1429363993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465745189711302299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d648ccdd76680641b3ab701dd0fedc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &465745189760989634
 GameObject:
   m_ObjectHideFlags: 0
