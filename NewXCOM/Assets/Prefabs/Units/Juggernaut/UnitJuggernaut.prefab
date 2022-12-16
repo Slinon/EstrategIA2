@@ -177,6 +177,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: gunJuggernaut
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1cd66e763f3c16245a3d9b2cb6ee5100,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1cd66e763f3c16245a3d9b2cb6ee5100, type: 3}
 --- !u!23 &39568891034034462 stripped
@@ -188,6 +193,9 @@ MeshRenderer:
 --- !u!23 &9067616955498300073 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -1541458644353745101, guid: 1cd66e763f3c16245a3d9b2cb6ee5100,
+--- !u!4 &1209145508201929329 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1cd66e763f3c16245a3d9b2cb6ee5100,
     type: 3}
   m_PrefabInstance: {fileID: 1679004917112503706}
   m_PrefabAsset: {fileID: 0}
@@ -198,6 +206,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4531885919472716451, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: rifleTransform
+      value: 
+      objectReference: {fileID: 1209145508201929329}
     - target: {fileID: 1952096564367789872, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: shootDamage

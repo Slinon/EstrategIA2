@@ -90,6 +90,12 @@ MeshRenderer:
     type: 3}
   m_PrefabInstance: {fileID: 4535857602070598477}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &4141098376740549798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b777381ae48ff094a872397039327ecd,
+    type: 3}
+  m_PrefabInstance: {fileID: 4535857602070598477}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7394810471330505072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -97,6 +103,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4531885919472716451, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: rifleTransform
+      value: 
+      objectReference: {fileID: 4141098376740549798}
     - target: {fileID: 1952096564367789872, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: maxShootDistance
@@ -207,6 +218,16 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 673443bdcb7bf2f47be93ce60e68966f, type: 2}
+    - target: {fileID: 6062886979335544872, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: maxStructureCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062886979335544872, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: obstacleLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -4097678567261118390, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}
     - {fileID: 2103982402689608955, guid: 93acb812f8d87a24c94eb922d5515eaf, type: 3}

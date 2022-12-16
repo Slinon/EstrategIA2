@@ -79,7 +79,7 @@ public class EnemyManager : MonoBehaviour
     {
 
         // Ponemos valor negativo a la base enemiga
-        heatMapMaker.SetEnemyBaseMoveValue(0);
+        heatMapMaker.SetEnemyBaseMoveValue(-20);
 
         // Ponemos valor positivo a la base aliada
         heatMapMaker.SetAllyBaseMoveValue(-20);

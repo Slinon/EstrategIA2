@@ -20,13 +20,16 @@ public class BuildStructureAction : BaseAction
     public event EventHandler OnStartBuilding;
     public event EventHandler OnStopBuilding;
 
-    [SerializeField] private int maxBuildDistance;      // Distancia maxima de construcción
-    [SerializeField] private GameObject structure;      // shield
-    [SerializeField] LayerMask obstacleLayerMask;       // Capa de los obstaculos
+    [SerializeField] private int maxBuildDistance;          // Distancia maxima de construcción
+    [SerializeField] private GameObject structure;          // shield
+    [SerializeField] private LayerMask obstacleLayerMask;   // Capa de los obstaculos
+    [SerializeField] private int maxStructureCount;         // Limite de estructuras que se pueden construir con esta accion
 
-    private State state;                                // Estado actual de la accion
-    private float stateTimer;                           // Timer de la maquina de estados
-    private Vector3 spawnPoint;                         // Punto donde spawnea la unidad
+    private State state;                                    // Estado actual de la accion
+    private float stateTimer;                               // Timer de la maquina de estados
+    private Vector3 spawnPoint;                             // Punto donde spawnea la unidad
+    private int structureCount;                             // Numero de torres que se pueden construir
+
 
     // Update is called once per frame
     void Update()
@@ -94,11 +97,28 @@ public class BuildStructureAction : BaseAction
                 float afterSpawnStateTime = 0.5f;
                 stateTimer = afterSpawnStateTime;
 
-                // Spawneamos la unidad
-                Unit newStructure = Instantiate(structure, spawnPoint, Quaternion.identity).GetComponent<Unit>();
+                // Comprobamos que no hemos superado el maximo de estructuras
+                if (GetStructureCount() < GetMaxStructureCount())
+                {
 
-                // Le quitamos los puntos de accion
-                newStructure.SpendActionPoints(newStructure.GetActionPoints());
+                    // Spawneamos la unidad
+                    Unit newStructure = Instantiate(structure, spawnPoint, Quaternion.identity).GetComponent<Unit>();
+
+                    // Le quitamos los puntos de accion
+                    newStructure.SpendActionPoints(newStructure.GetActionPoints());
+
+                    // Asignamos la estructura a esta unidad
+                    if (newStructure.TryGetComponent(out Structure turret))
+                    {
+
+                        turret.SetUnit(unit);
+
+                    }
+
+                    // Incrementamos el numero de estructuras generadas por esta unidad
+                    AddStructureCount();
+
+                }
 
                 break;
 
@@ -338,6 +358,46 @@ public class BuildStructureAction : BaseAction
     {
 
         return structure;
+
+    }
+
+    // @IGM --------------------------------------------------------
+    // Getter de la capacidad maxima de construccion de estructuras.
+    // -------------------------------------------------------------
+    public int GetMaxStructureCount()
+    {
+
+        return maxStructureCount;
+
+    }
+
+    // @IGM --------------------------------------------
+    // Getter de la cantidad de estructuras construidas.
+    // -------------------------------------------------
+    public int GetStructureCount()
+    {
+
+        return structureCount;
+
+    }
+
+    // @IGM ------------------------------------------
+    // Metodo para añadir una estructura en la cuenta.
+    // -----------------------------------------------
+    public void AddStructureCount()
+    {
+
+        structureCount++;
+
+    }
+
+    // @IGM --------------------------------------------
+    // Metodo para eliminar una estructura en la cuenta.
+    // -------------------------------------------------
+    public void DeleteStructureCount()
+    {
+
+        structureCount--;
 
     }
 

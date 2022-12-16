@@ -137,13 +137,33 @@ public class UnitActionSystem : MonoBehaviour
             if (!selectedUnit.IsEnemy()) //Si se trata del jugador
             {
 
-                if (selectedAction.MoneyCost() <= MoneySystem.Instance.player.money)
+                if (selectedAction is BuildStructureAction)
                 {
-                    SetBusy();
-                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);                 
+
+                    if ((selectedAction as BuildStructureAction).GetStructureCount()
+                    < (selectedAction as BuildStructureAction).GetMaxStructureCount())
+                    {
+
+                        SetBusy();
+                        selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+
+                    }
+                    else
+                    {
+
+                        Debug.Log("Esta acción NO se puede realizar, devolviendo el punto de acción");
+                        selectedUnit.GiveActionPointBack();
+
+                    }
 
                 }
+                else if (selectedAction.MoneyCost() <= MoneySystem.Instance.player.money)
+                {
 
+                    SetBusy();
+                    selectedAction.TakeAction(mouseGridPosition, ClearBusy);
+
+                }
                 else
                 {
 

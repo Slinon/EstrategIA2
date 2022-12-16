@@ -102,6 +102,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -4531885919472716451, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
+      propertyPath: rifleTransform
+      value: 
+      objectReference: {fileID: 9010159848785386073}
     - target: {fileID: 1952096564367789872, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
       propertyPath: maxShootDistance
@@ -328,6 +333,9 @@ MeshRenderer:
 --- !u!23 &4969819411743595339 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -4721912385525569799, guid: ac440551d1eccea44b91761e4cb51962,
+--- !u!4 &9010159848785386073 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ac440551d1eccea44b91761e4cb51962,
     type: 3}
   m_PrefabInstance: {fileID: 8827123269630590386}
   m_PrefabAsset: {fileID: 0}
