@@ -839,6 +839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxAIValueAction: 100000
   minAIValueAction: 0
+  enemyManager: {fileID: 0}
 --- !u!1 &465745189760989634
 GameObject:
   m_ObjectHideFlags: 0

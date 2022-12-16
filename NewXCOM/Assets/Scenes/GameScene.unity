@@ -939,11 +939,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6315176357458564335, guid: c7c2f787643e4e2449140e58fb1f2218,
-        type: 3}
-      propertyPath: maxActionPoints
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7c2f787643e4e2449140e58fb1f2218, type: 3}
 --- !u!4 &299142071 stripped
@@ -2107,6 +2102,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1640828378}
     m_Modifications:
+    - target: {fileID: 1101494743, guid: 16902b0745a39fb47bd3eeeacdc812a4, type: 3}
+      propertyPath: enemyManager
+      value: 
+      objectReference: {fileID: 1470498051}
     - target: {fileID: 465745189711302298, guid: 16902b0745a39fb47bd3eeeacdc812a4,
         type: 3}
       propertyPath: m_RootOrder
@@ -2724,7 +2723,7 @@ MonoBehaviour:
   moveCenterInfluence: 1
   coverMoveCenterInfluence: 0
   sphereMoveExpansion: 11
-  baseMoveExpansion: 20
+  baseMoveExpansion: 22
   coverMoveExpansion: 1
 --- !u!23 &1008373988
 MeshRenderer:
@@ -4022,6 +4021,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c703754aeceb594388aaeda0a32c233, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseMagnitude: 20
+  spheresMagnitude: 60
   heatMapMaker: {fileID: 1008373987}
   closeSphere: {fileID: 1462195611}
   farSphere: {fileID: 1825145544}

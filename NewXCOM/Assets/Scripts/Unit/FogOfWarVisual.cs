@@ -61,14 +61,14 @@ public class FogOfWarVisual : MonoBehaviour
 
     public void ShowForOfWar(List<GridPosition> revealedGridPositions)
     {
-        List<GridPosition> list = revealedGridPositions.ConvertAll(x => (GridPosition) x);
+
         for(int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
         {
             for(int z = 0; z < LevelGrid.Instance.GetHeight(); z++)
             {
                 // Instanciamos el prefab para cada posicion
                 GridPosition gridPosition = new GridPosition(x, z);
-                if(list.Contains(gridPosition))
+                if(revealedGridPositions.Contains(gridPosition))
                 {
                     //Debug.Log("position revealed");
 

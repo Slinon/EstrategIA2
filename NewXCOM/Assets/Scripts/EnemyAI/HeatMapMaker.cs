@@ -405,6 +405,16 @@ public class HeatMapMaker : MonoBehaviour
 
     }
 
+    // @IGM --------------------------------------
+    // Setter del valor de las esferas al moverse.
+    // -------------------------------------------
+    public void SetSpheresMoveValue(int sphereMoveValue)
+    {
+
+        this.sphereMoveValue = sphereMoveValue;
+
+    }
+
     // @IGM -----------------------------------------
     // Getter del valor de la base aliada al moverse.
     // ----------------------------------------------
