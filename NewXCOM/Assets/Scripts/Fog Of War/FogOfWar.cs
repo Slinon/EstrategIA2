@@ -114,7 +114,7 @@ public class FogOfWar : MonoBehaviour
         FogOfWarVisual.Instance.showFogOfWar(revealedGridPositionList);
 
         // Dehabilitamos el meshRender de los enemigos fuera de rango
-        UnitManager.Instance.hideOrShowEnemies(revealedGridPositionList);
+        // UnitManager.Instance.hideOrShowEnemies(revealedGridPositionList);
     }
 
     // copied from Code Monkey Utilities

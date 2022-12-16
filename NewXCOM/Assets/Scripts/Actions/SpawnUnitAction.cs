@@ -25,7 +25,7 @@ public class SpawnUnitAction : BaseAction
     [SerializeField] protected Transform unitSpawned;               // Unidad que queremos spawnear
 
     private int maxSpawnDistanceHeight;                             // Distancia maxima de spawn
-    private int maxSpawnDistanceWidht;
+    private int maxSpawnDistanceWidth;
     private GameObject[] interactionSpheres;
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
@@ -40,7 +40,7 @@ public class SpawnUnitAction : BaseAction
     {
         interactionSpheres = GameObject.FindGameObjectsWithTag("Sphere");
         maxSpawnDistanceHeight = 7;
-        maxSpawnDistanceWidht = 12;
+        maxSpawnDistanceWidth = 12;
     }
 
     // @IGM ------------------------
@@ -48,7 +48,6 @@ public class SpawnUnitAction : BaseAction
     // -----------------------------
     private void Update()
     {
-       
         // Comprobamos si la accion se ha activado
         if (!isActive)
         {
@@ -212,7 +211,7 @@ public class SpawnUnitAction : BaseAction
         // GridPosition unitGridPosition = unit.GetGridPosition();
         allPositionsList.Add(unit.GetGridPosition());
 
-        maxSpawnDistanceListWidth.Add(maxSpawnDistanceWidht);
+        maxSpawnDistanceListWidth.Add(maxSpawnDistanceWidth);
         maxSpawnDistanceListHeight.Add(maxSpawnDistanceHeight);
 
         // Comprobar puntos capturados y su distancia maxima alrededor
@@ -296,6 +295,70 @@ public class SpawnUnitAction : BaseAction
 
     }
 
+    public List<GridPosition> GetSpawnAreaPositionsList(SpawnUnitAction spawnBase)
+    {
+        // Creamos la lista posiciones
+        List<GridPosition> spawnPositionsList = new List<GridPosition>();
+        GridPosition spawnGridPosition = spawnBase.unit.GetGridPosition();
+
+        // Recorremos todas las posiciones validas alrededor de la malla
+        for (int x = - spawnBase.GetMaxSpawnDistanceWidth(); x <= spawnBase.GetMaxSpawnDistanceWidth(); x++) // width
+        {
+            for (int z = -spawnBase.GetMaxSpawnDistanceHeight(); z <= spawnBase.GetMaxSpawnDistanceHeight(); z++) // height
+            {
+
+                // Creamos la posicion alrededor de la posicion del jugador
+                GridPosition offsetGridPosition = new GridPosition(x, z);
+                GridPosition testGridPosition = spawnGridPosition + offsetGridPosition;
+
+                // Comprobamos si la posicion esta fuera de la malla
+                if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es en la que esta la unidad
+                if (spawnGridPosition == testGridPosition)
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion tiene unidades dentro
+                if (LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos si la posicion es un obstaculo
+                if (!Pathfinding.Instance.IsWalkableGridPosition(testGridPosition))
+                {
+
+                    // La saltamos
+                    continue;
+
+                }
+
+                // Comprobamos que la posicion no esta ya en la lista
+                if (!spawnPositionsList.Contains(testGridPosition))
+                {
+                    // Lo añadimos a la lista
+                    spawnPositionsList.Add(testGridPosition);
+                }
+            }
+        }
+
+        return spawnPositionsList;
+    }
+
     public override void TakeAction(GridPosition gridPosition, Action onActionComplete)
     {
 
@@ -306,9 +369,9 @@ public class SpawnUnitAction : BaseAction
         stateTimer = beforeSpawnStateTime;
 
         // Empezamos la accion
-        
+
         ActionStart(onActionComplete);
-        
+
     }
 
     // @IGM ------------------------------------------------
@@ -319,6 +382,15 @@ public class SpawnUnitAction : BaseAction
 
         return 0;
 
+    }
+
+    public int GetMaxSpawnDistanceHeight()
+    {
+        return this.maxSpawnDistanceHeight;
+    }
+    public int GetMaxSpawnDistanceWidth()
+    {
+        return this.maxSpawnDistanceWidth;
     }
 
 }
