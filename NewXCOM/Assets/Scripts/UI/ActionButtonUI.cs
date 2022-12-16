@@ -15,10 +15,22 @@ public class ActionButtonUI : MonoBehaviour
 
     private void Update()
     {
+
         if (baseAction.MoneyCost() > MoneySystem.Instance.player.money)
         {
             button.interactable = false;
         }
+
+        // Comprobamos si hemos superado la capacidad de estructuras construidas
+        if (baseAction is BuildStructureAction && 
+            (baseAction as BuildStructureAction).GetStructureCount() 
+            >= (baseAction as BuildStructureAction).GetMaxStructureCount())
+        {
+
+            button.interactable = false;
+
+        }
+
     }
 
 
