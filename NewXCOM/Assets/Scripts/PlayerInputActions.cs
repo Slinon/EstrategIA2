@@ -62,6 +62,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ToggleHeatMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""baa1cc1e-e103-464c-b418-e00df7fe3881"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eb10eb8b-9b1b-4fa7-a39a-eeb185877334"",
+                    ""path"": ""<Keyboard>/#(I)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ToggleHeatMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -186,6 +206,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_CameraRotate = m_Player.FindAction("CameraRotate", throwIfNotFound: true);
         m_Player_CameraZoom = m_Player.FindAction("CameraZoom", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+        m_Player_ToggleHeatMap = m_Player.FindAction("ToggleHeatMap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +270,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CameraRotate;
     private readonly InputAction m_Player_CameraZoom;
     private readonly InputAction m_Player_Click;
+    private readonly InputAction m_Player_ToggleHeatMap;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -257,6 +279,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @CameraRotate => m_Wrapper.m_Player_CameraRotate;
         public InputAction @CameraZoom => m_Wrapper.m_Player_CameraZoom;
         public InputAction @Click => m_Wrapper.m_Player_Click;
+        public InputAction @ToggleHeatMap => m_Wrapper.m_Player_ToggleHeatMap;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -278,6 +301,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Click.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnClick;
+                @ToggleHeatMap.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleHeatMap;
+                @ToggleHeatMap.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleHeatMap;
+                @ToggleHeatMap.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnToggleHeatMap;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -294,6 +320,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
+                @ToggleHeatMap.started += instance.OnToggleHeatMap;
+                @ToggleHeatMap.performed += instance.OnToggleHeatMap;
+                @ToggleHeatMap.canceled += instance.OnToggleHeatMap;
             }
         }
     }
@@ -304,5 +333,6 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnCameraRotate(InputAction.CallbackContext context);
         void OnCameraZoom(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnToggleHeatMap(InputAction.CallbackContext context);
     }
 }

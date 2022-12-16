@@ -24,6 +24,7 @@ public class FogOfWar : MonoBehaviour
     {
         UnitManager.OnAnyUnitMovedGridPosition += UnitManager_OnAnyUnitMovedGridPosition;
         Unit.OnAnyUnitDied += UnitManager_OnAnyUnitMovedGridPosition;
+        Unit.OnAnyUnitSpawned += UnitManager_OnAnyUnitMovedGridPosition;
         UpdateAllFogOfWar();
     }
 
@@ -36,11 +37,11 @@ public class FogOfWar : MonoBehaviour
     public void UpdateAllFogOfWar()
     {
 
-        List<Vector2Int> revealedGridPositionList = new List<Vector2Int>();
+        List<GridPosition> revealedGridPositionList = new List<GridPosition>();
 
         foreach(Unit unit in UnitManager.Instance.GetFriendlyUnitList())
         {
-            Vector2Int unitGridPosition = unit.GetGridPosition();
+            GridPosition unitGridPosition = unit.GetGridPosition();
             Vector3 unitWorldPosition = unit.GetWorldPosition();
 
             revealedGridPositionList.Add(unitGridPosition);
@@ -74,7 +75,7 @@ public class FogOfWar : MonoBehaviour
                 for(float viewDistance = 0f; viewDistance < viewDistanceCollision; viewDistance += viewDistanceIncrease)
                 {
                     Vector3 targetPosition = unitWorldPosition + dir * viewDistance;
-                    Vector2Int targetGridPosition = LevelGrid.Instance.GetGridPosition(targetPosition);
+                    GridPosition targetGridPosition = LevelGrid.Instance.GetGridPosition(targetPosition);
                     if(LevelGrid.Instance.IsValidGridPosition(targetGridPosition))
                     {
                         //CoverType coverType = LevelGrid.Instance.GetCoverTypeAtPosition(targetPosition);

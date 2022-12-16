@@ -176,7 +176,7 @@ public class UnitManager : MonoBehaviour
     // @VJT --------------------------------------
     // Escconde los enemigos
     // -------------------------------------------
-    public void hideOrShowEnemies(List<Vector2Int> revealedPositionGrid)
+    public void hideOrShowEnemies(List<GridPosition> revealedPositionGrid)
     {
         foreach (Unit enemy in enemyUnitList)
         {

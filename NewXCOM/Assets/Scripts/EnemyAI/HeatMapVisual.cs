@@ -8,6 +8,8 @@ public class HeatMapVisual : MonoBehaviour
     private Mesh mesh;                                  // Malla del mapa de influencia
     private Quaternion[] cachedQuaternionEulerArr;      // Cosas de cuaterniones
     private bool updateMesh;                            // Booleano para saber si tenemos que actualizar la malla
+    private MeshRenderer meshRenderer;                  // Malla de renderizado
+    private bool meshActive;                            // Booleano de control de la malla
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -20,6 +22,8 @@ public class HeatMapVisual : MonoBehaviour
 
         // Recuperamos el Filtro de la malla
         GetComponent<MeshFilter>().mesh = mesh;
+        meshRenderer = GetComponent<MeshRenderer>();
+        meshActive = false;
 
     }
 
@@ -31,6 +35,7 @@ public class HeatMapVisual : MonoBehaviour
 
         // Nos suscribimos a los eventos
         LevelGrid.Instance.OnAnyHeatMapValueChanged += LevelGrid_OnAnyHeatMapValueChanged;
+        meshRenderer.enabled = meshActive;
 
     }
 
@@ -39,6 +44,16 @@ public class HeatMapVisual : MonoBehaviour
     // -----------------------------------------------------------------
     private void LateUpdate()
     {
+
+        // Comprobamos si se ha activado la malla de renderizado
+        if (InputManager.Instance.IsIKeyPresssed())
+        {
+
+            // Habilitamos/Deshabilitamos la malla
+            meshActive = !meshActive;
+            meshRenderer.enabled = meshActive;
+
+        }
 
         // Comprobamos si tenemos que actualizar el mapa de influencia
         if (updateMesh)

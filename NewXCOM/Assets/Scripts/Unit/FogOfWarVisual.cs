@@ -59,7 +59,7 @@ public class FogOfWarVisual : MonoBehaviour
         }
     }
 
-    public void ShowForOfWar(List<Vector2Int> revealedGridPositions)
+    public void ShowForOfWar(List<GridPosition> revealedGridPositions)
     {
         List<GridPosition> list = revealedGridPositions.ConvertAll(x => (GridPosition) x);
         for(int x = 0; x < LevelGrid.Instance.GetWidth(); x++)
