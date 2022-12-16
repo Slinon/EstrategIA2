@@ -153,9 +153,9 @@ public class InputManager : MonoBehaviour
 
     }
 
-    // @IGM -------------------------------------------------------------
+    // @IGM ---------------------------------------------------------
     // Getter de la cantidad de zoom que hay que aplicar a la camara.
-    // ------------------------------------------------------------------
+    // --------------------------------------------------------------
     public float GetCameraZoomAmount()
     {
 
@@ -184,6 +184,16 @@ public class InputManager : MonoBehaviour
 
         return zoomAmount;
 #endif
+
+    }
+
+    // @IGM ---------------------------------
+    // Getter de si se ha pulsado la tecla I.
+    // --------------------------------------
+    public bool IsIKeyPresssed()
+    {
+
+        return playerInputActions.Player.ToggleHeatMap.WasPressedThisFrame();
 
     }
 
