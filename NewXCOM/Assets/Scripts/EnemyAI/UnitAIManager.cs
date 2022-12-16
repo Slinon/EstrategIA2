@@ -68,20 +68,14 @@ public class UnitAIManager : MonoBehaviour
         // Si puedo interactuar
         if (unit.TryGetComponent(out InteractAction interactAction))
         {
-
-            // Y tengo una esfera cerca
-            if (Checkers.Instance.IsCloseToSphere(unit))
-            {
            
-                // Si la esfera esta al lado
-                if (Checkers.Instance.IsSphereNearby(unit))
-                {
+            // Si la esfera esta al lado
+            if (Checkers.Instance.IsSphereNearby(unit))
+            {
 
-                    // interactuo
-                    SetValues(interactAction, maxAIValueAction, minAIValueAction);
-                    return;
-
-                }
+                // interactuo
+                SetValues(interactAction, maxAIValueAction, minAIValueAction);
+                return;
 
             }
 
