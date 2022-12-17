@@ -10,6 +10,7 @@ public class BaseAIManager : MonoBehaviour
 
     [SerializeField] private int maxAIValueAction;                  // Valor maximo de una accion para la IA
     [SerializeField] private int minAIValueAction;                  // Valor minimode una accion para la IA
+    [SerializeField] private EnemyManager enemyManager;             // Manager de la IA general
 
     private Unit enemyBase;
     private int scoutCost, granadierCost, engineerCost, berserkCost, juggernautCost;
@@ -83,69 +84,125 @@ public class BaseAIManager : MonoBehaviour
         //Si tengo dinero para plantar...
         else
         {
-            //Si tengo demasiadas tropas
-            if (BaseCheckers.Instance.AmountOfUnitsDeployed() >= 7)
+
+            // Si tengo menos de 3 unidades en juego
+            if (BaseCheckers.Instance.AmountOfUnitsDeployed() < 3)
             {
-                //Ahorro
-                Debug.Log("Tengo demasiadas tropas en juego, ahorro.");
 
-                SetValues(enemyBase.GetComponent<PassAction>(), maxAIValueAction, minAIValueAction);
-
-                return;
-            }
-
-
-            else if (BaseCheckers.Instance.AmountOfUnitsDeployed() >= 4) //3 o más soldados en juego
-            {
-                Debug.Log("Tengo una cantidad de tropas aceptable, voy a plantar la más cara");
-
-                //Juggernaut
-                if (MoneySystem.Instance.enemyAI.money >= juggernautCost)
-                {
-                    SetValues(enemyBase.GetComponent<SpawnJuggernaut>(), maxAIValueAction, minAIValueAction);
-                    return;
-                }
-
-                //Berserk
-                else if (MoneySystem.Instance.enemyAI.money >= berserkCost)
-                {
-                    SetValues(enemyBase.GetComponent<SpawnBerserk>(), maxAIValueAction, minAIValueAction);
-                    return;
-                }
-
-                //Engineer
-                else if (MoneySystem.Instance.enemyAI.money >= engineerCost)
-                {
-                    SetValues(enemyBase.GetComponent<SpawnEngineer>(), maxAIValueAction, minAIValueAction);
-                    return;
-                }
-
-                //Granadier
-                else if (MoneySystem.Instance.enemyAI.money >= granadierCost)
-                {
-                    SetValues(enemyBase.GetComponent<SpawnGranadier>(), maxAIValueAction, minAIValueAction);
-                    return;
-                }
-
-                //Scout
-                else
-                {
-                    SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
-                    return;
-                }
-               
-            }
-
-            else
-            {
                 Debug.Log("Tengo muy pocas unidades en juego, voy a plantar varias unidades baratujas");
 
                 SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
 
                 return;
+
+            }
+            else
+            {
+
+                // Tengo muchas unidades en juego
+                // Compruebo el estado de la IA general
+                if (enemyManager.GetState() == EnemyManager.StateBehaviour.UltraDefensive 
+                    || enemyManager.GetState() == EnemyManager.StateBehaviour.Defensive)
+                {
+
+                    // Estado ultra defensivo o defensivo
+                    //Engineer
+                    if (MoneySystem.Instance.enemyAI.money >= engineerCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnEngineer>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    //Granadier
+                    else if (MoneySystem.Instance.enemyAI.money >= granadierCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnGranadier>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    //Scout
+                    else if (MoneySystem.Instance.enemyAI.money >= scoutCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnScout>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    // No dineros
+                    else
+                    {
+
+                        //Doy la media vuelta, danza kuduro.
+                        Debug.Log("No tengo dinero para spawnear más tropas, paso");
+                        SetValues(enemyBase.GetComponent<PassAction>(), maxAIValueAction, minAIValueAction);
+                        return;
+
+                    }
+
+                }
+                else if(enemyManager.GetState() == EnemyManager.StateBehaviour.Neutral)
+                {
+
+                    // Estado neutral
+                    //Berserk
+                    if (MoneySystem.Instance.enemyAI.money >= berserkCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnBerserk>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    //Engineer
+                    else if (MoneySystem.Instance.enemyAI.money >= engineerCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnEngineer>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    // No dineros
+                    else
+                    {
+
+                        //Doy la media vuelta, danza kuduro.
+                        Debug.Log("No tengo dinero para spawnear más tropas, paso");
+                        SetValues(enemyBase.GetComponent<PassAction>(), maxAIValueAction, minAIValueAction);
+                        return;
+
+                    }
+
+                }
+                else if (enemyManager.GetState() == EnemyManager.StateBehaviour.Ofensive)
+                {
+
+                    //Juggernaut
+                    if (MoneySystem.Instance.enemyAI.money >= juggernautCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnJuggernaut>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    //Berserk
+                    else if (MoneySystem.Instance.enemyAI.money >= berserkCost)
+                    {
+                        SetValues(enemyBase.GetComponent<SpawnBerserk>(), maxAIValueAction, minAIValueAction);
+                        return;
+                    }
+
+                    // No dineros
+                    else
+                    {
+
+                        //Doy la media vuelta, danza kuduro.
+                        Debug.Log("No tengo dinero para spawnear más tropas, paso");
+                        SetValues(enemyBase.GetComponent<PassAction>(), maxAIValueAction, minAIValueAction);
+                        return;
+
+                    }
+
+                }
+
             }
 
         }
+
     }
 
 
