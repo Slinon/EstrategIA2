@@ -40,7 +40,7 @@ public class FogOfWar : MonoBehaviour
         // Nos desuscribimos de los eventos
         UnitManager.OnAnyUnitMovedGridPosition -= UnitManager_OnAnyUnitMovedGridPosition;
         Unit.OnAnyUnitDied -= UnitManager_OnAnyUnitMovedGridPosition; 
-        Unit.OnAnyUnitSpawned -= UnitManager_OnAnyUnitMovedGridPosition;
+        Unit.OnAnyUnitSpawned += UnitManager_OnAnyUnitMovedGridPosition;
         
         // Hacemos invisible el fog of war
         FogOfWarVisual.Instance.hideFogOfWar();

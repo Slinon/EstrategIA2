@@ -176,7 +176,7 @@ public class UnitManager : MonoBehaviour
     // @VJT --------------------------------------
     // Escconde los enemigos que no están en el rango de visión
     // -------------------------------------------
-    public void hideOrShowEnemies(List<Vector2Int> revealedPositionGrid)
+    public void hideOrShowEnemies(List<Vector> revealedPositionGrid)
     {
         foreach (Unit enemy in enemyUnitList)
         {
