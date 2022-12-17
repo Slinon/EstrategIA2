@@ -91,7 +91,20 @@ public class TutorialWindowSystem : MonoBehaviour
         if (pageIndex + 1 == modalWindows[windowIndex].page.Length)
         {
             Debug.Log("Se cierra la ventana xd");
-            return;
+
+            windowIndex += 1;
+            pageIndex = 0;
+
+            if (windowIndex >= modalWindows.Length)
+            {
+                Destroy(gameObject);
+            }
+
+            else
+            {
+                UpdateWindow();
+
+            }
         }
 
         else
