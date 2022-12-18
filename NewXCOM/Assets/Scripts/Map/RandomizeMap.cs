@@ -7,9 +7,6 @@ public class RandomizeMap : MonoBehaviour
     [SerializeField] private bool useRandomSeed;
     [SerializeField] private string seed;
 
-    //Solo quiero ver en el inspector si se actualiza correctamente, borrar después
-    public string debugSeed;
-
     [Range(0, 100)]
     [SerializeField] private int obstaclesPercentage;
     [SerializeField] GameObject[] obstacles;
@@ -32,9 +29,9 @@ public class RandomizeMap : MonoBehaviour
     private void Start()
     {
         seed = MenuManager.seed;
-        debugSeed = seed;
 
         if (seed == null) { useRandomSeed = true; }
+
     }
 
     public void FillWithObstacles()
