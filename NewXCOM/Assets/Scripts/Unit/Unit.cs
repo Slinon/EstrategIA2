@@ -25,6 +25,8 @@ public class Unit : MonoBehaviour
     [SerializeField] private Canvas UnitWorldUICanvas;
     [SerializeField] private bool isStructure = false;
 
+    [SerializeField] LayerMask obstacleLayerMask;
+
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
     // ---------------------------------------------------------
@@ -97,7 +99,6 @@ public class Unit : MonoBehaviour
         // Field of view
         //fieldOfView.SetOrigin(transform.position);
         //Debug.Log("setting new origin: " + transform.position);
-        LevelGrid.Instance.SomeoneSeesYou(this, gridPosition);
         
     } 
 
@@ -369,5 +370,24 @@ public class Unit : MonoBehaviour
     public int GetDistanceBetweenUnits(Unit selected, Unit target)
     {
         return (Mathf.Abs(selected.GetGridPosition().x - target.GetGridPosition().x)) + Mathf.Abs(Mathf.Abs(selected.GetGridPosition().z - target.GetGridPosition().z));
+    }
+
+    public bool ThisUnitIsInSight(Unit selectedUnit)
+    {
+        float unitShoulderHeight = 1.7f;
+
+        Vector3 selectedUnitWorldPosition = LevelGrid.Instance.GetWorldPosition(selectedUnit.GetGridPosition());
+
+        Vector3 shootDirection = (selectedUnitWorldPosition + Vector3.down * 1f - this.GetWorldPosition()).normalized;
+
+        if (Physics.Raycast(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, 
+            Vector3.Distance(this.GetWorldPosition(), selectedUnitWorldPosition), obstacleLayerMask)){
+
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

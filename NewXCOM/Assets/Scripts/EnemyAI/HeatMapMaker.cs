@@ -361,12 +361,10 @@ public class HeatMapMaker : MonoBehaviour
                 }
 
                 // Comprobamos si en esa posición la unidad no esta a tiro de nadie
-                if (LevelGrid.Instance.SomeoneSeesYou(unit, gridPosition))
+                if (CheckLineOfSightOfAllUnits(unit))
                 {
-
                     // Generamos un punto de influencia
                     LevelGrid.Instance.AddValue(gridPosition, coverMoveValue, coverMoveCenterInfluence, coverMoveExpansion);
-
                 }
 
             }
@@ -425,4 +423,15 @@ public class HeatMapMaker : MonoBehaviour
 
     }
 
+    public bool CheckLineOfSightOfAllUnits(Unit unit)
+    {
+        foreach (Unit playerUnit in UnitManager.Instance.GetFriendlyUnitList())
+        {
+            if (unit.ThisUnitIsInSight(playerUnit))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -246,6 +246,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
         type: 3}
+      propertyPath: obstacleLayerMask.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 5670714769479422706, guid: 93acb812f8d87a24c94eb922d5515eaf,
+        type: 3}
       propertyPath: meshRenderers.Array.data[0]
       value: 
       objectReference: {fileID: 6473197711377815094}

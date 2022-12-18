@@ -63,20 +63,20 @@ public class HitTextScript : MonoBehaviour
     
     private void UpdateHitProbabilityText()
     {
-
         // Actualizamos el texto
         hitProbabilityText.text = GetProbabilityHit().ToString() + " %";
-
     }
 
     public int GetProbabilityHit()
     {
         int probability = 0;
-        // Comprobar si esta cubierto para devolver 0
-        if (this.unit.GetCoverType() == CoverType.None)
+
+        if (unit.ThisUnitIsInSight(unitSelected))
         {
             probability = ps.GetProbabiltyByDistance(unitSelectedShootAction.GetShootHitProbability(), unit.GetDistanceBetweenUnits(unitSelected, this.unit), unitSelectedShootAction.GetMaxShootDistance());
+            if (probability > 100) { probability = 100; }
         }
+
         return probability;
     }
 
