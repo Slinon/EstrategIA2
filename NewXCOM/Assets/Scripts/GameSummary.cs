@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameSummary : MonoBehaviour
 {
-    CurrentGameState state;
-
-    //Stats to track
 
     //General
     private float duration;
@@ -26,13 +24,14 @@ public class GameSummary : MonoBehaviour
     private int aiMoney;
     private int aiMisses;
 
+    private void Start()
+    {
 
+    }
 
     private void Update()
     {
-       if (state == CurrentGameState.PLAYING)
-       {
-            duration += Time.deltaTime;
-       }
+    
     }
+
 }
