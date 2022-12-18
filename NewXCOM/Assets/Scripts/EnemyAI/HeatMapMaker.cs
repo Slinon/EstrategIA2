@@ -423,6 +423,10 @@ public class HeatMapMaker : MonoBehaviour
 
     }
 
+    //EMF, GRG ---------------------------------------------------
+    // Loopea por todas las unidades del jugador, y comprueba si
+    // alguna está viendo a la unidad
+    //------------------------------------------------------------
     public bool CheckLineOfSightOfAllUnits(Unit unit)
     {
         foreach (Unit playerUnit in UnitManager.Instance.GetFriendlyUnitList())

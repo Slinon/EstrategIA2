@@ -372,21 +372,31 @@ public class Unit : MonoBehaviour
         return (Mathf.Abs(selected.GetGridPosition().x - target.GetGridPosition().x)) + Mathf.Abs(Mathf.Abs(selected.GetGridPosition().z - target.GetGridPosition().z));
     }
 
+
+    //EMF, GRG ---------------------------------------------------
+    //Checks if this unit is in LineOfSight of a given player unit
+    //------------------------------------------------------------
     public bool ThisUnitIsInSight(Unit selectedUnit)
     {
+        //Origen del rayo
         float unitShoulderHeight = 1.7f;
 
+        //Obtiene la posición de la unidad pasada como parámetro
         Vector3 selectedUnitWorldPosition = LevelGrid.Instance.GetWorldPosition(selectedUnit.GetGridPosition());
 
+        //Dirección del rayo
         Vector3 shootDirection = (selectedUnitWorldPosition + Vector3.down * 1f - this.GetWorldPosition()).normalized;
 
+        //Si golpea contra un obstaculo
         if (Physics.Raycast(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, 
             Vector3.Distance(this.GetWorldPosition(), selectedUnitWorldPosition), obstacleLayerMask)){
 
+            //falso, no está siendo visto.
             return false;
         }
         else
         {
+            //está siendo visto
             return true;
         }
     }
