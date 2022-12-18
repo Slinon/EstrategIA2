@@ -303,7 +303,6 @@ GameObject:
   - component: {fileID: 9111971099781955217}
   - component: {fileID: 2646342428760882231}
   - component: {fileID: 6572504979355698165}
-  - component: {fileID: 2094705013}
   m_Layer: 7
   m_Name: MainBase
   m_TagString: MainBase
@@ -377,6 +376,9 @@ MonoBehaviour:
   meshRenderers: []
   UnitWorldUICanvas: {fileID: 0}
   isStructure: 1
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,6 +421,8 @@ MonoBehaviour:
   unitCost: 300
   unitSpawned: {fileID: 2674505501862230148, guid: 2abbe493b0edbf94898916aa814199a0,
     type: 3}
+  maxSpawnDistanceHeight: 7
+  maxSpawnDistanceWidht: 12
 --- !u!114 &3873654586206528798
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,6 +438,8 @@ MonoBehaviour:
   unitCost: 700
   unitSpawned: {fileID: 900443981725530657, guid: 0c1fc8774a35f9d4aa5ed7e2af9868d2,
     type: 3}
+  maxSpawnDistanceHeight: 7
+  maxSpawnDistanceWidht: 12
 --- !u!114 &9111971099781955217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,6 +455,8 @@ MonoBehaviour:
   unitCost: 1200
   unitSpawned: {fileID: 2895192204565787523, guid: ac511d283fd173c42a356eaa2af722b3,
     type: 3}
+  maxSpawnDistanceHeight: 7
+  maxSpawnDistanceWidht: 12
 --- !u!114 &2646342428760882231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +472,8 @@ MonoBehaviour:
   unitCost: 1500
   unitSpawned: {fileID: 3301654557798298561, guid: 3c8e2994b196057439b8a649fcf9f89f,
     type: 3}
+  maxSpawnDistanceHeight: 7
+  maxSpawnDistanceWidht: 12
 --- !u!114 &6572504979355698165
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,18 +489,8 @@ MonoBehaviour:
   unitCost: 2500
   unitSpawned: {fileID: 2340227495752026276, guid: c9cdf2952cd873f4c8d50bec81344437,
     type: 3}
---- !u!114 &2094705013
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5525236020020757582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d648ccdd76680641b3ab701dd0fedc4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  maxSpawnDistanceHeight: 7
+  maxSpawnDistanceWidht: 12
 --- !u!1 &5525236020238794742
 GameObject:
   m_ObjectHideFlags: 0
