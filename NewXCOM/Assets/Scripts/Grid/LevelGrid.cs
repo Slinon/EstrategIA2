@@ -441,54 +441,6 @@ public class LevelGrid : MonoBehaviour
         height = gridSystem.GetHeight();
     }
 
-    public bool SomeoneSeesYou(Unit unit, GridPosition testGridPosition)
-    {
-        float unitShoulderHeight = 1.7f;
-        bool visto = false;
-
-        Vector3 testWorldPosition = GetWorldPosition(testGridPosition);
-
-        foreach (Unit enemyUnit in UnitManager.Instance.GetUnitList())
-        {
-
-            if (unit.IsEnemy() != enemyUnit.IsEnemy())
-            {
-
-                if (!enemyUnit.TryGetComponent(out ShootAction shootAction))
-                {
-
-                    continue;
-
-                }
-
-                if (Vector3.Distance(enemyUnit.GetWorldPosition(), testWorldPosition) > shootAction.GetMaxShootDistance() * cellSize)
-                {
-
-                    continue;
-
-                }
-
-                Vector3 shootDirection = (testWorldPosition + Vector3.down * 1f - enemyUnit.GetWorldPosition()).normalized;
-
-                //Debug.DrawLine(enemyUnit.GetWorldPosition() + Vector3.up * unitShoulderHeight, enemyUnit.GetWorldPosition() + Vector3.up * unitShoulderHeight + shootDirection * Vector3.Distance(enemyUnit.GetWorldPosition(), testWorldPosition), Color.red, 10);
-                // Comprobamos si la unidad tiene visual del objetivo
-                if (!Physics.Raycast(enemyUnit.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection,
-                Vector3.Distance(enemyUnit.GetWorldPosition(), testWorldPosition), obstacleLayerMask))
-                {
-            
-                    visto = true;
-                    return visto;
-
-                }
-
-            }
-
-        }
-
-        return visto;
-
-    }
-
     public void SetCoverTypeAtGridPosition(CoverType coverType, GridPosition gridPosition)
     {
         

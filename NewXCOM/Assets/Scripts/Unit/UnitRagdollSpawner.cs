@@ -31,7 +31,7 @@ public class UnitRagdollSpawner : MonoBehaviour
     // ------------------------------------------
     private void HealthSystem_OnDead(object sender, EventArgs empty)
     {
-        ShowFloatingTextMoney(100);
+        ShowFloatingTextMoney(200);
 
         // Instanciamos el muñeco
         Transform ragdollTransform = Instantiate(ragdollPrefab, transform.position, transform.rotation);

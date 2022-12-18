@@ -36,7 +36,6 @@ public class ShootAction : BaseAction
     private float stateTimer;                                   // Timer de la maquina de estados
 
     private UnitManager unitManager;
-    private List<Unit> enemiesList;
     private Pathfinding pathFinding;
 
 
@@ -46,9 +45,6 @@ public class ShootAction : BaseAction
         ps = ProbabilitySystem.Instance;
         unitManager = UnitManager.Instance;
         pathFinding = Pathfinding.Instance;
-
-        enemiesList = unitManager.GetEnemyUnitList();
-
     }
     // @IGM ------------------------
     // Update is called every frame.
@@ -170,18 +166,12 @@ public class ShootAction : BaseAction
 
         //  Hacemos daño a la unidad
 
-        // Debug ------------------------------------------------------------------
-
-        
-
         Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance));
-
-        int porcentaje_acierto = ps.GetProbabiltyByDistance(hitProbability, pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10, maxShootDistance);
+            criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(unit, targetUnit), maxShootDistance));
 
         targetUnit.Damage(damagetmp);
 
-        //Debug.Log("damage: " + damagetmp.x + " tipo: " + damagetmp.y + " distancia: " + pathFinding.CalculateDistance(this.unit.GetGridPosition(), targetUnit.GetGridPosition()) / 10 + " %: " + porcentaje_acierto);
+        Debug.Log(damagetmp);
 
         // Debug -------------------------------------------------------------------
     }
