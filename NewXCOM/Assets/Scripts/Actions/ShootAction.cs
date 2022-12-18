@@ -17,7 +17,6 @@ public class ShootAction : BaseAction
         Cooloff,
 
     }
-    private ProbabilitySystem ps;                               // Funci�n probabilidad @EMF
 
     public event EventHandler<Unit> OnShoot;                    // Evento cuando la unidad dispara
     public static event EventHandler<Unit> OnAnyShoot;          // Evento cuando cualquier unidad dispara
@@ -35,17 +34,6 @@ public class ShootAction : BaseAction
     private bool canShootBullet;                                // Booleano para indicar que la unidad puede disparar
     private float stateTimer;                                   // Timer de la maquina de estados
 
-    private UnitManager unitManager;
-    private Pathfinding pathFinding;
-
-
-
-    private void Start()
-    {
-        ps = ProbabilitySystem.Instance;
-        unitManager = UnitManager.Instance;
-        pathFinding = Pathfinding.Instance;
-    }
     // @IGM ------------------------
     // Update is called every frame.
     // -----------------------------
@@ -165,15 +153,8 @@ public class ShootAction : BaseAction
         }
 
         //  Hacemos daño a la unidad
-
-        Vector2 damagetmp = (ps.CheckDamageProbability(shootDamage, criticalProbability,
+        targetUnit.Damage(ProbabilitySystem.Instance.CheckDamageProbability(shootDamage, criticalProbability,
             criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(unit, targetUnit), maxShootDistance));
-
-        targetUnit.Damage(damagetmp);
-
-        Debug.Log(damagetmp);
-
-        // Debug -------------------------------------------------------------------
     }
 
     // @IGM -------------------------------------
