@@ -82,15 +82,21 @@ public class HealthSystem : MonoBehaviour
     void ShowFloatingTextDamage(Vector2 damage)
     {
         var go = Instantiate(floatingTextPrebab, transform.position, Quaternion.identity, transform);
-        go.GetComponent<TextMesh>().text = damage.x.ToString();
-
+        
         if (damage.y > 0) // critico
         {
-            go.GetComponent<TextMesh>().color = Color.red;
+            go.GetComponent<TextMesh>().text = damage.x.ToString();
+            go.GetComponent<TextMesh>().color = Color.yellow;
+        }
+        else if (damage.y == 0)
+        {
+            go.GetComponent<TextMesh>().text = damage.x.ToString();
+            go.GetComponent<TextMesh>().color = Color.white;
         }
         else
         {
-            go.GetComponent<TextMesh>().color = Color.white;
+            go.GetComponent<TextMesh>().text = "miss";
+            go.GetComponent<TextMesh>().color = Color.red;
         }
     }
 
