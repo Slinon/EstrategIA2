@@ -18,7 +18,7 @@ public class ShootAction : BaseAction
 
     }
 
-    public event EventHandler<Unit> OnShoot;                    // Evento cuando la unidad dispara
+    public event EventHandler<Vector3> OnShoot;                    // Evento cuando la unidad dispara
     public static event EventHandler<Unit> OnAnyShoot;          // Evento cuando cualquier unidad dispara
 
     [SerializeField] private int maxShootDistance;              // Distancia maxima de disparo
@@ -33,6 +33,8 @@ public class ShootAction : BaseAction
     private Unit targetUnit;                                    // Unidad ala que vamos a disparar
     private bool canShootBullet;                                // Booleano para indicar que la unidad puede disparar
     private float stateTimer;                                   // Timer de la maquina de estados
+
+    private float lastShotStatus;
 
     // @IGM ------------------------
     // Update is called every frame.
@@ -143,18 +145,48 @@ public class ShootAction : BaseAction
 
         }
 
+        // Hacemos daño a la unidad
+        Vector2 totalDamage = ProbabilitySystem.Instance.CheckDamageProbability(shootDamage, criticalProbability,
+            criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(unit, targetUnit), maxShootDistance);
+
+        lastShotStatus = totalDamage.y;
+
+        targetUnit.Damage(totalDamage);
+
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnShoot != null)
         {
+            float offsetX = 0f;
 
-            // Lanzamos el evento
-            OnShoot(this, targetUnit);
+            if (lastShotStatus == -1) // si falla
+            {
+                offsetX = GetMissShotOfftet();
+            }
 
+            Vector3 targetUnitWorldPosition = targetUnit.GetWorldPosition();
+            targetUnitWorldPosition.x = targetUnitWorldPosition.x + offsetX;
+
+            // Lanzamos el evento con offset
+            OnShoot(this, targetUnitWorldPosition);
         }
+    }
 
-        //  Hacemos daño a la unidad
-        targetUnit.Damage(ProbabilitySystem.Instance.CheckDamageProbability(shootDamage, criticalProbability,
-            criticalPercentage, hitProbability, unit.GetDistanceBetweenUnits(unit, targetUnit), maxShootDistance));
+    private float GetMissShotOfftet()
+    {
+        float offset = UnityEngine.Random.Range(-0.9f, 0.9f);
+
+        if (offset >= -0.5 && offset <= 0.5)
+        {
+            if (offset > 0)
+            {
+                offset += 0.4f;
+            }
+            else
+            {
+                offset -= 0.4f;
+            }
+        }
+        return offset;
     }
 
     // @IGM -------------------------------------
@@ -376,5 +408,10 @@ public class ShootAction : BaseAction
 
         return shootDamage;
 
+    }
+
+    public float GetLastShotStatus()
+    {
+        return lastShotStatus;
     }
 }

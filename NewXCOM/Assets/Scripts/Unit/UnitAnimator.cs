@@ -118,7 +118,7 @@ public class UnitAnimator : MonoBehaviour
     // @IGM ---------------------------------------
     // Handler del evento cuando la unidad dispara.
     // --------------------------------------------
-    private void MoveAction_OnShoot(object sender, Unit targetUnit)
+    private void MoveAction_OnShoot(object sender, Vector3 targetUnitWorldPosition)
     {
 
         // Activamos la animacion
@@ -133,7 +133,7 @@ public class UnitAnimator : MonoBehaviour
         BulletProjectile bulletProjectile = bulletProjectileTransform.GetComponent<BulletProjectile>();
 
         // Actualizamos la altura del disparo
-        Vector3 targetUnitShootAtPosition = targetUnit.GetWorldPosition();
+        Vector3 targetUnitShootAtPosition = targetUnitWorldPosition;
         targetUnitShootAtPosition.y = shootPointTransform.position.y;
 
         // Establecemos los parametros de la bala

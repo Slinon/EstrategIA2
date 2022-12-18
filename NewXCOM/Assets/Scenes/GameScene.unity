@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: -0.053931713, y: 13.98124, z: -9.946069}
+  m_FollowOffset: {x: -0.053931713, y: 13.97643, z: -9.946069}
   m_XDamping: 0
   m_YDamping: 0
   m_ZDamping: 0
@@ -448,7 +448,7 @@ PrefabInstance:
     - target: {fileID: 2674505501862230149, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}
       propertyPath: maxActionPoints
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2674505501862230150, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}
@@ -1138,8 +1138,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.44313216, y: -0.22769174, z: 0.11745016, w: 0.85906684}
-  m_LocalPosition: {x: 21.926329, y: 13.98124, z: -1.6405144}
+  m_LocalRotation: {x: 0.4430624, y: -0.22770132, z: 0.11743169, w: 0.85910285}
+  m_LocalPosition: {x: 21.926329, y: 13.97643, z: -1.6405144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3374,8 +3374,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103454021}
-  m_LocalRotation: {x: 0.44313216, y: -0.22769174, z: 0.11745016, w: 0.85906684}
-  m_LocalPosition: {x: 21.926329, y: 13.98124, z: -1.6405144}
+  m_LocalRotation: {x: 0.4430624, y: -0.22770132, z: 0.11743169, w: 0.85910285}
+  m_LocalPosition: {x: 21.926329, y: 13.97643, z: -1.6405144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3646,7 +3646,7 @@ PrefabInstance:
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 7242043243429256272, guid: a714c1f150a92554297b968b05509432,
         type: 3}
@@ -3696,7 +3696,7 @@ PrefabInstance:
     - target: {fileID: 7242043243429256273, guid: a714c1f150a92554297b968b05509432,
         type: 3}
       propertyPath: maxActionPoints
-      value: 100
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7242043243429256273, guid: a714c1f150a92554297b968b05509432,
         type: 3}
@@ -3707,6 +3707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UnitScoutEnemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8821015115498587999, guid: a714c1f150a92554297b968b05509432,
+        type: 3}
+      propertyPath: healthMax
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a714c1f150a92554297b968b05509432, type: 3}
