@@ -9,12 +9,12 @@ public class FogOfWarToggle : MonoBehaviour
         if(!active)
         {
             FogOfWar.Instance.unableFogOfWar();
-            //Debug.Log("Desactivando fog of war...");
+            Debug.Log("Desactivando fog of war...");
         }
         else
         {
             FogOfWar.Instance.enableFogOfWar();
-            //Debug.Log("Activando fog of war...");
+            Debug.Log("Activando fog of war...");
         }
         
     }

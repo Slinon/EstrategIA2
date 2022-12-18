@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7199893852344679569}
   - component: {fileID: 3108144675853648648}
   - component: {fileID: 4640028328480529507}
+  - component: {fileID: -5765376471564373709}
+  - component: {fileID: 1551304231046527468}
   m_Layer: 0
   m_Name: Floating text
   m_TagString: Untagged
@@ -86,13 +88,13 @@ TextMesh:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3181831354123590032}
   m_Text: 92
-  m_OffsetZ: 0
+  m_OffsetZ: 60
   m_CharacterSize: 1
   m_LineSpacing: 1
   m_Anchor: 1
   m_Alignment: 0
   m_TabSize: 4
-  m_FontSize: 0
+  m_FontSize: 150
   m_FontStyle: 0
   m_RichText: 1
   m_Font: {fileID: 12800000, guid: ae536259ae058d54db4184c79531e579, type: 3}
@@ -111,7 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 507c4b5ebf6e444499723f1a55ef1731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DestroyTime: 3
+  DestroyTime: 10
+  offset: {x: 0, y: 2.5, z: 0}
+  RandomizeIntensity: {x: 0.5, y: 0, z: 0}
 --- !u!95 &4640028328480529507
 Animator:
   serializedVersion: 4
@@ -132,3 +136,27 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-5765376471564373709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181831354123590032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8354bd0b2b0dcca4992ef4ccbd85a916, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invert: 1
+--- !u!210 &1551304231046527468
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3181831354123590032}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0

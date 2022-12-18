@@ -82,13 +82,48 @@ public class UnitWorldUI : MonoBehaviour
 
     }
 
+    //EMF, GRG ---------------------------------------------------
+    // Loopea por todas las unidades del jugador, y comprueba si
+    // alguna está viendo a la unidad. Sí, esta feo que esté repetida.
+    // pero paso de refactorizar más.
+    //------------------------------------------------------------
+    public bool CheckLineOfSightOfAllUnits(Unit unit)
+    {
+        if (unit.IsEnemy())
+        {
+            foreach (Unit playerUnit in UnitManager.Instance.GetFriendlyUnitList())
+            {
+                if (unit.ThisUnitIsInSight(playerUnit))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        else
+        {
+            foreach (Unit playerUnit in UnitManager.Instance.GetEnemyUnitList())
+            {
+                if (unit.ThisUnitIsInSight(playerUnit))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+    }
+
     private void UpdateImages()
     {
-        if(LevelGrid.Instance.SomeoneSeesYou(unit, unit.GetGridPosition()))
+        if(CheckLineOfSightOfAllUnits(unit))
         {
             coveredImage.enabled = false;
             targetImage.enabled = true;
-        }else
+        }
+        
+        else
         {
             coveredImage.enabled = true;
             targetImage.enabled = false;

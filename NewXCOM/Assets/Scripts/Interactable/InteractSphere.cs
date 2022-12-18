@@ -92,8 +92,12 @@ public class InteractSphere : MonoBehaviour, IInteractable
             // Llamamos a la accion
             isActive = false;
             onInteractionComplete();
-            OnSphereCaptured(this, EventArgs.Empty);
 
+            if(OnSphereCaptured != null)
+            {
+                OnSphereCaptured(this, EventArgs.Empty);
+            }
+          
         }
 
     }
@@ -182,7 +186,16 @@ public class InteractSphere : MonoBehaviour, IInteractable
             }
         }
 
-        FogOfWar.Instance.UpdateAllFogOfWar();
+        if (FogOfWar.Instance.IsDisabled())
+        {
+            return;
+        }
+
+        else
+        {
+            FogOfWar.Instance.UpdateAllFogOfWar();
+        }
+        
     }
 
     // @IGM --------------------------

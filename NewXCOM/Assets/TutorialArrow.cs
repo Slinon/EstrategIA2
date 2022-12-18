@@ -16,23 +16,20 @@ public class TutorialArrow : MonoBehaviour
 
         if (other.tag is "TutorialUnit")
         {
-            //Activamos la ventana
-            tutorialManager.ActiveNextModalWindow();
-
-            //Desplazamos la flecha a una nueva posición
-            tutorialManager.MoveArrow(-2, 0, 2);
-
-            //Apagamos el panel de tasks
-            tutorialManager.SetActiveTaskPanel(false);
+            Invoke("ActiveWindow", 0.7f);
+            
         }
     }
 
+    void ActiveWindow()
+    {
+        //Activamos la ventana
+        tutorialManager.ActiveNextModalWindow();
 
-    //Cuando se capture una esfera
+        //Desplazamos la flecha a una nueva posición
+        tutorialManager.MoveArrow(-2, 0, 2);
 
-    //Activamos la ventana
-    //tutorialManager.ActiveNextModalWindow();
-
-    //Desplazamos la flecha a una nueva posición
-    //tutorialManager.MoveArrow(-2, 2);
+        //Apagamos el panel de tasks
+        tutorialManager.SetActiveTaskPanel(false);
+    }
 }

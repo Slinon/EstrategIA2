@@ -10,6 +10,8 @@ public class FogOfWar : MonoBehaviour
     [Range (1, 5)] [SerializeField] private float viewDistanceMax = 5f;
     [SerializeField] private LayerMask layerMask;
 
+    bool isDisabled;
+
     private void Awake() {
         if(Instance != null)
         {
@@ -32,7 +34,7 @@ public class FogOfWar : MonoBehaviour
         Unit.OnAnyUnitDied += UnitManager_OnAnyUnitMovedGridPosition;
         Unit.OnAnyUnitSpawned += UnitManager_OnAnyUnitMovedGridPosition;
         UpdateAllFogOfWar();
-        
+        isDisabled = false;
     }
 
     public void unableFogOfWar()
@@ -47,6 +49,8 @@ public class FogOfWar : MonoBehaviour
         
         // Mostramos todos los enemigos
         UnitManager.Instance.showAllEnemies();
+
+        isDisabled = true;
     }
 
     private void UnitManager_OnAnyUnitMovedGridPosition(object sender, System.EventArgs e)
@@ -117,11 +121,17 @@ public class FogOfWar : MonoBehaviour
         FogOfWarVisual.Instance.showFogOfWar(revealedGridPositionList);
 
         // Dehabilitamos el meshRender de los enemigos fuera de rango
-        // UnitManager.Instance.hideOrShowEnemies(revealedGridPositionList);
+        UnitManager.Instance.hideOrShowEnemies(revealedGridPositionList);
     }
 
     // copied from Code Monkey Utilities
     public Vector3 ApplyRotationToVectorXZ(Vector3 vec, float angle) {
         return Quaternion.Euler(0, angle, 0) * vec;
+    }
+
+    //Getter del estado del fog of war
+    public bool IsDisabled()
+    {
+        return isDisabled;
     }
 }
