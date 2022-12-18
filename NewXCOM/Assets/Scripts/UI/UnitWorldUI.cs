@@ -12,6 +12,8 @@ public class UnitWorldUI : MonoBehaviour
     [SerializeField] private Unit unit;                             // Unidad que gestiona el UI
     [SerializeField] private Image healthBarImage;                  // Imagen de la barra de vida
     [SerializeField] private HealthSystem healthSystem;             // Sistema de vida de la unidad
+    [SerializeField] private Image coveredImage;
+    [SerializeField] private Image targetImage;
 
 
     // @IGM -----------------------------------------
@@ -28,7 +30,12 @@ public class UnitWorldUI : MonoBehaviour
         // Actualizamos las variables
         UpdateActionPointsText();
         UpdateHelthBar();
+        
+    }
 
+    private void Update()
+    {
+        UpdateImages();
     }
 
     // @IGM -----------------------------------------------------
@@ -75,7 +82,18 @@ public class UnitWorldUI : MonoBehaviour
 
     }
 
-
+    private void UpdateImages()
+    {
+        if(LevelGrid.Instance.SomeoneSeesYou(unit, unit.GetGridPosition()))
+        {
+            coveredImage.enabled = false;
+            targetImage.enabled = true;
+        }else
+        {
+            coveredImage.enabled = true;
+            targetImage.enabled = false;
+        }
+    }
 
 
 }
