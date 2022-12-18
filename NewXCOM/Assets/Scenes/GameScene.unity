@@ -761,7 +761,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useRandomSeed: 0
   seed: holiwis
-  debugSeed: 
   obstaclesPercentage: 15
   obstacles:
   - {fileID: 3188524047625887889, guid: 973183692a0c1714fae22433d6922691, type: 3}
@@ -1139,8 +1138,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.4240108, y: -0.33787456, z: 0.17428574, w: 0.82199764}
-  m_LocalPosition: {x: 10.000002, y: 13.98124, z: -4.0658646}
+  m_LocalRotation: {x: 0.44313216, y: -0.22769174, z: 0.11745016, w: 0.85906684}
+  m_LocalPosition: {x: 21.926329, y: 13.98124, z: -1.6405144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3291,14 +3290,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051956109}
-  m_LocalRotation: {x: -0, y: -0.38268343, z: -0, w: 0.92387956}
-  m_LocalPosition: {x: 3.0052042, y: 0, z: 3.0052037}
+  m_LocalRotation: {x: 0, y: -0.258819, z: 0, w: 0.9659259}
+  m_LocalPosition: {x: 17, y: 0, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 939650129}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -30, z: 0}
 --- !u!114 &1051956111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3375,8 +3374,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103454021}
-  m_LocalRotation: {x: 0.4240108, y: -0.33787456, z: 0.17428574, w: 0.82199764}
-  m_LocalPosition: {x: 10.000002, y: 13.98124, z: -4.0658646}
+  m_LocalRotation: {x: 0.44313216, y: -0.22769174, z: 0.11745016, w: 0.85906684}
+  m_LocalPosition: {x: 21.926329, y: 13.98124, z: -1.6405144}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

@@ -27,6 +27,7 @@ public class GameSummary : MonoBehaviour
     private int aiMisses;
 
 
+
     private void Update()
     {
        if (state == CurrentGameState.PLAYING)
