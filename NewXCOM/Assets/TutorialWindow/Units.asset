@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcdad9e2355bc341a7983191e61d08b, type: 3}
+  m_Name: Units
+  m_EditorClassIdentifier: 
+  page:
+  - title: UNITS AND ECONOMY (1/7)
+    image: {fileID: 0}
+    flavorText: "Each turn, players recive <b><color=green>500$</color></b>. Players
+      will recive <b><color=green>200$</color></b> extra per takedown. \n\nPlayers
+      can spend their money to spawn new <b><color=#7FD6FC>units</color></b> in their
+      barracks. Each unit is unique and has its own properties.\n"
+  - title: 'UNITS: SCOUT (2/7)'
+    image: {fileID: 0}
+    flavorText: 'The Scout is the most basic Unit. It has average damage, health
+      and speed.
+
+
+      It costs <b><color=green>300$</color></b>
+
+'
+  - title: 'UNITS: GRENADIER (3/7)'
+    image: {fileID: 0}
+    flavorText: 'The Grenadier can damage multiple enemies at once and destroy obstacles.
+      Grenades can damage allies too.
+
+
+      It costs <b><color=green>700$</color></b>'
+  - title: 'UNITS: ENGINEER (4/7)'
+    image: {fileID: 0}
+    flavorText: 'The Engineer can build up to two turrets. Turrets are static units
+      that can only shoot.
+
+
+      It costs <b><color=green>1200$</color></b>'
+  - title: 'UNITS: BERSERKER (5/7)'
+    image: {fileID: 0}
+    flavorText: 'The berserker can move faster than any other unit, and can perform
+      powerful melee attacks that defeat most enemies in one hit.
+
+
+      It costs
+      <b><color=green>1500$</color></b>'
+  - title: 'UNITS: JUGGERNAUT (6/7)'
+    image: {fileID: 0}
+    flavorText: 'An absolute unit, the Juggernaut can withstand several attacks and
+      dish out huge amounts of damage. In return, its the slowest and most expensive
+      unit.
+
+
+      It costs <b><color=green>2500$</color></b>'
+  - title: 'UNITS: BARRACKS (7/7)'
+    image: {fileID: 0}
+    flavorText: 'The most importat unit is the Barracks. Barracks can spawn up to
+      two units each turn. You can''t play a unit the same turn it was spawned.
+
+
+      Whenever
+      a player''s barrack is destroyed, the game ends.
+
+
+'

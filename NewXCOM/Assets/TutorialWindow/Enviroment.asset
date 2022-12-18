@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcdad9e2355bc341a7983191e61d08b, type: 3}
+  m_Name: Enviroment
+  m_EditorClassIdentifier: 
+  page:
+  - title: ENVIROMENT (1/2)
+    image: {fileID: 0}
+    flavorText: 'The map is an arena made up of a 16x32 grid, filled with random
+      obstacles. The arena is sectioned into four areas: the <b><color=#7FD6FC>Player
+      Spawn</color></b> area, two <b><color=grey>Neutral</color></b> areas, and the
+      <b><color=red>Enemy Spawn</color></b>
+
+'
+  - title: ENVIROMENT (2/2)
+    image: {fileID: 0}
+    flavorText: A <b><color=purple>capture point</color></b> can be found in each
+      <b><color=grey>Neutral</color></b> area. Units can <b><color=#7FD6FC>interact</color></b>
+      with the <b><color=purple>capture point</color></b> to reclaim the area. Players
+      can deploy new units in all claimed areas.
