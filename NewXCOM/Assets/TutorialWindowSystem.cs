@@ -21,11 +21,14 @@ public class TutorialWindowSystem : MonoBehaviour
     [Header("WindowContent")]
     [SerializeField] private ScriptableWindow[] modalWindows;
 
-    private int windowIndex;
+    public int windowIndex;
     private int pageIndex;
+    TutorialManager tutorialManager;
 
     private void Start()
     {
+        tutorialManager = FindObjectOfType<TutorialManager>();
+
         windowIndex = 0;
         pageIndex = 0;
 
@@ -34,7 +37,7 @@ public class TutorialWindowSystem : MonoBehaviour
 
 
     //@GRG Actualizar datos de la ventana modal
-    private void UpdateWindow()
+    public void UpdateWindow()
     {
         //Usamos stringbuilder para evitar garbage collection.
         windowTitle.text = modalWindows[windowIndex].
@@ -88,23 +91,17 @@ public class TutorialWindowSystem : MonoBehaviour
     //@GRG método para CONTINUE button, cargar la siguiente ventana.
     public void LoadNextPage()
     {
+        //Si la no hay más páginas
         if (pageIndex + 1 == modalWindows[windowIndex].page.Length)
         {
-            Debug.Log("Se cierra la ventana xd");
-
-            windowIndex += 1;
             pageIndex = 0;
 
-            if (windowIndex >= modalWindows.Length)
-            {
-                Destroy(gameObject);
-            }
+            //Apagamos la ventana
+            gameObject.SetActive(false);
 
-            else
-            {
-                UpdateWindow();
+            //Activamos la task
+            tutorialManager.SetActiveTaskPanel(true);
 
-            }
         }
 
         else

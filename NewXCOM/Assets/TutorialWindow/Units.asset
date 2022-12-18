@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Units
   m_EditorClassIdentifier: 
   page:
-  - title: UNITS (1/7)
+  - title: UNITS AND ECONOMY (1/7)
     image: {fileID: 0}
-    flavorText: 'Each unit is unique and has its own properties.
-
-'
+    flavorText: "Each turn, players recive <b><color=green>500$</color></b>. Players
+      will recive <b><color=green>200$</color></b> extra per takedown. \n\nPlayers
+      can spend their money to spawn new <b><color=#7FD6FC>units</color></b> in their
+      barracks. Each unit is unique and has its own properties.\n"
   - title: 'UNITS: SCOUT (2/7)'
     image: {fileID: 0}
     flavorText: 'The Scout is the most basic Unit. It has average damage, health

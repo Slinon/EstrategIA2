@@ -22,8 +22,8 @@ MonoBehaviour:
 '
   - title: GAME BASICS (2/3)
     image: {fileID: 0}
-    flavorText: 'Each turn, every deployed unit gets two <b><color=#508bde>action
-      points</color></b> to spend. Each unit is unique and has its own <b><color=#508bde>actions</color></b>.
+    flavorText: 'Each turn, every deployed unit gets two <b><color=#7FD6FC>action
+      points</color></b> to spend. Each unit is unique and has its own <b><color=#7FD6FC>actions</color></b>.
 
 '
   - title: GAME BASICS (3/3)

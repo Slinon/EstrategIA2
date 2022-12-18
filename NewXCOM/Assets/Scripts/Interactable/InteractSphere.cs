@@ -38,6 +38,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
     private bool isActive;                                  // Booleano para saber si la animacion esta activa 
     private float timer;                                    // Tiempo que tarda en interactuar la puerta
 
+    public event EventHandler OnSphereCaptured;
+
     // @IGM -----------------------------------------
     // Start is called before the first frame update.
     // ----------------------------------------------
@@ -90,6 +92,7 @@ public class InteractSphere : MonoBehaviour, IInteractable
             // Llamamos a la accion
             isActive = false;
             onInteractionComplete();
+            OnSphereCaptured(this, EventArgs.Empty);
 
         }
 

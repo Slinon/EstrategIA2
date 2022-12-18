@@ -24,8 +24,8 @@ public class SpawnUnitAction : BaseAction
     [SerializeField] protected int unitCost;
     [SerializeField] protected Transform unitSpawned;               // Unidad que queremos spawnear
 
-    private int maxSpawnDistanceHeight;                             // Distancia maxima de spawn
-    private int maxSpawnDistanceWidht;
+    [SerializeField] private int maxSpawnDistanceHeight = 7;                             // Distancia maxima de spawn
+    [SerializeField] private int maxSpawnDistanceWidht = 12;
     private GameObject[] interactionSpheres;
     private Vector3 spawnPoint;                                     // Punto donde spawnea la unidad
     private State state;                                            // Estado actual de la accion
@@ -39,8 +39,7 @@ public class SpawnUnitAction : BaseAction
     private void Start()
     {
         interactionSpheres = GameObject.FindGameObjectsWithTag("Sphere");
-        maxSpawnDistanceHeight = 7;
-        maxSpawnDistanceWidht = 12;
+
     }
 
     // @IGM ------------------------

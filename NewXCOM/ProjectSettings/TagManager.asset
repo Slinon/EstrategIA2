@@ -8,6 +8,8 @@ TagManager:
   - MainBase
   - EnemyMainBase
   - Turret
+  - ProbabilityText
+  - TutorialUnit
   layers:
   - Default
   - TransparentFX
