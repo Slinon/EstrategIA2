@@ -759,9 +759,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 664713d17a287d14caee0da0b74ff451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useRandomSeed: 0
-  seed: holiwis
-  debugSeed: 
+  useRandomSeed: 1
+  seed: 
   obstaclesPercentage: 15
   obstacles:
   - {fileID: 3188524047625887889, guid: 973183692a0c1714fae22433d6922691, type: 3}
@@ -1139,7 +1138,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_LocalRotation: {x: 0.4240108, y: -0.33787456, z: 0.17428572, w: 0.8219977}
+  m_LocalRotation: {x: 0.42401084, y: -0.3378746, z: 0.17428575, w: 0.82199764}
   m_LocalPosition: {x: 10.000002, y: 13.98124, z: -4.0658646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3375,7 +3374,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103454021}
-  m_LocalRotation: {x: 0.4240108, y: -0.33787456, z: 0.17428572, w: 0.8219977}
+  m_LocalRotation: {x: 0.42401084, y: -0.3378746, z: 0.17428575, w: 0.82199764}
   m_LocalPosition: {x: 10.000002, y: 13.98124, z: -4.0658646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

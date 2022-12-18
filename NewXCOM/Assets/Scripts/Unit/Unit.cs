@@ -387,17 +387,27 @@ public class Unit : MonoBehaviour
         //Dirección del rayo
         Vector3 shootDirection = (selectedUnitWorldPosition + Vector3.down * 1f - this.GetWorldPosition()).normalized;
 
-        //Si golpea contra un obstaculo
-        if (Physics.Raycast(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, 
-            Vector3.Distance(this.GetWorldPosition(), selectedUnitWorldPosition), obstacleLayerMask)){
-
-            //falso, no está siendo visto.
-            return false;
-        }
-        else
+        if (selectedUnit.TryGetComponent(out ShootAction shootAction))
         {
-            //está siendo visto
-            return true;
+
+            //Si golpea contra un obstaculo
+            if (Physics.Raycast
+                (this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, shootAction.GetMaxShootDistance(), obstacleLayerMask))
+            {
+
+                //falso, no está siendo visto.
+                return false;
+            }
+            else
+            {
+                //está siendo visto
+                return true;
+            }
+
+
         }
+
+        else return false;
+        
     }
 }
