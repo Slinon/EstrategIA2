@@ -288,6 +288,7 @@ public class Unit : MonoBehaviour
 
         // Eliminamos la unidad de la malla
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
+        Destroy(gameObject);
 
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnAnyUnitDied != null)
@@ -300,8 +301,6 @@ public class Unit : MonoBehaviour
             else GameSummary.aiDefeated += 1;
 
         }
-
-        Destroy(gameObject);
 
     }
 
