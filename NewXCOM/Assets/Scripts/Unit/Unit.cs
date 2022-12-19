@@ -288,7 +288,6 @@ public class Unit : MonoBehaviour
 
         // Eliminamos la unidad de la malla
         LevelGrid.Instance.RemoveUnitAtGridPosition(gridPosition, this);
-        Destroy(gameObject);
 
         // Comprobamos si hay alguna clase escuchando el evento
         if (OnAnyUnitDied != null)
@@ -298,6 +297,8 @@ public class Unit : MonoBehaviour
             OnAnyUnitDied(this, EventArgs.Empty);
 
         }
+
+        Destroy(gameObject);
 
     }
 
@@ -389,9 +390,17 @@ public class Unit : MonoBehaviour
 
         if (selectedUnit.TryGetComponent(out ShootAction shootAction))
         {
+            //Debug.DrawLine(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, (shootDirection + this.GetWorldPosition() + Vector3.up * unitShoulderHeight) * shootAction.GetMaxShootDistance());
+            Debug.DrawRay(this.GetWorldPosition() + Vector3.up, shootDirection);
+
             //Si golpea contra un obstaculo
             if (Physics.Raycast
-                (this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, shootAction.GetMaxShootDistance(), obstacleLayerMask))
+
+                (this.GetWorldPosition() + Vector3.up * unitShoulderHeight, //Origen
+                shootDirection, //Dirección
+                shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize(), //Distancia
+                obstacleLayerMask)) //Layer que golpear
+
             {
 
                 //falso, no está siendo visto.
