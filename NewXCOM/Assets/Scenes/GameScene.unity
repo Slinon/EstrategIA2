@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useRandomSeed: 0
-  seed: holiwis
+  seed: 
   obstaclesPercentage: 15
   obstacles:
   - {fileID: 3188524047625887889, guid: 973183692a0c1714fae22433d6922691, type: 3}
