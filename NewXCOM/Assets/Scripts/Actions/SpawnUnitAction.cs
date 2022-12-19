@@ -145,6 +145,9 @@ public class SpawnUnitAction : BaseAction
 
                     // Lanzamos el evento
                     OnSpawnActionCompleted(this, EventArgs.Empty);
+                
+                    if (unit.IsEnemy()) GameSummary.aiUnits += 1;
+                    else GameSummary.playerUnits += 1;
 
                 }
 

@@ -160,6 +160,9 @@ public class ShootAction : BaseAction
 
             if (lastShotStatus == -1) // si falla
             {
+                if (unit.IsEnemy()) GameSummary.aiMisses += 1;
+                else GameSummary.playerMisses+= 1;
+
                 offsetX = GetMissShotOfftet();
             }
 

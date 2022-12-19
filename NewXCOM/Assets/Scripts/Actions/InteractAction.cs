@@ -158,6 +158,9 @@ public class InteractAction : BaseAction
             // Lanzamos el evento
             OnAnyInteractionCompleted(this, EventArgs.Empty);
 
+            if (unit.IsEnemy()) GameSummary.aiPoints += 1;
+            else GameSummary.playerPoints += 1;
+
         }
 
         // Terminamos la accion

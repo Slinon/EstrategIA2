@@ -58,14 +58,14 @@ public class GameSummary : MonoBehaviour
     {
         playerStats[0].text = playerDefeated.ToString();
         playerStats[1].text = playerPoints.ToString();
-        playerStats[2].text = playerMoney.ToString();
-        playerStats[3].text = playerUnits.ToString();
+        playerStats[2].text = playerUnits.ToString();
+        playerStats[3].text = playerMoney.ToString();       
         playerStats[4].text = playerMisses.ToString();
 
         aiStats[0].text = aiDefeated.ToString();
         aiStats[1].text = aiPoints.ToString();
-        aiStats[2].text = aiMoney.ToString();
-        aiStats[3].text = aiUnits.ToString();
+        aiStats[2].text = aiUnits.ToString();
+        aiStats[3].text = aiMoney.ToString();
         aiStats[4].text = aiMisses.ToString();
 
         generalStats[0].text = CalculateTime(TurnSystem.Instance.GetDuration()).ToString();

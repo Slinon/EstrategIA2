@@ -48,6 +48,9 @@ public class MoneySystem : MonoBehaviour
         player.money = startingAmountPlayer;
         enemyAI.money = startingAmountAI;
 
+
+        GameSummary.playerMoney += startingAmountPlayer;
+        GameSummary.aiMoney += startingAmountAI;
     }
 
 
@@ -83,6 +86,13 @@ public class MoneySystem : MonoBehaviour
     {
         //Starts a coroutine to smoothly add money
         StartCoroutine(ChangeValueSmoothly(amount, target));
+
+        //Si no estamos restando dinero
+        if (amount > 0)
+        {
+            if (target == enemyAI) GameSummary.aiMoney += amount;
+            else GameSummary.playerMoney += amount;
+        }    
     }
 
     private IEnumerator ChangeValueSmoothly(int amount, Target target)

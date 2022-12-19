@@ -296,6 +296,9 @@ public class Unit : MonoBehaviour
             // Lanzamos el evento
             OnAnyUnitDied(this, EventArgs.Empty);
 
+            if (this.IsEnemy()) GameSummary.playerDefeated += 1;
+            else GameSummary.aiDefeated += 1;
+
         }
 
         Destroy(gameObject);
