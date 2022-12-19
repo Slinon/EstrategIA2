@@ -12,8 +12,10 @@ public class TurnSystem : MonoBehaviour
 
     private int turnNumber;                                       // Numero del turno actual
     private bool isPlayerTurn;                                    // Booleano para saber de quien es el turno
+    private float duration;
 
     private MoneySystem moneySystem;
+    private GameState gameState;
 
     // @IGM ----------------------------------------------------
     // Awake is called when the script instance is being loaded.
@@ -48,10 +50,22 @@ public class TurnSystem : MonoBehaviour
     {
 
         moneySystem = FindObjectOfType<MoneySystem>();
+        gameState = FindObjectOfType<GameState>();
 
     }
 
+    //GRG
+    //trackear duración de la partida
+    private void Update()
+    {
+        if (gameState.GetCurrenState() == CurrentState.OVER)
+        {
+            return;
+        }
 
+        duration += Time.deltaTime;
+    }
+   
     // @IGM --------------------------------
     // Metodo para pasar al turno siguiente.
     // -------------------------------------
@@ -109,6 +123,13 @@ public class TurnSystem : MonoBehaviour
 
         return isPlayerTurn;
 
+    }
+
+    //GRG
+    //Getter duración
+    public float GetDuration()
+    {
+        return duration;
     }
 
 }

@@ -649,6 +649,7 @@ GameObject:
   - component: {fileID: 7707601630530221458}
   - component: {fileID: 5496302085300907835}
   - component: {fileID: 1101494743}
+  - component: {fileID: 9031273875122024398}
   m_Layer: 7
   m_Name: EnemyMainBase
   m_TagString: EnemyMainBase
@@ -852,6 +853,18 @@ MonoBehaviour:
   maxAIValueAction: 100000
   minAIValueAction: 0
   enemyManager: {fileID: 0}
+--- !u!114 &9031273875122024398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465745189711302299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7deaccf5900ca864c897acfb38bee98c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &465745189760989634
 GameObject:
   m_ObjectHideFlags: 0
