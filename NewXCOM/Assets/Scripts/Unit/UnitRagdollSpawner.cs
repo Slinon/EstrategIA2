@@ -46,7 +46,7 @@ public class UnitRagdollSpawner : MonoBehaviour
     void ShowFloatingTextMoney(int money)
     {
         var go = Instantiate(floatingTextPrebab, transform.position, Quaternion.identity);
-        go.GetComponent<TextMesh>().text = money.ToString() + "$";
+        go.GetComponent<TextMesh>().text = money.ToString() + "€";
         go.GetComponent<TextMesh>().color = Color.yellow;
     }
 

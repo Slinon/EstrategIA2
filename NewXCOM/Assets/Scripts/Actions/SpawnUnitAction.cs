@@ -245,6 +245,7 @@ public class SpawnUnitAction : BaseAction
                     GridPosition offsetGridPosition = new GridPosition(x, z);
                     GridPosition testGridPosition = allPositionsList[i] + offsetGridPosition;
 
+                    
                     // Comprobamos si la posicion esta fuera de la malla
                     if (!LevelGrid.Instance.IsValidGridPosition(testGridPosition))
                     {
@@ -253,16 +254,14 @@ public class SpawnUnitAction : BaseAction
                         continue;
 
                     }
-
+                    
                     // Comprobamos si la posicion es en la que esta la unidad
                     if (allPositionsList[i] == testGridPosition)
                     {
-
                         // La saltamos
                         continue;
-
                     }
-
+                    
                     // Comprobamos si la posicion tiene unidades dentro
                     if (!painting && LevelGrid.Instance.HasAnyUnitOnGridPosition(testGridPosition))
                     {
@@ -281,16 +280,30 @@ public class SpawnUnitAction : BaseAction
 
                     }
 
+                    
                     // Comprobamos que la posicion no esta ya en la lista
                     if (!validGridPositionList.Contains(allPositionsList[i]))
                     {
                         // Lo añadimos a la lista
                         validGridPositionList.Add(testGridPosition);
-                    }
+                    }                
                 }
             }
         }
 
+        // Añadimos las eferas
+        if (painting)
+        {
+            foreach (GameObject child in interactionSpheres)
+            {
+                InteractSphere sphere = child.GetComponent<InteractSphere>();
+
+                if (sphere.GetInControlState() == state)
+                {
+                    validGridPositionList.Add(sphere.GetGridPosition());
+                }
+            }
+        }
         return validGridPositionList;
 
     }

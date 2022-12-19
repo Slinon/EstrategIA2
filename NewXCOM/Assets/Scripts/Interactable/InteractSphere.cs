@@ -25,7 +25,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
     [Space(10)]
 
     [Header("Meshes:")]
-    [SerializeField] private MeshRenderer meshRenderer;     // Malla de la esfera
+    [SerializeField] private MeshRenderer SphereMeshRenderer;     // Malla de la esfera
+    [SerializeField] private MeshRenderer FlagMeshRenderer;       // Malla de la bandera
     [Space(10)]
 
     [Header("Capture area size")]
@@ -110,7 +111,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
         // Establecemos el control en el jugador
         state = InControlState.Player;
-        meshRenderer.material = playerMaterial;
+        SphereMeshRenderer.material = playerMaterial;
+        FlagMeshRenderer.material = playerMaterial;
 
     }
 
@@ -122,7 +124,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
         // Establecemos el control en el enemigo
         state = InControlState.Enemy;
-        meshRenderer.material = enemyMaterial;
+        SphereMeshRenderer.material = enemyMaterial;
+        FlagMeshRenderer.material = enemyMaterial;
 
     }
 
@@ -134,7 +137,8 @@ public class InteractSphere : MonoBehaviour, IInteractable
 
         // No establecemos el control en nadie
         state = InControlState.Neutral;
-        meshRenderer.material = neutralMaterial;
+        SphereMeshRenderer.material = neutralMaterial;
+        FlagMeshRenderer.material = neutralMaterial;
 
     }
 
