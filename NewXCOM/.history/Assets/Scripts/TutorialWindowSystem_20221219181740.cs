@@ -47,7 +47,7 @@ public class TutorialWindowSystem : MonoBehaviour
             page[pageIndex].flavorText.ToString();
 
         windowImage.sprite = modalWindows[windowIndex].
-            page[pageIndex].image;
+            page[pageIndex].;
 
         //Apagar back button en primera p�gina
         if (pageIndex == 0)

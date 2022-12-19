@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   page:
   - title: UNITS AND ECONOMY (1/7)
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: d6a4f16eaeae62c4998d87db04973c55, type: 3}
     flavorText: "Each turn, players recive <b><color=green>500$</color></b>. Players
       will recive <b><color=green>200$</color></b> extra per takedown. \n\nPlayers
       can spend their money to spawn new <b><color=#7FD6FC>units</color></b> in their
       barracks. Each unit is unique and has its own properties.\n"
   - title: 'UNITS: SCOUT (2/7)'
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: e3e38f7e897743044bd94e127ecb4f9d, type: 3}
     flavorText: 'The Scout is the most basic Unit. It has average damage, health
       and speed.
 
@@ -29,21 +29,21 @@ MonoBehaviour:
 
 '
   - title: 'UNITS: GRENADIER (3/7)'
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 4e595dffdf18a4946a90ecd61c014fd1, type: 3}
     flavorText: 'The Grenadier can damage multiple enemies at once and destroy obstacles.
       Grenades can damage allies too.
 
 
       It costs <b><color=green>700$</color></b>'
   - title: 'UNITS: ENGINEER (4/7)'
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 12a1274f25a879b4880bce42e003e536, type: 3}
     flavorText: 'The Engineer can build up to two turrets. Turrets are static units
       that can only shoot.
 
 
       It costs <b><color=green>1200$</color></b>'
   - title: 'UNITS: BERSERKER (5/7)'
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 6f24fcfce2938f44e9a51e07cdde79eb, type: 3}
     flavorText: 'The berserker can move faster than any other unit, and can perform
       powerful melee attacks that defeat most enemies in one hit.
 
@@ -51,7 +51,7 @@ MonoBehaviour:
       It costs
       <b><color=green>1500$</color></b>'
   - title: 'UNITS: JUGGERNAUT (6/7)'
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 600261aa01d9a6e439659ae33587422f, type: 3}
     flavorText: 'An absolute unit, the Juggernaut can withstand several attacks and
       dish out huge amounts of damage. In return, its the slowest and most expensive
       unit.
@@ -59,7 +59,7 @@ MonoBehaviour:
 
       It costs <b><color=green>2500$</color></b>'
   - title: 'UNITS: BARRACKS (7/7)'
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 0e33f415dfdafba4daae4ba2e0eae961, type: 3}
     flavorText: 'The most importat unit is the Barracks. Barracks can spawn up to
       two units each turn. You can''t play a unit the same turn it was spawned.
 

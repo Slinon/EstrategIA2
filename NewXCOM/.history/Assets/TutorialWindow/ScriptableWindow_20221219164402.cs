@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public struct Page
 {
     public string title;
-    public Sprite image;
+    public Image image;
     [TextArea(5, 6)] public string flavorText;
 }
 
