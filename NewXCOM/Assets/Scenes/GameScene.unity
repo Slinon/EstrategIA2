@@ -5730,7 +5730,7 @@ PrefabInstance:
     - target: {fileID: 2674505501862230149, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}
       propertyPath: maxActionPoints
-      value: 1303
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2674505501862230150, guid: 2abbe493b0edbf94898916aa814199a0,
         type: 3}
