@@ -379,7 +379,7 @@ MonoBehaviour:
   isStructure: 1
   obstacleLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
 --- !u!114 &6830159223452896923
 MonoBehaviour:
   m_ObjectHideFlags: 0

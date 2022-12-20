@@ -390,17 +390,21 @@ public class Unit : MonoBehaviour
         //Dirección del rayo
         Vector3 shootDirection = (selectedUnitWorldPosition + Vector3.down * 1f - this.GetWorldPosition()).normalized;
 
+
+
         if (selectedUnit.TryGetComponent(out ShootAction shootAction))
         {
             //Debug.DrawLine(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, (shootDirection + this.GetWorldPosition() + Vector3.up * unitShoulderHeight) * shootAction.GetMaxShootDistance());
             Debug.DrawRay(this.GetWorldPosition() + Vector3.up, shootDirection);
 
+            //Debug.Log("Yo soy el " + this.isEnemy + " en la posicion " + LevelGrid.Instance.GetGridPosition(this.GetWorldPosition()) + " y mi shootdirection es " + shootDirection + " hacia " + LevelGrid.Instance.GetGridPosition(selectedUnitWorldPosition) + " y mi disparo ha resultado en " +
+            //(Physics.Raycast(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize(),obstacleLayerMask)));
             //Si golpea contra un obstaculo
             if (Physics.Raycast
 
                 (this.GetWorldPosition() + Vector3.up * unitShoulderHeight, //Origen
                 shootDirection, //Dirección
-                shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize(), //Distancia
+                Vector3.Distance(this.GetWorldPosition(), selectedUnitWorldPosition), //Distancia
                 obstacleLayerMask)) //Layer que golpear
 
             {
