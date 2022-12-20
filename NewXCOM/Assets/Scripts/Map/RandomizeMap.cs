@@ -26,17 +26,20 @@ public class RandomizeMap : MonoBehaviour
 
     }
 
-    private void Start()
+    public void FillWithObstacles()
     {
         seed = MenuManager.seed;
 
-        if (seed == null) { useRandomSeed = true; }
+        if (seed == null)
+        {
+            Debug.Log("Seed is null, setting random seed");
+            useRandomSeed = true;
+        }
 
-    }
-
-    public void FillWithObstacles()
-    {
         if (useRandomSeed) seed = Time.deltaTime.ToString();
+
+        Debug.Log(seed);
+
         System.Random pseudoRandom = new System.Random(seed.GetHashCode());
 
 

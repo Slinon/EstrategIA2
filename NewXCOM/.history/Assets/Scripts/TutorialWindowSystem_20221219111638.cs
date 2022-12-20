@@ -46,10 +46,10 @@ public class TutorialWindowSystem : MonoBehaviour
         windowFlavorText.text = modalWindows[windowIndex].
             page[pageIndex].flavorText.ToString();
 
-        windowImage.sprite = modalWindows[windowIndex].
+        windowImage = modalWindows[windowIndex].
             page[pageIndex].image;
 
-        //Apagar back button en primera pï¿½gina
+        //Apagar back button en primera página
         if (pageIndex == 0)
         {
             backButton.gameObject.SetActive(false);
@@ -60,7 +60,7 @@ public class TutorialWindowSystem : MonoBehaviour
             backButton.gameObject.SetActive(true);
         }
 
-        //Cambiar continue a close en la ultima pï¿½gina
+        //Cambiar continue a close en la ultima página
         if (pageIndex == modalWindows[windowIndex].page.Length - 1)
         {
             continueButtonText.text = "CLOSE".ToString();
@@ -73,7 +73,7 @@ public class TutorialWindowSystem : MonoBehaviour
 
     }
 
-    //@GRG mï¿½todo para BACK button, cargar la ventana anterior.
+    //@GRG método para BACK button, cargar la ventana anterior.
     public void LoadLastPage()
     {
         if (pageIndex - 1 < 0)
@@ -88,10 +88,10 @@ public class TutorialWindowSystem : MonoBehaviour
         }
     }
 
-    //@GRG mï¿½todo para CONTINUE button, cargar la siguiente ventana.
+    //@GRG método para CONTINUE button, cargar la siguiente ventana.
     public void LoadNextPage()
     {
-        //Si la no hay mï¿½s pï¿½ginas
+        //Si la no hay más páginas
         if (pageIndex + 1 == modalWindows[windowIndex].page.Length)
         {
             pageIndex = 0;

@@ -18,6 +18,11 @@ public class MenuManager : MonoBehaviour
     //load scene by name
     public void LoadScene(string scene)
     {
+        if (scene == "Tutorial")
+        {
+            seed = "tutorial";
+        }
+
         SceneManager.LoadScene(scene);
     }
 

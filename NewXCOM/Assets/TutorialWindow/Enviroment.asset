@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   page:
   - title: ENVIROMENT (1/2)
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 37238eac190f85e4e952cabc5dd393d5, type: 3}
     flavorText: 'The map is an arena made up of a 16x32 grid, filled with random
       obstacles. The arena is sectioned into four areas: the <b><color=#7FD6FC>Player
       Spawn</color></b> area, two <b><color=grey>Neutral</color></b> areas, and the
@@ -22,7 +22,7 @@ MonoBehaviour:
 
 '
   - title: ENVIROMENT (2/2)
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 0695e9ce2c0b23046a99b6cbd51aa187, type: 3}
     flavorText: A <b><color=purple>capture point</color></b> can be found in each
       <b><color=grey>Neutral</color></b> area. Units can <b><color=#7FD6FC>interact</color></b>
       with the <b><color=purple>capture point</color></b> to reclaim the area. Players
