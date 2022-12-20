@@ -395,28 +395,37 @@ public class Unit : MonoBehaviour
         if (selectedUnit.TryGetComponent(out ShootAction shootAction))
         {
             //Debug.DrawLine(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, (shootDirection + this.GetWorldPosition() + Vector3.up * unitShoulderHeight) * shootAction.GetMaxShootDistance());
-            Debug.DrawRay(this.GetWorldPosition() + Vector3.up, shootDirection);
+            //Debug.DrawRay(this.GetWorldPosition() + Vector3.up, shootDirection);
 
-            //Debug.Log("Yo soy el " + this.isEnemy + " en la posicion " + LevelGrid.Instance.GetGridPosition(this.GetWorldPosition()) + " y mi shootdirection es " + shootDirection + " hacia " + LevelGrid.Instance.GetGridPosition(selectedUnitWorldPosition) + " y mi disparo ha resultado en " +
-            //(Physics.Raycast(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize(),obstacleLayerMask)));
-            //Si golpea contra un obstaculo
-            if (Physics.Raycast
+            Debug.Log((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) + " de " + this.GetWorldPosition() + "hasta " + selectedUnitWorldPosition);
+            Debug.Log(shootAction.GetMaxShootDistance());
+            Debug.Log((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) < shootAction.GetMaxShootDistance());
 
-                (this.GetWorldPosition() + Vector3.up * unitShoulderHeight, //Origen
-                shootDirection, //Dirección
-                Vector3.Distance(this.GetWorldPosition(), selectedUnitWorldPosition), //Distancia
-                obstacleLayerMask)) //Layer que golpear
-
+            if((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) < shootAction.GetMaxShootDistance())
             {
+
+            
+                //Debug.Log("Yo soy el " + this.isEnemy + " en la posicion " + LevelGrid.Instance.GetGridPosition(this.GetWorldPosition()) + " y mi shootdirection es " + shootDirection + " hacia " + LevelGrid.Instance.GetGridPosition(selectedUnitWorldPosition) + " y mi disparo ha resultado en " +
+                //(Physics.Raycast(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, shootDirection, shootAction.GetMaxShootDistance() * LevelGrid.Instance.GetCellSize(),obstacleLayerMask)));
+                //Si golpea contra un obstaculo
+                if (Physics.Raycast
+
+                    (this.GetWorldPosition() + Vector3.up * unitShoulderHeight, //Origen
+                    shootDirection, //Dirección
+                    Vector3.Distance(this.GetWorldPosition(), selectedUnitWorldPosition), //Distancia
+                    obstacleLayerMask)) //Layer que golpear
+
+                {
 
                 //falso, no está siendo visto.
-                return false;
-            }
-            else
-            {
+                    return false;
+                }
+                else
+                {
                 //está siendo visto
-                return true;
-            }
+                    return true;
+                }
+            }else return false;
         }
         else return false;
     }
