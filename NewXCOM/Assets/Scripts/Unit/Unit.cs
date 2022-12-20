@@ -397,9 +397,9 @@ public class Unit : MonoBehaviour
             //Debug.DrawLine(this.GetWorldPosition() + Vector3.up * unitShoulderHeight, (shootDirection + this.GetWorldPosition() + Vector3.up * unitShoulderHeight) * shootAction.GetMaxShootDistance());
             //Debug.DrawRay(this.GetWorldPosition() + Vector3.up, shootDirection);
 
-            Debug.Log((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) + " de " + this.GetWorldPosition() + "hasta " + selectedUnitWorldPosition);
-            Debug.Log(shootAction.GetMaxShootDistance());
-            Debug.Log((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) < shootAction.GetMaxShootDistance());
+            //Debug.Log((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) + " de " + this.GetWorldPosition() + "hasta " + selectedUnitWorldPosition);
+            //Debug.Log(shootAction.GetMaxShootDistance());
+            //Debug.Log((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) < shootAction.GetMaxShootDistance());
 
             if((Vector3.Distance(LevelGrid.Instance.GetWorldPosition(LevelGrid.Instance.GetGridPosition(this.GetWorldPosition())), selectedUnitWorldPosition)/2) < shootAction.GetMaxShootDistance())
             {
