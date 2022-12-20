@@ -290,9 +290,9 @@ public class ShootAction : BaseAction
                 if(targetUnit.GetCoverType() == CoverType.Covered)
                 {
                     shootDirection = ((targetUnit.GetWorldPosition()+ Vector3.down * 1f) - unitWorldPosition).normalized;
-                    //Debug.Log("Cambiado");
-                }else{shootDirection = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;}
-                //Debug.Log("El shoot 2 es " + shootDirection);
+                    
+                }
+
 
                 // Comprobamos si la unidad no tiene visual del objetivo
                 if (Physics.Raycast(unitWorldPosition + Vector3.up * unitShoulderHeight, shootDirection ,

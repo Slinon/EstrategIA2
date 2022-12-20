@@ -413,6 +413,9 @@ MonoBehaviour:
   - {fileID: 3971381634955791457}
   UnitWorldUICanvas: {fileID: 4730256894191432498}
   isStructure: 0
+  obstacleLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &2829561667425429965
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -95,6 +95,7 @@ public class UnitWorldUI : MonoBehaviour
             {
                 if (unit.ThisUnitIsInSight(playerUnit))
                 {
+                    //Debug.Log("Soy el aliado " + LevelGrid.Instance.GetGridPosition(playerUnit.GetWorldPosition()) + " hacia el unit " + LevelGrid.Instance.GetGridPosition(unit.GetWorldPosition()) + " y el resultado es " + unit.ThisUnitIsInSight(playerUnit) + "------------" );
                     return true;
                 }
             }
@@ -107,6 +108,7 @@ public class UnitWorldUI : MonoBehaviour
             {
                 if (unit.ThisUnitIsInSight(playerUnit))
                 {
+                    //Debug.Log("Soy el enemigo " + LevelGrid.Instance.GetGridPosition(playerUnit.GetWorldPosition()) + " hacia el unit " + LevelGrid.Instance.GetGridPosition(unit.GetWorldPosition()) + " y el resultado es " + unit.ThisUnitIsInSight(playerUnit) + "------------" );
                     return true;
                 }
             }
