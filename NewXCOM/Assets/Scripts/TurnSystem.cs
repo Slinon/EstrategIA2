@@ -64,13 +64,6 @@ public class TurnSystem : MonoBehaviour
         }
 
         duration += Time.deltaTime;
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Time.timeScale = 2;
-        }
-        else { Time.timeScale = 1; }
-
     }
    
     // @IGM --------------------------------
@@ -97,7 +90,8 @@ public class TurnSystem : MonoBehaviour
         {
             //Si es el turno de la IA, dar dinero
             moneySystem.GiveTakeMoney(moneySystem.MoneyPerTurn(), moneySystem.enemyAI);
-            
+            //Time.timeScale = 3;
+
         }
 
         // Comprobamos si hay alguna clase escuchando el evento

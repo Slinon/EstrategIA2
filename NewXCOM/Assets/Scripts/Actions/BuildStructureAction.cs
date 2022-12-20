@@ -104,12 +104,6 @@ public class BuildStructureAction : BaseAction
                     // Spawneamos la unidad
                     Unit newStructure = Instantiate(structure, spawnPoint, Quaternion.identity).GetComponent<Unit>();
 
-                    //isEnemy
-                    if (newStructure.GetComponent<Unit>().IsEnemy())
-                    {
-                        UnitManager.Instance.GetEnemyUnitList().Add(newStructure);
-                    }
-
                     // Le quitamos los puntos de accion
                     newStructure.SpendActionPoints(newStructure.GetActionPoints());
 
