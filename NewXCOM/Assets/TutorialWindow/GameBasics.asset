@@ -28,4 +28,9 @@ MonoBehaviour:
 '
   - title: GAME BASICS (3/3)
     image: {fileID: 21300000, guid: a8a9ad9616ce1d0479e7c2e033076b31, type: 3}
-    flavorText: Some epic final introduction!
+    flavorText: 'Deplot new units, dominate territory and lead your army across the
+      map defeating all enemies!
+
+      
+
+      We trust you, General.'
